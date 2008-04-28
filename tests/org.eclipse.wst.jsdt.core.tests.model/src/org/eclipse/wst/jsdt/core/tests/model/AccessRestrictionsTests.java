@@ -62,7 +62,7 @@ public class AccessRestrictionsTests extends ModifyingResourceTests {
  * accessible class.
  */
 public void test001() throws CoreException {
-	ICompilationUnit x1 = null, x2 = null, y =  null, z = null;
+	IJavaScriptUnit x1 = null, x2 = null, y =  null, z = null;
 	try {
 		WorkingCopyOwner owner = new WorkingCopyOwner(){};
 		createJavaProject(
@@ -98,11 +98,11 @@ public void test001() throws CoreException {
 			"----------\n" + 
 			"----------\n"
 		);
-		IJavaProject p2 = createJavaProject("P2", new String[] {"src"}, 
+		IJavaScriptProject p2 = createJavaProject("P2", new String[] {"src"}, 
 				new String[] {"JCL_LIB"}, "bin");
-		IClasspathEntry[] classpath = p2.getRawClasspath();
+		IIncludePathEntry[] classpath = p2.getRawClasspath();
 		int length = classpath.length;
-		System.arraycopy(classpath, 0, classpath = new IClasspathEntry[length+1], 0, length);
+		System.arraycopy(classpath, 0, classpath = new IIncludePathEntry[length+1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "-p/X1");
 		p2.setRawClasspath(classpath, null);
 		// check the most basic case
@@ -169,7 +169,7 @@ public void test001() throws CoreException {
  * accessible class.
  */
 public void test002() throws CoreException {
-	ICompilationUnit x1 = null, x2 = null, y =  null;
+	IJavaScriptUnit x1 = null, x2 = null, y =  null;
 	try {
 		WorkingCopyOwner owner = new WorkingCopyOwner(){};
 		createJavaProject(
@@ -204,11 +204,11 @@ public void test002() throws CoreException {
 			"----------\n" + 
 			"----------\n"
 		);
-		IJavaProject p2 = createJavaProject("P2", new String[] {"src"}, 
+		IJavaScriptProject p2 = createJavaProject("P2", new String[] {"src"}, 
 				new String[] {"JCL_LIB"}, "bin");
-		IClasspathEntry[] classpath = p2.getRawClasspath();
+		IIncludePathEntry[] classpath = p2.getRawClasspath();
 		int length = classpath.length;
-		System.arraycopy(classpath, 0, classpath = new IClasspathEntry[length+1], 0, length);
+		System.arraycopy(classpath, 0, classpath = new IIncludePathEntry[length+1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "-p/X1");
 		p2.setRawClasspath(classpath, null);
 		String src = 
@@ -252,7 +252,7 @@ public void test002() throws CoreException {
  * accessible class.
  */
 public void test003() throws CoreException {
-	ICompilationUnit x1 = null, x2 = null, y =  null;
+	IJavaScriptUnit x1 = null, x2 = null, y =  null;
 	try {
 		WorkingCopyOwner owner = new WorkingCopyOwner(){};
 		createJavaProject(
@@ -292,11 +292,11 @@ public void test003() throws CoreException {
 			"----------\n" + 
 			"----------\n"
 		);
-		IJavaProject p2 = createJavaProject("P2", new String[] {"src"}, 
+		IJavaScriptProject p2 = createJavaProject("P2", new String[] {"src"}, 
 				new String[] {"JCL_LIB"}, "bin");
-		IClasspathEntry[] classpath = p2.getRawClasspath();
+		IIncludePathEntry[] classpath = p2.getRawClasspath();
 		int length = classpath.length;
-		System.arraycopy(classpath, 0, classpath = new IClasspathEntry[length+1], 0, length);
+		System.arraycopy(classpath, 0, classpath = new IIncludePathEntry[length+1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "-p/X1");
 		p2.setRawClasspath(classpath, null);
 		String src =
@@ -370,7 +370,7 @@ public void test003() throws CoreException {
  * Discouraged access message - type via discouraged rule.
  */
 public void test004() throws CoreException {
-	ICompilationUnit x1 = null, z = null;
+	IJavaScriptUnit x1 = null, z = null;
 	try {
 		WorkingCopyOwner owner = new WorkingCopyOwner(){};
 		createJavaProject(
@@ -393,11 +393,11 @@ public void test004() throws CoreException {
 			"----------\n" + 
 			"----------\n"
 		);
-		IJavaProject p2 = createJavaProject("P2", new String[] {"src"}, 
+		IJavaScriptProject p2 = createJavaProject("P2", new String[] {"src"}, 
 				new String[] {"JCL_LIB"}, "bin");
-		IClasspathEntry[] classpath = p2.getRawClasspath();
+		IIncludePathEntry[] classpath = p2.getRawClasspath();
 		int length = classpath.length;
-		System.arraycopy(classpath, 0, classpath = new IClasspathEntry[length+1], 0, length);
+		System.arraycopy(classpath, 0, classpath = new IIncludePathEntry[length+1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "~p/X1");
 		p2.setRawClasspath(classpath, null);
 		String src =
@@ -442,7 +442,7 @@ public void test004() throws CoreException {
  * or field is restricted.
  */
 public void test005() throws CoreException {
-	ICompilationUnit x1 = null, i1 = null, x2 = null, y =  null;
+	IJavaScriptUnit x1 = null, i1 = null, x2 = null, y =  null;
 	try {
 		WorkingCopyOwner owner = new WorkingCopyOwner(){};
 		createJavaProject(
@@ -493,15 +493,15 @@ public void test005() throws CoreException {
 			"----------\n" + 
 			"----------\n"
 		);
-		IJavaProject p2 = createJavaProject(
+		IJavaScriptProject p2 = createJavaProject(
 			"P2", 
 			new String[] {"src"}, 
 			new String[] {"JCL_LIB"}, 
 			"bin");
-		IClasspathEntry[] classpath = p2.getRawClasspath();
+		IIncludePathEntry[] classpath = p2.getRawClasspath();
 		int length = classpath.length;
 		System.arraycopy(classpath, 0, 
-				classpath = new IClasspathEntry[length + 1], 0, length);
+				classpath = new IIncludePathEntry[length + 1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "-p/X1");
 		p2.setRawClasspath(classpath, null);
 		String src = 
@@ -545,10 +545,10 @@ public void test005() throws CoreException {
  * https://bugs.eclipse.org/bugs/show_bug.cgi?id=122995
  */
 public void test006() throws CoreException {
-	ICompilationUnit x = null, y =  null;
+	IJavaScriptUnit x = null, y =  null;
 	try {
 		WorkingCopyOwner owner = new WorkingCopyOwner(){};
-		IJavaProject p1 = createJavaProject(
+		IJavaScriptProject p1 = createJavaProject(
 			"P1", 
 			new String[] {"src"}, 
 			new String[] {"JCL_LIB"}, 
@@ -556,7 +556,7 @@ public void test006() throws CoreException {
 		p1.setOption("org.eclipse.wst.jsdt.core.compiler.compliance", "1.5");
 		p1.setOption("org.eclipse.wst.jsdt.core.compiler.source", "1.5");
 		p1.setOption("org.eclipse.wst.jsdt.core.compiler.targetPlatform", "1.5");
-		p1.setOption(JavaCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaCore.IGNORE);
+		p1.setOption(JavaScriptCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaScriptCore.IGNORE);
 		this.problemRequestor = new ProblemRequestor();
 		x = getWorkingCopy(
 			"/P1/src/p/X.js",
@@ -571,7 +571,7 @@ public void test006() throws CoreException {
 			"----------\n" + 
 			"----------\n"
 		);
-		IJavaProject p2 = createJavaProject(
+		IJavaScriptProject p2 = createJavaProject(
 				"P2", 
 				new String[] {"src"}, 
 				new String[] {"JCL_LIB"}, 
@@ -579,10 +579,10 @@ public void test006() throws CoreException {
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.compliance", "1.5");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.source", "1.5");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.targetPlatform", "1.5");
-		p2.setOption(JavaCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaCore.IGNORE);
-		IClasspathEntry[] classpath = p2.getRawClasspath();
+		p2.setOption(JavaScriptCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaScriptCore.IGNORE);
+		IIncludePathEntry[] classpath = p2.getRawClasspath();
 		int length = classpath.length;
-		System.arraycopy(classpath, 0, classpath = new IClasspathEntry[length+1], 0, length);
+		System.arraycopy(classpath, 0, classpath = new IIncludePathEntry[length+1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "-p/X");
 		p2.setRawClasspath(classpath, null);
 		String src =
@@ -637,10 +637,10 @@ public void test006() throws CoreException {
  * https://bugs.eclipse.org/bugs/show_bug.cgi?id=122995
  */
 public void test007() throws CoreException {
-	ICompilationUnit x = null, y =  null;
+	IJavaScriptUnit x = null, y =  null;
 	try {
 		WorkingCopyOwner owner = new WorkingCopyOwner(){};
-		IJavaProject p1 = createJavaProject(
+		IJavaScriptProject p1 = createJavaProject(
 			"P1", 
 			new String[] {"src"}, 
 			new String[] {"JCL_LIB"}, 
@@ -648,7 +648,7 @@ public void test007() throws CoreException {
 		p1.setOption("org.eclipse.wst.jsdt.core.compiler.compliance", "1.5");
 		p1.setOption("org.eclipse.wst.jsdt.core.compiler.source", "1.5");
 		p1.setOption("org.eclipse.wst.jsdt.core.compiler.targetPlatform", "1.5");
-		p1.setOption(JavaCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaCore.IGNORE);
+		p1.setOption(JavaScriptCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaScriptCore.IGNORE);
 		this.problemRequestor = new ProblemRequestor();
 		x = getWorkingCopy(
 			"/P1/src/p/X.js",
@@ -666,7 +666,7 @@ public void test007() throws CoreException {
 			"----------\n" + 
 			"----------\n"
 		);
-		IJavaProject p2 = createJavaProject(
+		IJavaScriptProject p2 = createJavaProject(
 				"P2", 
 				new String[] {"src"}, 
 				new String[] {"JCL_LIB"}, 
@@ -674,10 +674,10 @@ public void test007() throws CoreException {
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.compliance", "1.5");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.source", "1.5");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.targetPlatform", "1.5");
-		p2.setOption(JavaCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaCore.IGNORE);
-		IClasspathEntry[] classpath = p2.getRawClasspath();
+		p2.setOption(JavaScriptCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaScriptCore.IGNORE);
+		IIncludePathEntry[] classpath = p2.getRawClasspath();
 		int length = classpath.length;
-		System.arraycopy(classpath, 0, classpath = new IClasspathEntry[length+1], 0, length);
+		System.arraycopy(classpath, 0, classpath = new IIncludePathEntry[length+1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "-p/X");
 		p2.setRawClasspath(classpath, null);
 		String src =
@@ -732,10 +732,10 @@ public void test007() throws CoreException {
  * https://bugs.eclipse.org/bugs/show_bug.cgi?id=122995
  */
 public void test008() throws CoreException {
-	ICompilationUnit x1 = null, x2 = null, y =  null;
+	IJavaScriptUnit x1 = null, x2 = null, y =  null;
 	try {
 		WorkingCopyOwner owner = new WorkingCopyOwner(){};
-		IJavaProject p1 = createJavaProject(
+		IJavaScriptProject p1 = createJavaProject(
 			"P1", 
 			new String[] {"src"}, 
 			new String[] {"JCL_LIB"}, 
@@ -743,7 +743,7 @@ public void test008() throws CoreException {
 		p1.setOption("org.eclipse.wst.jsdt.core.compiler.compliance", "1.5");
 		p1.setOption("org.eclipse.wst.jsdt.core.compiler.source", "1.5");
 		p1.setOption("org.eclipse.wst.jsdt.core.compiler.targetPlatform", "1.5");		
-		p1.setOption(JavaCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaCore.IGNORE);
+		p1.setOption(JavaScriptCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaScriptCore.IGNORE);
 		this.problemRequestor = new ProblemRequestor();
 		x1 = getWorkingCopy(
 			"/P1/src/p/X1.js",
@@ -772,14 +772,14 @@ public void test008() throws CoreException {
 			"----------\n" + 
 			"----------\n"
 		);
-		IJavaProject p2 = createJavaProject("P2", new String[] {"src"}, 
+		IJavaScriptProject p2 = createJavaProject("P2", new String[] {"src"}, 
 				new String[] {"JCL_LIB"}, "bin");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.compliance", "1.5");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.source", "1.5");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.targetPlatform", "1.5");		
-		IClasspathEntry[] classpath = p2.getRawClasspath();
+		IIncludePathEntry[] classpath = p2.getRawClasspath();
 		int length = classpath.length;
-		System.arraycopy(classpath, 0, classpath = new IClasspathEntry[length+1], 0, length);
+		System.arraycopy(classpath, 0, classpath = new IIncludePathEntry[length+1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "-p/X1");
 		p2.setRawClasspath(classpath, null);
 		String src = 
@@ -822,10 +822,10 @@ public void test008() throws CoreException {
  * https://bugs.eclipse.org/bugs/show_bug.cgi?id=122995
  */
 public void test009() throws CoreException {
-	ICompilationUnit x1 = null, x2 = null, y =  null;
+	IJavaScriptUnit x1 = null, x2 = null, y =  null;
 	try {
 		WorkingCopyOwner owner = new WorkingCopyOwner(){};
-		IJavaProject p1 = createJavaProject(
+		IJavaScriptProject p1 = createJavaProject(
 			"P1", 
 			new String[] {"src"}, 
 			new String[] {"JCL_LIB"}, 
@@ -833,7 +833,7 @@ public void test009() throws CoreException {
 		p1.setOption("org.eclipse.wst.jsdt.core.compiler.compliance", "1.5");
 		p1.setOption("org.eclipse.wst.jsdt.core.compiler.source", "1.5");
 		p1.setOption("org.eclipse.wst.jsdt.core.compiler.targetPlatform", "1.5");		
-		p1.setOption(JavaCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaCore.IGNORE);
+		p1.setOption(JavaScriptCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaScriptCore.IGNORE);
 		this.problemRequestor = new ProblemRequestor();
 		x1 = getWorkingCopy(
 			"/P1/src/p/X1.js",
@@ -861,14 +861,14 @@ public void test009() throws CoreException {
 			"----------\n" + 
 			"----------\n"
 		);
-		IJavaProject p2 = createJavaProject("P2", new String[] {"src"}, 
+		IJavaScriptProject p2 = createJavaProject("P2", new String[] {"src"}, 
 				new String[] {"JCL_LIB"}, "bin");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.compliance", "1.5");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.source", "1.5");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.targetPlatform", "1.5");		
-		IClasspathEntry[] classpath = p2.getRawClasspath();
+		IIncludePathEntry[] classpath = p2.getRawClasspath();
 		int length = classpath.length;
-		System.arraycopy(classpath, 0, classpath = new IClasspathEntry[length+1], 0, length);
+		System.arraycopy(classpath, 0, classpath = new IIncludePathEntry[length+1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "-p/X1");
 		p2.setRawClasspath(classpath, null);
 		String src = 
@@ -911,10 +911,10 @@ public void test009() throws CoreException {
  * https://bugs.eclipse.org/bugs/show_bug.cgi?id=122995
  */
 public void test010() throws CoreException {
-	ICompilationUnit x1 = null, x2 = null, y =  null;
+	IJavaScriptUnit x1 = null, x2 = null, y =  null;
 	try {
 		WorkingCopyOwner owner = new WorkingCopyOwner(){};
-		IJavaProject p1 = createJavaProject(
+		IJavaScriptProject p1 = createJavaProject(
 			"P1", 
 			new String[] {"src"}, 
 			new String[] {"JCL_LIB"}, 
@@ -922,7 +922,7 @@ public void test010() throws CoreException {
 		p1.setOption("org.eclipse.wst.jsdt.core.compiler.compliance", "1.5");
 		p1.setOption("org.eclipse.wst.jsdt.core.compiler.source", "1.5");
 		p1.setOption("org.eclipse.wst.jsdt.core.compiler.targetPlatform", "1.5");		
-		p1.setOption(JavaCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaCore.IGNORE);
+		p1.setOption(JavaScriptCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaScriptCore.IGNORE);
 		this.problemRequestor = new ProblemRequestor();
 		x1 = getWorkingCopy(
 			"/P1/src/p/X1.js",
@@ -955,15 +955,15 @@ public void test010() throws CoreException {
 			"----------\n" + 
 			"----------\n"
 		);
-		IJavaProject p2 = createJavaProject("P2", new String[] {"src"}, 
+		IJavaScriptProject p2 = createJavaProject("P2", new String[] {"src"}, 
 				new String[] {"JCL_LIB"}, "bin");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.compliance", "1.5");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.source", "1.5");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.targetPlatform", "1.5");		
-		p2.setOption(JavaCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaCore.IGNORE);
-		IClasspathEntry[] classpath = p2.getRawClasspath();
+		p2.setOption(JavaScriptCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaScriptCore.IGNORE);
+		IIncludePathEntry[] classpath = p2.getRawClasspath();
 		int length = classpath.length;
-		System.arraycopy(classpath, 0, classpath = new IClasspathEntry[length+1], 0, length);
+		System.arraycopy(classpath, 0, classpath = new IIncludePathEntry[length+1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "-p/X1");
 		p2.setRawClasspath(classpath, null);
 		String src =

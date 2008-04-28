@@ -40,9 +40,9 @@ public static class DefaultVariableInitializer implements VariablesInitializer.I
 		}
 	}
 	
-	public void initialize(String variable) throws JavaModelException {
+	public void initialize(String variable) throws JavaScriptModelException {
 		if (variableValues == null) return;
-		JavaCore.setClasspathVariable(
+		JavaScriptCore.setClasspathVariable(
 			variable, 
 			(IPath)variableValues.get(variable), 
 			null);
@@ -56,15 +56,15 @@ public static class DefaultContainerInitializer implements ContainerInitializer.
 		public DefaultContainer(char[][] libPaths) {
 			this.libPaths = libPaths;
 		}
-		public IClasspathEntry[] getClasspathEntries() {
+		public IIncludePathEntry[] getClasspathEntries() {
 			int length = this.libPaths.length;
-			IClasspathEntry[] entries = new IClasspathEntry[length];
+			IIncludePathEntry[] entries = new IIncludePathEntry[length];
 			for (int j = 0; j < length; j++) {
 			    IPath path = new Path(new String(this.libPaths[j]));
 			    if (path.segmentCount() == 1) {
-			        entries[j] = JavaCore.newProjectEntry(path);
+			        entries[j] = JavaScriptCore.newProjectEntry(path);
 			    } else {
-					entries[j] = JavaCore.newLibraryEntry(path, null, null);
+					entries[j] = JavaScriptCore.newLibraryEntry(path, null, null);
 			    }
 			}
 			return entries;
@@ -109,12 +109,12 @@ public static class DefaultContainerInitializer implements ContainerInitializer.
 	public boolean allowFailureContainer() {
 		return true;
 	}
-	public void initialize(IPath containerPath, IJavaProject project) throws CoreException {
+	public void initialize(IPath containerPath, IJavaScriptProject project) throws CoreException {
 		if (containerValues == null) return;
 		try {
-			JavaCore.setJsGlobalScopeContainer(
+			JavaScriptCore.setJsGlobalScopeContainer(
 				containerPath, 
-				new IJavaProject[] {project},
+				new IJavaScriptProject[] {project},
 				new IJsGlobalScopeContainer[] {(IJsGlobalScopeContainer)containerValues.get(project.getElementName())}, 
 				null);
 		} catch (CoreException e) {
@@ -130,11 +130,11 @@ public class NullContainerInitializer implements ContainerInitializer.ITestIniti
 	public boolean allowFailureContainer() {
 		return false; // allow the initializer to run again
 	}
-	public void initialize(IPath containerPath, IJavaProject project) throws CoreException {
+	public void initialize(IPath containerPath, IJavaScriptProject project) throws CoreException {
 		hasRun = true;
-		JavaCore.setJsGlobalScopeContainer(
+		JavaScriptCore.setJsGlobalScopeContainer(
 			containerPath, 
-			new IJavaProject[] {project}, 
+			new IJavaScriptProject[] {project}, 
 			new IJsGlobalScopeContainer[] { null }, 
 			null);
 	}
@@ -169,7 +169,7 @@ public void testContainerInitializer01() throws CoreException {
 		createProject("P1");
 		createFile("/P1/lib.jar", "");
 		ContainerInitializer.setInitializer(new DefaultContainerInitializer(new String[] {"P2", "/P1/lib.jar"}));
-		IJavaProject p2 = createJavaProject(
+		IJavaScriptProject p2 = createJavaProject(
 				"P2", 
 				new String[] {}, 
 				new String[] {"org.eclipse.wst.jsdt.core.tests.model.TEST_CONTAINER"}, 
@@ -187,7 +187,7 @@ public void testContainerInitializer02() throws CoreException {
 		createProject("P1");
 		createFile("/P1/lib.jar", "");
 		ContainerInitializer.setInitializer(new DefaultContainerInitializer(new String[] {"P2", "/P1/lib.jar"}));
-		IJavaProject p2 = createJavaProject(
+		IJavaScriptProject p2 = createJavaProject(
 				"P2", 
 				new String[] {}, 
 				new String[] {"org.eclipse.wst.jsdt.core.tests.model.TEST_CONTAINER"}, 
@@ -339,7 +339,7 @@ public void testContainerInitializer05() throws CoreException {
  * (regression test for bug 48818 NPE in delta processor)
   */
 public void testContainerInitializer06() throws CoreException {
-    ICompilationUnit workingCopy = null;
+    IJavaScriptUnit workingCopy = null;
 	try {
 		createProject("P1");
 		ContainerInitializer.setInitializer(new DefaultContainerInitializer(new String[] {"P2", ""}));
@@ -387,10 +387,10 @@ public void testContainerInitializer07() throws CoreException {
 		boolean gotException = false;
 		try {
 			ContainerInitializer.setInitializer(new DefaultContainerInitializer(new String[] {"P1", "/P1/lib.jar"}) {
-				public void initialize(IPath containerPath, IJavaProject project) throws CoreException {
+				public void initialize(IPath containerPath, IJavaScriptProject project) throws CoreException {
 					throw new OperationCanceledException("test");
 				}});
-			IJavaProject p1 = createJavaProject(
+			IJavaScriptProject p1 = createJavaProject(
 					"P1", 
 					new String[] {}, 
 					new String[] {"org.eclipse.wst.jsdt.core.tests.model.TEST_CONTAINER"}, 
@@ -430,18 +430,18 @@ public void testContainerInitializer08() throws CoreException {
 				IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 				for (int i = 0; i < projectLength-1; i++) {
 					try {
-						JavaCore.create(root.getProject(projects[i])).getResolvedClasspath(true);
-					} catch (JavaModelException e) {
+						JavaScriptCore.create(root.getProject(projects[i])).getResolvedClasspath(true);
+					} catch (JavaScriptModelException e) {
 						// project doesn't exist: ignore
 					}
 				}
 			}
-			public void initialize(IPath containerPath, IJavaProject project) throws CoreException {
+			public void initialize(IPath containerPath, IJavaScriptProject project) throws CoreException {
 				foo(500);
 				super.initialize(containerPath, project);
 			}
 		});
-		JavaCore.run(new IWorkspaceRunnable() {
+		JavaScriptCore.run(new IWorkspaceRunnable() {
 			public void run(IProgressMonitor monitor) throws CoreException {
 				for (int i = 0; i < projectLength; i++) {
 					createProject(projects[i]);
@@ -494,10 +494,10 @@ public void testContainerInitializer09() throws CoreException {
 		ClasspathInitializerTests.DefaultContainerInitializer initializer = new ClasspathInitializerTests.DefaultContainerInitializer(new String[] {"P1", "/P1/lib.jar"}) {
 			protected DefaultContainer newContainer(char[][] libPaths) {
 				return new DefaultContainer(libPaths) {
-					public IClasspathEntry[] getClasspathEntries() {
+					public IIncludePathEntry[] getClasspathEntries() {
 						try {
 							getJavaProject("P1").getResolvedClasspath(true);
-						} catch (JavaModelException e) {
+						} catch (JavaScriptModelException e) {
 							// project doesn't exist: ignore
 						}
 						return super.getClasspathEntries();
@@ -506,7 +506,7 @@ public void testContainerInitializer09() throws CoreException {
 			}
 		};
 		ContainerInitializer.setInitializer(initializer);
-		JavaCore.run(new IWorkspaceRunnable() {
+		JavaScriptCore.run(new IWorkspaceRunnable() {
 			public void run(IProgressMonitor monitor) throws CoreException {
 				createProject("P1");
 				editFile(
@@ -561,17 +561,17 @@ public void testContainerInitializer10() throws CoreException {
 	LogListener listener = new LogListener();
 	try {
 		Platform.addLogListener(listener);
-		final IJavaProject p1 = createJavaProject("P1");
-		final IJavaProject p2 = createJavaProject("P2");
+		final IJavaScriptProject p1 = createJavaProject("P1");
+		final IJavaScriptProject p2 = createJavaProject("P2");
 		ContainerInitializer.setInitializer(new DefaultContainerInitializer(new String[] {"P3", "/P1"}) {
-	        public void initialize(IPath containerPath, IJavaProject project) throws CoreException {
+	        public void initialize(IPath containerPath, IJavaScriptProject project) throws CoreException {
 	            super.initialize(containerPath, project);
-	            getJavaModel().refreshExternalArchives(new IJavaElement[] {p1}, null);
+	            getJavaModel().refreshExternalArchives(new IJavaScriptElement[] {p1}, null);
 	        }
 		});
 		getWorkspace().run(new IWorkspaceRunnable() {
             public void run(IProgressMonitor monitor) throws CoreException {
-                p2.setRawClasspath(new IClasspathEntry[] {JavaCore.newSourceEntry(new Path("/P2/src"))}, new Path("/P2/bin"), null);
+                p2.setRawClasspath(new IIncludePathEntry[] {JavaScriptCore.newSourceEntry(new Path("/P2/src"))}, new Path("/P2/bin"), null);
 				createProject("P3");
                 editFile(
                 	"/P3/.project",
@@ -629,7 +629,7 @@ public void testContainerInitializer11() throws CoreException {
 			"");
 		simulateExitRestart();
 		ClasspathInitializerTests.DefaultContainerInitializer initializer = new ClasspathInitializerTests.DefaultContainerInitializer(new String[] {}) {
-			public void initialize(IPath containerPath,IJavaProject project) throws CoreException {
+			public void initialize(IPath containerPath,IJavaScriptProject project) throws CoreException {
 				assertTrue("Should not initialize container on shutdown", false);
 			}
 		};
@@ -651,7 +651,7 @@ public void testContainerInitializer11() throws CoreException {
 public void testContainerInitializer12() throws CoreException {
 	try {
 		ContainerInitializer.setInitializer(new DefaultContainerInitializer(new String[] {"P1", "/P1/lib.jar"}));
-		IJavaProject project =  createJavaProject(
+		IJavaScriptProject project =  createJavaProject(
 			"P1", 
 			new String[] {}, 
 			new String[] {"org.eclipse.wst.jsdt.core.tests.model.TEST_CONTAINER"}, 
@@ -666,7 +666,7 @@ public void testContainerInitializer12() throws CoreException {
 			public Initializer(String[] args) {
 				super(args);
 			}
-			public void initialize(IPath containerPath, IJavaProject p) throws CoreException {
+			public void initialize(IPath containerPath, IJavaScriptProject p) throws CoreException {
 				super.initialize(containerPath, p);
 				this.initialized = true;
 			}
@@ -704,7 +704,7 @@ public void testContainerInitializer13() throws CoreException {
 	try {
 		NullContainerInitializer nullInitializer = new NullContainerInitializer();
 		ContainerInitializer.setInitializer(nullInitializer);
-		IJavaProject project = createJavaProject(
+		IJavaScriptProject project = createJavaProject(
 				"P1", 
 				new String[] {}, 
 				new String[] {"org.eclipse.wst.jsdt.core.tests.model.TEST_CONTAINER"}, 
@@ -743,14 +743,14 @@ public void testContainerInitializer14() throws CoreException {
 			Container(String[] values) {
 				super(values);
 			}
-			public void initialize(IPath containerPath, IJavaProject project) 	throws CoreException {
+			public void initialize(IPath containerPath, IJavaScriptProject project) 	throws CoreException {
 				this.initializeCount++;
 				super.initialize(containerPath, getJavaProject("P1"));
 			}
 		}
 		Container container = new Container(new String[] {"P2", "/P1/lib.jar"});
 		ContainerInitializer.setInitializer(container);
-		IJavaProject p2 = createJavaProject(
+		IJavaScriptProject p2 = createJavaProject(
 				"P2", 
 				new String[] {}, 
 				new String[] {"org.eclipse.wst.jsdt.core.tests.model.TEST_CONTAINER"}, 
@@ -775,17 +775,17 @@ public void testContainerInitializer15() throws CoreException {
 			Container(String[] values) {
 				super(values);
 			}
-			public void initialize(IPath containerPath, IJavaProject project) 	throws CoreException {
+			public void initialize(IPath containerPath, IJavaScriptProject project) 	throws CoreException {
 			}
 		}
 		Container container = new Container(new String[] {"P1", "/P1/lib.jar"});
 		ContainerInitializer.setInitializer(container);
-		IJavaProject p1 = createJavaProject(
+		IJavaScriptProject p1 = createJavaProject(
 				"P1", 
 				new String[] {}, 
 				new String[] {"org.eclipse.wst.jsdt.core.tests.model.TEST_CONTAINER"}, 
 				"");
-		IJsGlobalScopeContainer JsGlobalScopeContainer = JavaCore.getJsGlobalScopeContainer(new Path("org.eclipse.wst.jsdt.core.tests.model.TEST_CONTAINER"), p1);
+		IJsGlobalScopeContainer JsGlobalScopeContainer = JavaScriptCore.getJsGlobalScopeContainer(new Path("org.eclipse.wst.jsdt.core.tests.model.TEST_CONTAINER"), p1);
 		assertClasspathEquals(JsGlobalScopeContainer.getClasspathEntries(), "");
 	} finally {
 		stopDeltas();
@@ -798,15 +798,15 @@ public void testContainerInitializer15() throws CoreException {
 public void testContainerInitializer16() throws CoreException {
 	try {
 		ContainerInitializer.setInitializer(new DefaultContainerInitializer(new String[] {"P1", "/P1"}));
-		JavaModelException exception = null;
+		JavaScriptModelException exception = null;
 		try {
-			IJavaProject p1 = createJavaProject(
+			IJavaScriptProject p1 = createJavaProject(
 				"P1", 
 				new String[] {}, 
 				new String[] {"org.eclipse.wst.jsdt.core.tests.model.TEST_CONTAINER"}, 
 				"");
 			p1.getResolvedClasspath(true);
-		} catch (JavaModelException e) {
+		} catch (JavaScriptModelException e) {
 			exception = e;
 		}
 		assertExceptionEquals(
@@ -823,7 +823,7 @@ public void testVariableInitializer01() throws CoreException {
 		createProject("P1");
 		createFile("/P1/lib.jar", "");
 		VariablesInitializer.setInitializer(new DefaultVariableInitializer(new String[] {"TEST_LIB", "/P1/lib.jar"}));
-		IJavaProject p2 = createJavaProject("P2", new String[] {}, new String[] {"TEST_LIB"}, "");
+		IJavaScriptProject p2 = createJavaProject("P2", new String[] {}, new String[] {"TEST_LIB"}, "");
 		IPackageFragmentRoot root = p2.getPackageFragmentRoot(getFile("/P1/lib.jar"));
 		assertTrue("/P1/lib.jar should exist", root.exists());
 	} finally {
@@ -842,7 +842,7 @@ public void testVariableInitializer02() throws CoreException {
 			"TEST_SRC", "/P1/src.zip",
 			"TEST_ROOT", "src",
 		}));
-		IJavaProject p2 = createJavaProject("P2", new String[] {}, new String[] {"TEST_LIB,TEST_SRC,TEST_ROOT"}, "");
+		IJavaScriptProject p2 = createJavaProject("P2", new String[] {}, new String[] {"TEST_LIB,TEST_SRC,TEST_ROOT"}, "");
 		IPackageFragmentRoot root = p2.getPackageFragmentRoot(getFile("/P1/lib.jar"));
 		assertEquals("Unexpected source attachment path", "/P1/src.zip", root.getSourceAttachmentPath().toString());
 		assertEquals("Unexpected source attachment root path", "src", root.getSourceAttachmentRootPath().toString());
@@ -888,11 +888,11 @@ public void testVariableInitializer04() throws CoreException {
 	try {
 		final StringBuffer buffer = new StringBuffer();
 		VariablesInitializer.setInitializer(new VariablesInitializer.ITestInitializer() {
-			public void initialize(String variable) throws JavaModelException {
+			public void initialize(String variable) throws JavaScriptModelException {
 				buffer.append("Initializing " + variable + "\n");
 				IPath path = new Path(variable.toLowerCase());
 				buffer.append("Setting variable " + variable + " to " + path + "\n");
-				JavaCore.setClasspathVariable(variable, path, null);
+				JavaScriptCore.setClasspathVariable(variable, path, null);
 			}
 		});
 		createJavaProject("P", new String[] {}, new String[] {"TEST_LIB,TEST_SRC,TEST_ROOT"}, "");
@@ -909,12 +909,12 @@ public void testVariableInitializer05() throws CoreException {
 	try {
 		final StringBuffer buffer = new StringBuffer();
 		VariablesInitializer.setInitializer(new VariablesInitializer.ITestInitializer() {
-			public void initialize(String variable) throws JavaModelException {
+			public void initialize(String variable) throws JavaScriptModelException {
 				buffer.append("Initializing " + variable + "\n");
 				IPath path = new Path(variable.toLowerCase());
-				JavaCore.getClasspathVariable("TEST_SRC");
+				JavaScriptCore.getClasspathVariable("TEST_SRC");
 				buffer.append("Setting variable " + variable + " to " + path + "\n");
-				JavaCore.setClasspathVariable(variable, path, null);
+				JavaScriptCore.setClasspathVariable(variable, path, null);
 			}
 		});
 		createJavaProject("P", new String[] {}, new String[] {"TEST_LIB,TEST_SRC,TEST_ROOT"}, "");
@@ -942,14 +942,14 @@ public void testVariableInitializer06() throws CoreException {
 				buffer.append("Ignoring request to initialize");
 			}
 		});
-		IPath path = JavaCore.getClasspathVariable("TEST_SRC");
+		IPath path = JavaScriptCore.getClasspathVariable("TEST_SRC");
 		assertEquals(
 			"Unexpected value of TEST_SRC after initializer was called",
 			null,
 			path);
 		IPath varValue = new Path("src.zip");
-		JavaCore.setClasspathVariable("TEST_SRC", varValue, null);
-		path = JavaCore.getClasspathVariable("TEST_SRC");
+		JavaScriptCore.setClasspathVariable("TEST_SRC", varValue, null);
+		path = JavaScriptCore.getClasspathVariable("TEST_SRC");
 		assertEquals(
 			"Unexpected value of TEST_SRC after setting it",
 			varValue,
@@ -1010,11 +1010,11 @@ public void testVariableInitializer08() throws CoreException {
 		boolean gotException = false;
 		try {
 			VariablesInitializer.setInitializer(new DefaultVariableInitializer(new String[] {"TEST_LIB", "/P1/lib.jar"}) {
-				public void initialize(String variable) throws JavaModelException {
+				public void initialize(String variable) throws JavaScriptModelException {
 					throw new OperationCanceledException("test");
 				}
 			});
-			IJavaProject p1 = createJavaProject("P1", new String[] {}, new String[] {"TEST_LIB"}, "");
+			IJavaScriptProject p1 = createJavaProject("P1", new String[] {}, new String[] {"TEST_LIB"}, "");
 			p1.getResolvedClasspath(true);
 		} catch (OperationCanceledException e) {
 			gotException = true;
@@ -1033,12 +1033,12 @@ public void testVariableInitializer08() throws CoreException {
 public void testVariableInitializer09() throws CoreException {
 	try {
 		VariablesInitializer.setInitializer(new DefaultVariableInitializer(new String[] {"TEST_LIB", "/P1/lib.jar"}) {
-			public void initialize(String variable) throws JavaModelException {
-				JavaCore.removeClasspathVariable("TEST_LIB", null);
+			public void initialize(String variable) throws JavaScriptModelException {
+				JavaScriptCore.removeClasspathVariable("TEST_LIB", null);
 			}
 		});
-		IJavaProject p1 = createJavaProject("P1", new String[] {}, new String[] {"TEST_LIB"}, "");
-		IClasspathEntry[] resolvedClasspath = p1.getResolvedClasspath(true);
+		IJavaScriptProject p1 = createJavaProject("P1", new String[] {}, new String[] {"TEST_LIB"}, "");
+		IIncludePathEntry[] resolvedClasspath = p1.getResolvedClasspath(true);
 		assertClasspathEquals(
 			resolvedClasspath, 
 			""
@@ -1055,14 +1055,14 @@ public void testVariableInitializer09() throws CoreException {
 public void testVariableInitializer10() throws CoreException {
 	try {
 		VariablesInitializer.setInitializer(new DefaultVariableInitializer(new String[] {"TEST_LIB", "/P1/lib.jar"}) {
-			public void initialize(String variable) throws JavaModelException {
+			public void initialize(String variable) throws JavaScriptModelException {
 				// don't initialize
 			}
 		});
 		// force resolution
-		JavaCore.getClasspathVariable("TEST_LIB");
+		JavaScriptCore.getClasspathVariable("TEST_LIB");
 		// second call should still be null
-		assertEquals("TEST_LIB should be null", null, JavaCore.getClasspathVariable("TEST_LIB"));
+		assertEquals("TEST_LIB should be null", null, JavaScriptCore.getClasspathVariable("TEST_LIB"));
 	} finally {
 		deleteProject("P1");
 		VariablesInitializer.reset();
@@ -1079,16 +1079,16 @@ public void testVariableInitializer11() throws CoreException {
 		String initialValue = "/P1/lib.jar";
 		String newValue = "/tmp/file.jar";
 		VariablesInitializer.setInitializer(new DefaultVariableInitializer(new String[] {varName, initialValue}));
-		assertEquals("JavaCore classpath value should have been initialized", JavaCore.getClasspathVariable(varName).toString(), initialValue);
+		assertEquals("JavaScriptCore classpath value should have been initialized", JavaScriptCore.getClasspathVariable(varName).toString(), initialValue);
 		
 		// Modify preference
 		JavaModelManager manager = JavaModelManager.getJavaModelManager();
 		IEclipsePreferences preferences = manager.getInstancePreferences();
 		preferences.put(JavaModelManager.CP_VARIABLE_PREFERENCES_PREFIX+varName, newValue);
 	
-		// verify that JavaCore preferences have been reset
-		assertEquals("JavaCore classpath value should be unchanged", JavaCore.getClasspathVariable(varName).toString(), initialValue);
-		assertEquals("JavaCore preferences value should be unchanged", preferences.get(varName, "X"), initialValue);
+		// verify that JavaScriptCore preferences have been reset
+		assertEquals("JavaScriptCore classpath value should be unchanged", JavaScriptCore.getClasspathVariable(varName).toString(), initialValue);
+		assertEquals("JavaScriptCore preferences value should be unchanged", preferences.get(varName, "X"), initialValue);
 	} finally {
 		VariablesInitializer.reset();
 	}
@@ -1104,20 +1104,20 @@ public void testVariableInitializerDeprecated() throws CoreException {
 		String varName = "TEST_DEPRECATED";
 		String filePath = "/P1/lib.jar";
 		VariablesInitializer.setInitializer(new DefaultVariableInitializer(new String[] {varName, filePath}));
-		assertEquals("JavaCore classpath value should have been initialized", JavaCore.getClasspathVariable(varName).toString(), filePath);
+		assertEquals("JavaScriptCore classpath value should have been initialized", JavaScriptCore.getClasspathVariable(varName).toString(), filePath);
 		
 		// Verify that Classpath Variable is deprecated
-		assertEquals("JavaCore classpath variable should be deprecated", "Test deprecated flag", JavaCore.getClasspathVariableDeprecationMessage(varName));
+		assertEquals("JavaScriptCore classpath variable should be deprecated", "Test deprecated flag", JavaScriptCore.getClasspathVariableDeprecationMessage(varName));
 
 		// Create project
-		IJavaProject project = createJavaProject("P1");
+		IJavaScriptProject project = createJavaProject("P1");
 		createFile("/P1/lib.jar", "");
-		IClasspathEntry variable = JavaCore.newVariableEntry(new Path("TEST_DEPRECATED"), null, null);
-		IJavaModelStatus status = JavaConventions.validateClasspathEntry(project, variable, false);
+		IIncludePathEntry variable = JavaScriptCore.newVariableEntry(new Path("TEST_DEPRECATED"), null, null);
+		IJavaScriptModelStatus status = JavaScriptConventions.validateClasspathEntry(project, variable, false);
 		assertStatus("Classpath variable 'TEST_DEPRECATED' in project P1 is deprecated: 'Test deprecated flag'", status);
 		assertFalse("Status should not be OK", status.isOK());
 		assertEquals("Status should have WARNING severity", IStatus.WARNING, status.getSeverity());
-		assertEquals("Status should have deprecated code", IJavaModelStatusConstants.DEPRECATED_VARIABLE, status.getCode());
+		assertEquals("Status should have deprecated code", IJavaScriptModelStatusConstants.DEPRECATED_VARIABLE, status.getCode());
 	} finally {
 		VariablesInitializer.reset();
 		deleteProject("P1");
@@ -1129,19 +1129,19 @@ public void testVariableInitializerUnboundAndDeprecated() throws CoreException {
 		String varName = "TEST_DEPRECATED";
 		String filePath = "/P1/lib.jar";
 		VariablesInitializer.setInitializer(new DefaultVariableInitializer(new String[] {varName, filePath}));
-		assertEquals("JavaCore classpath value should have been initialized", JavaCore.getClasspathVariable(varName).toString(), filePath);
+		assertEquals("JavaScriptCore classpath value should have been initialized", JavaScriptCore.getClasspathVariable(varName).toString(), filePath);
 		
 		// Verify that Classpath Variable is deprecated
-		assertEquals("JavaCore classpath variable should be deprecated", "Test deprecated flag", JavaCore.getClasspathVariableDeprecationMessage(varName));
+		assertEquals("JavaScriptCore classpath variable should be deprecated", "Test deprecated flag", JavaScriptCore.getClasspathVariableDeprecationMessage(varName));
 
 		// Create project
-		IJavaProject project = createJavaProject("P1");
-		IClasspathEntry variable = JavaCore.newVariableEntry(new Path("TEST_DEPRECATED"), null, null);
-		IJavaModelStatus status = JavaConventions.validateClasspathEntry(project, variable, false);
+		IJavaScriptProject project = createJavaProject("P1");
+		IIncludePathEntry variable = JavaScriptCore.newVariableEntry(new Path("TEST_DEPRECATED"), null, null);
+		IJavaScriptModelStatus status = JavaScriptConventions.validateClasspathEntry(project, variable, false);
 		assertStatus("Project P1 is missing required library: 'lib.jar'", status);
 		assertFalse("Status should not be OK", status.isOK());
 		assertEquals("Status should have WARNING severity", IStatus.ERROR, status.getSeverity());
-		assertEquals("Status should have deprecated code", IJavaModelStatusConstants.INVALID_CLASSPATH, status.getCode());
+		assertEquals("Status should have deprecated code", IJavaScriptModelStatusConstants.INVALID_CLASSPATH, status.getCode());
 	} finally {
 		VariablesInitializer.reset();
 		deleteProject("P1");
@@ -1158,16 +1158,16 @@ public void testVariableInitializerReadOnly() throws CoreException {
 		String varName = "TEST_READ_ONLY";
 		String path = "/P1/lib.jar";
 		VariablesInitializer.setInitializer(new DefaultVariableInitializer(new String[] { varName, path }));
-		assertEquals("JavaCore classpath value should have been initialized", JavaCore.getClasspathVariable(varName).toString(), path);
+		assertEquals("JavaScriptCore classpath value should have been initialized", JavaScriptCore.getClasspathVariable(varName).toString(), path);
 
 		// verify that Classpath Variable is read-only
-		assertTrue("JavaCore classpath variable should be read-only", JavaCore.isClasspathVariableReadOnly(varName));
+		assertTrue("JavaScriptCore classpath variable should be read-only", JavaScriptCore.isClasspathVariableReadOnly(varName));
 
 		// Create project
-		IJavaProject project = createJavaProject("P1");
+		IJavaScriptProject project = createJavaProject("P1");
 		createFile("/P1/lib.jar", "");
-		IClasspathEntry variable = JavaCore.newVariableEntry(new Path("TEST_READ_ONLY"), null, null);
-		IJavaModelStatus status = JavaConventions.validateClasspathEntry(project, variable, false);
+		IIncludePathEntry variable = JavaScriptCore.newVariableEntry(new Path("TEST_READ_ONLY"), null, null);
+		IJavaScriptModelStatus status = JavaScriptConventions.validateClasspathEntry(project, variable, false);
 		assertStatus("OK", status);
 		assertTrue("Status should be OK", status.isOK());
 		assertEquals("Status should be VERIFIED_OK", JavaModelStatus.VERIFIED_OK, status);
@@ -1182,21 +1182,21 @@ public void testVariableInitializerDeprecatedAndReadOnly() throws CoreException 
 		String varName = "TEST_DEPRECATED_READ_ONLY";
 		String path = "/P1/lib.jar";
 		VariablesInitializer.setInitializer(new DefaultVariableInitializer(new String[] { varName, path }));
-		assertEquals("JavaCore classpath value should have been initialized", JavaCore.getClasspathVariable(varName).toString(), path);
+		assertEquals("JavaScriptCore classpath value should have been initialized", JavaScriptCore.getClasspathVariable(varName).toString(), path);
 
 		// verify that Classpath Variable is read-only
-		assertEquals("JavaCore classpath variable should be deprecated", "A deprecated and read-only initializer", JavaCore.getClasspathVariableDeprecationMessage(varName));
-		assertTrue("JavaCore classpath variable should be read-only", JavaCore.isClasspathVariableReadOnly(varName));
+		assertEquals("JavaScriptCore classpath variable should be deprecated", "A deprecated and read-only initializer", JavaScriptCore.getClasspathVariableDeprecationMessage(varName));
+		assertTrue("JavaScriptCore classpath variable should be read-only", JavaScriptCore.isClasspathVariableReadOnly(varName));
 
 		// Create project
-		IJavaProject project = createJavaProject("P1");
+		IJavaScriptProject project = createJavaProject("P1");
 		createFile("/P1/lib.jar", "");
-		IClasspathEntry variable = JavaCore.newVariableEntry(new Path("TEST_DEPRECATED_READ_ONLY"), null, null);
-		IJavaModelStatus status = JavaConventions.validateClasspathEntry(project, variable, false);
+		IIncludePathEntry variable = JavaScriptCore.newVariableEntry(new Path("TEST_DEPRECATED_READ_ONLY"), null, null);
+		IJavaScriptModelStatus status = JavaScriptConventions.validateClasspathEntry(project, variable, false);
 		assertStatus("Classpath variable 'TEST_DEPRECATED_READ_ONLY' in project P1 is deprecated: 'A deprecated and read-only initializer'", status);
 		assertFalse("Status should not be OK", status.isOK());
 		assertEquals("Status should have WARNING severity", IStatus.WARNING, status.getSeverity());
-		assertEquals("Status should have deprecated code", IJavaModelStatusConstants.DEPRECATED_VARIABLE, status.getCode());
+		assertEquals("Status should have deprecated code", IJavaScriptModelStatusConstants.DEPRECATED_VARIABLE, status.getCode());
 	} finally {
 		VariablesInitializer.reset();
 		deleteProject("P1");
@@ -1213,25 +1213,25 @@ public void testVariableInitializerBug172207() throws CoreException {
 		String varName = "TEST_DEPRECATED_READ_ONLY";
 		String path = "/P1/lib.jar";
 		VariablesInitializer.setInitializer(new DefaultVariableInitializer(new String[] { varName, path }));
-		assertEquals("JavaCore classpath value should have been initialized", JavaCore.getClasspathVariable(varName).toString(), path);
+		assertEquals("JavaScriptCore classpath value should have been initialized", JavaScriptCore.getClasspathVariable(varName).toString(), path);
 
 		// verify that Classpath Variable is read-only
-		assertEquals("JavaCore classpath variable should be deprecated", "A deprecated and read-only initializer", JavaCore.getClasspathVariableDeprecationMessage(varName));
-		assertTrue("JavaCore classpath variable should be read-only", JavaCore.isClasspathVariableReadOnly(varName));
+		assertEquals("JavaScriptCore classpath variable should be deprecated", "A deprecated and read-only initializer", JavaScriptCore.getClasspathVariableDeprecationMessage(varName));
+		assertTrue("JavaScriptCore classpath variable should be read-only", JavaScriptCore.isClasspathVariableReadOnly(varName));
 
 		// Create project
-		IJavaProject project = createJavaProject("P1");
+		IJavaScriptProject project = createJavaProject("P1");
 		createFile("/P1/lib.jar", "");
-		IClasspathEntry variable = JavaCore.newVariableEntry(new Path("TEST_DEPRECATED_READ_ONLY"), null, null);
-		IClasspathEntry[] entries = project.getRawClasspath();
+		IIncludePathEntry variable = JavaScriptCore.newVariableEntry(new Path("TEST_DEPRECATED_READ_ONLY"), null, null);
+		IIncludePathEntry[] entries = project.getRawClasspath();
 		int length = entries.length;
-		System.arraycopy(entries, 0, entries = new IClasspathEntry[length+1], 0, length);
+		System.arraycopy(entries, 0, entries = new IIncludePathEntry[length+1], 0, length);
 		entries[length] = variable;
 		project.setRawClasspath(entries, null);
 
 		// verify markers
 		waitForAutoBuild();
-		IMarker[] markers = project.getProject().findMarkers(IJavaModelMarker.BUILDPATH_PROBLEM_MARKER, false, IResource.DEPTH_ZERO);
+		IMarker[] markers = project.getProject().findMarkers(IJavaScriptModelMarker.BUILDPATH_PROBLEM_MARKER, false, IResource.DEPTH_ZERO);
 		sortMarkers(markers);
 		assertMarkers("Unexpected marker(s)",
 			"Classpath variable 'TEST_DEPRECATED_READ_ONLY' in project P1 is deprecated: 'A deprecated and read-only initializer'",
@@ -1249,9 +1249,9 @@ public void testVariableInitializerBug172207() throws CoreException {
 public void testUserLibraryInitializer1() throws CoreException {
 	try {
 		// Create new user library "SWT"
-		JsGlobalScopeContainerInitializer initializer= JavaCore.getJsGlobalScopeContainerInitializer(JavaCore.USER_LIBRARY_CONTAINER_ID);
+		JsGlobalScopeContainerInitializer initializer= JavaScriptCore.getJsGlobalScopeContainerInitializer(JavaScriptCore.USER_LIBRARY_CONTAINER_ID);
 		String libraryName = "SWT";
-		IPath containerPath = new Path(JavaCore.USER_LIBRARY_CONTAINER_ID);
+		IPath containerPath = new Path(JavaScriptCore.USER_LIBRARY_CONTAINER_ID);
 		UserLibraryJsGlobalScopeContainer containerSuggestion = new UserLibraryJsGlobalScopeContainer(libraryName);
 		initializer.requestJsGlobalScopeContainerUpdate(containerPath.append(libraryName), null, containerSuggestion);
 
@@ -1261,14 +1261,14 @@ public void testUserLibraryInitializer1() throws CoreException {
 		IFile srcFile = createFile("/p61872/swtsrc.zip", "");
 
 		// Modify user library
-		Preferences preferences = JavaCore.getPlugin().getPluginPreferences();
+		Preferences preferences = JavaScriptCore.getPlugin().getPluginPreferences();
 		String propertyName = UserLibraryManager.CP_USERLIBRARY_PREFERENCES_PREFIX+"SWT";
 		StringBuffer propertyValue = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<userlibrary systemlibrary=\"false\" version=\"1\">\r\n<archive");
 		String jarFullPath = getWorkspaceRoot().getLocation().append(jarFile.getFullPath()).toString();
 		propertyValue.append(" path=\""+jarFullPath);
 		propertyValue.append("\"/>\r\n</userlibrary>\r\n");
 		preferences.setValue(propertyName, propertyValue.toString());
-		JavaCore.getPlugin().savePluginPreferences();
+		JavaScriptCore.getPlugin().savePluginPreferences();
 
 		// Modify project classpath
 		editFile(
@@ -1281,7 +1281,7 @@ public void testUserLibraryInitializer1() throws CoreException {
 		);
 
 		// Verify 
-		IClasspathEntry[] entries = getJavaProject("p61872").getResolvedClasspath(true);
+		IIncludePathEntry[] entries = getJavaProject("p61872").getResolvedClasspath(true);
 		assertEquals("Invalid entries number in resolved classpath for project p61872!", 1, entries.length);
 		assertEquals("Invalid path for project 61872 classpath entry!", jarFullPath.toLowerCase(), entries[0].getPath().toString().toLowerCase());
 		assertNull("Project 61872 classpath entry should not have any source attached!", entries[0].getSourceAttachmentPath());
@@ -1293,7 +1293,7 @@ public void testUserLibraryInitializer1() throws CoreException {
 		propertyValue.append("\" path=\""+jarFullPath);
 		propertyValue.append("\"/>\r\n</userlibrary>\r\n");
 		preferences.setValue(propertyName, propertyValue.toString());
-		JavaCore.getPlugin().savePluginPreferences();
+		JavaScriptCore.getPlugin().savePluginPreferences();
 
 		// Verify 
 		entries = getJavaProject("p61872").getResolvedClasspath(true);

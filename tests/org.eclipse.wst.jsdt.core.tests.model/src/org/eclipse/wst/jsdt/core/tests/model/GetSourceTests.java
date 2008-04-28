@@ -17,7 +17,7 @@ import junit.framework.Test;
 
 public class GetSourceTests extends ModifyingResourceTests {
 	
-	ICompilationUnit cu;
+	IJavaScriptUnit cu;
 
 	public GetSourceTests(String name) {
 		super(name);
@@ -90,7 +90,7 @@ public class GetSourceTests extends ModifyingResourceTests {
 	 * Ensure the source for a field contains the modifiers, field
 	 * type, name, and terminator.
 	 */
-	public void testField() throws JavaModelException {
+	public void testField() throws JavaScriptModelException {
 		IType type = this.cu.getType("X");
 		IField field = type.getField("field");
 	
@@ -103,7 +103,7 @@ public class GetSourceTests extends ModifyingResourceTests {
 	 * Ensure the source for an import contains the 'import' keyword,
 	 * name, and terminator.
 	 */
-	public void testImport() throws JavaModelException {
+	public void testImport() throws JavaScriptModelException {
 		IImportDeclaration i = this.cu.getImport("java.lang.*");
 	
 		String actualSource = i.getSource();
@@ -114,7 +114,7 @@ public class GetSourceTests extends ModifyingResourceTests {
 	/*
 	 * Ensures the source for a local variable contains the modifiers, type and name.
 	 */
-	public void testLocalVariable1() throws JavaModelException {
+	public void testLocalVariable1() throws JavaScriptModelException {
 		ILocalVariable var = getLocalVariable("/P/p/X.js", "var1 = 2;", "var1");
 		
 		String actualSource = ((ISourceReference)var).getSource();
@@ -125,7 +125,7 @@ public class GetSourceTests extends ModifyingResourceTests {
 	/*
 	 * Ensures the source for a local variable contains the modifiers, type and name.
 	 */
-	public void testLocalVariable2() throws JavaModelException {
+	public void testLocalVariable2() throws JavaScriptModelException {
 		ILocalVariable var = getLocalVariable("/P/p/X.js", "var2;", "var2");
 		
 		String actualSource = ((ISourceReference)var).getSource();
@@ -136,7 +136,7 @@ public class GetSourceTests extends ModifyingResourceTests {
 	/*
 	 * Ensures the source for a local variable contains the modifiers, type and name.
 	 */
-	public void testLocalVariable3() throws JavaModelException {
+	public void testLocalVariable3() throws JavaScriptModelException {
 		ILocalVariable var = getLocalVariable("/P/p/X.js", "i = 0;", "i");
 		
 		String actualSource = ((ISourceReference)var).getSource();
@@ -147,7 +147,7 @@ public class GetSourceTests extends ModifyingResourceTests {
 	/*
 	 * Ensures the source for a local variable contains the modifiers, type and name.
 	 */
-	public void testLocalVariable4() throws JavaModelException {
+	public void testLocalVariable4() throws JavaScriptModelException {
 		ILocalVariable var = getLocalVariable("/P/p/X.js", "s) {", "s");
 		
 		String actualSource = ((ISourceReference)var).getSource();
@@ -159,9 +159,9 @@ public class GetSourceTests extends ModifyingResourceTests {
 	 * Ensure the source for a method contains the modifiers, return
 	 * type, selector, and terminator.
 	 */
-	public void testMethod() throws JavaModelException {
+	public void testMethod() throws JavaScriptModelException {
 		IType type = this.cu.getType("X");
-		IMethod method= type.getMethod("bar", new String[0]);
+		IFunction method= type.getMethod("bar", new String[0]);
 	
 		String actualSource = method.getSource();
 		String expectedSource =
@@ -185,7 +185,7 @@ public class GetSourceTests extends ModifyingResourceTests {
 				"  void static bar() {}\n" +
 				"}";
 			createFile("/P/p/Y.js", cuSource);
-			IMethod method= getCompilationUnit("/P/p/Y.js").getType("Y").getMethod("bar", new String[0]);
+			IFunction method= getCompilationUnit("/P/p/Y.js").getType("Y").getMethod("bar", new String[0]);
 		
 			String actualSource = getNameSource(cuSource, method);
 			String expectedSource = "bar";
@@ -307,7 +307,7 @@ public class GetSourceTests extends ModifyingResourceTests {
 	 * Ensure the source for a field contains the modifiers, field
 	 * type, name, and terminator, and unicode characters.
 	 */
-	public void testUnicodeField() throws JavaModelException {
+	public void testUnicodeField() throws JavaScriptModelException {
 		IType type = this.cu.getType("X");
 		IField field = type.getField("size");
 	
@@ -320,9 +320,9 @@ public class GetSourceTests extends ModifyingResourceTests {
 	 * Ensure the source for a field contains the modifiers, field
 	 * type, name, and terminator, and unicode characters.
 	 */
-	public void testUnicodeMethod() throws JavaModelException {
+	public void testUnicodeMethod() throws JavaScriptModelException {
 		IType type = this.cu.getType("X");
-		IMethod method= type.getMethod("getSize", null);
+		IFunction method= type.getMethod("getSize", null);
 	
 		String actualSource = method.getSource();
 		String expectedSource = 

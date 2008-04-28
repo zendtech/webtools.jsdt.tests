@@ -16,7 +16,7 @@ import junit.framework.Test;
 
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.wst.jsdt.core.JavaModelException;
+import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.eclipse.wst.jsdt.core.tests.util.Util;
 import org.eclipse.wst.jsdt.internal.compiler.impl.CompilerOptions;
 
@@ -116,7 +116,7 @@ protected void writeFiles(String[] sources) {
 /**
  * @category Tests for tag names completion
  */
-public void test001() throws JavaModelException {
+public void test001() throws JavaScriptModelException {
 	String source =
 		"/**\n" +
 		" * Completion on empty tag name:\n" +
@@ -125,20 +125,20 @@ public void test001() throws JavaModelException {
 		"package javadoc;\n";
 	completeInJavadoc("/Completion/src/javadoc/package-info.js", source, true, "@");
 	assertResults(
-		"author[JAVADOC_BLOCK_TAG]{@author, null, null, author, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"see[JAVADOC_BLOCK_TAG]{@see, null, null, see, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"version[JAVADOC_BLOCK_TAG]{@version, null, null, version, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"category[JAVADOC_BLOCK_TAG]{@category, null, null, category, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"since[JAVADOC_BLOCK_TAG]{@since, null, null, since, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"serial[JAVADOC_BLOCK_TAG]{@serial, null, null, serial, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"link[JAVADOC_INLINE_TAG]{{@link}, null, null, link, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"docRoot[JAVADOC_INLINE_TAG]{{@docRoot}, null, null, docRoot, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"linkplain[JAVADOC_INLINE_TAG]{{@linkplain}, null, null, linkplain, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"value[JAVADOC_INLINE_TAG]{{@value}, null, null, value, null, "+this.positions+JAVADOC_RELEVANCE+"}"
+		"author[JSDOC_BLOCK_TAG]{@author, null, null, author, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"see[JSDOC_BLOCK_TAG]{@see, null, null, see, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"version[JSDOC_BLOCK_TAG]{@version, null, null, version, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"category[JSDOC_BLOCK_TAG]{@category, null, null, category, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"since[JSDOC_BLOCK_TAG]{@since, null, null, since, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"serial[JSDOC_BLOCK_TAG]{@serial, null, null, serial, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"link[JSDOC_INLINE_TAG]{{@link}, null, null, link, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"docRoot[JSDOC_INLINE_TAG]{{@docRoot}, null, null, docRoot, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"linkplain[JSDOC_INLINE_TAG]{{@linkplain}, null, null, linkplain, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"value[JSDOC_INLINE_TAG]{{@value}, null, null, value, null, "+this.positions+JAVADOC_RELEVANCE+"}"
 	);
 }
 
-public void test002() throws JavaModelException {
+public void test002() throws JavaScriptModelException {
 	String source =
 		"/**\n" +
 		" * Completion on impossible tag name:\n" +
@@ -149,7 +149,7 @@ public void test002() throws JavaModelException {
 	assertResults("");
 }
 
-public void test003() throws JavaModelException {
+public void test003() throws JavaScriptModelException {
 	String source = 
 		"/**\n" +
 		" * Completion on one letter:\n" +
@@ -158,11 +158,11 @@ public void test003() throws JavaModelException {
 		"package javadoc;\n";
 	completeInJavadoc("/Completion/src/javadoc/package-info.js", source, true, "@a");
 	assertResults(
-		"author[JAVADOC_BLOCK_TAG]{@author, null, null, author, null, "+this.positions+JAVADOC_RELEVANCE+"}"
+		"author[JSDOC_BLOCK_TAG]{@author, null, null, author, null, "+this.positions+JAVADOC_RELEVANCE+"}"
 	);
 }
 
-public void test004() throws JavaModelException {
+public void test004() throws JavaScriptModelException {
 	String source =
 		"/**\n" +
 		" * Completion with several letters:\n" +
@@ -171,11 +171,11 @@ public void test004() throws JavaModelException {
 		"package javadoc;\n";
 	completeInJavadoc("/Completion/src/javadoc/package-info.js", source, true, "@ser");
 	assertResults(
-		"serial[JAVADOC_BLOCK_TAG]{@serial, null, null, serial, null, "+this.positions+JAVADOC_RELEVANCE+"}"
+		"serial[JSDOC_BLOCK_TAG]{@serial, null, null, serial, null, "+this.positions+JAVADOC_RELEVANCE+"}"
 	);
 }
 
-public void test005() throws JavaModelException {
+public void test005() throws JavaScriptModelException {
 	String source =
 		"/**\n" +
 		" * Completion on full tag name:\n" +
@@ -184,11 +184,11 @@ public void test005() throws JavaModelException {
 		"package javadoc;\n";
 	completeInJavadoc("/Completion/src/javadoc/package-info.js", source, true, "@since");
 	assertResults(
-		"since[JAVADOC_BLOCK_TAG]{@since, null, null, since, null, "+this.positions+JAVADOC_RELEVANCE+"}"
+		"since[JSDOC_BLOCK_TAG]{@since, null, null, since, null, "+this.positions+JAVADOC_RELEVANCE+"}"
 	);
 }
 
-public void test006() throws JavaModelException {
+public void test006() throws JavaScriptModelException {
 	String source =
 		"/**\n" +
 		" * Completion on @ inside text\n" +
@@ -196,14 +196,14 @@ public void test006() throws JavaModelException {
 		"package javadoc;\n";
 	completeInJavadoc("/Completion/src/javadoc/package-info.js", source, true, "@");
 	assertResults(
-		"link[JAVADOC_INLINE_TAG]{{@link}, null, null, link, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"docRoot[JAVADOC_INLINE_TAG]{{@docRoot}, null, null, docRoot, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"linkplain[JAVADOC_INLINE_TAG]{{@linkplain}, null, null, linkplain, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"value[JAVADOC_INLINE_TAG]{{@value}, null, null, value, null, "+this.positions+JAVADOC_RELEVANCE+"}"
+		"link[JSDOC_INLINE_TAG]{{@link}, null, null, link, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"docRoot[JSDOC_INLINE_TAG]{{@docRoot}, null, null, docRoot, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"linkplain[JSDOC_INLINE_TAG]{{@linkplain}, null, null, linkplain, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"value[JSDOC_INLINE_TAG]{{@value}, null, null, value, null, "+this.positions+JAVADOC_RELEVANCE+"}"
 	);
 }
 
-public void test007() throws JavaModelException {
+public void test007() throws JavaScriptModelException {
 	String source =
 		"/**\n" +
 		" * Completion on @d inside text\n" +
@@ -211,14 +211,14 @@ public void test007() throws JavaModelException {
 		"package javadoc;\n";
 	completeInJavadoc("/Completion/src/javadoc/package-info.js", source, true, "@d");
 	assertResults(
-		"docRoot[JAVADOC_INLINE_TAG]{{@docRoot}, null, null, docRoot, null, "+this.positions+JAVADOC_RELEVANCE+"}"
+		"docRoot[JSDOC_INLINE_TAG]{{@docRoot}, null, null, docRoot, null, "+this.positions+JAVADOC_RELEVANCE+"}"
 	);
 }
 
 /**
  * @category Tests for types completion
  */
-public void test010() throws JavaModelException {
+public void test010() throws JavaScriptModelException {
 	String source =
 		"/**\n" + 
 		" * Completion after:\n" + 
@@ -231,7 +231,7 @@ public void test010() throws JavaModelException {
 	);
 }
 
-public void test011() throws JavaModelException {
+public void test011() throws JavaScriptModelException {
 	String source =
 		"/**\n" + 
 		" * Completion after:\n" + 
@@ -244,7 +244,7 @@ public void test011() throws JavaModelException {
 	);
 }
 
-public void test012() throws JavaModelException {
+public void test012() throws JavaScriptModelException {
 	String source =
 		"/**\n" + 
 		" * Completion after:\n" + 
@@ -258,7 +258,7 @@ public void test012() throws JavaModelException {
 	);
 }
 
-public void test013() throws JavaModelException {
+public void test013() throws JavaScriptModelException {
 	String source =
 		"/**\n" + 
 		" * Completion after:\n" + 
@@ -273,7 +273,7 @@ public void test013() throws JavaModelException {
 	);
 }
 
-public void test014() throws JavaModelException {
+public void test014() throws JavaScriptModelException {
 	String source =
 		"/**\n" + 
 		" * Completion after:\n" + 
@@ -288,7 +288,7 @@ public void test014() throws JavaModelException {
 	);
 }
 
-public void test015() throws JavaModelException {
+public void test015() throws JavaScriptModelException {
 	String source =
 		"/**\n" + 
 		" * Completion after:\n" + 
@@ -306,7 +306,7 @@ public void test015() throws JavaModelException {
 /**
  * @category Tests for fields completion
  */
-public void test020() throws JavaModelException {
+public void test020() throws JavaScriptModelException {
 	String source =
 		"/**\n" + 
 		" * Completion after:\n" + 
@@ -317,7 +317,7 @@ public void test020() throws JavaModelException {
 	assertResults("");
 }
 
-public void test021() throws JavaModelException {
+public void test021() throws JavaScriptModelException {
 	String source =
 		"/**\n" + 
 		" * Completion after:\n" + 
@@ -330,7 +330,7 @@ public void test021() throws JavaModelException {
 	);
 }
 
-public void test022() throws JavaModelException {
+public void test022() throws JavaScriptModelException {
 	String[] sources = {
 		"/Completion/src/javadoc/tags/package-info.js",
 			"/**\n" + 
@@ -350,7 +350,7 @@ public void test022() throws JavaModelException {
 	);
 }
 
-public void test023() throws JavaModelException {
+public void test023() throws JavaScriptModelException {
 	String source =
 		"/**\n" + 
 		" * Completion after:\n" + 
@@ -361,7 +361,7 @@ public void test023() throws JavaModelException {
 	assertResults("");
 }
 
-public void test024() throws JavaModelException {
+public void test024() throws JavaScriptModelException {
 	String source =
 		"/**\n" + 
 		" * Completion after:\n" + 
@@ -386,7 +386,7 @@ public void test024() throws JavaModelException {
 	);
 }
 
-public void test025() throws JavaModelException {
+public void test025() throws JavaScriptModelException {
 	String[] sources = {
 		"/Completion/src/javadoc/tags/package-info.js",
 			"/**\n" + 
@@ -423,7 +423,7 @@ public void test025() throws JavaModelException {
 /**
  * @category Tests for methods completion
  */
-public void test030() throws JavaModelException {
+public void test030() throws JavaScriptModelException {
 	String[] sources = {
 		"/Completion/src/javadoc/tags/package-info.js",
 			"/**\n" + 
@@ -442,7 +442,7 @@ public void test030() throws JavaModelException {
 		"method[METHOD_REF]{method(), Ljavadoc.tags.OtherTypes;, ()V, method, null, "+this.positions+R_DICNRNS+"}"
 	);
 }
-public void test031() throws JavaModelException {
+public void test031() throws JavaScriptModelException {
 	String[] sources = {
 		"/Completion/src/javadoc/tags/package-info.js",
 			"/**\n" + 
@@ -479,7 +479,7 @@ public void test031() throws JavaModelException {
 /**
  * @category Tests for constructors completion
  */
-public void test040() throws JavaModelException {
+public void test040() throws JavaScriptModelException {
 	String[] sources = {
 		"/Completion/src/javadoc/tags/package-info.js",
 			"/**\n" + 
@@ -499,7 +499,7 @@ public void test040() throws JavaModelException {
 		"OtherTypes[METHOD_REF<CONSTRUCTOR>]{OtherTypes(), Ljavadoc.tags.OtherTypes;, ()V, OtherTypes, null, "+this.positions+JAVADOC_RELEVANCE+"}"
 	);
 }
-public void test041() throws JavaModelException {
+public void test041() throws JavaScriptModelException {
 	String[] sources = {
 		"/Completion/src/javadoc/tags/package-info.js",
 			"/**\n" + 

@@ -33,9 +33,9 @@ import org.eclipse.wst.jsdt.core.compiler.CharOperation;
 import org.eclipse.wst.jsdt.core.dom.ASTNode;
 import org.eclipse.wst.jsdt.core.formatter.CodeFormatter;
 import org.eclipse.wst.jsdt.core.formatter.DefaultCodeFormatterConstants;
-import org.eclipse.wst.jsdt.core.ICompilationUnit;
-import org.eclipse.wst.jsdt.core.JavaCore;
-import org.eclipse.wst.jsdt.core.JavaModelException;
+import org.eclipse.wst.jsdt.core.IJavaScriptUnit;
+import org.eclipse.wst.jsdt.core.JavaScriptCore;
+import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.eclipse.wst.jsdt.core.ToolFactory;
 import org.eclipse.wst.jsdt.core.tests.model.AbstractJavaModelTests;
 import org.eclipse.wst.jsdt.core.tests.util.Util;
@@ -240,10 +240,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	
 	private void runTest(CodeFormatter codeFormatter, String packageName, String compilationUnitName, int kind, int indentationLevel, boolean checkNull, int offset, int length, String lineSeparator) {
 		try {
-			ICompilationUnit sourceUnit = getCompilationUnit("Formatter" , "", packageName, getIn(compilationUnitName)); //$NON-NLS-1$ //$NON-NLS-2$
+			IJavaScriptUnit sourceUnit = getCompilationUnit("Formatter" , "", packageName, getIn(compilationUnitName)); //$NON-NLS-1$ //$NON-NLS-2$
 			String s = sourceUnit.getSource();
 			assertNotNull(s);
-			ICompilationUnit outputUnit = getCompilationUnit("Formatter" , "", packageName, getOut(compilationUnitName)); //$NON-NLS-1$ //$NON-NLS-2$
+			IJavaScriptUnit outputUnit = getCompilationUnit("Formatter" , "", packageName, getOut(compilationUnitName)); //$NON-NLS-1$ //$NON-NLS-2$
 			assertNotNull(outputUnit);
 			String result;
 			if (length == -1) {
@@ -252,7 +252,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 				result = runFormatter(codeFormatter, s, kind, indentationLevel, offset, length, lineSeparator);
 			}
 			assertLineEquals(result, s, outputUnit.getSource(), checkNull);
-		} catch (JavaModelException e) {
+		} catch (JavaScriptModelException e) {
 			e.printStackTrace();
 			assertTrue(false);
 		}
@@ -1367,10 +1367,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test135() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
@@ -1928,7 +1928,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	public void test190() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
 		options.put(DefaultCodeFormatterConstants.FORMATTER_NUMBER_OF_EMPTY_LINES_TO_PRESERVE, "1");
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test190", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -1958,10 +1958,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test193() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
@@ -1974,10 +1974,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test194() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
@@ -1990,10 +1990,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test195() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
@@ -2006,16 +2006,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test196() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test196", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS, true);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2023,16 +2023,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test197() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test197", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS, true);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2040,16 +2040,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test198() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test198", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS, true);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2057,16 +2057,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test199() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test199", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS, true);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2074,16 +2074,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test201() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test201", "A.js", CodeFormatter.K_STATEMENTS, true);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2095,16 +2095,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test202() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test202", "A.js", CodeFormatter.K_STATEMENTS, true);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2116,16 +2116,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void _test203() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test203", "A.js", CodeFormatter.K_STATEMENTS, true);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2133,16 +2133,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test204() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test204", "A.js", CodeFormatter.K_STATEMENTS, true);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2150,16 +2150,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test205() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_NUMBER_OF_EMPTY_LINES_TO_PRESERVE, "1");//$NON-NLS-1$
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -2168,16 +2168,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test206() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test206", "A.js", CodeFormatter.K_STATEMENTS, true);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2185,16 +2185,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test207() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test207", "A.js", CodeFormatter.K_STATEMENTS, true);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2202,16 +2202,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	
 	public void test208() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test208", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS, true);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2219,16 +2219,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test209() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_NUMBER_OF_EMPTY_LINES_TO_PRESERVE, "1");//$NON-NLS-1$
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -2237,16 +2237,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	
 	public void test210() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_NUMBER_OF_EMPTY_LINES_TO_PRESERVE, "1");//$NON-NLS-1$
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -2255,16 +2255,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test211() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_NUMBER_OF_EMPTY_LINES_TO_PRESERVE, "1");//$NON-NLS-1$
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -2273,16 +2273,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test212() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test212", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2290,16 +2290,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test213() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test213", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2307,16 +2307,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test214() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test214", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2324,16 +2324,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test215() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test215", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2341,16 +2341,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test216() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test216", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2358,16 +2358,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test217() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test217", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2375,16 +2375,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test218() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test218", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS, 1);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2392,16 +2392,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test219() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test219", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS, 1);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2409,16 +2409,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test220() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test220", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS, 1);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2426,16 +2426,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test221() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test221", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2443,32 +2443,32 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test222() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test222", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
 	}
 	public void test223() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test223", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2476,16 +2476,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	
 	public void test224() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test224", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2493,16 +2493,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test225() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test225", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2510,16 +2510,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	
 	public void test226() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test226", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2527,16 +2527,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test227() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test227", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2544,16 +2544,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	
 	public void test228() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test228", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2561,16 +2561,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test229() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test229", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2578,16 +2578,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	
 	public void test230() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test230", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2595,16 +2595,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test231() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test231", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2612,16 +2612,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test232() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test232", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2629,16 +2629,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test233() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test233", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS, 1);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2646,16 +2646,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test234() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test234", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2663,16 +2663,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test235() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test235", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2680,16 +2680,16 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test236() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test236", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2697,17 +2697,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test237() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test237", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2715,17 +2715,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test238() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test238", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2733,17 +2733,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test239() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test239", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2751,17 +2751,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test240() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test240", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2769,17 +2769,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test241() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test241", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2787,17 +2787,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	
 	public void test242() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test242", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2805,17 +2805,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test243() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test243", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2823,17 +2823,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test244() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test244", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2841,17 +2841,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test245() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test245", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2859,17 +2859,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test246() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test246", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2877,17 +2877,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test247() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test247", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2895,17 +2895,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test248() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test248", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2913,17 +2913,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test249() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test249", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2931,17 +2931,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test250() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test250", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2949,17 +2949,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test251() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test251", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2967,17 +2967,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test252() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test252", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -2985,17 +2985,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test253() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test253", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3003,17 +3003,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test254() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test254", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3021,17 +3021,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test255() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test255", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3039,17 +3039,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test256() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test256", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3057,17 +3057,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test257() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test257", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3075,17 +3075,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	
 	public void test258() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test258", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3093,17 +3093,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test259() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test259", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3111,17 +3111,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test260() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test260", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3129,17 +3129,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test261() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test261", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3147,17 +3147,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test262() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test262", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3165,17 +3165,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test263() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test263", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3183,17 +3183,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test264() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test264", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3201,17 +3201,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test265() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test265", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3219,17 +3219,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	
 	public void test266() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test266", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3237,17 +3237,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test267() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test267", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3255,17 +3255,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test268() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test268", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3273,17 +3273,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test269() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test269", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3291,17 +3291,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test270() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test270", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3309,17 +3309,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test271() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test271", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3327,10 +3327,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test272() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
@@ -3338,7 +3338,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK_IN_CASE, DefaultCodeFormatterConstants.NEXT_LINE_SHIFTED);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test272", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3346,10 +3346,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test273() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
@@ -3357,7 +3357,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK_IN_CASE, DefaultCodeFormatterConstants.NEXT_LINE_SHIFTED);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test273", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3365,17 +3365,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test274() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test274", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3383,17 +3383,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test275() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test275", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3401,17 +3401,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test276() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test276", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3419,17 +3419,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test277() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test277", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3437,17 +3437,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test278() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test278", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3455,17 +3455,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	
 	public void test279() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test279", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3473,17 +3473,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test280() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test280", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3491,17 +3491,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test281() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test281", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3509,17 +3509,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test282() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test282", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3527,17 +3527,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test283() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test283", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3545,17 +3545,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test284() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test284", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3563,17 +3563,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test285() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test285", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3581,17 +3581,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test286() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test286", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3599,17 +3599,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test287() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test287", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3617,17 +3617,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test288() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test288", "A.js", CodeFormatter.K_STATEMENTS, 1);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3635,17 +3635,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test289() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test289", "A.js", CodeFormatter.K_STATEMENTS, 1);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3653,17 +3653,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test290() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test290", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3671,17 +3671,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test291() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test291", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3689,17 +3689,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test292() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test292", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3707,17 +3707,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	
 	public void test293() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test293", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3725,17 +3725,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test294() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test294", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3743,17 +3743,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	
 	public void test295() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test295", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3761,17 +3761,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test296() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test296", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3779,17 +3779,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test297() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.SPACE);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.SPACE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_SIZE, "4");
 		options.put(DefaultCodeFormatterConstants.FORMATTER_LINE_SPLIT, "100");
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
@@ -3800,17 +3800,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test298() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_LINE_SPLIT, "80");
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -3819,17 +3819,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test299() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_LINE_SPLIT, "80");
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -3838,17 +3838,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test300() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test300", "A.js", CodeFormatter.K_EXPRESSION, 2);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3856,18 +3856,18 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test301() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_CLOSING_PAREN_IN_CAST, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_CLOSING_PAREN_IN_CAST, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test301", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -3875,17 +3875,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test302() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.number_of_empty_lines_to_preserve = 0;
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -3992,17 +3992,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	
 	public void test313() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test313", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -4010,17 +4010,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 
 	public void test314() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.END_OF_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test314", "A.js", CodeFormatter.K_STATEMENTS);//$NON-NLS-1$ //$NON-NLS-2$
@@ -4284,17 +4284,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test336() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_CONSTRUCTOR_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.number_of_empty_lines_to_preserve = 0;
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -4511,7 +4511,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test356() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_ALIGNMENT_FOR_BINARY_EXPRESSION, DefaultCodeFormatterConstants.createAlignmentValue(false, DefaultCodeFormatterConstants.WRAP_COMPACT, DefaultCodeFormatterConstants.INDENT_DEFAULT));
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -4523,8 +4523,8 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test357() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_PREFIX_OPERATOR, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_PREFIX_OPERATOR, JavaScriptCore.INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test357", "A.js", CodeFormatter.K_EXPRESSION);//$NON-NLS-1$ //$NON-NLS-2$
@@ -4535,8 +4535,8 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test358() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_PREFIX_OPERATOR, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_PREFIX_OPERATOR, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test358", "A.js", CodeFormatter.K_EXPRESSION);//$NON-NLS-1$ //$NON-NLS-2$
@@ -4547,7 +4547,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test359() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test359", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -4558,7 +4558,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test360() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_NUMBER_OF_EMPTY_LINES_TO_PRESERVE, "2");
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -4570,7 +4570,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test361() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_NUMBER_OF_EMPTY_LINES_TO_PRESERVE, "1");
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -4729,12 +4729,12 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test374() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ARRAY_INITIALIZER, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_CONTINUATION_INDENTATION_FOR_ARRAY_INITIALIZER, "1");
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_COMMA_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_COMMA_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(new DefaultCodeFormatterOptions(options));
 		runTest(codeFormatter, "test374", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
 	}
@@ -4744,12 +4744,12 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test375() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ARRAY_INITIALIZER, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_CONTINUATION_INDENTATION_FOR_ARRAY_INITIALIZER, "1");
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_COMMA_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_COMMA_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(new DefaultCodeFormatterOptions(options));
 		runTest(codeFormatter, "test375", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
 	}
@@ -4759,12 +4759,12 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test376() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ARRAY_INITIALIZER, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_CONTINUATION_INDENTATION_FOR_ARRAY_INITIALIZER, "1");
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_COMMA_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_COMMA_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(new DefaultCodeFormatterOptions(options));
 		runTest(codeFormatter, "test376", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
 	}
@@ -4774,12 +4774,12 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test377() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ARRAY_INITIALIZER, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_CONTINUATION_INDENTATION_FOR_ARRAY_INITIALIZER, "1");
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_COMMA_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_COMMA_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(new DefaultCodeFormatterOptions(options));
 		runTest(codeFormatter, "test377", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
 	}
@@ -4789,12 +4789,12 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test378() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ARRAY_INITIALIZER, DefaultCodeFormatterConstants.END_OF_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_CONTINUATION_INDENTATION_FOR_ARRAY_INITIALIZER, "1");
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_COMMA_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_COMMA_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(new DefaultCodeFormatterOptions(options));
 		runTest(codeFormatter, "test378", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
 	}
@@ -4804,12 +4804,12 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test379() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ARRAY_INITIALIZER, DefaultCodeFormatterConstants.NEXT_LINE_SHIFTED);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_CONTINUATION_INDENTATION_FOR_ARRAY_INITIALIZER, "1");
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_COMMA_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_COMMA_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(new DefaultCodeFormatterOptions(options));
 		runTest(codeFormatter, "test379", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS);//$NON-NLS-1$ //$NON-NLS-2$
 	}
@@ -4819,10 +4819,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test380() {
 		Hashtable options = new Hashtable();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_ANONYMOUS_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
@@ -4830,7 +4830,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_SWITCH, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BLANK_LINES_BEFORE_FIRST_CLASS_BODY_DECLARATION, "1");
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.SPACE);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.SPACE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_SIZE, "4");
 		options.put(DefaultCodeFormatterConstants.FORMATTER_LINE_SPLIT, "100");
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
@@ -4856,7 +4856,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test382() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(new DefaultCodeFormatterOptions(options));
 		runTest(codeFormatter, "test382", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
 	}
@@ -5155,7 +5155,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test401() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_BRACES_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_BRACES_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_KEEP_EMPTY_ARRAY_INITIALIZER_ON_ONE_LINE, DefaultCodeFormatterConstants.TRUE);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -5168,7 +5168,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	public void test402() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
 		options.put(DefaultCodeFormatterConstants.FORMATTER_KEEP_EMPTY_ARRAY_INITIALIZER_ON_ONE_LINE, DefaultCodeFormatterConstants.TRUE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_BRACES_IN_ARRAY_INITIALIZER, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_BRACES_IN_ARRAY_INITIALIZER, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test402", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -5179,8 +5179,8 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test403() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_METHOD_INVOCATION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_INVOCATION, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_METHOD_INVOCATION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_INVOCATION, JavaScriptCore.INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test403", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -5191,10 +5191,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test404() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_METHOD_INVOCATION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_INVOCATION, JavaCore.INSERT);
- 		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_PARENS_IN_METHOD_INVOCATION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_PARENS_IN_METHOD_DECLARATION, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_METHOD_INVOCATION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_INVOCATION, JavaScriptCore.INSERT);
+ 		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_PARENS_IN_METHOD_INVOCATION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_PARENS_IN_METHOD_DECLARATION, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test404", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -5218,10 +5218,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test406() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_METHOD_INVOCATION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_INVOCATION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_PARENS_IN_METHOD_INVOCATION, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_PARENS_IN_METHOD_DECLARATION, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_METHOD_INVOCATION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_INVOCATION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_PARENS_IN_METHOD_INVOCATION, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_PARENS_IN_METHOD_DECLARATION, JavaScriptCore.INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test406", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -5396,10 +5396,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test421() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_METHOD_INVOCATION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_INVOCATION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_PARENS_IN_METHOD_INVOCATION, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_PARENS_IN_METHOD_DECLARATION, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_METHOD_INVOCATION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_INVOCATION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_PARENS_IN_METHOD_INVOCATION, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_PARENS_IN_METHOD_DECLARATION, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test421", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -5410,10 +5410,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test422() {
 		Map options = DefaultCodeFormatterConstants.getJavaConventionsSettings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_METHOD_INVOCATION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_INVOCATION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_PARENS_IN_METHOD_INVOCATION, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_PARENS_IN_METHOD_DECLARATION, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_METHOD_INVOCATION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_INVOCATION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_PARENS_IN_METHOD_INVOCATION, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_PARENS_IN_METHOD_DECLARATION, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
         preferences.tab_char = DefaultCodeFormatterOptions.SPACE;
 		preferences.blank_lines_before_first_class_body_declaration = 1;
@@ -5523,7 +5523,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test431() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_SEMICOLON_IN_FOR, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_SEMICOLON_IN_FOR, JavaScriptCore.INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.number_of_empty_lines_to_preserve = 0;
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -5681,10 +5681,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	public void test443() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
 		options.put(DefaultCodeFormatterConstants.FORMATTER_PUT_EMPTY_STATEMENT_ON_NEW_LINE, DefaultCodeFormatterConstants.FALSE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_ELSE_IN_IF_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_FINALLY_IN_TRY_STATEMENT, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_WHILE_IN_DO_STATEMENT, JavaScriptCore.INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test443", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -5983,17 +5983,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test464() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_FOR, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_PAREN_IN_FOR, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_FOR, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_DECLARATION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_METHOD_DECLARATION, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_FOR, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_PAREN_IN_FOR, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_FOR, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_DECLARATION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_METHOD_DECLARATION, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_METHOD_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE_SHIFTED);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_INDENT_STATEMENTS_COMPARE_TO_BLOCK, DefaultCodeFormatterConstants.FALSE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_INDENT_STATEMENTS_COMPARE_TO_BODY, DefaultCodeFormatterConstants.TRUE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_INVOCATION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_METHOD_INVOCATION, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_INVOCATION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_METHOD_INVOCATION, JavaScriptCore.INSERT);
 
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -6090,10 +6090,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test469() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_BRACKET_IN_ARRAY_ALLOCATION_EXPRESSION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_BRACKET_IN_ARRAY_ALLOCATION_EXPRESSION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_BRACKETS_IN_ARRAY_ALLOCATION_EXPRESSION, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_BRACKET_IN_ARRAY_ALLOCATION_EXPRESSION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_BRACKET_IN_ARRAY_ALLOCATION_EXPRESSION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_BRACKETS_IN_ARRAY_ALLOCATION_EXPRESSION, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_KEEP_EMPTY_ARRAY_INITIALIZER_ON_ONE_LINE, DefaultCodeFormatterConstants.TRUE);
 
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
@@ -6120,10 +6120,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test471() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_BRACES_IN_ARRAY_INITIALIZER, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_BRACES_IN_ARRAY_INITIALIZER, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_KEEP_EMPTY_ARRAY_INITIALIZER_ON_ONE_LINE, DefaultCodeFormatterConstants.TRUE);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -6135,10 +6135,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test472() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_BRACES_IN_ARRAY_INITIALIZER, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_BRACES_IN_ARRAY_INITIALIZER, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_KEEP_EMPTY_ARRAY_INITIALIZER_ON_ONE_LINE, DefaultCodeFormatterConstants.TRUE);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -6150,10 +6150,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test473() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_BRACES_IN_ARRAY_INITIALIZER, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_BRACES_IN_ARRAY_INITIALIZER, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_KEEP_EMPTY_ARRAY_INITIALIZER_ON_ONE_LINE, DefaultCodeFormatterConstants.TRUE);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -6165,10 +6165,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test474() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_BRACES_IN_ARRAY_INITIALIZER, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_BRACES_IN_ARRAY_INITIALIZER, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_KEEP_EMPTY_ARRAY_INITIALIZER_ON_ONE_LINE, DefaultCodeFormatterConstants.TRUE);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -6180,11 +6180,11 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test475() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_BRACES_IN_ARRAY_INITIALIZER, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CLOSING_BRACE_IN_ARRAY_INITIALIZER, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BETWEEN_EMPTY_BRACES_IN_ARRAY_INITIALIZER, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_KEEP_EMPTY_ARRAY_INITIALIZER_ON_ONE_LINE, DefaultCodeFormatterConstants.TRUE);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -6196,7 +6196,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test476() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_INDENT_BODY_DECLARATIONS_COMPARE_TO_TYPE_HEADER, DefaultCodeFormatterConstants.FALSE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_INDENT_STATEMENTS_COMPARE_TO_BLOCK, DefaultCodeFormatterConstants.FALSE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_INDENT_STATEMENTS_COMPARE_TO_BODY, DefaultCodeFormatterConstants.FALSE);
@@ -6205,18 +6205,18 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_TYPE_DECLARATION, DefaultCodeFormatterConstants.NEXT_LINE_SHIFTED);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BRACE_POSITION_FOR_BLOCK, DefaultCodeFormatterConstants.NEXT_LINE_SHIFTED);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_BLANK_LINES_AFTER_IMPORTS, "1");
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_INVOCATION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_METHOD_INVOCATION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_IF, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_IF, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_IF, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_PAREN_IN_FOR, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_FOR, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_FOR, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_ASSIGNMENT_OPERATOR, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_ASSIGNMENT_OPERATOR, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_BINARY_OPERATOR, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_BINARY_OPERATOR, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_INVOCATION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_METHOD_INVOCATION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_IF, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_IF, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_IF, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_PAREN_IN_FOR, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_FOR, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_FOR, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_ASSIGNMENT_OPERATOR, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_ASSIGNMENT_OPERATOR, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_BINARY_OPERATOR, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_BINARY_OPERATOR, JavaScriptCore.INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test476", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -6290,7 +6290,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test478() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_4);
+		options.put(JavaScriptCore.COMPILER_SOURCE, JavaScriptCore.VERSION_1_4);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, options);
 		runTest(codeFormatter, "test478", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -6332,7 +6332,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test482() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_CLOSING_BRACE_IN_BLOCK, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_CLOSING_BRACE_IN_BLOCK, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test482", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -6343,7 +6343,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test483() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_CLOSING_BRACE_IN_BLOCK, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_CLOSING_BRACE_IN_BLOCK, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test483", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -6396,7 +6396,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	
 	public void test488() {
 		Map options = DefaultCodeFormatterConstants.getEclipse21Settings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_COLON_IN_CASE, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_COLON_IN_CASE, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -6449,7 +6449,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		String resourcePath = getResource("test492", "core_formatting.xml");
 		Map options = DecodeCodeFormatterPreferences.decodeCodeFormatterOptions(resourcePath, "core");
 		assertNotNull("No preferences", options);
-		options.put(JavaCore.COMPILER_PB_NON_NLS_STRING_LITERAL, JavaCore.ERROR);
+		options.put(JavaScriptCore.COMPILER_PB_NON_NLS_STRING_LITERAL, JavaScriptCore.ERROR);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, options);
 		runTest(codeFormatter, "test492", "Main.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -6595,13 +6595,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -6610,7 +6610,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test504", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -6622,13 +6622,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
         preferences.tab_size = 4;
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -6637,7 +6637,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test505", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -6649,13 +6649,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
         preferences.tab_size = 4;
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -6664,7 +6664,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test506", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -6676,13 +6676,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
         preferences.tab_size = 4;
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -6691,7 +6691,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test507", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -6703,13 +6703,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -6718,7 +6718,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test508", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -6794,13 +6794,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -6809,7 +6809,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test513", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -6820,7 +6820,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		String resourcePath = getResource("test514", "formatter.xml");
 		Map options = DecodeCodeFormatterPreferences.decodeCodeFormatterOptions(resourcePath, "core");
 		assertNotNull("No preferences", options);
-		options.put(JavaCore.COMPILER_PB_NON_NLS_STRING_LITERAL, JavaCore.ERROR);
+		options.put(JavaScriptCore.COMPILER_PB_NON_NLS_STRING_LITERAL, JavaScriptCore.ERROR);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, options);
 		runTest(codeFormatter, "test514", "A.js", CodeFormatter.K_COMPILATION_UNIT);//$NON-NLS-1$ //$NON-NLS-2$
@@ -6834,13 +6834,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
         preferences.tab_size = 4;
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -6849,7 +6849,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test515", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -6858,18 +6858,18 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test516() {
 		Map options = DefaultCodeFormatterConstants.getJavaConventionsSettings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_ELLIPSIS, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_ELLIPSIS, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_ELLIPSIS, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_ELLIPSIS, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -6878,7 +6878,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test516", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -6887,18 +6887,18 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test517() {
 		Map options = DefaultCodeFormatterConstants.getJavaConventionsSettings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_ELLIPSIS, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_ELLIPSIS, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_ELLIPSIS, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_ELLIPSIS, JavaScriptCore.INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -6907,7 +6907,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test517", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -6916,18 +6916,18 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test518() {
 		Map options = DefaultCodeFormatterConstants.getJavaConventionsSettings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_ELLIPSIS, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_ELLIPSIS, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_ELLIPSIS, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_ELLIPSIS, JavaScriptCore.INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -6936,7 +6936,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test518", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -6945,18 +6945,18 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	 */
 	public void test519() {
 		Map options = DefaultCodeFormatterConstants.getJavaConventionsSettings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_ELLIPSIS, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_ELLIPSIS, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_ELLIPSIS, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_ELLIPSIS, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -6965,7 +6965,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test519", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -6977,13 +6977,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -6992,7 +6992,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test520", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7004,13 +7004,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7019,7 +7019,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test521", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7031,13 +7031,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7046,7 +7046,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test522", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7061,13 +7061,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		preferences.insert_new_line_in_empty_enum_constant = false;
 		preferences.insert_new_line_in_empty_enum_declaration = false;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7076,7 +7076,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test523", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7091,13 +7091,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		preferences.insert_new_line_in_empty_enum_constant = false;
 		preferences.insert_new_line_in_empty_enum_declaration = true;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7106,7 +7106,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test524", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 
@@ -7121,13 +7121,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		preferences.insert_new_line_in_empty_enum_constant = true;
 		preferences.insert_new_line_in_empty_enum_declaration = false;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7136,7 +7136,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test525", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7151,13 +7151,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		preferences.insert_new_line_in_empty_enum_constant = true;
 		preferences.insert_new_line_in_empty_enum_declaration = true;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7166,7 +7166,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test526", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7178,13 +7178,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7193,7 +7193,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test527", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7205,13 +7205,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7220,7 +7220,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test528", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7232,13 +7232,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7247,7 +7247,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test529", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7259,13 +7259,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7274,7 +7274,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test530", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7286,13 +7286,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7301,7 +7301,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test531", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7313,13 +7313,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7328,7 +7328,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test532", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7340,13 +7340,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7355,7 +7355,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test533", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7367,13 +7367,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7382,7 +7382,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test534", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7394,13 +7394,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.tab_char = DefaultCodeFormatterOptions.TAB;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7409,7 +7409,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test535", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7423,13 +7423,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		preferences.insert_space_after_question_in_wilcard = true;
 		preferences.insert_space_before_question_in_wilcard = true;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7438,7 +7438,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test536", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7452,13 +7452,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		preferences.insert_space_after_question_in_wilcard = true;
 		preferences.insert_space_before_question_in_wilcard = true;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7467,7 +7467,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test537", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7488,13 +7488,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		Map options = DefaultCodeFormatterConstants.getJavaConventionsSettings();
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7503,7 +7503,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test539", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7514,13 +7514,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		Map options = DefaultCodeFormatterConstants.getJavaConventionsSettings();
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7529,7 +7529,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test540", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7541,13 +7541,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
         preferences.tab_char = DefaultCodeFormatterOptions.SPACE;
         preferences.tab_size = 4;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7556,7 +7556,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test541", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7586,13 +7586,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
         preferences.tab_char = DefaultCodeFormatterOptions.SPACE;
 		preferences.insert_space_after_closing_angle_bracket_in_type_parameters = true;
 		preferences.brace_position_for_type_declaration = DefaultCodeFormatterConstants.NEXT_LINE;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7601,7 +7601,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test544", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7613,13 +7613,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
         preferences.tab_size = 4;
         preferences.tab_char = DefaultCodeFormatterOptions.SPACE;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7628,7 +7628,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test545", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7809,13 +7809,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
         preferences.tab_char = DefaultCodeFormatterOptions.SPACE;
 		preferences.insert_space_after_comma_in_enum_declarations = false;
 		preferences.insert_new_line_after_annotation = false;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7824,7 +7824,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test558", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7836,13 +7836,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
         preferences.tab_char = DefaultCodeFormatterOptions.SPACE;
 		preferences.insert_space_after_comma_in_enum_declarations = true;
 		preferences.insert_new_line_after_annotation = false;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7851,7 +7851,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test559", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7892,13 +7892,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
         preferences.tab_char = DefaultCodeFormatterOptions.SPACE;
         preferences.tab_size = 4;
 		preferences.insert_space_after_closing_angle_bracket_in_type_arguments = false;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7907,7 +7907,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test562", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7919,13 +7919,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
         preferences.tab_size = 4;
         preferences.tab_char = DefaultCodeFormatterOptions.SPACE;
 		preferences.insert_space_after_closing_angle_bracket_in_type_arguments = true;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7934,7 +7934,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test563", "A.js", CodeFormatter.K_CLASS_BODY_DECLARATIONS, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -7974,13 +7974,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
         preferences.tab_char = DefaultCodeFormatterOptions.SPACE;
 		preferences.brace_position_for_enum_constant = DefaultCodeFormatterConstants.NEXT_LINE;
 		preferences.brace_position_for_enum_declaration = DefaultCodeFormatterConstants.NEXT_LINE;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -7989,7 +7989,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test566", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -8045,13 +8045,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 				DefaultCodeFormatterConstants.FORMATTER_ALIGNMENT_FOR_ENUM_CONSTANTS,
 				DefaultCodeFormatterConstants.createAlignmentValue(false, DefaultCodeFormatterConstants.WRAP_ONE_PER_LINE, DefaultCodeFormatterConstants.INDENT_DEFAULT));
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8060,7 +8060,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test570", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -8071,13 +8071,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 				DefaultCodeFormatterConstants.FORMATTER_ALIGNMENT_FOR_ENUM_CONSTANTS,
 				DefaultCodeFormatterConstants.createAlignmentValue(true, DefaultCodeFormatterConstants.WRAP_ONE_PER_LINE, DefaultCodeFormatterConstants.INDENT_ON_COLUMN));
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8086,7 +8086,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test571", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -8120,13 +8120,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	public void test575() {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8135,7 +8135,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test575", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -8143,13 +8143,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	public void test576() {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8158,7 +8158,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test576", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -8198,13 +8198,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	public void test581() {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8213,7 +8213,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test581", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -8222,13 +8222,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.insert_space_after_closing_angle_bracket_in_type_arguments = false;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8237,7 +8237,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test582", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -8245,13 +8245,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	public void test583() {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8260,7 +8260,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test583", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -8272,13 +8272,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		options.put(DefaultCodeFormatterConstants.FORMATTER_LINE_SPLIT, "65");
 		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_SIZE, "4");
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8287,7 +8287,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test584", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -8299,13 +8299,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		options.put(DefaultCodeFormatterConstants.FORMATTER_LINE_SPLIT, "80");
 		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_SIZE, "4");
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8314,7 +8314,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test585", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -8322,17 +8322,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	public void test586() {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		options.put(DefaultCodeFormatterConstants.FORMATTER_USE_TABS_ONLY_FOR_LEADING_INDENTATIONS, DefaultCodeFormatterConstants.TRUE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_LINE_SPLIT, "65");
 		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_SIZE, "4");
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8341,7 +8341,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test586", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -8349,17 +8349,17 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	public void test587() {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		options.put(DefaultCodeFormatterConstants.FORMATTER_USE_TABS_ONLY_FOR_LEADING_INDENTATIONS, DefaultCodeFormatterConstants.TRUE);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_LINE_SPLIT, "80");
 		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_SIZE, "4");
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8368,7 +8368,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test587", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -8376,13 +8376,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	public void test588() {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8391,7 +8391,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test588", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -8426,14 +8426,14 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		options.put(DefaultCodeFormatterConstants.FORMATTER_ALIGNMENT_FOR_PARAMETERS_IN_METHOD_DECLARATION,
 				DefaultCodeFormatterConstants.createAlignmentValue(false, DefaultCodeFormatterConstants.WRAP_NEXT_PER_LINE, DefaultCodeFormatterConstants.INDENT_ON_COLUMN));
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_DECLARATION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_PAREN_IN_METHOD_DECLARATION, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_DECLARATION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_PAREN_IN_METHOD_DECLARATION, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_LINE_SPLIT, "60");
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.SPACE);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.SPACE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_ALIGNMENT_FOR_ARGUMENTS_IN_METHOD_INVOCATION,
 				DefaultCodeFormatterConstants.createAlignmentValue(false, DefaultCodeFormatterConstants.WRAP_NEXT_PER_LINE, DefaultCodeFormatterConstants.INDENT_ON_COLUMN));
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_PAREN_IN_METHOD_INVOCATION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_INVOCATION, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_OPENING_PAREN_IN_METHOD_INVOCATION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_METHOD_INVOCATION, JavaScriptCore.INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test592", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
@@ -8494,7 +8494,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		options.put(DefaultCodeFormatterConstants.FORMATTER_ALIGNMENT_FOR_ARGUMENTS_IN_METHOD_INVOCATION,
 				DefaultCodeFormatterConstants.createAlignmentValue(false, DefaultCodeFormatterConstants.WRAP_NEXT_PER_LINE, DefaultCodeFormatterConstants.INDENT_ON_COLUMN));
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_USE_TABS_ONLY_FOR_LEADING_INDENTATIONS, DefaultCodeFormatterConstants.TRUE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_LINE_SPLIT, "60");
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
@@ -8506,7 +8506,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		options.put(DefaultCodeFormatterConstants.FORMATTER_ALIGNMENT_FOR_ARGUMENTS_IN_METHOD_INVOCATION,
 				DefaultCodeFormatterConstants.createAlignmentValue(false, DefaultCodeFormatterConstants.WRAP_ONE_PER_LINE, DefaultCodeFormatterConstants.INDENT_DEFAULT));
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_CONTINUATION_INDENTATION, "1");
 		options.put(DefaultCodeFormatterConstants.FORMATTER_USE_TABS_ONLY_FOR_LEADING_INDENTATIONS, DefaultCodeFormatterConstants.TRUE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_LINE_SPLIT, "60");
@@ -8526,7 +8526,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		options.put(DefaultCodeFormatterConstants.FORMATTER_ALIGNMENT_FOR_BINARY_EXPRESSION,
 				DefaultCodeFormatterConstants.createAlignmentValue(true, DefaultCodeFormatterConstants.WRAP_ONE_PER_LINE, DefaultCodeFormatterConstants.INDENT_DEFAULT));
-		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.TAB);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaScriptCore.TAB);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_USE_TABS_ONLY_FOR_LEADING_INDENTATIONS, DefaultCodeFormatterConstants.TRUE);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_LINE_SPLIT, "60");
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
@@ -8543,13 +8543,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 						DefaultCodeFormatterConstants.WRAP_NEXT_PER_LINE,
 						DefaultCodeFormatterConstants.INDENT_DEFAULT));
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8558,13 +8558,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test605", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=110304
 	public void test606() {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_PARENTHESIZED_EXPRESSION_IN_RETURN, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_PARENTHESIZED_EXPRESSION_IN_RETURN, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test606", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
@@ -8680,13 +8680,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		preferences.indent_body_declarations_compare_to_type_header = true;
 		preferences.insert_new_line_in_empty_annotation_declaration = false;
 		preferences.insert_new_line_in_empty_type_declaration = true;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8695,7 +8695,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test612", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=126625
@@ -8706,13 +8706,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		preferences.indent_body_declarations_compare_to_type_header = false;
 		preferences.insert_new_line_in_empty_annotation_declaration = true;
 		preferences.insert_new_line_in_empty_type_declaration = false;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8721,7 +8721,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test613", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=128848
@@ -8776,15 +8776,15 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=139291
 	public void test620() {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_CLOSING_ANGLE_BRACKET_IN_TYPE_ARGUMENTS, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_CLOSING_ANGLE_BRACKET_IN_TYPE_ARGUMENTS, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8793,21 +8793,21 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test620", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=139291
 	public void test621() {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_CLOSING_ANGLE_BRACKET_IN_TYPE_ARGUMENTS, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_CLOSING_ANGLE_BRACKET_IN_TYPE_ARGUMENTS, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8816,20 +8816,20 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test621", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=148370
 	public void test622() {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8838,20 +8838,20 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test622", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=148370
 	public void test623() {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8860,20 +8860,20 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test623", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=148370
 	public void test624() {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8882,7 +8882,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test624", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=102728
@@ -8902,13 +8902,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	public void test626() {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_6);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_6);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_6);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_6);
@@ -8917,7 +8917,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test626", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -8926,13 +8926,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.brace_position_for_type_declaration = DefaultCodeFormatterConstants.NEXT_LINE_ON_WRAP;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8941,7 +8941,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test627", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=158267
@@ -8949,13 +8949,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.brace_position_for_type_declaration = DefaultCodeFormatterConstants.NEXT_LINE_ON_WRAP;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8964,7 +8964,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test628", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=158267
@@ -8972,13 +8972,13 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 		Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		preferences.brace_position_for_type_declaration = DefaultCodeFormatterConstants.NEXT_LINE_ON_WRAP;
-		Hashtable javaCoreOptions = JavaCore.getOptions();
+		Hashtable javaCoreOptions = JavaScriptCore.getOptions();
 		try {
-			Hashtable newJavaCoreOptions = JavaCore.getOptions();
+			Hashtable newJavaCoreOptions = JavaScriptCore.getOptions();
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_TargetPlatform, CompilerOptions.VERSION_1_5);
 			newJavaCoreOptions.put(CompilerOptions.OPTION_Source, CompilerOptions.VERSION_1_5);
-			JavaCore.setOptions(newJavaCoreOptions);
+			JavaScriptCore.setOptions(newJavaCoreOptions);
 		
 			Map compilerOptions = new HashMap();
 			compilerOptions.put(CompilerOptions.OPTION_Compliance, CompilerOptions.VERSION_1_5);
@@ -8987,7 +8987,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 			DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences, compilerOptions);
 			runTest(codeFormatter, "test629", "A.js", CodeFormatter.K_COMPILATION_UNIT, false);//$NON-NLS-1$ //$NON-NLS-2$
 		} finally {
-			JavaCore.setOptions(javaCoreOptions);
+			JavaScriptCore.setOptions(javaCoreOptions);
 		}
 	}
 	
@@ -9004,9 +9004,9 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=158267
 	public void test631() {
 		final Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_PARENTHESIZED_EXPRESSION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_PARENTHESIZED_EXPRESSION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_PARENTHESIZED_EXPRESSION_IN_THROW, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_PARENTHESIZED_EXPRESSION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_PARENTHESIZED_EXPRESSION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_PARENTHESIZED_EXPRESSION_IN_THROW, JavaScriptCore.INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test631", "A.js");//$NON-NLS-1$ //$NON-NLS-2$
@@ -9015,10 +9015,10 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=158267
 	public void test632() {
 		final Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_PARENTHESIZED_EXPRESSION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_PARENTHESIZED_EXPRESSION, JavaCore.INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_PARENTHESIZED_EXPRESSION_IN_RETURN, JavaCore.DO_NOT_INSERT);
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_PARENTHESIZED_EXPRESSION_IN_THROW, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_OPENING_PAREN_IN_PARENTHESIZED_EXPRESSION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_CLOSING_PAREN_IN_PARENTHESIZED_EXPRESSION, JavaScriptCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_PARENTHESIZED_EXPRESSION_IN_RETURN, JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_BEFORE_PARENTHESIZED_EXPRESSION_IN_THROW, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test632", "A.js");//$NON-NLS-1$ //$NON-NLS-2$
@@ -9122,7 +9122,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=171634
 	public void test643() {
 		final Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AT_END_OF_FILE_IF_MISSING, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AT_END_OF_FILE_IF_MISSING, JavaScriptCore.INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test643", "A.js");//$NON-NLS-1$ //$NON-NLS-2$
@@ -9130,7 +9130,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=171634
 	public void test644() {
 		final Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AT_END_OF_FILE_IF_MISSING, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AT_END_OF_FILE_IF_MISSING, JavaScriptCore.INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test644", "A.js");//$NON-NLS-1$ //$NON-NLS-2$
@@ -9138,7 +9138,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=171634
 	public void test645() {
 		final Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AT_END_OF_FILE_IF_MISSING, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AT_END_OF_FILE_IF_MISSING, JavaScriptCore.INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test645", "A.js");//$NON-NLS-1$ //$NON-NLS-2$
@@ -9146,7 +9146,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=171634
 	public void test646() {
 		final Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AT_END_OF_FILE_IF_MISSING, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AT_END_OF_FILE_IF_MISSING, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test646", "A.js");//$NON-NLS-1$ //$NON-NLS-2$
@@ -9154,7 +9154,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=171634
 	public void test647() {
 		final Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AT_END_OF_FILE_IF_MISSING, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AT_END_OF_FILE_IF_MISSING, JavaScriptCore.DO_NOT_INSERT);
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
 		runTest(codeFormatter, "test647", "A.js");//$NON-NLS-1$ //$NON-NLS-2$
@@ -9162,7 +9162,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=171634
 	public void test648() {
 		final Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AT_END_OF_FILE_IF_MISSING, JavaCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AT_END_OF_FILE_IF_MISSING, JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_NUMBER_OF_EMPTY_LINES_TO_PRESERVE, "0");
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);
@@ -9171,7 +9171,7 @@ public class FormatterRegressionTests extends AbstractJavaModelTests {
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=171634
 	public void test649() {
 		final Map options = DefaultCodeFormatterConstants.getEclipseDefaultSettings();
-		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AT_END_OF_FILE_IF_MISSING, JavaCore.INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AT_END_OF_FILE_IF_MISSING, JavaScriptCore.INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_NUMBER_OF_EMPTY_LINES_TO_PRESERVE, "0");
 		DefaultCodeFormatterOptions preferences = new DefaultCodeFormatterOptions(options);
 		DefaultCodeFormatter codeFormatter = new DefaultCodeFormatter(preferences);

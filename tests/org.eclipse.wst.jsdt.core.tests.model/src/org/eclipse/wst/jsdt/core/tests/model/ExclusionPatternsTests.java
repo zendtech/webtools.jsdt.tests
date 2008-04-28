@@ -17,18 +17,18 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.wst.jsdt.core.*;
-import org.eclipse.wst.jsdt.core.search.IJavaSearchConstants;
-import org.eclipse.wst.jsdt.core.search.IJavaSearchScope;
+import org.eclipse.wst.jsdt.core.search.IJavaScriptSearchConstants;
+import org.eclipse.wst.jsdt.core.search.IJavaScriptSearchScope;
 import org.eclipse.wst.jsdt.core.search.SearchEngine;
 
 import junit.framework.Test;
 
 public class ExclusionPatternsTests extends ModifyingResourceTests {
-	IJavaProject project;
+	IJavaScriptProject project;
 public ExclusionPatternsTests(String name) {
 	super(name);
 }
-protected void setClasspath(String[] sourceFoldersAndExclusionPatterns) throws JavaModelException {
+protected void setClasspath(String[] sourceFoldersAndExclusionPatterns) throws JavaScriptModelException {
 	this.project.setRawClasspath(createClasspath(sourceFoldersAndExclusionPatterns, false/*no inclusion*/, true/*exclusion*/), null);
 }
 protected void setUp() throws Exception {
@@ -94,7 +94,7 @@ public void testAddExclusionOnCompilationUnit() throws CoreException {
  */
 public void testAddExclusionOnFolderUnderProject() throws CoreException {
 	try {
-		IJavaProject javaProject = createJavaProject("P1", new String[] {""}, "");
+		IJavaScriptProject javaProject = createJavaProject("P1", new String[] {""}, "");
 		createFolder("/P1/doc");
 
 		clearDeltas();
@@ -165,7 +165,7 @@ public void testAddExclusionOnPrimaryWorkingCopy() throws CoreException {
 		"}"
 	);
 		
-	ICompilationUnit workingCopy = null;
+	IJavaScriptUnit workingCopy = null;
 	try {
 		workingCopy = getCompilationUnit("/P/src/p/A.js");
 		workingCopy.becomeWorkingCopy(null, null);
@@ -424,7 +424,7 @@ public void testIsOnClasspath1() throws CoreException {
 	);
 	assertTrue("Resource should be on classpath", project.isOnClasspath(file));
 	
-	ICompilationUnit cu = getCompilationUnit("/P/src/p/A.js");
+	IJavaScriptUnit cu = getCompilationUnit("/P/src/p/A.js");
 	assertTrue("CU should be on classpath", project.isOnClasspath(cu));
 }
 /*
@@ -441,7 +441,7 @@ public void testIsOnClasspath2() throws CoreException {
 	);
 	assertTrue("Resource should not be on classpath", !project.isOnClasspath(file));
 	
-	ICompilationUnit cu = getCompilationUnit("/P/src/p/A.js");
+	IJavaScriptUnit cu = getCompilationUnit("/P/src/p/A.js");
 	assertTrue("CU should not be on classpath", !project.isOnClasspath(cu));
 }
 /*
@@ -696,9 +696,9 @@ public void testSearchWithExcludedCompilationUnit1() throws CoreException {
 	JavaSearchTests.JavaSearchResultCollector resultCollector = new JavaSearchTests.JavaSearchResultCollector();
 	search(
 		"A", 
-		IJavaSearchConstants.TYPE,
-		IJavaSearchConstants.DECLARATIONS,
-		SearchEngine.createJavaSearchScope(new IJavaProject[] {getJavaProject("P")}), 
+		IJavaScriptSearchConstants.TYPE,
+		IJavaScriptSearchConstants.DECLARATIONS,
+		SearchEngine.createJavaSearchScope(new IJavaScriptProject[] {getJavaProject("P")}), 
 		resultCollector);
 	assertEquals(
 		"Unexpected matches found",
@@ -722,9 +722,9 @@ public void testSearchWithExcludedCompilationUnit2() throws CoreException {
 	JavaSearchTests.JavaSearchResultCollector resultCollector = new JavaSearchTests.JavaSearchResultCollector();
 	search(
 		"A", 
-		IJavaSearchConstants.TYPE,
-		IJavaSearchConstants.DECLARATIONS,
-		SearchEngine.createJavaSearchScope(new IJavaProject[] {getJavaProject("P")}), 
+		IJavaScriptSearchConstants.TYPE,
+		IJavaScriptSearchConstants.DECLARATIONS,
+		SearchEngine.createJavaSearchScope(new IJavaScriptProject[] {getJavaProject("P")}), 
 		resultCollector);
 	assertEquals(
 		"Unexpected matches found",
@@ -801,9 +801,9 @@ public void testRenameResourceExcludedPackage() throws CoreException {
  */
 public void testSearchPotentialMatchInOutput() throws CoreException {
 	try {
-		JavaCore.run(new IWorkspaceRunnable() {
+		JavaScriptCore.run(new IWorkspaceRunnable() {
 			public void run(IProgressMonitor monitor) throws CoreException {
-				IJavaProject javaProject = createJavaProject("P2", new String[] {}, "bin");
+				IJavaScriptProject javaProject = createJavaProject("P2", new String[] {}, "bin");
 				javaProject.setRawClasspath(createClasspath(new String[] {"/P2", "src/", "/P2/src", ""}, false/*no inclusion*/, true/*exclusion*/), null);
 				createFile(
 					"/P2/bin/X.js",
@@ -814,11 +814,11 @@ public void testSearchPotentialMatchInOutput() throws CoreException {
 		}, null);
 		
 		JavaSearchTests.JavaSearchResultCollector resultCollector = new JavaSearchTests.JavaSearchResultCollector();
-		IJavaSearchScope scope = SearchEngine.createJavaSearchScope(new IJavaElement[] {getJavaProject("P")});
+		IJavaScriptSearchScope scope = SearchEngine.createJavaSearchScope(new IJavaScriptElement[] {getJavaProject("P")});
 		search(
 			"X", 
-			IJavaSearchConstants.TYPE,
-			IJavaSearchConstants.DECLARATIONS,
+			IJavaScriptSearchConstants.TYPE,
+			IJavaScriptSearchConstants.DECLARATIONS,
 			scope, 
 			resultCollector);
 		assertEquals("", resultCollector.toString());

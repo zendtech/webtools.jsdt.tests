@@ -15,14 +15,14 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.wst.jsdt.core.*;
-import org.eclipse.wst.jsdt.core.search.IJavaSearchConstants;
-import org.eclipse.wst.jsdt.core.search.IJavaSearchScope;
+import org.eclipse.wst.jsdt.core.search.IJavaScriptSearchConstants;
+import org.eclipse.wst.jsdt.core.search.IJavaScriptSearchScope;
 import org.eclipse.wst.jsdt.core.search.SearchEngine;
 
 import junit.framework.Test;
 
 public class InclusionPatternsTests extends ModifyingResourceTests {
-	IJavaProject project;
+	IJavaScriptProject project;
 public InclusionPatternsTests(String name) {
 	super(name);
 }
@@ -33,7 +33,7 @@ static {
 public static Test suite() {
 	return buildModelTestSuite(InclusionPatternsTests.class);
 }
-protected void setClasspath(String[] sourceFoldersAndInclusionPatterns) throws JavaModelException {
+protected void setClasspath(String[] sourceFoldersAndInclusionPatterns) throws JavaScriptModelException {
 	this.project.setRawClasspath(createClasspath(sourceFoldersAndInclusionPatterns, true/*inclusion*/, false/*no exclusion*/), null);
 }
 protected void setUp() throws Exception {
@@ -87,7 +87,7 @@ public void testAddInclusionOnCompilationUnit() throws CoreException {
  */
 public void testAddInclusionOnFolderUnderProject() throws CoreException {
 	try {
-		IJavaProject javaProject = createJavaProject("P1", new String[] {""}, "");
+		IJavaScriptProject javaProject = createJavaProject("P1", new String[] {""}, "");
 		createFolder("/P1/doc");
 
 		clearDeltas();
@@ -400,7 +400,7 @@ public void testIncludeCUOnly01() throws CoreException {
 		"public class X {\n" +
 		"}"
 	);
-	ICompilationUnit workingCopy = null;
+	IJavaScriptUnit workingCopy = null;
 	try {
 		ProblemRequestor problemRequestor = new ProblemRequestor();
 		workingCopy = getWorkingCopy(
@@ -434,7 +434,7 @@ public void testIncludeCUOnly02() throws CoreException {
 		"public class X {\n" +
 		"}"
 	);
-	ICompilationUnit workingCopy = null;
+	IJavaScriptUnit workingCopy = null;
 	try {
 		ProblemRequestor problemRequestor = new ProblemRequestor();
 		workingCopy = getWorkingCopy(
@@ -468,7 +468,7 @@ public void testIsOnClasspath1() throws CoreException {
 	);
 	assertTrue("Resource should not be on classpath", !project.isOnClasspath(file));
 	
-	ICompilationUnit cu = getCompilationUnit("/P/src/p/A.js");
+	IJavaScriptUnit cu = getCompilationUnit("/P/src/p/A.js");
 	assertTrue("CU should not be on classpath", !project.isOnClasspath(cu));
 }
 /*
@@ -485,7 +485,7 @@ public void testIsOnClasspath2() throws CoreException {
 	);
 	assertTrue("Resource should be on classpath", project.isOnClasspath(file));
 	
-	ICompilationUnit cu = getCompilationUnit("/P/src/p/A.js");
+	IJavaScriptUnit cu = getCompilationUnit("/P/src/p/A.js");
 	assertTrue("CU should be on classpath", project.isOnClasspath(cu));
 }
 /*
@@ -790,7 +790,7 @@ public void testRenameIncludedPackage1() throws CoreException {
 }
 /*
  * Ensure that renaming an included package that has compilation units
- * so that it is not included any longer doesn't throw a JavaModelException.
+ * so that it is not included any longer doesn't throw a JavaScriptModelException.
  * (regression test for bug 67297 Renaming included package folder throws JME)
  */
 public void testRenameIncludedPackage2() throws CoreException {
@@ -900,9 +900,9 @@ public void testRenameResourceIncludedPackage() throws CoreException {
  */
 public void testSearchPotentialMatchInOutput() throws CoreException {
 	try {
-		JavaCore.run(new IWorkspaceRunnable() {
+		JavaScriptCore.run(new IWorkspaceRunnable() {
 			public void run(IProgressMonitor monitor) throws CoreException {
-				IJavaProject javaProject = createJavaProject("P2", new String[] {}, "bin");
+				IJavaScriptProject javaProject = createJavaProject("P2", new String[] {}, "bin");
 				javaProject.setRawClasspath(createClasspath(new String[] {"/P2", "**/X.js", "/P2/src", ""}, true/*inclusion*/, false/*no exclusion*/), null);
 				createFile(
 					"/P2/bin/X.js",
@@ -913,11 +913,11 @@ public void testSearchPotentialMatchInOutput() throws CoreException {
 		}, null);
 		
 		JavaSearchTests.JavaSearchResultCollector resultCollector = new JavaSearchTests.JavaSearchResultCollector();
-		IJavaSearchScope scope = SearchEngine.createJavaSearchScope(new IJavaElement[] {getJavaProject("P")});
+		IJavaScriptSearchScope scope = SearchEngine.createJavaSearchScope(new IJavaScriptElement[] {getJavaProject("P")});
 		search(
 			"X", 
-			IJavaSearchConstants.TYPE,
-			IJavaSearchConstants.DECLARATIONS,
+			IJavaScriptSearchConstants.TYPE,
+			IJavaScriptSearchConstants.DECLARATIONS,
 			scope, 
 			resultCollector);
 		assertEquals("", resultCollector.toString());
@@ -941,9 +941,9 @@ public void testSearchWithIncludedCompilationUnit1() throws CoreException {
 	JavaSearchTests.JavaSearchResultCollector resultCollector = new JavaSearchTests.JavaSearchResultCollector();
 	search(
 		"A", 
-		IJavaSearchConstants.TYPE,
-		IJavaSearchConstants.DECLARATIONS,
-		SearchEngine.createJavaSearchScope(new IJavaProject[] {getJavaProject("P")}), 
+		IJavaScriptSearchConstants.TYPE,
+		IJavaScriptSearchConstants.DECLARATIONS,
+		SearchEngine.createJavaSearchScope(new IJavaScriptProject[] {getJavaProject("P")}), 
 		resultCollector);
 	assertEquals(
 		"Unexpected matches found",
@@ -967,9 +967,9 @@ public void testSearchWithIncludedCompilationUnit2() throws CoreException {
 	JavaSearchTests.JavaSearchResultCollector resultCollector = new JavaSearchTests.JavaSearchResultCollector();
 	search(
 		"A", 
-		IJavaSearchConstants.TYPE,
-		IJavaSearchConstants.DECLARATIONS,
-		SearchEngine.createJavaSearchScope(new IJavaProject[] {getJavaProject("P")}), 
+		IJavaScriptSearchConstants.TYPE,
+		IJavaScriptSearchConstants.DECLARATIONS,
+		SearchEngine.createJavaSearchScope(new IJavaScriptProject[] {getJavaProject("P")}), 
 		resultCollector);
 	assertEquals(
 		"Unexpected matches found",
@@ -993,9 +993,9 @@ public void testSearchWithIncludedPackage1() throws CoreException {
 	JavaSearchTests.JavaSearchResultCollector resultCollector = new JavaSearchTests.JavaSearchResultCollector();
 	search(
 		"A", 
-		IJavaSearchConstants.TYPE,
-		IJavaSearchConstants.DECLARATIONS,
-		SearchEngine.createJavaSearchScope(new IJavaProject[] {getJavaProject("P")}), 
+		IJavaScriptSearchConstants.TYPE,
+		IJavaScriptSearchConstants.DECLARATIONS,
+		SearchEngine.createJavaSearchScope(new IJavaScriptProject[] {getJavaProject("P")}), 
 		resultCollector);
 	assertEquals(
 		"Unexpected matches found",
@@ -1022,9 +1022,9 @@ public void testSearchWithIncludedPackage2() throws CoreException {
 	JavaSearchTests.JavaSearchResultCollector resultCollector = new JavaSearchTests.JavaSearchResultCollector();
 	search(
 		"A", 
-		IJavaSearchConstants.TYPE,
-		IJavaSearchConstants.DECLARATIONS,
-		SearchEngine.createJavaSearchScope(new IJavaProject[] {getJavaProject("P")}), 
+		IJavaScriptSearchConstants.TYPE,
+		IJavaScriptSearchConstants.DECLARATIONS,
+		SearchEngine.createJavaSearchScope(new IJavaScriptProject[] {getJavaProject("P")}), 
 		resultCollector);
 	assertEquals(
 		"Unexpected matches found",

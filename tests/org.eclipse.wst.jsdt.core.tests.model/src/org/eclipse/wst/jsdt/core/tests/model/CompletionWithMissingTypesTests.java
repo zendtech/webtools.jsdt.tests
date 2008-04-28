@@ -40,8 +40,8 @@ public static Test suite() {
 	return buildModelTestSuite(CompletionWithMissingTypesTests.class);
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0001() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[2];
+public void test0001() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[2];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -77,8 +77,8 @@ public void test0001() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0002() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[2];
+public void test0002() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[2];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -114,8 +114,8 @@ public void test0002() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0003() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[3];
+public void test0003() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[3];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -157,8 +157,8 @@ public void test0003() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0004() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[2];
+public void test0004() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[2];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -217,8 +217,8 @@ public void test0004() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0005() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[2];
+public void test0005() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[2];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -254,8 +254,8 @@ public void test0005() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0006() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[2];
+public void test0006() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[2];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -293,8 +293,8 @@ public void test0006() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0007() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[3];
+public void test0007() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[3];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -336,8 +336,8 @@ public void test0007() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0008() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[3];
+public void test0008() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[3];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -376,8 +376,8 @@ public void test0008() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0009() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[3];
+public void test0009() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[3];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -422,8 +422,8 @@ public void test0009() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0010() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[2];
+public void test0010() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[2];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -461,8 +461,8 @@ public void test0010() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0011() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[2];
+public void test0011() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[2];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -498,8 +498,8 @@ public void test0011() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0012() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[2];
+public void test0012() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[2];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -535,8 +535,8 @@ public void test0012() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0013() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[3];
+public void test0013() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[3];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -578,8 +578,8 @@ public void test0013() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0014() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[3];
+public void test0014() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[3];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -618,8 +618,8 @@ public void test0014() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0015() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[3];
+public void test0015() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[3];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -664,8 +664,8 @@ public void test0015() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0016() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[2];
+public void test0016() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[2];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -703,8 +703,8 @@ public void test0016() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0017() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[2];
+public void test0017() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[2];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -736,8 +736,8 @@ public void test0017() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0018() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[2];
+public void test0018() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[2];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -769,8 +769,8 @@ public void test0018() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0019() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[2];
+public void test0019() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[2];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -808,15 +808,15 @@ public void test0019() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0020() throws JavaModelException {
-	this.oldOptions = JavaCore.getOptions();
+public void test0020() throws JavaScriptModelException {
+	this.oldOptions = JavaScriptCore.getOptions();
 	
 	try {
 		Hashtable options = new Hashtable(this.oldOptions);
-		options.put(JavaCore.CODEASSIST_DEPRECATION_CHECK, JavaCore.DISABLED);
-		JavaCore.setOptions(options);
+		options.put(JavaScriptCore.CODEASSIST_DEPRECATION_CHECK, JavaScriptCore.DISABLED);
+		JavaScriptCore.setOptions(options);
 		
-		this.workingCopies = new ICompilationUnit[2];
+		this.workingCopies = new IJavaScriptUnit[2];
 		this.workingCopies[0] = getWorkingCopy(
 			"/Completion/src/test/Test.js",
 			"package test;\n"+
@@ -854,19 +854,19 @@ public void test0020() throws JavaModelException {
 				"   MissingType.MissingMemberType[TYPE_REF]{missing.MissingType.MissingMemberType, missing, Lmissing.MissingType$MissingMemberType;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 				requestor.getResults());
 	} finally {
-		JavaCore.setOptions(oldOptions);
+		JavaScriptCore.setOptions(oldOptions);
 	}
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0021() throws JavaModelException {
-	this.oldOptions = JavaCore.getOptions();
+public void test0021() throws JavaScriptModelException {
+	this.oldOptions = JavaScriptCore.getOptions();
 	
 	try {
 		Hashtable options = new Hashtable(this.oldOptions);
-		options.put(JavaCore.CODEASSIST_DEPRECATION_CHECK, JavaCore.ENABLED);
-		JavaCore.setOptions(options);
+		options.put(JavaScriptCore.CODEASSIST_DEPRECATION_CHECK, JavaScriptCore.ENABLED);
+		JavaScriptCore.setOptions(options);
 		
-		this.workingCopies = new ICompilationUnit[2];
+		this.workingCopies = new IJavaScriptUnit[2];
 		this.workingCopies[0] = getWorkingCopy(
 			"/Completion/src/test/Test.js",
 			"package test;\n"+
@@ -898,19 +898,19 @@ public void test0021() throws JavaModelException {
 				"",
 				requestor.getResults());
 	} finally {
-		JavaCore.setOptions(oldOptions);
+		JavaScriptCore.setOptions(oldOptions);
 	}
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0022() throws JavaModelException {
-	this.oldOptions = JavaCore.getOptions();
+public void test0022() throws JavaScriptModelException {
+	this.oldOptions = JavaScriptCore.getOptions();
 	
 	try {
 		Hashtable options = new Hashtable(this.oldOptions);
-		options.put(JavaCore.CODEASSIST_DEPRECATION_CHECK, JavaCore.DISABLED);
-		JavaCore.setOptions(options);
+		options.put(JavaScriptCore.CODEASSIST_DEPRECATION_CHECK, JavaScriptCore.DISABLED);
+		JavaScriptCore.setOptions(options);
 		
-		this.workingCopies = new ICompilationUnit[2];
+		this.workingCopies = new IJavaScriptUnit[2];
 		this.workingCopies[0] = getWorkingCopy(
 			"/Completion/src/test/Test.js",
 			"package test;\n"+
@@ -950,19 +950,19 @@ public void test0022() throws JavaModelException {
 				"   MissingType.MissingMemberType.MissingMemberMemberType[TYPE_REF]{missing.MissingType.MissingMemberType.MissingMemberMemberType, missing, Lmissing.MissingType$MissingMemberType$MissingMemberMemberType;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 				requestor.getResults());
 	} finally {
-		JavaCore.setOptions(oldOptions);
+		JavaScriptCore.setOptions(oldOptions);
 	}
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0023() throws JavaModelException {
-	this.oldOptions = JavaCore.getOptions();
+public void test0023() throws JavaScriptModelException {
+	this.oldOptions = JavaScriptCore.getOptions();
 	
 	try {
 		Hashtable options = new Hashtable(this.oldOptions);
-		options.put(JavaCore.CODEASSIST_DEPRECATION_CHECK, JavaCore.ENABLED);
-		JavaCore.setOptions(options);
+		options.put(JavaScriptCore.CODEASSIST_DEPRECATION_CHECK, JavaScriptCore.ENABLED);
+		JavaScriptCore.setOptions(options);
 		
-		this.workingCopies = new ICompilationUnit[2];
+		this.workingCopies = new IJavaScriptUnit[2];
 		this.workingCopies[0] = getWorkingCopy(
 			"/Completion/src/test/Test.js",
 			"package test;\n"+
@@ -996,19 +996,19 @@ public void test0023() throws JavaModelException {
 				"",
 				requestor.getResults());
 	} finally {
-		JavaCore.setOptions(oldOptions);
+		JavaScriptCore.setOptions(oldOptions);
 	}
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void _test0024() throws JavaModelException {
-	this.oldOptions = JavaCore.getOptions();
+public void _test0024() throws JavaScriptModelException {
+	this.oldOptions = JavaScriptCore.getOptions();
 	
 	try {
 		Hashtable options = new Hashtable(this.oldOptions);
-		options.put(JavaCore.CODEASSIST_VISIBILITY_CHECK, JavaCore.DISABLED);
-		JavaCore.setOptions(options);
+		options.put(JavaScriptCore.CODEASSIST_VISIBILITY_CHECK, JavaScriptCore.DISABLED);
+		JavaScriptCore.setOptions(options);
 		
-		this.workingCopies = new ICompilationUnit[2];
+		this.workingCopies = new IJavaScriptUnit[2];
 		this.workingCopies[0] = getWorkingCopy(
 			"/Completion/src/test/Test.js",
 			"package test;\n"+
@@ -1045,19 +1045,19 @@ public void _test0024() throws JavaModelException {
 				"   MissingType.MissingMemberType[TYPE_REF]{missing.MissingType.MissingMemberType, missing, Lmissing.MissingType$MissingMemberType;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 				requestor.getResults());
 	} finally {
-		JavaCore.setOptions(oldOptions);
+		JavaScriptCore.setOptions(oldOptions);
 	}
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0025() throws JavaModelException {
-	this.oldOptions = JavaCore.getOptions();
+public void test0025() throws JavaScriptModelException {
+	this.oldOptions = JavaScriptCore.getOptions();
 	
 	try {
 		Hashtable options = new Hashtable(this.oldOptions);
-		options.put(JavaCore.CODEASSIST_VISIBILITY_CHECK, JavaCore.ENABLED);
-		JavaCore.setOptions(options);
+		options.put(JavaScriptCore.CODEASSIST_VISIBILITY_CHECK, JavaScriptCore.ENABLED);
+		JavaScriptCore.setOptions(options);
 		
-		this.workingCopies = new ICompilationUnit[2];
+		this.workingCopies = new IJavaScriptUnit[2];
 		this.workingCopies[0] = getWorkingCopy(
 			"/Completion/src/test/Test.js",
 			"package test;\n"+
@@ -1088,19 +1088,19 @@ public void test0025() throws JavaModelException {
 				"",
 				requestor.getResults());
 	} finally {
-		JavaCore.setOptions(oldOptions);
+		JavaScriptCore.setOptions(oldOptions);
 	}
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void _test0026() throws JavaModelException {
-	this.oldOptions = JavaCore.getOptions();
+public void _test0026() throws JavaScriptModelException {
+	this.oldOptions = JavaScriptCore.getOptions();
 	
 	try {
 		Hashtable options = new Hashtable(this.oldOptions);
-		options.put(JavaCore.CODEASSIST_VISIBILITY_CHECK, JavaCore.DISABLED);
-		JavaCore.setOptions(options);
+		options.put(JavaScriptCore.CODEASSIST_VISIBILITY_CHECK, JavaScriptCore.DISABLED);
+		JavaScriptCore.setOptions(options);
 		
-		this.workingCopies = new ICompilationUnit[2];
+		this.workingCopies = new IJavaScriptUnit[2];
 		this.workingCopies[0] = getWorkingCopy(
 			"/Completion/src/test/Test.js",
 			"package test;\n"+
@@ -1139,19 +1139,19 @@ public void _test0026() throws JavaModelException {
 				"   MissingType.MissingMemberType.MissingMemberMemberType[TYPE_REF]{missing.MissingType.MissingMemberType.MissingMemberMemberType, missing, Lmissing.MissingType$MissingMemberType$MissingMemberMemberType;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 				requestor.getResults());
 	} finally {
-		JavaCore.setOptions(oldOptions);
+		JavaScriptCore.setOptions(oldOptions);
 	}
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0027() throws JavaModelException {
-	this.oldOptions = JavaCore.getOptions();
+public void test0027() throws JavaScriptModelException {
+	this.oldOptions = JavaScriptCore.getOptions();
 	
 	try {
 		Hashtable options = new Hashtable(this.oldOptions);
-		options.put(JavaCore.CODEASSIST_VISIBILITY_CHECK, JavaCore.ENABLED);
-		JavaCore.setOptions(options);
+		options.put(JavaScriptCore.CODEASSIST_VISIBILITY_CHECK, JavaScriptCore.ENABLED);
+		JavaScriptCore.setOptions(options);
 		
-		this.workingCopies = new ICompilationUnit[2];
+		this.workingCopies = new IJavaScriptUnit[2];
 		this.workingCopies[0] = getWorkingCopy(
 			"/Completion/src/test/Test.js",
 			"package test;\n"+
@@ -1184,12 +1184,12 @@ public void test0027() throws JavaModelException {
 				"",
 				requestor.getResults());
 	} finally {
-		JavaCore.setOptions(oldOptions);
+		JavaScriptCore.setOptions(oldOptions);
 	}
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0028() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[3];
+public void test0028() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[3];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -1227,8 +1227,8 @@ public void test0028() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0029() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[3];
+public void test0029() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[3];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -1266,8 +1266,8 @@ public void test0029() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0030() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[3];
+public void test0030() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[3];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -1305,8 +1305,8 @@ public void test0030() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test031() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[3];
+public void test031() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[3];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -1344,8 +1344,8 @@ public void test031() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0032() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[3];
+public void test0032() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[3];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+
@@ -1383,8 +1383,8 @@ public void test0032() throws JavaModelException {
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=44984
-public void test0033() throws JavaModelException {
-	this.workingCopies = new ICompilationUnit[3];
+public void test0033() throws JavaScriptModelException {
+	this.workingCopies = new IJavaScriptUnit[3];
 	this.workingCopies[0] = getWorkingCopy(
 		"/Completion/src/test/Test.js",
 		"package test;"+

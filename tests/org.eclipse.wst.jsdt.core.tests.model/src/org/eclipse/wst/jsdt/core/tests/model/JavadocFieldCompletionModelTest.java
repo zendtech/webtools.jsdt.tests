@@ -14,8 +14,8 @@ import java.util.Hashtable;
 
 import junit.framework.Test;
 
-import org.eclipse.wst.jsdt.core.JavaCore;
-import org.eclipse.wst.jsdt.core.JavaModelException;
+import org.eclipse.wst.jsdt.core.JavaScriptCore;
+import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.eclipse.wst.jsdt.internal.compiler.impl.CompilerOptions;
 
 /**
@@ -46,7 +46,7 @@ protected void setUp() throws Exception {
 /**
  * @category Tests for tag names completion
  */
-public void test001() throws JavaModelException {
+public void test001() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields;\n" +
 		"public class Test {\n" +
@@ -58,20 +58,20 @@ public void test001() throws JavaModelException {
 		"}\n";
 	completeInJavadoc("/Completion/src/javadoc/fields/Test.js", source, true, "@");
 	assertResults(
-		"deprecated[JAVADOC_BLOCK_TAG]{@deprecated, null, null, deprecated, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"see[JAVADOC_BLOCK_TAG]{@see, null, null, see, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"category[JAVADOC_BLOCK_TAG]{@category, null, null, category, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"since[JAVADOC_BLOCK_TAG]{@since, null, null, since, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"serial[JAVADOC_BLOCK_TAG]{@serial, null, null, serial, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"serialField[JAVADOC_BLOCK_TAG]{@serialField, null, null, serialField, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"link[JAVADOC_INLINE_TAG]{{@link}, null, null, link, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"docRoot[JAVADOC_INLINE_TAG]{{@docRoot}, null, null, docRoot, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"linkplain[JAVADOC_INLINE_TAG]{{@linkplain}, null, null, linkplain, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"value[JAVADOC_INLINE_TAG]{{@value}, null, null, value, null, "+this.positions+JAVADOC_RELEVANCE+"}"
+		"deprecated[JSDOC_BLOCK_TAG]{@deprecated, null, null, deprecated, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"see[JSDOC_BLOCK_TAG]{@see, null, null, see, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"category[JSDOC_BLOCK_TAG]{@category, null, null, category, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"since[JSDOC_BLOCK_TAG]{@since, null, null, since, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"serial[JSDOC_BLOCK_TAG]{@serial, null, null, serial, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"serialField[JSDOC_BLOCK_TAG]{@serialField, null, null, serialField, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"link[JSDOC_INLINE_TAG]{{@link}, null, null, link, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"docRoot[JSDOC_INLINE_TAG]{{@docRoot}, null, null, docRoot, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"linkplain[JSDOC_INLINE_TAG]{{@linkplain}, null, null, linkplain, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"value[JSDOC_INLINE_TAG]{{@value}, null, null, value, null, "+this.positions+JAVADOC_RELEVANCE+"}"
 	);
 }
 
-public void test002() throws JavaModelException {
+public void test002() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields;\n" +
 		"public class Test {\n" +
@@ -85,7 +85,7 @@ public void test002() throws JavaModelException {
 	assertResults("");
 }
 
-public void test003() throws JavaModelException {
+public void test003() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields;\n" +
 		"public class Test {\n" +
@@ -97,11 +97,11 @@ public void test003() throws JavaModelException {
 		"}\n";
 	completeInJavadoc("/Completion/src/javadoc/fields/Test.js", source, true, "@v");
 	assertResults(
-		"value[JAVADOC_INLINE_TAG]{{@value}, null, null, value, null, "+this.positions+JAVADOC_RELEVANCE+"}"
+		"value[JSDOC_INLINE_TAG]{{@value}, null, null, value, null, "+this.positions+JAVADOC_RELEVANCE+"}"
 	);
 }
 
-public void test004() throws JavaModelException {
+public void test004() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields;\n" +
 		"public class Test {\n" +
@@ -113,12 +113,12 @@ public void test004() throws JavaModelException {
 		"}\n";
 	completeInJavadoc("/Completion/src/javadoc/fields/Test.js", source, true, "@ser");
 	assertResults(
-		"serial[JAVADOC_BLOCK_TAG]{@serial, null, null, serial, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"serialField[JAVADOC_BLOCK_TAG]{@serialField, null, null, serialField, null, "+this.positions+JAVADOC_RELEVANCE+"}"
+		"serial[JSDOC_BLOCK_TAG]{@serial, null, null, serial, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"serialField[JSDOC_BLOCK_TAG]{@serialField, null, null, serialField, null, "+this.positions+JAVADOC_RELEVANCE+"}"
 	);
 }
 
-public void test005() throws JavaModelException {
+public void test005() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields;\n" +
 		"public class Test {\n" +
@@ -130,11 +130,11 @@ public void test005() throws JavaModelException {
 		"}\n";
 	completeInJavadoc("/Completion/src/javadoc/fields/Test.js", source, true, "@docRoot");
 	assertResults(
-		"docRoot[JAVADOC_INLINE_TAG]{{@docRoot}, null, null, docRoot, null, "+this.positions+JAVADOC_RELEVANCE+"}"
+		"docRoot[JSDOC_INLINE_TAG]{{@docRoot}, null, null, docRoot, null, "+this.positions+JAVADOC_RELEVANCE+"}"
 	);
 }
 
-public void test006() throws JavaModelException {
+public void test006() throws JavaScriptModelException {
 	setUpProjectOptions(CompilerOptions.VERSION_1_3);
 	String source =
 		"package javadoc.fields;\n" +
@@ -147,18 +147,18 @@ public void test006() throws JavaModelException {
 		"}\n";
 	completeInJavadoc("/Completion/src/javadoc/fields/Test.js", source, true, "@");
 	assertResults(
-		"deprecated[JAVADOC_BLOCK_TAG]{@deprecated, null, null, deprecated, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"see[JAVADOC_BLOCK_TAG]{@see, null, null, see, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"category[JAVADOC_BLOCK_TAG]{@category, null, null, category, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"since[JAVADOC_BLOCK_TAG]{@since, null, null, since, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"serial[JAVADOC_BLOCK_TAG]{@serial, null, null, serial, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"serialField[JAVADOC_BLOCK_TAG]{@serialField, null, null, serialField, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"link[JAVADOC_INLINE_TAG]{{@link}, null, null, link, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"docRoot[JAVADOC_INLINE_TAG]{{@docRoot}, null, null, docRoot, null, "+this.positions+JAVADOC_RELEVANCE+"}"
+		"deprecated[JSDOC_BLOCK_TAG]{@deprecated, null, null, deprecated, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"see[JSDOC_BLOCK_TAG]{@see, null, null, see, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"category[JSDOC_BLOCK_TAG]{@category, null, null, category, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"since[JSDOC_BLOCK_TAG]{@since, null, null, since, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"serial[JSDOC_BLOCK_TAG]{@serial, null, null, serial, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"serialField[JSDOC_BLOCK_TAG]{@serialField, null, null, serialField, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"link[JSDOC_INLINE_TAG]{{@link}, null, null, link, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"docRoot[JSDOC_INLINE_TAG]{{@docRoot}, null, null, docRoot, null, "+this.positions+JAVADOC_RELEVANCE+"}"
 	);
 }
 
-public void test007() throws JavaModelException {
+public void test007() throws JavaScriptModelException {
 	setUpProjectOptions(CompilerOptions.VERSION_1_5);
 	String source =
 		"package javadoc.fields;\n" +
@@ -171,25 +171,25 @@ public void test007() throws JavaModelException {
 		"}\n";
 	completeInJavadoc("/Completion/src/javadoc/fields/Test.js", source, true, "@");
 	assertResults(
-		"deprecated[JAVADOC_BLOCK_TAG]{@deprecated, null, null, deprecated, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"see[JAVADOC_BLOCK_TAG]{@see, null, null, see, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"category[JAVADOC_BLOCK_TAG]{@category, null, null, category, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"since[JAVADOC_BLOCK_TAG]{@since, null, null, since, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"serial[JAVADOC_BLOCK_TAG]{@serial, null, null, serial, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"serialField[JAVADOC_BLOCK_TAG]{@serialField, null, null, serialField, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"link[JAVADOC_INLINE_TAG]{{@link}, null, null, link, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"docRoot[JAVADOC_INLINE_TAG]{{@docRoot}, null, null, docRoot, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"linkplain[JAVADOC_INLINE_TAG]{{@linkplain}, null, null, linkplain, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"value[JAVADOC_INLINE_TAG]{{@value}, null, null, value, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"code[JAVADOC_INLINE_TAG]{{@code}, null, null, code, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
-		"literal[JAVADOC_INLINE_TAG]{{@literal}, null, null, literal, null, "+this.positions+JAVADOC_RELEVANCE+"}"
+		"deprecated[JSDOC_BLOCK_TAG]{@deprecated, null, null, deprecated, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"see[JSDOC_BLOCK_TAG]{@see, null, null, see, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"category[JSDOC_BLOCK_TAG]{@category, null, null, category, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"since[JSDOC_BLOCK_TAG]{@since, null, null, since, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"serial[JSDOC_BLOCK_TAG]{@serial, null, null, serial, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"serialField[JSDOC_BLOCK_TAG]{@serialField, null, null, serialField, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"link[JSDOC_INLINE_TAG]{{@link}, null, null, link, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"docRoot[JSDOC_INLINE_TAG]{{@docRoot}, null, null, docRoot, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"linkplain[JSDOC_INLINE_TAG]{{@linkplain}, null, null, linkplain, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"value[JSDOC_INLINE_TAG]{{@value}, null, null, value, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"code[JSDOC_INLINE_TAG]{{@code}, null, null, code, null, "+this.positions+JAVADOC_RELEVANCE+"}\n" + 
+		"literal[JSDOC_INLINE_TAG]{{@literal}, null, null, literal, null, "+this.positions+JAVADOC_RELEVANCE+"}"
 	);
 }
 
 /**
  * @category Tests for types completion
  */
-public void test010() throws JavaModelException {
+public void test010() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields.tags;\n" + 
 		"public class BasicTestFields {\n" + 
@@ -205,7 +205,7 @@ public void test010() throws JavaModelException {
 	);
 }
 
-public void test011() throws JavaModelException {
+public void test011() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields.tags;\n" + 
 		"public class BasicTestFields {\n" + 
@@ -222,7 +222,7 @@ public void test011() throws JavaModelException {
 	);
 }
 
-public void test012() throws JavaModelException {
+public void test012() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields.tags;\n" + 
 		"public class BasicTestFields {\n" + 
@@ -239,7 +239,7 @@ public void test012() throws JavaModelException {
 	);
 }
 
-public void test013() throws JavaModelException {
+public void test013() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields.tags;\n" + 
 		"public class BasicTestFields {\n" + 
@@ -256,7 +256,7 @@ public void test013() throws JavaModelException {
 	);
 }
 
-public void test014() throws JavaModelException {
+public void test014() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields.tags;\n" + 
 		"public class BasicTestFields {\n" + 
@@ -274,7 +274,7 @@ public void test014() throws JavaModelException {
 	);
 }
 
-public void test015() throws JavaModelException {
+public void test015() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields.tags;\n" + 
 		"public class BasicTestFields {\n" + 
@@ -295,7 +295,7 @@ public void test015() throws JavaModelException {
 /**
  * @category Tests for fields completion
  */
-public void test020() throws JavaModelException {
+public void test020() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields.tags;\n" + 
 		"public class BasicTestFields {\n" + 
@@ -311,7 +311,7 @@ public void test020() throws JavaModelException {
 	);
 }
 
-public void test021() throws JavaModelException {
+public void test021() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields.tags;\n" + 
 		"public class BasicTestFields {\n" + 
@@ -327,7 +327,7 @@ public void test021() throws JavaModelException {
 	);
 }
 
-public void test022() throws JavaModelException {
+public void test022() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields.tags;\n" + 
 		"public class BasicTestFields {\n" + 
@@ -343,7 +343,7 @@ public void test022() throws JavaModelException {
 	);
 }
 
-public void test023() throws JavaModelException {
+public void test023() throws JavaScriptModelException {
 	String[] sources = {
 		"/Completion/src/javadoc/fields/tags/BasicTestFields.js",
 			"package javadoc.fields.tags;\n" + 
@@ -366,7 +366,7 @@ public void test023() throws JavaModelException {
 	);
 }
 
-public void test024() throws JavaModelException {
+public void test024() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields.tags;\n" + 
 		"public class BasicTestFields {\n" + 
@@ -396,7 +396,7 @@ public void test024() throws JavaModelException {
 	);
 }
 
-public void test025() throws JavaModelException {
+public void test025() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields.tags;\n" + 
 		"public class BasicTestFields {\n" + 
@@ -426,7 +426,7 @@ public void test025() throws JavaModelException {
 	);
 }
 
-public void test026() throws JavaModelException {
+public void test026() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields.tags;\n" + 
 		"public class BasicTestFields {\n" + 
@@ -456,7 +456,7 @@ public void test026() throws JavaModelException {
 	);
 }
 
-public void test027() throws JavaModelException {
+public void test027() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields.tags;\n" + 
 		"public class BasicTestFields {\n" + 
@@ -471,7 +471,7 @@ public void test027() throws JavaModelException {
 	assertResults("");
 }
 
-public void test028() throws JavaModelException {
+public void test028() throws JavaScriptModelException {
 	String source =
 		"package javadoc.fields.tags;\n" + 
 		"public class BasicTestFields {\n" + 
@@ -490,12 +490,12 @@ public void test028() throws JavaModelException {
 /**
  * @tests Tests for camel case completion
  */
-public void test030() throws JavaModelException {
-	this.oldOptions = JavaCore.getOptions();
+public void test030() throws JavaScriptModelException {
+	this.oldOptions = JavaScriptCore.getOptions();
 	try {
 		Hashtable options = new Hashtable(oldOptions);
-		options.put(JavaCore.CODEASSIST_CAMEL_CASE_MATCH, JavaCore.ENABLED);
-		JavaCore.setOptions(options);
+		options.put(JavaScriptCore.CODEASSIST_CAMEL_CASE_MATCH, JavaScriptCore.ENABLED);
+		JavaScriptCore.setOptions(options);
 		
 		String source =
 			"package javadoc.fields.tags;\n" + 
@@ -513,7 +513,7 @@ public void test030() throws JavaModelException {
 			"oneTwoThree[FIELD_REF]{oneTwoThree, Ljavadoc.fields.tags.BasicTestFields;, Ljava.lang.Object;, oneTwoThree, null, "+this.positions+"24}"
 		);
 	} finally {
-		JavaCore.setOptions(oldOptions);
+		JavaScriptCore.setOptions(oldOptions);
 	}
 }
 }
