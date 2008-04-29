@@ -29,7 +29,7 @@ public ExclusionPatternsTests(String name) {
 	super(name);
 }
 protected void setClasspath(String[] sourceFoldersAndExclusionPatterns) throws JavaScriptModelException {
-	this.project.setRawClasspath(createClasspath(sourceFoldersAndExclusionPatterns, false/*no inclusion*/, true/*exclusion*/), null);
+	this.project.setRawIncludepath(createClasspath(sourceFoldersAndExclusionPatterns, false/*no inclusion*/, true/*exclusion*/), null);
 }
 protected void setUp() throws Exception {
 	super.setUp();
@@ -85,7 +85,7 @@ public void testAddExclusionOnCompilationUnit() throws CoreException {
 	assertResourceNamesEqual(
 		"Unexpected non-java resources",
 		"A.js",
-		pkg.getNonJavaResources());
+		pkg.getNonJavaScriptResources());
 }
 /*
  * Ensure that adding an exclusion on a folder directly under a project (and prj=src)
@@ -98,7 +98,7 @@ public void testAddExclusionOnFolderUnderProject() throws CoreException {
 		createFolder("/P1/doc");
 
 		clearDeltas();
-		javaProject.setRawClasspath(createClasspath(new String[] {"/P1", "doc/"}, false/*no inclusion*/, true/*exclusion*/), null);
+		javaProject.setRawIncludepath(createClasspath(new String[] {"/P1", "doc/"}, false/*no inclusion*/, true/*exclusion*/), null);
 	
 		assertDeltas(
 			"Unexpected deltas",
@@ -118,7 +118,7 @@ public void testAddExclusionOnFolderUnderProject() throws CoreException {
 			".classpath\n" +
 			".project\n" +
 			"doc",
-			javaProject.getNonJavaResources());
+			javaProject.getNonJavaScriptResources());
 	} finally {
 		deleteProject("P1");
 	}
@@ -150,7 +150,7 @@ public void testAddExclusionOnPackage() throws CoreException {
 	assertResourceNamesEqual(
 		"Unexpected non-java resources",
 		"p",
-		root.getNonJavaResources());
+		root.getNonJavaScriptResources());
 }
 /*
  * Ensure that adding an exclusion on a primary working copy
@@ -189,7 +189,7 @@ public void testAddExclusionOnPrimaryWorkingCopy() throws CoreException {
 		assertResourceNamesEqual(
 			"Unexpected non-java resources",
 			"A.js",
-			pkg.getNonJavaResources());
+			pkg.getNonJavaScriptResources());
 	} finally {
 		if (workingCopy != null) {
 			workingCopy.discardWorkingCopy();
@@ -258,7 +258,7 @@ public void testCreateExcludedCompilationUnit() throws CoreException {
 	assertResourceNamesEqual(
 		"Unexpected non-java resources",
 		"A.js",
-		pkg.getNonJavaResources());
+		pkg.getNonJavaScriptResources());
 }
 /*
  * Ensure that crearing an excluded package 
@@ -286,7 +286,7 @@ public void testCreateExcludedPackage() throws CoreException {
 	assertResourceNamesEqual(
 		"Unexpected non-java resources",
 		"p",
-		root.getNonJavaResources());
+		root.getNonJavaScriptResources());
 }
 /*
  * Ensure that crearing an excluded package doesn't make it appear as a child of its package fragment root but it is a non-java resource.
@@ -315,7 +315,7 @@ public void testCreateExcludedPackage2() throws CoreException {
 	assertResourceNamesEqual(
 		"Unexpected non-java resources",
 		"org",
-		root.getNonJavaResources());
+		root.getNonJavaScriptResources());
 }
 /*
  * Ensure that creating a folder that represents an excluded and included package
@@ -345,7 +345,7 @@ public void testCreateExcludedAndIncludedPackages() throws CoreException {
 	assertResourceNamesEqual(
 		"Unexpected non-java resources",
 		"p2",
-		root.getPackageFragment("p1").getNonJavaResources());
+		root.getPackageFragment("p1").getNonJavaScriptResources());
 }
 /*
  * Ensure that creating a file that corresponds to an excluded compilation unit 
@@ -380,7 +380,7 @@ public void testCreateResourceExcludedCompilationUnit() throws CoreException {
 	assertResourceNamesEqual(
 		"Unexpected non-java resources",
 		"A.js",
-		pkg.getNonJavaResources());
+		pkg.getNonJavaScriptResources());
 }
 /*
  * Ensure that creating a folder that corresponds to an excluded package 
@@ -408,7 +408,7 @@ public void testCreateResourceExcludedPackage() throws CoreException {
 	assertResourceNamesEqual(
 		"Unexpected non-java resources",
 		"p",
-		root.getNonJavaResources());
+		root.getNonJavaScriptResources());
 }
 /*
  * Ensures that a cu that is not excluded is on the classpath of the project.
@@ -422,10 +422,10 @@ public void testIsOnClasspath1() throws CoreException {
 		"public class A {\n" +
 		"}"
 	);
-	assertTrue("Resource should be on classpath", project.isOnClasspath(file));
+	assertTrue("Resource should be on classpath", project.isOnIncludepath(file));
 	
 	IJavaScriptUnit cu = getCompilationUnit("/P/src/p/A.js");
-	assertTrue("CU should be on classpath", project.isOnClasspath(cu));
+	assertTrue("CU should be on classpath", project.isOnIncludepath(cu));
 }
 /*
  * Ensures that a cu that is excluded is not on the classpath of the project.
@@ -439,10 +439,10 @@ public void testIsOnClasspath2() throws CoreException {
 		"public class A {\n" +
 		"}"
 	);
-	assertTrue("Resource should not be on classpath", !project.isOnClasspath(file));
+	assertTrue("Resource should not be on classpath", !project.isOnIncludepath(file));
 	
 	IJavaScriptUnit cu = getCompilationUnit("/P/src/p/A.js");
-	assertTrue("CU should not be on classpath", !project.isOnClasspath(cu));
+	assertTrue("CU should not be on classpath", !project.isOnIncludepath(cu));
 }
 /*
  * Ensures that a non-java resource that is not excluded is on the classpath of the project.
@@ -451,7 +451,7 @@ public void testIsOnClasspath3() throws CoreException {
 	setClasspath(new String[] {"/P/src", ""});
 	createFolder("/P/src/p");
 	IFile file = createFile("/P/src/p/readme.txt", "");
-	assertTrue("Resource should be on classpath", project.isOnClasspath(file));
+	assertTrue("Resource should be on classpath", project.isOnIncludepath(file));
 }
 /*
  * Ensures that a non-java resource that is excluded is not on the classpath of the project.
@@ -460,7 +460,7 @@ public void testIsOnClasspath4() throws CoreException {
 	setClasspath(new String[] {"/P/src", "p/**"});
 	createFolder("/P/src/p");
 	IFile file = createFile("/P/src/p/readme.txt", "");
-	assertTrue("Resource should not be on classpath", !project.isOnClasspath(file));
+	assertTrue("Resource should not be on classpath", !project.isOnIncludepath(file));
 }
 /*
  * Ensures that an excluded nested source folder doesn't appear as a non-java resource of the outer folder.
@@ -474,7 +474,7 @@ public void testNestedSourceFolder1() throws CoreException {
 	assertResourceNamesEqual(
 		"Unexpected non-java resources for /P/src1",
 		"",
-		root1.getNonJavaResources());
+		root1.getNonJavaScriptResources());
 }
 /*
  * Ensures that adding a .java file in a nested source folder reports 
@@ -609,7 +609,7 @@ public void testRenameExcludedCompilationUnit() throws CoreException {
 	assertResourceNamesEqual(
 		"Unexpected non-java resources",
 		"",
-		pkg.getNonJavaResources());
+		pkg.getNonJavaScriptResources());
 }
 /*
  * Ensure that renaming an excluded package so that it is not excluded any longer
@@ -641,7 +641,7 @@ public void testRenameExcludedPackage() throws CoreException {
 	assertResourceNamesEqual(
 		"Unexpected non-java resources",
 		"",
-		root.getNonJavaResources());
+		root.getNonJavaScriptResources());
 }
 /*
  * Ensure that renaming a file that corresponds to an excluded compilation unit so that it is not excluded any longer
@@ -678,7 +678,7 @@ public void testRenameResourceExcludedCompilationUnit() throws CoreException {
 	assertResourceNamesEqual(
 		"Unexpected non-java resources",
 		"",
-		pkg.getNonJavaResources());
+		pkg.getNonJavaScriptResources());
 }
 /*
  * Ensure search doesn't find matches in an excluded compilation unit.
@@ -759,7 +759,7 @@ public void testRemoveExcludedAndIncludedPackages() throws CoreException {
 	assertResourceNamesEqual(
 		"Unexpected non-java resources",
 		"",
-		root.getNonJavaResources());
+		root.getNonJavaScriptResources());
 }
 
 /*
@@ -793,7 +793,7 @@ public void testRenameResourceExcludedPackage() throws CoreException {
 	assertResourceNamesEqual(
 		"Unexpected non-java resources",
 		"",
-		root.getNonJavaResources());
+		root.getNonJavaScriptResources());
 }
 /*
  * Ensure that a potential match in the output folder is not indexed.
@@ -804,7 +804,7 @@ public void testSearchPotentialMatchInOutput() throws CoreException {
 		JavaScriptCore.run(new IWorkspaceRunnable() {
 			public void run(IProgressMonitor monitor) throws CoreException {
 				IJavaScriptProject javaProject = createJavaProject("P2", new String[] {}, "bin");
-				javaProject.setRawClasspath(createClasspath(new String[] {"/P2", "src/", "/P2/src", ""}, false/*no inclusion*/, true/*exclusion*/), null);
+				javaProject.setRawIncludepath(createClasspath(new String[] {"/P2", "src/", "/P2/src", ""}, false/*no inclusion*/, true/*exclusion*/), null);
 				createFile(
 					"/P2/bin/X.js",
 					"public class X {\n" +
@@ -859,7 +859,7 @@ public void testRemoveExclusionOnCompilationUnit() throws CoreException {
 	assertResourceNamesEqual(
 		"Unexpected non-java resources",
 		"",
-		pkg.getNonJavaResources());
+		pkg.getNonJavaScriptResources());
 }
 /*
  * Ensure that removing the exclusion on a package
@@ -890,6 +890,6 @@ public void testRemoveExclusionOnPackage() throws CoreException {
 	assertResourceNamesEqual(
 		"Unexpected non-java resources",
 		"",
-		root.getNonJavaResources());
+		root.getNonJavaScriptResources());
 }
 }

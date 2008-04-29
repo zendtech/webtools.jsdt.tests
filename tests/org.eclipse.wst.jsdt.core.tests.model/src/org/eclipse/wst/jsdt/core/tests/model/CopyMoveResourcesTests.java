@@ -229,7 +229,7 @@ public void testCopyCU() throws CoreException {
 
 	copyPositive(cuSource, pkgDest, null, null, false);
 	
-	IJavaScriptUnit cu= pkgDest.getCompilationUnit("X.js");
+	IJavaScriptUnit cu= pkgDest.getJavaScriptUnit("X.js");
 	assertTrue("Package declaration not updated for copied cu", cu.getPackageDeclaration("p2").exists());
 }
 /**
@@ -294,7 +294,7 @@ public void testCopyCUFromDefaultToNonDefault() throws CoreException {
 
 	copyPositive(cuSource, pkgDest, null, null, false);
 	
-	IJavaScriptUnit cu= pkgDest.getCompilationUnit("X.js");
+	IJavaScriptUnit cu= pkgDest.getJavaScriptUnit("X.js");
 	assertTrue("Package declaration not updated for copied cu", cu.getPackageDeclaration("p").exists());
 }
 /**
@@ -462,7 +462,7 @@ public void testCopyCUWithServerProperties() throws CoreException {
 	IPackageFragment pkgDest = getPackage("/P/src/p2");
 
 	copyPositive(cuSource, pkgDest, null, null, false);
-	IJavaScriptUnit cu= pkgDest.getCompilationUnit("X.js");
+	IJavaScriptUnit cu= pkgDest.getJavaScriptUnit("X.js");
 	String propertyValue = cu.getUnderlyingResource().getPersistentProperty(qualifiedName);
 	assertEquals(
 		"Server property should be copied with cu",
@@ -758,7 +758,7 @@ public void testMoveCU() throws CoreException {
 
 	movePositive(cuSource, pkgDest, null, null, false);
 	
-	IJavaScriptUnit cu= pkgDest.getCompilationUnit("X.js");
+	IJavaScriptUnit cu= pkgDest.getJavaScriptUnit("X.js");
 	assertTrue("Package declaration not updated for copied cu", cu.getPackageDeclaration("p2").exists());
 }
 /**

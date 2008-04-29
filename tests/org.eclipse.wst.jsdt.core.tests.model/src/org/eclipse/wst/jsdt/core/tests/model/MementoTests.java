@@ -131,12 +131,12 @@ public void testAnonymousTypeMemento2() {
 public void testAnonymousTypeMemento3() {
 	IType type = getCompilationUnit("/P/src/p/X.js").getType("X");
 	
-	IType anonymous = type.getMethod("foo", new String[]{}).getType("", 1);
+	IType anonymous = type.getFunction("foo", new String[]{}).getType("", 1);
 	assertMemento(
 		"=P/src<p{X.java[X~foo[",
 		anonymous);
 		
-	anonymous = type.getMethod("foo", new String[]{}).getType("", 4);
+	anonymous = type.getFunction("foo", new String[]{}).getType("", 4);
 	assertMemento(
 		"=P/src<p{X.java[X~foo[!4",
 		anonymous);
@@ -166,7 +166,7 @@ public void testBinaryInnerTypeMemento() throws JavaScriptModelException {
 		"=P/lib<p(X$Inner.class[Inner^field",
 		innerField);
 	
-	IFunction innerMethod = type.getMethod("foo", new String[] {"I", "Ljava.lang.String;"});
+	IFunction innerMethod = type.getFunction("foo", new String[] {"I", "Ljava.lang.String;"});
 	assertMemento(
 		"=P/lib<p(X$Inner.class[Inner~foo~I~Ljava.lang.String;",
 		innerMethod);
@@ -176,7 +176,7 @@ public void testBinaryInnerTypeMemento() throws JavaScriptModelException {
  */
 public void testBinaryMethodMemento1() throws JavaScriptModelException {
 	IType type = getClassFile("/P/lib/p/X.class").getType();
-	IFunction method = type.getMethod("foo", new String[] {"I", "Ljava.lang.String;"});
+	IFunction method = type.getFunction("foo", new String[] {"I", "Ljava.lang.String;"});
 	assertMemento(
 		"=P/lib<p(X.class[X~foo~I~Ljava.lang.String;",
 		method);
@@ -186,7 +186,7 @@ public void testBinaryMethodMemento1() throws JavaScriptModelException {
  */
 public void testBinaryMethodMemento2() throws JavaScriptModelException {
 	IType type = getClassFile("/P/lib/p/X.class").getType();
-	IFunction method = type.getMethod("bar", new String[] {});
+	IFunction method = type.getFunction("bar", new String[] {});
 	assertMemento(
 		"=P/lib<p(X.class[X~bar",
 		method);
@@ -196,7 +196,7 @@ public void testBinaryMethodMemento2() throws JavaScriptModelException {
  */
 public void testBinaryMethodMemento3() throws JavaScriptModelException {
 	IType type = getClassFile("/P/lib/p/X.class").getType();
-	IFunction method = type.getMethod("fred", new String[] {"[Z"});
+	IFunction method = type.getFunction("fred", new String[] {"[Z"});
 	assertMemento(
 		"=P/lib<p(X.class[X~fred~\\[Z",
 		method);
@@ -207,7 +207,7 @@ public void testBinaryMethodMemento3() throws JavaScriptModelException {
  */
 public void testBinaryMethodMemento4() throws JavaScriptModelException {
 	IType type = getClassFile("/P/lib/p/X.class").getType();
-	IFunction method = type.getMethod("foo", new String[] {"Ljava.util.Collection<*>;"});
+	IFunction method = type.getFunction("foo", new String[] {"Ljava.util.Collection<*>;"});
 	assertMemento(
 		"=P/lib<p(X.class[X~foo~Ljava.util.Collection\\<*>;",
 		method);
@@ -275,7 +275,7 @@ public void testExternalJarBinaryInnerTypeMemento() throws JavaScriptModelExcept
  */
 public void testExternalJarBinaryMethodMemento() throws JavaScriptModelException {	
 	IType type = getClassFile("P", getExternalJCLPathString(), "p", "X.class").getType();
-	IFunction method = type.getMethod("foo", new String[] {"[Ljava.lang.String;"});
+	IFunction method = type.getFunction("foo", new String[] {"[Ljava.lang.String;"});
 	assertMemento(
 		"=P/" + getEscapedExternalJCLPath() + "<p(X.class[X~foo~\\[Ljava.lang.String;",
 		method);
@@ -371,7 +371,7 @@ public void testInternalJarBinaryInnerTypeMemento() throws JavaScriptModelExcept
  */
 public void testInternalJarBinaryMethodMemento() throws JavaScriptModelException {	
 	IType type = getPackageFragmentRoot("/P/lib/myLib.jar").getPackageFragment("p").getClassFile("X.class").getType();
-	IFunction method = type.getMethod("foo", new String[] {"[Ljava.lang.String;"});
+	IFunction method = type.getFunction("foo", new String[] {"[Ljava.lang.String;"});
 	assertMemento(
 		"=P/lib\\/myLib.jar<p(X.class[X~foo~\\[Ljava.lang.String;",
 		method);
@@ -407,12 +407,12 @@ public void testLocalTypeMemento1() {
 public void testLocalTypeMemento2() {
 	IType type = getCompilationUnit("/P/src/p/X.js").getType("X");
 	
-	IType anonymous = type.getMethod("foo", new String[]{}).getType("Y", 1);
+	IType anonymous = type.getFunction("foo", new String[]{}).getType("Y", 1);
 	assertMemento(
 		"=P/src<p{X.java[X~foo[Y",
 		anonymous);
 		
-	anonymous = type.getMethod("foo", new String[]{}).getType("Y", 3);
+	anonymous = type.getFunction("foo", new String[]{}).getType("Y", 3);
 	assertMemento(
 		"=P/src<p{X.java[X~foo[Y!3",
 		anonymous);
@@ -422,7 +422,7 @@ public void testLocalTypeMemento2() {
  */
 public void testLocalVariableMemento1() {
 	IType type = getCompilationUnit("/P/src/p/X.js").getType("X");
-	IFunction method = type.getMethod("foo", new String[]{});
+	IFunction method = type.getFunction("foo", new String[]{});
 
 	ILocalVariable localVar = new LocalVariable((JavaElement)method, "var", 1, 2, 3, 4, "Z");
 	assertMemento(
@@ -446,7 +446,7 @@ public void testLocalVariableMemento3() {
  */
 public void testLocalVariableMemento2() throws JavaScriptModelException {
 	IType type = getClassFile("/P/src/p/X.class").getType();
-	IFunction method = type.getMethod("foo", new String[]{"I"});
+	IFunction method = type.getFunction("foo", new String[]{"I"});
 
 	ILocalVariable localVar = new LocalVariable((JavaElement)method, "var", 1, 2, 3, 4, "Z");
 	assertMemento(
@@ -656,7 +656,7 @@ public void testSourceInnerTypeMemento() {
  */
 public void testSourceMethodMemento1() {
 	IType type = getCompilationUnit("/P/src/p/X.js").getType("X");
-	IFunction method = type.getMethod("foo", new String[] {"I", "Ljava.lang.String;"});
+	IFunction method = type.getFunction("foo", new String[] {"I", "Ljava.lang.String;"});
 	assertMemento(
 		"=P/src<p{X.java[X~foo~I~Ljava.lang.String;",
 		method);
@@ -666,7 +666,7 @@ public void testSourceMethodMemento1() {
  */
 public void testSourceMethodMemento2() {
 	IType type = getCompilationUnit("/P/src/p/X.js").getType("X");
-	IFunction method = type.getMethod("bar", new String[] {});
+	IFunction method = type.getFunction("bar", new String[] {});
 	assertMemento(
 		"=P/src<p{X.java[X~bar",
 		method);
@@ -676,7 +676,7 @@ public void testSourceMethodMemento2() {
  */
 public void testSourceMethodMemento3() {
 	IType type = getCompilationUnit("/P/src/p/X.js").getType("X");
-	IFunction method = type.getMethod("fred", new String[] {"[Z"});
+	IFunction method = type.getFunction("fred", new String[] {"[Z"});
 	assertMemento(
 		"=P/src<p{X.java[X~fred~\\[Z",
 		method);
@@ -703,7 +703,7 @@ public void testTypeParameter1() {
  * Tests that a type parameter can be persisted and restored using its memento.
  */
 public void testTypeParameter2() {
-	ITypeParameter typeParameter = getCompilationUnit("/P/src/p/X.js").getType("X").getMethod("foo", new String[0]).getTypeParameter("T");
+	ITypeParameter typeParameter = getCompilationUnit("/P/src/p/X.js").getType("X").getFunction("foo", new String[0]).getTypeParameter("T");
 	assertMemento(
 		"=P/src<p{X.java[X~foo]T",
 		typeParameter);

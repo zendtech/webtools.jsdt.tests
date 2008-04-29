@@ -224,7 +224,7 @@ protected IClassFile createClassFile(String libPath, String classFileRelativePat
 	IClassFile classFile = getClassFile(libPath + "/" + classFileRelativePath);
 //	classFile.getResource().delete(false, null);
 	Util.delete(classFile.getResource());
-	IJavaScriptProject javaProject = classFile.getJavaProject();
+	IJavaScriptProject javaProject = classFile.getJavaScriptProject();
 	IProject project = javaProject.getProject();
 	String sourcePath = project.getLocation().toOSString() + File.separatorChar + classFile.getType().getElementName() + ".js";
 	String libOSPath = new Path(libPath).segmentCount() > 1 ? getFolder(libPath).getLocation().toOSString() : getProject(libPath).getLocation().toOSString();

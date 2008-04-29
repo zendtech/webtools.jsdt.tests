@@ -968,7 +968,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 					text = new String(source, start, name.getLength());
 					assumeEquals(prefix+"Misplaced member ref at <"+start+">: ", text, name.toString());
 					verifyNamePositions(start, name, source);
-				} else if (fragment.getNodeType() == ASTNode.METHOD_REF) {
+				} else if (fragment.getNodeType() == ASTNode.FUNCTION_REF) {
 					FunctionRef methodRef = (FunctionRef) fragment;
 					// Store start position
 					int start = tagStart;
@@ -1160,7 +1160,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 						assumeNotNull(prefix+""+name+" binding was not foundfound in "+fragment, name.resolveBinding());
 						verifyNameBindings(memberRef.getQualifier());
 					}
-				} else if (fragment.getNodeType() == ASTNode.METHOD_REF) {
+				} else if (fragment.getNodeType() == ASTNode.FUNCTION_REF) {
 					FunctionRef methodRef = (FunctionRef) fragment;
 					previousBinding = methodRef.resolveBinding();
 					if (previousBinding != null) {
@@ -1295,11 +1295,11 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 
 		// Get current project
 		String sourceStr = sourceUnit.getSource();
-		if (savedOptions != null && !sourceUnit.getJavaProject().getElementName().equals(currentProject.getElementName())) {
+		if (savedOptions != null && !sourceUnit.getJavaScriptProject().getElementName().equals(currentProject.getElementName())) {
 			currentProject.setOptions(savedOptions);
 			savedOptions = null;
 		}
-		currentProject = sourceUnit.getJavaProject();
+		currentProject = sourceUnit.getJavaScriptProject();
 		if (savedOptions == null) savedOptions = currentProject.getOptions(false);
 
 		// set up java project options
@@ -1554,7 +1554,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 			// Verify first method existence
 			ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 			assumeNotNull("We should get a non-null ast node", node);
-			assumeTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+			assumeTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 			FunctionDeclaration method = (FunctionDeclaration) node;
 			// Verify first method extended positions
 			int commentStart = method.getStartPosition();
@@ -1574,7 +1574,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 			// Verify second method existence
 			node = getASTNode((JavaScriptUnit) result, 0, 1);
 			assumeNotNull("We should get a non-null ast node", node);
-			assumeTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+			assumeTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 			method = (FunctionDeclaration) node;
 			// Verify second method extended positions
 			commentStart = method.getStartPosition();
@@ -1674,7 +1674,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 		// get first method
 		ASTNode node = getASTNode(compilUnit, 0, 0);
 		assumeNotNull("We should get a non-null ast node", node);
-		assumeTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assumeTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration method = (FunctionDeclaration) node;
 		// verify that first method does not include comment
 		int methodStart = compilUnit.getExtendedStartPosition(method);
@@ -1694,7 +1694,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 		// get second method
 		node = getASTNode(compilUnit, 0, 1);
 		assumeNotNull("We should get a non-null ast node", node);
-		assumeTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assumeTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		method = (FunctionDeclaration) node;
 		// verify that second method start includes comment
 		assumeEquals("Method declaration "+method+" does not start at the right position", commentStart, method.getStartPosition());
@@ -1711,7 +1711,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 		// get first method
 		ASTNode node = getASTNode(compilUnit, 0, 0);
 		assumeNotNull("We should get a non-null ast node", node);
-		assumeTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assumeTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration method = (FunctionDeclaration) node;
 		// verify that first method does not include comment
 		int methodStart = compilUnit.getExtendedStartPosition(method);
@@ -1731,7 +1731,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 		// get second method
 		node = getASTNode(compilUnit, 0, 1);
 		assumeNotNull("We should get a non-null ast node", node);
-		assumeTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assumeTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		method = (FunctionDeclaration) node;
 		// verify that second method start includes comment
 		assumeEquals("Method declaration "+method+" does not start at the right position", commentStart, method.getStartPosition());
@@ -1749,7 +1749,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 		// get first method
 		ASTNode node = getASTNode(compilUnit, 0, 0);
 		assumeNotNull("We should get a non-null ast node", node);
-		assumeTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assumeTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration method = (FunctionDeclaration) node;
 		// verify that first method includes comment
 		int methodStart = compilUnit.getExtendedStartPosition(method);
@@ -1769,7 +1769,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 		// get second method
 		node = getASTNode(compilUnit, 0, 1);
 		assumeNotNull("We should get a non-null ast node", node);
-		assumeTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assumeTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		method = (FunctionDeclaration) node;
 		// verify that second method does not include comment
 		methodStart = compilUnit.getExtendedStartPosition(method);
@@ -1787,7 +1787,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 		// get first method
 		ASTNode node = getASTNode(compilUnit, 0, 0);
 		assumeNotNull("We should get a non-null ast node", node);
-		assumeTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assumeTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration method = (FunctionDeclaration) node;
 		// verify that first method includes comment
 		int methodStart = compilUnit.getExtendedStartPosition(method);
@@ -1815,7 +1815,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 		// get method
 		ASTNode node = getASTNode(compilUnit, 0, 0);
 		assumeNotNull("We should get a non-null ast node", node);
-		assumeEquals("Not a method declaration", ASTNode.METHOD_DECLARATION, node.getNodeType()); //$NON-NLS-1$
+		assumeEquals("Not a method declaration", ASTNode.FUNCTION_DECLARATION, node.getNodeType()); //$NON-NLS-1$
 		FunctionDeclaration method = (FunctionDeclaration) node;
 		// get method body
 		node = method.getBody();
@@ -1857,7 +1857,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 		// get method
 		ASTNode node = getASTNode(compilUnit, 0, 0);
 		assumeNotNull("We should get a non-null ast node", node);
-		assumeEquals("Not a method declaration", ASTNode.METHOD_DECLARATION, node.getNodeType()); //$NON-NLS-1$
+		assumeEquals("Not a method declaration", ASTNode.FUNCTION_DECLARATION, node.getNodeType()); //$NON-NLS-1$
 		FunctionDeclaration method = (FunctionDeclaration) node;
 		// get return type
 		node = method.getReturnType();
@@ -2475,7 +2475,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 		JavaScriptUnit compilUnit = (JavaScriptUnit) runConversion(workingCopies[0], true);
 		if (docCommentSupport.equals(JavaScriptCore.ENABLED)) {
 			ASTNode node = getASTNode(compilUnit, 0, 0);
-			assertEquals("Invalid type for node: "+node, ASTNode.METHOD_DECLARATION, node.getNodeType());
+			assertEquals("Invalid type for node: "+node, ASTNode.FUNCTION_DECLARATION, node.getNodeType());
 			FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 			JSdoc methodJavadoc = methodDeclaration.getJavadoc();
 			assertNotNull("FunctionDeclaration have a javadoc comment", methodJavadoc);
@@ -2539,13 +2539,13 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 				TagElement tag = (TagElement) docComment.tags().get(i);				
 				assertEquals("Invalid number of fragment for see reference: "+tag, 1, tag.fragments().size());
 				ASTNode node = (ASTNode) tag.fragments().get(0);
-				assertEquals("Invalid kind of name reference for tag element: "+tag, ASTNode.METHOD_REF, node.getNodeType());
+				assertEquals("Invalid kind of name reference for tag element: "+tag, ASTNode.FUNCTION_REF, node.getNodeType());
 				FunctionRef methodRef = (FunctionRef) node;
 				List parameters = methodRef.parameters();
 				int paramSize = parameters.size();
 				for (int j=0; j<paramSize; j++) {
 					node = (ASTNode) parameters.get(j);
-					assertEquals("Invalid kind of method parameter: "+node, ASTNode.METHOD_REF_PARAMETER, node.getNodeType());
+					assertEquals("Invalid kind of method parameter: "+node, ASTNode.FUNCTION_REF_PARAMETER, node.getNodeType());
 					FunctionRefParameter parameter = (FunctionRefParameter) node;
 					if (j==(paramSize-1)) {
 						switch (i) {
@@ -2963,7 +2963,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 			Iterator iterator = unitComments.iterator();
 			for (int i=0; i<size; i++) {
 				Comment comment = (Comment) iterator.next();
-				assertEquals("Expect javadoc for comment: "+comment, ASTNode.JAVADOC, comment.getNodeType());
+				assertEquals("Expect javadoc for comment: "+comment, ASTNode.JSDOC, comment.getNodeType());
 				javadocs[i] = (JSdoc) comment;
 			}
 
@@ -2983,7 +2983,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 
 			// Verify method declaration start
 			node = getASTNode(compilUnit, 0, 2);
-			assertEquals("Expected method declaration for node: "+node, ASTNode.METHOD_DECLARATION, node.getNodeType());
+			assertEquals("Expected method declaration for node: "+node, ASTNode.FUNCTION_DECLARATION, node.getNodeType());
 			FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 			javadocStart = javadocs[2].getStartPosition();
 			assertEquals("Invalid start position for FunctionDeclaration: "+methodDeclaration, methodDeclaration.getStartPosition(), javadocStart);
@@ -3005,7 +3005,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 
 			// Verify method declaration start
 			node = (ASTNode) bodyDeclarations.get(1);
-			assertEquals("Expected method declaration for node: "+node, ASTNode.METHOD_DECLARATION, node.getNodeType());
+			assertEquals("Expected method declaration for node: "+node, ASTNode.FUNCTION_DECLARATION, node.getNodeType());
 			methodDeclaration = (FunctionDeclaration) node;
 			javadocStart = javadocs[5].getStartPosition();
 			assertEquals("Invalid start position for FunctionDeclaration: "+methodDeclaration, methodDeclaration.getStartPosition(), javadocStart);
@@ -3042,7 +3042,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 			Iterator unitComments = compilUnit.getCommentList().iterator();
 			while (unitComments.hasNext()) {
 				Comment comment = (Comment) unitComments.next();
-				assertEquals("Comment should be javadoc", comment.getNodeType(), ASTNode.JAVADOC);
+				assertEquals("Comment should be javadoc", comment.getNodeType(), ASTNode.JSDOC);
 				JSdoc javadoc = (JSdoc) comment;
 
 				// Verify that there's always a method reference in tags
@@ -3052,7 +3052,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 					TagElement tag = (TagElement) javadoc.tags().get(i);				
 					assertEquals("Invalid number of fragment for see reference: "+tag, 1, tag.fragments().size());
 					ASTNode node = (ASTNode) tag.fragments().get(0);
-					assertEquals("Invalid kind of name reference for tag element: "+tag, ASTNode.METHOD_REF, node.getNodeType());
+					assertEquals("Invalid kind of name reference for tag element: "+tag, ASTNode.FUNCTION_REF, node.getNodeType());
 				}
 			}
 		}
@@ -3080,7 +3080,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 			List unitComments = compilUnit.getCommentList();
 			assertEquals("Wrong number of comments", 1, unitComments.size());
 			Comment comment = (Comment) unitComments.get(0);
-			assertEquals("Comment should be javadoc", comment.getNodeType(), ASTNode.JAVADOC);
+			assertEquals("Comment should be javadoc", comment.getNodeType(), ASTNode.JSDOC);
 
 			// Get local variable declaration
 			JSdoc docComment = (JSdoc) comment;
@@ -3123,7 +3123,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 		if (docCommentSupport.equals(JavaScriptCore.ENABLED)) {
 			// Verify first method
 			ASTNode node = getASTNode(compilUnit, 0, 0);
-			assertEquals("Invalid type for node: "+node, ASTNode.METHOD_DECLARATION, node.getNodeType());
+			assertEquals("Invalid type for node: "+node, ASTNode.FUNCTION_DECLARATION, node.getNodeType());
 			FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 			assertEquals("Invalid method name", "getFoo", methodDeclaration.getName().toString());
 			JSdoc methodJavadoc = methodDeclaration.getJavadoc();
@@ -3132,7 +3132,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 			assertEquals("Method declaration should include javadoc comment", methodDeclaration.getStartPosition(), javadocStart);
 			// Verify second method
 			node = getASTNode(compilUnit, 0, 1);
-			assertEquals("Invalid type for node: "+node, ASTNode.METHOD_DECLARATION, node.getNodeType());
+			assertEquals("Invalid type for node: "+node, ASTNode.FUNCTION_DECLARATION, node.getNodeType());
 			methodDeclaration = (FunctionDeclaration) node;
 			assertEquals("Invalid method name", "setFoo", methodDeclaration.getName().toString());
 			methodJavadoc = methodDeclaration.getJavadoc();
@@ -3169,7 +3169,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 		if (docCommentSupport.equals(JavaScriptCore.ENABLED)) {
 			// Verify  method javadoc
 			ASTNode node = getASTNode(compilUnit, 0, 0);
-			assertEquals("Invalid type for node: "+node, ASTNode.METHOD_DECLARATION, node.getNodeType());
+			assertEquals("Invalid type for node: "+node, ASTNode.FUNCTION_DECLARATION, node.getNodeType());
 			FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 			assertEquals("Invalid method name", "foo", methodDeclaration.getName().toString());
 			JSdoc methodJavadoc = methodDeclaration.getJavadoc();
@@ -3206,7 +3206,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 		if (docCommentSupport.equals(JavaScriptCore.ENABLED)) {
 			// Verify  method javadoc
 			ASTNode node = getASTNode(compilUnit, 0, 0);
-			assertEquals("Invalid type for node: "+node, ASTNode.METHOD_DECLARATION, node.getNodeType());
+			assertEquals("Invalid type for node: "+node, ASTNode.FUNCTION_DECLARATION, node.getNodeType());
 			FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 			assertEquals("Invalid method name", "foo", methodDeclaration.getName().toString());
 			JSdoc methodJavadoc = methodDeclaration.getJavadoc();
@@ -3243,7 +3243,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 		if (docCommentSupport.equals(JavaScriptCore.ENABLED)) {
 			// Verify  method javadoc
 			ASTNode node = getASTNode(compilUnit, 0, 0);
-			assertEquals("Invalid type for node: "+node, ASTNode.METHOD_DECLARATION, node.getNodeType());
+			assertEquals("Invalid type for node: "+node, ASTNode.FUNCTION_DECLARATION, node.getNodeType());
 			FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 			assertEquals("Invalid method name", "foo", methodDeclaration.getName().toString());
 			JSdoc methodJavadoc = methodDeclaration.getJavadoc();
@@ -3412,7 +3412,7 @@ public class ASTConverterJavadocTest extends ConverterTestSetup {
 			List unitComments = compilUnit.getCommentList();
 			assertEquals("Wrong number of comments", 1, unitComments.size());
 			Comment comment = (Comment) unitComments.get(0);
-			assertEquals("Comment should be javadoc", comment.getNodeType(), ASTNode.JAVADOC);
+			assertEquals("Comment should be javadoc", comment.getNodeType(), ASTNode.JSDOC);
 		}
 	}
 

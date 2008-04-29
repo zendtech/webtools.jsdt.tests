@@ -784,7 +784,7 @@ public void test052() throws JavaScriptModelException {
 	};
 	completeInJavadoc(sources, true, "meth");
 	assertResults(
-		"method[METHOD_REF]{method(), Ljavadoc.types.tags.OtherTypes;, ()V, method, null, "+this.positions+R_DICNRNS+"}"
+		"method[FUNCTION_REF]{method(), Ljavadoc.types.tags.OtherTypes;, ()V, method, null, "+this.positions+R_DICNRNS+"}"
 	);
 }
 
@@ -806,7 +806,7 @@ public void test053() throws JavaScriptModelException {
 	};
 	completeInJavadoc(sources, true, "meth");
 	assertResults(
-		"method[METHOD_REF]{method(), Ljavadoc.types.tags.OtherTypes;, ()V, method, null, "+this.positions+R_DICNRNS+"}"
+		"method[FUNCTION_REF]{method(), Ljavadoc.types.tags.OtherTypes;, ()V, method, null, "+this.positions+R_DICNRNS+"}"
 	);
 }
 

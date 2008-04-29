@@ -52,7 +52,7 @@ public class JavaLikeExtensionsTests extends ModifyingResourceTests {
 			"bar\n" + 
 			"foo\n" + 
 			"java\n",
-			JavaScriptCore.getJavaLikeExtensions()
+			JavaScriptCore.getJavaScriptLikeExtensions()
 		);
 	}
 
@@ -70,7 +70,7 @@ public class JavaLikeExtensionsTests extends ModifyingResourceTests {
 				"bar\n" + 
 				"foo\n" + 
 				"java\n",
-				JavaScriptCore.getJavaLikeExtensions()
+				JavaScriptCore.getJavaScriptLikeExtensions()
 			);
 		} finally {
 			if (javaContentType != null)
@@ -82,48 +82,48 @@ public class JavaLikeExtensionsTests extends ModifyingResourceTests {
 	 * Ensure that file.foo is a Java-like file name
 	 */
 	public void testIJavaLikeFileName01() {
-		assertTrue("file.foo should be a Java-like file name", JavaScriptCore.isJavaLikeFileName("file.foo"));
+		assertTrue("file.foo should be a Java-like file name", JavaScriptCore.isJavaScriptLikeFileName("file.foo"));
 	}
 
 	/*
 	 * Ensure that file.java is a Java-like file name
 	 */
 	public void testIJavaLikeFileName02() {
-		assertTrue("file.java should be a Java-like file name", JavaScriptCore.isJavaLikeFileName("file.js"));
+		assertTrue("file.java should be a Java-like file name", JavaScriptCore.isJavaScriptLikeFileName("file.js"));
 	}
 
 	/*
 	 * Ensure that file.other is not a Java-like file name
 	 */
 	public void testIJavaLikeFileName03() {
-		assertFalse("file.other should not be a Java-like file name", JavaScriptCore.isJavaLikeFileName("file.other"));
+		assertFalse("file.other should not be a Java-like file name", JavaScriptCore.isJavaScriptLikeFileName("file.other"));
 	}
 
 	/*
 	 * Ensure that file is not a Java-like file name
 	 */
 	public void testIJavaLikeFileName04() {
-		assertFalse("file should not be a Java-like file name", JavaScriptCore.isJavaLikeFileName("file"));
+		assertFalse("file should not be a Java-like file name", JavaScriptCore.isJavaScriptLikeFileName("file"));
 	}
 	
 	/*
 	 * Ensure that removing the Java-like extension for file.foo returns foo
 	 */
 	public void testRemoveJavaLikeExtension01() {
-		assertEquals("Unexpected file without Java-like extension", "file", JavaScriptCore.removeJavaLikeExtension("file.foo"));
+		assertEquals("Unexpected file without Java-like extension", "file", JavaScriptCore.removeJavaScriptLikeExtension("file.foo"));
 	}
 
 	/*
 	 * Ensure that removing the Java-like extension for file.java returns foo
 	 */
 	public void testRemoveJavaLikeExtension02() {
-		assertEquals("Unexpected file without Java-like extension", "file", JavaScriptCore.removeJavaLikeExtension("file.js"));
+		assertEquals("Unexpected file without Java-like extension", "file", JavaScriptCore.removeJavaScriptLikeExtension("file.js"));
 	}
 
 	/*
 	 * Ensure that removing the Java-like extension for file.other returns foo.other
 	 */
 	public void testRemoveJavaLikeExtension03() {
-		assertEquals("Unexpected file without Java-like extension", "file.other", JavaScriptCore.removeJavaLikeExtension("file.other"));
+		assertEquals("Unexpected file without Java-like extension", "file.other", JavaScriptCore.removeJavaScriptLikeExtension("file.other"));
 	}
 }

@@ -137,7 +137,7 @@ public IJavaScriptElement generateHandle(IJavaScriptElement original, String ren
 		case IJavaScriptElement.PACKAGE_FRAGMENT :
 			switch (original.getElementType()) {
 				case IJavaScriptElement.COMPILATION_UNIT :
-					return ((IPackageFragment) container).getCompilationUnit(name);
+					return ((IPackageFragment) container).getJavaScriptUnit(name);
 				default :
 					assertTrue("illegal child type", false);
 					break;
@@ -152,7 +152,7 @@ public IJavaScriptElement generateHandle(IJavaScriptElement original, String ren
 				case IJavaScriptElement.TYPE :
 					if (isMainType(original, container)) {
 						//the cu has been renamed as well
-						container = ((IPackageFragment) container.getParent()).getCompilationUnit(name + ".js");
+						container = ((IPackageFragment) container.getParent()).getJavaScriptUnit(name + ".js");
 					}
 					return ((IJavaScriptUnit) container).getType(name);
 				default :
@@ -165,9 +165,9 @@ public IJavaScriptElement generateHandle(IJavaScriptElement original, String ren
 				case IJavaScriptElement.METHOD :
 					if (name.equals(original.getParent().getElementName())) {
 						//method is a constructor
-						return ((IType) container).getMethod(container.getElementName(), ((IFunction) original).getParameterTypes());
+						return ((IType) container).getFunction(container.getElementName(), ((IFunction) original).getParameterTypes());
 					}
-					return ((IType) container).getMethod(name, ((IFunction) original).getParameterTypes());
+					return ((IType) container).getFunction(name, ((IFunction) original).getParameterTypes());
 				case IJavaScriptElement.FIELD :
 					return ((IType) container).getField(name);
 				case IJavaScriptElement.TYPE :

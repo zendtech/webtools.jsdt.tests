@@ -117,7 +117,7 @@ public abstract class AbstractJavaModelTests extends SuiteOfTestCases {
 		}
 		private JavaScriptUnit getCompilationUnitAST(IJavaScriptUnit workingCopy, IJavaScriptElementDelta delta) {
 			if ((delta.getFlags() & IJavaScriptElementDelta.F_AST_AFFECTED) != 0 && workingCopy.equals(delta.getElement()))
-				return delta.getCompilationUnitAST();
+				return delta.getJavaScriptUnitAST();
 			return null;
 		}
 		protected void sortDeltas(IJavaScriptElementDelta[] elementDeltas) {
@@ -313,7 +313,7 @@ public abstract class AbstractJavaModelTests extends SuiteOfTestCases {
 		);
 	}
 	protected void addLibraryEntry(IJavaScriptProject project, IPath path, IPath srcAttachmentPath, IPath srcAttachmentPathRoot, IPath[] accessibleFiles, IPath[] nonAccessibleFiles, IIncludePathAttribute[] extraAttributes, boolean exported) throws JavaScriptModelException{
-		IIncludePathEntry[] entries = project.getRawClasspath();
+		IIncludePathEntry[] entries = project.getRawIncludepath();
 		int length = entries.length;
 		System.arraycopy(entries, 0, entries = new IIncludePathEntry[length + 1], 0, length);
 		entries[length] = JavaScriptCore.newLibraryEntry(
@@ -323,7 +323,7 @@ public abstract class AbstractJavaModelTests extends SuiteOfTestCases {
 			ClasspathEntry.getAccessRules(accessibleFiles, nonAccessibleFiles), 
 			extraAttributes, 
 			exported);
-		project.setRawClasspath(entries, null);
+		project.setRawIncludepath(entries, null);
 	}
 	protected void assertSortedElementsEqual(String message, String expected, IJavaScriptElement[] elements) {
 		sortElements(elements);
@@ -635,8 +635,8 @@ public abstract class AbstractJavaModelTests extends SuiteOfTestCases {
 	 * Attaches a source zip to the given jar package fragment root.
 	 */
 	protected void attachSource(IPackageFragmentRoot root, String sourcePath, String sourceRoot) throws JavaScriptModelException {
-		IJavaScriptProject javaProject = root.getJavaProject();
-		IIncludePathEntry[] entries = (IIncludePathEntry[])javaProject.getRawClasspath().clone();
+		IJavaScriptProject javaProject = root.getJavaScriptProject();
+		IIncludePathEntry[] entries = (IIncludePathEntry[])javaProject.getRawIncludepath().clone();
 		for (int i = 0; i < entries.length; i++){
 			IIncludePathEntry entry = entries[i];
 			if (entry.getPath().toOSString().toLowerCase().equals(root.getPath().toOSString().toLowerCase())) {
@@ -648,7 +648,7 @@ public abstract class AbstractJavaModelTests extends SuiteOfTestCases {
 				break;
 			}
 		}
-		javaProject.setRawClasspath(entries, null);
+		javaProject.setRawIncludepath(entries, null);
 	}
 	/**
 	 * Creates an operation to delete the given element, asserts
@@ -1170,7 +1170,7 @@ public abstract class AbstractJavaModelTests extends SuiteOfTestCases {
 				entries[entries.length-1] = jreEntry;
 				
 				
-				javaProject.setRawClasspath(entries, projectPath.append(outputPath), null);
+				javaProject.setRawIncludepath(entries, projectPath.append(outputPath), null);
 				
 				// set compliance level options
 				if ("1.5".equals(compliance)) {
@@ -1325,7 +1325,7 @@ public abstract class AbstractJavaModelTests extends SuiteOfTestCases {
 		if (pkg == null) {
 			return null;
 		}
-		return pkg.getCompilationUnit(cuName);
+		return pkg.getJavaScriptUnit(cuName);
 	}
 	/**
 	 * Returns the specified compilation unit in the given project, root, and
@@ -1336,7 +1336,7 @@ public abstract class AbstractJavaModelTests extends SuiteOfTestCases {
 		if (pkg == null) {
 			return null;
 		}
-		return pkg.getCompilationUnits();
+		return pkg.getJavaScriptUnits();
 	}
 	protected IJavaScriptUnit getCompilationUnitFor(IJavaScriptElement element) {
 	
@@ -1345,7 +1345,7 @@ public abstract class AbstractJavaModelTests extends SuiteOfTestCases {
 		}
 	
 		if (element instanceof IMember) {
-			return ((IMember)element).getCompilationUnit();
+			return ((IMember)element).getJavaScriptUnit();
 		}
 	
 		if (element instanceof IPackageDeclaration ||
@@ -1724,7 +1724,7 @@ public abstract class AbstractJavaModelTests extends SuiteOfTestCases {
 		removeLibraryEntry(this.currentProject, path);
 	}
 	protected void removeLibraryEntry(IJavaScriptProject project, Path path) throws JavaScriptModelException {
-		IIncludePathEntry[] entries = project.getRawClasspath();
+		IIncludePathEntry[] entries = project.getRawIncludepath();
 		int length = entries.length;
 		IIncludePathEntry[] newEntries = null;
 		for (int i = 0; i < length; i++) {
@@ -1739,7 +1739,7 @@ public abstract class AbstractJavaModelTests extends SuiteOfTestCases {
 			}	
 		}
 		if (newEntries != null)
-			project.setRawClasspath(newEntries, null);
+			project.setRawIncludepath(newEntries, null);
 	}
 
 	/**
@@ -2031,7 +2031,7 @@ public abstract class AbstractJavaModelTests extends SuiteOfTestCases {
 	 */
 	public void setClasspath(IJavaScriptProject javaProject, IIncludePathEntry[] classpath) {
 		try {
-			javaProject.setRawClasspath(classpath, null);
+			javaProject.setRawIncludepath(classpath, null);
 		} catch (JavaScriptModelException e) {
 			assertTrue("failed to set classpath", false);
 		}
@@ -2148,7 +2148,7 @@ public abstract class AbstractJavaModelTests extends SuiteOfTestCases {
 		javaProject.setOptions(options);
 		
 		// replace JCL_LIB with JCL15_LIB, and JCL_SRC with JCL15_SRC
-		IIncludePathEntry[] classpath = javaProject.getRawClasspath();
+		IIncludePathEntry[] classpath = javaProject.getRawIncludepath();
 		IPath jclLib = new Path(jclLibString);
 		for (int i = 0, length = classpath.length; i < length; i++) {
 			IIncludePathEntry entry = classpath[i];
@@ -2163,21 +2163,21 @@ public abstract class AbstractJavaModelTests extends SuiteOfTestCases {
 				break;
 			}
 		}
-		javaProject.setRawClasspath(classpath, null);
+		javaProject.setRawIncludepath(classpath, null);
 	}
 	public void setUpJCLClasspathVariables(String compliance) throws JavaScriptModelException, IOException {
 		if ("1.5".equals(compliance)) {
-			if (JavaScriptCore.getClasspathVariable("JCL15_LIB") == null) {
+			if (JavaScriptCore.getIncludepathVariable("JCL15_LIB") == null) {
 //				setupExternalJCL("jclMin1.5");
-				JavaScriptCore.setClasspathVariables(
+				JavaScriptCore.setIncludepathVariables(
 					new String[] {"JCL15_LIB", "JCL15_SRC", "JCL_SRCROOT"},
 					new IPath[] {getExternalJCLPath(compliance), getExternalJCLSourcePath(compliance), getExternalJCLRootSourcePath()},
 					null);
 			} 
 		} else {
-			if (JavaScriptCore.getClasspathVariable("JCL_LIB") == null) {
+			if (JavaScriptCore.getIncludepathVariable("JCL_LIB") == null) {
 //				setupExternalJCL("jclMin");
-				JavaScriptCore.setClasspathVariables(
+				JavaScriptCore.setIncludepathVariables(
 					new String[] {"JCL_LIB", "JCL_SRC", "JCL_SRCROOT"},
 					new IPath[] {getExternalJCLPath(), getExternalJCLSourcePath(), getExternalJCLRootSourcePath()},
 					null);

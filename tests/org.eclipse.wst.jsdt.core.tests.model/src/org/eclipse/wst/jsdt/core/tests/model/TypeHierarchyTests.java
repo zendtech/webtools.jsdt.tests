@@ -244,7 +244,7 @@ public void testAnonymousType04() throws JavaScriptModelException {
  */
 public void testAnonymousType05() throws JavaScriptModelException {
 	IType typeA = getCompilationUnit("TypeHierarchy", "src", "p7", "A.js").getType("A");
-	IType type = typeA.getMethod("foo", new String[] {}).getType("", 1);
+	IType type = typeA.getFunction("foo", new String[] {}).getType("", 1);
 	ITypeHierarchy hierarchy = type.newTypeHierarchy(null);
 	assertHierarchyEquals(
 		"Focus: <anonymous #1> [in foo() [in A [in A.java [in p7 [in src [in TypeHierarchy]]]]]]\n" + 
@@ -260,7 +260,7 @@ public void testAnonymousType05() throws JavaScriptModelException {
  */
 public void testAnonymousType06() throws JavaScriptModelException {
 	IType typeA = getCompilationUnit("TypeHierarchy", "src", "p8", "X.js").getType("X");
-	IType type = typeA.getMethod("foo", new String[] {}).getType("", 1);
+	IType type = typeA.getFunction("foo", new String[] {}).getType("", 1);
 	ITypeHierarchy hierarchy = type.newTypeHierarchy(null);
 	assertHierarchyEquals(
 		"Focus: <anonymous #1> [in foo() [in X [in X.java [in p8 [in src [in TypeHierarchy]]]]]]\n" + 
@@ -560,7 +560,7 @@ public void testCancel() throws JavaScriptModelException {
 	try {
 		TestProgressMonitor monitor = TestProgressMonitor.getInstance();
 		monitor.setCancelledCounter(1);
-		type.getJavaProject().newTypeHierarchy(type, region, monitor);
+		type.getJavaScriptProject().newTypeHierarchy(type, region, monitor);
 	} catch (OperationCanceledException e) {
 		isCanceled = true;
 	}
@@ -941,7 +941,7 @@ public void testGetAllSubtypesFromBinary() throws JavaScriptModelException {
 	IType type = getClassFile("TypeHierarchy", "lib.jar", "binary", "X.class").getType();
 	IRegion region = JavaScriptCore.newRegion();
 	region.add(type.getPackageFragment());
-	ITypeHierarchy hierarchy = type.getJavaProject().newTypeHierarchy(type, region, null);
+	ITypeHierarchy hierarchy = type.getJavaScriptProject().newTypeHierarchy(type, region, null);
 	IType[] types = hierarchy.getAllSubtypes(type);
 	assertTypesEqual(
 		"Unexpected all subtypes of binary.X", 
@@ -1221,7 +1221,7 @@ public void testGetSuperclassInRegion() throws JavaScriptModelException {
 	IRegion r = JavaScriptCore.newRegion();
 	IPackageFragment p = getPackageFragment("TypeHierarchy", "src", "p1");
 	r.add(p);
-	ITypeHierarchy hierarchy = p.getJavaProject().newTypeHierarchy(r, null);
+	ITypeHierarchy hierarchy = p.getJavaScriptProject().newTypeHierarchy(r, null);
 
 	IType type = getCompilationUnit("TypeHierarchy", "src", "p1", "Y.js").getType("Y");
 	IType superclass= hierarchy.getSuperclass(type);
@@ -1364,7 +1364,7 @@ public void testLocalType2() throws JavaScriptModelException {
  */
 public void testLocalType3() throws JavaScriptModelException {
 	IType typeA = getCompilationUnit("TypeHierarchy", "src", "p7", "A.js").getType("A");
-	IType type = typeA.getMethod("foo", new String[] {}).getType("Y2", 1);
+	IType type = typeA.getFunction("foo", new String[] {}).getType("Y2", 1);
 	ITypeHierarchy hierarchy = type.newTypeHierarchy(null);
 	assertHierarchyEquals(
 		"Focus: Y2 [in foo() [in A [in A.java [in p7 [in src [in TypeHierarchy]]]]]]\n" + 
@@ -1381,7 +1381,7 @@ public void testLocalType3() throws JavaScriptModelException {
  */
 public void testLocalType4() throws JavaScriptModelException {
 	IType typeA = getCompilationUnit("TypeHierarchy", "src", "p7", "A.js").getType("A");
-	IType type = typeA.getMethod("foo", new String[] {}).getType("Y1", 1);
+	IType type = typeA.getFunction("foo", new String[] {}).getType("Y1", 1);
 	ITypeHierarchy hierarchy = type.newSupertypeHierarchy(null);
 	assertHierarchyEquals(
 		"Focus: Y1 [in foo() [in A [in A.java [in p7 [in src [in TypeHierarchy]]]]]]\n" + 
@@ -1467,7 +1467,7 @@ public void testRegion1() throws JavaScriptModelException {
 	IPackageFragment pkg = getPackageFragment("TypeHierarchy", "src", "q1");
 	IRegion region = JavaScriptCore.newRegion();
 	region.add(pkg);
-	ITypeHierarchy h = pkg.getJavaProject().newTypeHierarchy(region, null);
+	ITypeHierarchy h = pkg.getJavaScriptProject().newTypeHierarchy(region, null);
 	assertTypesEqual(
 		"Unexpected types in hierarchy",
 		"java.lang.Object\n" + 
@@ -1485,7 +1485,7 @@ public void testRegion2() throws JavaScriptModelException {
 	IPackageFragment pkg = getPackageFragment("TypeHierarchy", "src", "q2");
 	IRegion region = JavaScriptCore.newRegion();
 	region.add(pkg);
-	ITypeHierarchy h = pkg.getJavaProject().newTypeHierarchy(region, null);
+	ITypeHierarchy h = pkg.getJavaScriptProject().newTypeHierarchy(region, null);
 	assertTypesEqual(
 		"Unexpected types in hierarchy",
 		"java.lang.Object\n" + 
@@ -1502,7 +1502,7 @@ public void testRegion3() throws JavaScriptModelException {
 	IPackageFragment pkg = getPackageFragment("TypeHierarchy", "src", "p9");
 	IRegion region = JavaScriptCore.newRegion();
 	region.add(pkg);
-	ITypeHierarchy h = pkg.getJavaProject().newTypeHierarchy(region, null);
+	ITypeHierarchy h = pkg.getJavaScriptProject().newTypeHierarchy(region, null);
 	assertTypesEqual(
 		"Unexpected types in hierarchy",
 		"java.lang.Object\n" + 
@@ -1825,13 +1825,13 @@ public void testSupertypeHierarchyOnWorkingCopy() throws JavaScriptModelExceptio
  */
 public void testSuperTypeHierarchyWithMissingBinary() throws JavaScriptModelException {
 	IJavaScriptProject project = getJavaProject("TypeHierarchy");
-	IIncludePathEntry[] originalClasspath = project.getRawClasspath();
+	IIncludePathEntry[] originalClasspath = project.getRawIncludepath();
 	try {
 		int length = originalClasspath.length;
 		IIncludePathEntry[] newClasspath = new IIncludePathEntry[length+1];
 		System.arraycopy(originalClasspath, 0, newClasspath, 0, length);
 		newClasspath[length] = JavaScriptCore.newLibraryEntry(new Path("/TypeHierarchy/test49809.jar"), null, null);
-		project.setRawClasspath(newClasspath, null);
+		project.setRawIncludepath(newClasspath, null);
 		IJavaScriptUnit cu = getCompilationUnit("/TypeHierarchy/src/q3/Z.js");
 		IType type = cu.getType("Z");
 		ITypeHierarchy hierarchy = type.newSupertypeHierarchy(null);
@@ -1843,7 +1843,7 @@ public void testSuperTypeHierarchyWithMissingBinary() throws JavaScriptModelExce
 			hierarchy
 		);
 	} finally {
-		project.setRawClasspath(originalClasspath, null);
+		project.setRawIncludepath(originalClasspath, null);
 	}
 }
 /*

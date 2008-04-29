@@ -107,7 +107,7 @@ public abstract class ASTRewritingModifyingTest extends AbstractJavaModelTests {
 	}
 	
 	public String evaluateRewrite(IJavaScriptUnit cu, JavaScriptUnit astRoot)  throws CoreException, MalformedTreeException, BadLocationException {
-		return evaluateRewrite(cu.getSource(), astRoot, cu.getJavaProject().getOptions(true));
+		return evaluateRewrite(cu.getSource(), astRoot, cu.getJavaScriptProject().getOptions(true));
 	}
 	
 	public String evaluateRewrite(String source, JavaScriptUnit astRoot)  throws MalformedTreeException, BadLocationException {

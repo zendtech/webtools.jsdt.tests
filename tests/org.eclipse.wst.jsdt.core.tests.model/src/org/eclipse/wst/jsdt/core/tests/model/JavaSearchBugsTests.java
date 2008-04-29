@@ -156,7 +156,7 @@ public void testBug41018() throws CoreException {
 		"}\n"
 		);
 	IType type = workingCopies[0].getType("A");
-	IFunction method = type.getMethod("methodA", new String[] { "QClassB.InnerInterface;" });
+	IFunction method = type.getFunction("methodA", new String[] { "QClassB.InnerInterface;" });
 	search(method, REFERENCES);
 	assertSearchResults(
 		"src/b41018/A.java void b41018.A.anotherMethod() [methodA(null)] EXACT_MATCH"
@@ -185,7 +185,7 @@ public void testBug70827() throws CoreException {
 		"}\n"
 		);
 	IType type = workingCopies[0].getType("A");
-	IFunction method = type.getMethod("privateMethod", new String[] {});
+	IFunction method = type.getFunction("privateMethod", new String[] {});
 	search(method, REFERENCES);
 	assertSearchResults(
 		""
@@ -262,7 +262,7 @@ public void testBug72866() throws CoreException {
 		owner,
 		true	);
 	IType type = workingCopies[2].getType("V");
-	IFunction method = type.getMethod("bar", new String[] {"QX;"});
+	IFunction method = type.getFunction("bar", new String[] {"QX;"});
 	search(method, REFERENCES);
 	assertSearchResults(
 		"src/b72866/X.java void b72866.X.foo(V) [bar(this)] EXACT_MATCH"
@@ -564,7 +564,7 @@ public void testBug74776() throws CoreException {
 		true);
 	// search method references
 	IType type = workingCopies[0].getType("A");
-	IFunction method = type.getMethod("foo", new String[] { "QRegion;" });
+	IFunction method = type.getFunction("foo", new String[] { "QRegion;" });
 	search(method, REFERENCES);
 	assertSearchResults("");
 }
@@ -576,7 +576,7 @@ public void testBug74776() throws CoreException {
 public void testBug75816() throws CoreException {
 	IType type = getClassFile("JavaSearchBugs", "lib/test75816.jar", "", "Test.class").getType();
 	IType innerType = type.getType("Inner");
-	IFunction[] methods = innerType.getMethods();
+	IFunction[] methods = innerType.getFunctions();
 	assertEquals("Wrong number of method.", 1, methods.length);
 	search(methods[0], REFERENCES);
 	assertSearchResults(
@@ -614,7 +614,7 @@ private void setUpBug77093() throws CoreException {
 public void testBug77093constructor() throws CoreException {
 	setUpBug77093();
 	IType type = workingCopies[0].getType("X");
-	IFunction method = type.getMethod("X", new String[] {"[[QZ;"});
+	IFunction method = type.getFunction("X", new String[] {"[[QZ;"});
 	// Search for constructor declarations and references
 	search(method, ALL_OCCURRENCES);
 	assertSearchResults(
@@ -638,7 +638,7 @@ public void testBug77093field() throws CoreException {
 public void testBug77093method() throws CoreException {
 	setUpBug77093();
 	IType type = workingCopies[0].getType("X");
-	IFunction method = type.getMethod("foo", new String[] {"[QZ;"});
+	IFunction method = type.getFunction("foo", new String[] {"[QZ;"});
 	search(method, ALL_OCCURRENCES);
 	assertSearchResults(
 		"src/b77093/X.java void b77093.X.foo(Z[]) [foo] EXACT_MATCH\n" +
@@ -661,7 +661,7 @@ public void testBug77388() throws CoreException {
 		"	}\n" + 
 		"}");
 	IType type = workingCopies[0].getType("Test");
-	IFunction method = type.getMethod("Test", new String[] {"I", "I"});
+	IFunction method = type.getFunction("Test", new String[] {"I", "I"});
 	// Search for constructor references
 	search(method, REFERENCES);
 	assertSearchResults(
@@ -766,7 +766,7 @@ public void testBug79378() throws CoreException {
 		"	}\n" + 
 		"}\n"
 	);
-	IFunction[] methods = workingCopies[0].getType("Test").getMethods();
+	IFunction[] methods = workingCopies[0].getType("Test").getFunctions();
 	assertEquals("Invalid number of methods", 3, methods.length);
 	search(methods[0], REFERENCES);
 	assertSearchResults(
@@ -788,7 +788,7 @@ public void testBug79378b() throws CoreException {
 		"	}\n" + 
 		"}\n"
 	);
-	IFunction[] methods = workingCopies[0].getType("Test").getMethods();
+	IFunction[] methods = workingCopies[0].getType("Test").getFunctions();
 	assertEquals("Invalid number of methods", 3, methods.length);
 	search(methods[1], REFERENCES);
 	assertSearchResults("");
@@ -904,7 +904,7 @@ private void setUpBug79990() throws CoreException {
 	);}
 public void testBug79990() throws CoreException {
 	setUpBug79990();
-	IFunction method = workingCopies[0].getType("Test").getMethods()[0];
+	IFunction method = workingCopies[0].getType("Test").getFunctions()[0];
 	search(method, DECLARATIONS);
 	assertSearchResults(
 		"src/b79990/Test.java void b79990.Test.first(Exception) [first] EXACT_MATCH\n" + 
@@ -913,7 +913,7 @@ public void testBug79990() throws CoreException {
 }
 public void testBug79990b() throws CoreException {
 	setUpBug79990();
-	IFunction method = workingCopies[0].getType("Test").getMethods()[1];
+	IFunction method = workingCopies[0].getType("Test").getFunctions()[1];
 	search(method, DECLARATIONS);
 	assertSearchResults(
 		"src/b79990/Test.java void b79990.Test.second(T) [second] EXACT_MATCH\n" + 
@@ -922,7 +922,7 @@ public void testBug79990b() throws CoreException {
 }
 public void testBug79990c() throws CoreException {
 	setUpBug79990();
-	IFunction method = workingCopies[0].getType("Test").getMethods()[1];
+	IFunction method = workingCopies[0].getType("Test").getFunctions()[1];
 	search(method, DECLARATIONS|IGNORE_DECLARING_TYPE|IGNORE_RETURN_TYPE);
 	assertSearchResults(
 		"src/b79990/Test.java void b79990.Test.second(T) [second] EXACT_MATCH\n" + 
@@ -940,7 +940,7 @@ public void testBug79990d() throws CoreException {
 		"	void methodT(X x) {} // overrides Super#methodT(T)\n" + 
 		"}\n"
 	);
-	IFunction method = workingCopies[0].getType("Test").getMethods()[0];
+	IFunction method = workingCopies[0].getType("Test").getFunctions()[0];
 	search(method, DECLARATIONS);
 	assertSearchResults(
 		"src/b79990/Test.java void b79990.Test.methodT(T) [methodT] EXACT_MATCH\n" + 
@@ -966,7 +966,7 @@ public void testBug80084() throws CoreException, JavaScriptModelException {
 		"}\n"
 		);
 	IType type = workingCopies[0].getType("Test");
-	IFunction method = type.getMethod("foo", new String[] { "QList<QException;>;" } );
+	IFunction method = type.getFunction("foo", new String[] { "QList<QException;>;" } );
 	search(method, REFERENCES);
 	assertSearchResults(
 		"src/b80084/Test.java void b80084.Test.bar() [foo(le)] EXACT_MATCH"
@@ -999,7 +999,7 @@ private void setUpBug80194() throws CoreException, JavaScriptModelException {
 public void testBug80194() throws CoreException, JavaScriptModelException {
 	setUpBug80194();
 	IType type = workingCopies[0].getType("Test");
-	IFunction method = type.getMethod("doSomething", new String[] { "QMap<QString;QObject;>;" } );
+	IFunction method = type.getFunction("doSomething", new String[] { "QMap<QString;QObject;>;" } );
 	search(method, REFERENCES);
 	assertSearchResults(
 		"src/b80194/Test.java void b80194.Test.callDoSomething() [doSomething(map)] EXACT_MATCH"
@@ -1008,7 +1008,7 @@ public void testBug80194() throws CoreException, JavaScriptModelException {
 public void testBug80194b() throws CoreException, JavaScriptModelException {
 	setUpBug80194();
 	IType type = workingCopies[0].getType("Test");
-	IFunction method = type.getMethod("doSomething", new String[] { "QMap<QString;QObject;>;", "Z" } );
+	IFunction method = type.getFunction("doSomething", new String[] { "QMap<QString;QObject;>;", "Z" } );
 	search(method, REFERENCES);
 	assertSearchResults(
 		"src/b80194/Test.java void b80194.Test.callDoSomething() [doSomething(map, true)] EXACT_MATCH"
@@ -1064,7 +1064,7 @@ public void testBug80223() throws CoreException {
 		true);
 	// search for method declaration should find only A match
 	IType type = workingCopies[0].getType("A");
-	IFunction method = type.getMethod("m", new String[0]);
+	IFunction method = type.getFunction("m", new String[0]);
 	search(method, DECLARATIONS);
 	assertSearchResults(
 		"src/b80223/a/A.java void b80223.a.A.m() [m] EXACT_MATCH"
@@ -1101,7 +1101,7 @@ private void setUpBug80264_Methods() throws CoreException {
 public void testBug80264_Methods() throws CoreException {
 	setUpBug80264_Methods();
 	IType type = workingCopies[0].getType("Methods");
-	IFunction[] methods = type.getMethods();
+	IFunction[] methods = type.getFunctions();
 	search(methods[0], DECLARATIONS);
 	search(methods[1], DECLARATIONS);
 	assertSearchResults(
@@ -1114,7 +1114,7 @@ public void testBug80264_Methods() throws CoreException {
 public void testBug80264_MethodsIgnoreDeclaringType() throws CoreException, JavaScriptModelException {
 	setUpBug80264_Methods();
 	IType type = workingCopies[0].getType("Methods");
-	IFunction[] methods = type.getMethods();
+	IFunction[] methods = type.getFunctions();
 	search(methods[0], DECLARATIONS|IGNORE_DECLARING_TYPE);
 	search(methods[1], DECLARATIONS|IGNORE_DECLARING_TYPE);
 	assertSearchResults(
@@ -1128,7 +1128,7 @@ public void testBug80264_MethodsIgnoreDeclaringType() throws CoreException, Java
 public void testBug80264_MethodsIgnoreReturnType() throws CoreException, JavaScriptModelException {
 	setUpBug80264_Methods();
 	IType type = workingCopies[0].getType("Methods");
-	IFunction[] methods = type.getMethods();
+	IFunction[] methods = type.getFunctions();
 	search(methods[0], DECLARATIONS|IGNORE_RETURN_TYPE);
 	search(methods[1], DECLARATIONS|IGNORE_RETURN_TYPE);
 	assertSearchResults(
@@ -1141,7 +1141,7 @@ public void testBug80264_MethodsIgnoreReturnType() throws CoreException, JavaScr
 public void testBug80264_MethodsIgnoreBothTypes() throws CoreException, JavaScriptModelException {
 	setUpBug80264_Methods();
 	IType type = workingCopies[0].getType("Methods");
-	IFunction[] methods = type.getMethods();
+	IFunction[] methods = type.getFunctions();
 	search(methods[0], DECLARATIONS|IGNORE_DECLARING_TYPE|IGNORE_RETURN_TYPE);
 	search(methods[1], DECLARATIONS|IGNORE_DECLARING_TYPE|IGNORE_RETURN_TYPE);
 	assertSearchResults(
@@ -1301,9 +1301,9 @@ public void testBug80890() throws CoreException, JavaScriptModelException {
 		);
 	// search for first and second method should both return 2 inaccurate matches
 	IType type = workingCopies[0].getType("A");
-	IFunction method = type.getMethods()[0];
+	IFunction method = type.getFunctions()[0];
 	search(method, REFERENCES);
-	method = type.getMethods()[1];
+	method = type.getFunctions()[1];
 	search(method, REFERENCES);
 	assertSearchResults(
 		"src/b80890/A.java void b80890.B1.bar1() [foo(null)] POTENTIAL_MATCH\n" + 
@@ -1417,7 +1417,7 @@ public void testBug81084b() throws CoreException, JavaScriptModelException {
 public void testBug81556() throws CoreException {
 	IJavaScriptUnit unit = getCompilationUnit("JavaSearchBugs", "src", "b81556.a", "X81556.js");
 	IType type = unit.getType("X81556");
-	IFunction method = type.getMethod("foo", new String[0]);
+	IFunction method = type.getFunction("foo", new String[0]);
 	search(method, REFERENCES);
 	assertSearchResults(
 		"src/b81556/a/A81556.java void b81556.a.A81556.bar(XX81556) [foo()] EXACT_MATCH"
@@ -1576,7 +1576,7 @@ public void testBug82673() throws CoreException {
 		"class X {}\n" + 
 		"class Y {}\n"
 	);
-	IType type = selectType(workingCopies[0], "Test").getMethod("test1", new String[0]).getType("Dummy", 1);
+	IType type = selectType(workingCopies[0], "Test").getFunction("test1", new String[0]).getType("Dummy", 1);
 	search(type, REFERENCES);
 	assertSearchResults(
 		"src/b82673/Test.java void b82673.Test.test1() [Dummy] EXACT_MATCH\n" + 
@@ -1737,7 +1737,7 @@ public void testBug83230_Implicit01() throws CoreException {
 		"}\n"
 	);
 	IType type = selectType(workingCopies[0], "Annot");
-	IFunction method = type.getMethod("value", new String[0]);
+	IFunction method = type.getFunction("value", new String[0]);
 	search(method, REFERENCES);
 	assertSearchResults(
 		"src/b83230/Test.java b83230.Test [41] EXACT_MATCH\n" + 
@@ -1763,7 +1763,7 @@ public void testBug83230_Implicit02() throws CoreException {
 		"}\n"
 	);
 	IType type = selectType(workingCopies[0], "A");
-	IFunction method = type.getMethod("value", new String[0]);
+	IFunction method = type.getFunction("value", new String[0]);
 	search(method, REFERENCES);
 	assertSearchResults(
 		"src/b83230/Test.java A b83230.Main.first() [\"Void\"] EXACT_MATCH\n" + 
@@ -1893,7 +1893,7 @@ public void testBug83304_MethodGenericElementPattern() throws CoreException {
 	resultCollector.showRule = true;
 	setUpBug83304_MethodParameterizedElementPattern();
 	IType type = getClassFile("JavaSearchBugs", "lib/JavaSearch15.jar", "g5.m.def", "Single.class").getType();
-	IFunction method = type.getMethod("generic", new String[] { "TU;" });
+	IFunction method = type.getFunction("generic", new String[] { "TU;" });
 	search(method, REFERENCES, ERASURE_RULE);
 	assertSearchResults(
 		"src/b83304/Methods.java void b83304.Methods.test() [generic(exc)] ERASURE_MATCH\n" + 
@@ -1942,7 +1942,7 @@ public void testBug83304_ConstructorParameterizedElementPattern() throws CoreExc
 	resultCollector.showRule = true;
 	setUpBug83304_ConstructorGenericElementPattern();
 	IType type = getClassFile("JavaSearchBugs", "lib/JavaSearch15.jar", "g5.c.def", "Single.class").getType();
-	IFunction method = type.getMethod("Single", new String[] { "TT;", "TU;" });
+	IFunction method = type.getFunction("Single", new String[] { "TT;", "TU;" });
 	search(method, REFERENCES, ERASURE_RULE);
 	assertSearchResults(
 		"src/b83304/Constructors.java void b83304.Constructors.test() [new <Throwable>Single<String>(\"\", exc)] ERASURE_MATCH\n" + 
@@ -2011,7 +2011,7 @@ public void testBug83804_Type() throws CoreException {
 public void testBug83804_Method() throws CoreException {
 	resultCollector.showInsideDoc = true;
 	setUpBug83804_Type();
-	IFunction[] methods = workingCopies[1].getType("Test").getMethods();
+	IFunction[] methods = workingCopies[1].getType("Test").getFunctions();
 	assertEquals("Invalid number of methods", 1, methods.length);
 	search(methods[0], REFERENCES);
 	assertSearchResults(
@@ -2110,7 +2110,7 @@ public void testBug83693() throws CoreException {
 		"    }\n" + 
 		"}"
 	);
-	IFunction[] methods = workingCopies[0].getType("A").getMethods();
+	IFunction[] methods = workingCopies[0].getType("A").getFunctions();
 	assertEquals("Invalid number of methods", 1, methods.length);
 	search(methods[0], REFERENCES);
 	assertSearchResults(
@@ -2354,7 +2354,7 @@ private void setUpBug84727() throws CoreException {
 public void testBug84727() throws CoreException {
 	resultCollector.showRule = true;
 	setUpBug84727();
-	IFunction[] methods = workingCopies[0].getType("A").getMethods();
+	IFunction[] methods = workingCopies[0].getType("A").getFunctions();
 	assertEquals("Invalid number of methods", 2, methods.length);
 	search(methods[0], REFERENCES);
 	assertSearchResults(
@@ -2364,7 +2364,7 @@ public void testBug84727() throws CoreException {
 public void testBug84727b() throws CoreException {
 	resultCollector.showRule = true;
 	setUpBug84727();
-	IFunction[] methods = workingCopies[0].getType("A").getMethods();
+	IFunction[] methods = workingCopies[0].getType("A").getFunctions();
 	assertEquals("Invalid number of methods", 2, methods.length);
 	search(methods[1], REFERENCES);
 	assertSearchResults(
@@ -2461,7 +2461,7 @@ public void testBug86642() throws CoreException {
  */
 public void testBug86293() throws CoreException {
     IType type = getClassFile("JavaSearchBugs", "lib/b86293.jar", "", "I86293.class").getType();
-	IFunction method = type.getMethod("m86293", new String[0]);
+	IFunction method = type.getFunction("m86293", new String[0]);
 	search(method, DECLARATIONS);
 	assertSearchResults(
 		"lib/b86293.jar void <anonymous>.m86293() EXACT_MATCH\n" + 
@@ -2508,7 +2508,7 @@ public void testBug86380_Method() throws CoreException {
 	resultCollector.showInsideDoc = true;
 	setUpBug86380();
 	IJavaScriptUnit unit = getCompilationUnit("JavaSearchBugs", "src", "b86380", "Annot.js");
-	IFunction[] methods = unit.getType("Annot").getMethods();
+	IFunction[] methods = unit.getType("Annot").getFunctions();
 	assertEquals("Invalid number of methods", 1, methods.length);
 	search(methods[0], REFERENCES);
 	assertSearchResults(
@@ -2558,7 +2558,7 @@ public void testBug88174() throws CoreException {
 		"  int getTheValue() { return 0; }\n" + 
 		"}\n"
 	);
-	IFunction method = workingCopies[0].getType("Test").getMethod("getTheValue", new String[0]);
+	IFunction method = workingCopies[0].getType("Test").getFunction("getTheValue", new String[0]);
 	search(method, DECLARATIONS | IGNORE_DECLARING_TYPE);
 	assertSearchResults(
 		"src/b88174/Test.java int b88174.Test.a:<anonymous>#1.getTheValue() [getTheValue] EXACT_MATCH\n" + 
@@ -2616,7 +2616,7 @@ public void testBug88300() throws CoreException {
 		"}\n"
 	);
 	IType type = workingCopies[0].getType("SubClass");
-	search(type.getMethods()[1], REFERENCES);
+	search(type.getFunctions()[1], REFERENCES);
 	assertSearchResults(
 		"src/b88300/User.java void b88300.User.methodUsingSubClassMethod() [aMethod(new Object())] EXACT_MATCH"
 	);
@@ -2649,7 +2649,7 @@ public void testBug88300b() throws CoreException {
 		"}\n"
 	);
 	IType type = workingCopies[0].getType("SubClass");
-	search(type.getMethods()[0], REFERENCES);
+	search(type.getFunctions()[0], REFERENCES);
 	assertSearchResults(
 		"src/b88300/User.java void b88300.User.methodUsingSubClassMethod() [aMethod(new Object())] EXACT_MATCH"
 	);
@@ -2697,7 +2697,7 @@ public void testBug88300c() throws CoreException {
 		"}\n"
 		);
 	IType type = workingCopies[2].getType("UnconditionalFlowInfo");
-	search(type.getMethods()[2], REFERENCES);
+	search(type.getFunctions()[2], REFERENCES);
 	assertSearchResults(
 		"src/b88300/not/fixed/ConditionalFlowInfo.java void b88300.not.fixed.ConditionalFlowInfo.markAsDefinitelyNull(LocalVariableBinding) [markAsDefinitelyNull(local)] EXACT_MATCH"
 	);
@@ -2718,7 +2718,7 @@ public void testBug89686() throws CoreException {
 		"}"
 	);
 	IType type = workingCopies[0].getType("Color");
-	IFunction method = type.getMethod("Color", new String[0]);
+	IFunction method = type.getFunction("Color", new String[0]);
 	search(method, REFERENCES);
 	assertSearchResults(
 		"src/b89686/A.java b89686.Color.RED [RED] EXACT_MATCH\n" + 
@@ -2736,7 +2736,7 @@ public void testBug89686b() throws CoreException {
 		"}"
 	);
 	IType type = workingCopies[0].getType("Color");
-	IFunction method = type.getMethod("Color", new String[] { "I"} );
+	IFunction method = type.getFunction("Color", new String[] { "I"} );
 	search(method, REFERENCES);
 	assertSearchResults(
 		"src/b89686/A.java b89686.Color.BLUE [BLUE(17)] EXACT_MATCH\n" + 
@@ -2750,7 +2750,7 @@ public void testBug89686b() throws CoreException {
  */
 public void testBug89848() throws CoreException {
 	IType classFile = getClassFile("JavaSearchBugs", "lib", "b89848", "X.class").getType();
-	IFunction method = classFile.getMethod("foo", new String[0]);
+	IFunction method = classFile.getFunction("foo", new String[0]);
 	search(method, ALL_OCCURRENCES);
 	assertSearchResults(
 		"lib/b89848/Test.class void b89848.Test.foo() EXACT_MATCH\n" + 
@@ -2783,7 +2783,7 @@ public void testBug90779() throws CoreException {
 		"}\n"
 	);
 	IType type = workingCopies[0].getType("A");
-	IFunction[] methods = type.getMethods();
+	IFunction[] methods = type.getFunctions();
 	assertEquals("Wrong number of methods", 1, methods.length);
 	search(methods[0], DECLARATIONS | IGNORE_DECLARING_TYPE | IGNORE_RETURN_TYPE);
 	assertSearchResults(
@@ -2811,11 +2811,11 @@ public void testBug90915() throws CoreException {
 		"}\n"
 	);
 	IType type = workingCopies[0].getType("X");
-	IFunction[] methods = type.getMethods();
+	IFunction[] methods = type.getFunctions();
 	assertEquals("Wrong number of methods", 1, methods.length);
 	IType anonymous = methods[0].getType("", 1);
 	assertNotNull("Cannot find anonymous in method foo()", anonymous);
-	methods = anonymous.getMethods();
+	methods = anonymous.getFunctions();
 	assertEquals("Wrong number of methods", 2, methods.length);
 	search(methods[1], REFERENCES);
 	assertSearchResults(
@@ -2843,7 +2843,7 @@ public void testBug91542() throws CoreException {
 		"}"
 	);
 	IType type = workingCopies[0].getType("B");
-	IFunction method = type.getMethod("foo", new String[0]);
+	IFunction method = type.getFunction("foo", new String[0]);
 	searchDeclarationsOfSentMessages(method, this.resultCollector);
 	assertSearchResults(
 		"src/b91542/A.java void b91542.A.a(A<T>) [a(A<T> a)] EXACT_MATCH"
@@ -3190,7 +3190,7 @@ public void testBug93392() throws CoreException {
 		"}\n"
 	);
 	IType type = selectType(workingCopies[0], "Annot");
-	IFunction method = type.getMethod("value", new String[0]);
+	IFunction method = type.getFunction("value", new String[0]);
 	search(method, REFERENCES, getJavaSearchScopeBugs(), collector);
 	assertSearchResults(
 		"src/b93392/Test.java b93392.Test [41] EXACT_MATCH\n" + 
@@ -3262,7 +3262,7 @@ public void testBug94389() throws CoreException {
 		"}\n"
 	);
 	IType type = workingCopies[0].getType("Test");
-	IFunction[] methods = type.getMethods();
+	IFunction[] methods = type.getFunctions();
 	int methodsLength = methods.length;
 
 	// Perform search on each duplicate method
@@ -3320,10 +3320,10 @@ public void testBug94718() throws CoreException {
 public void testBug95152_jar01() throws CoreException {
 	IType type = getPackageFragment("JavaSearchBugs", "lib/b95152.jar", "b95152").getClassFile("T1$T12.class").getType();
 	// search constructor first level member
-	search(type.getMethods()[0], REFERENCES);
+	search(type.getFunctions()[0], REFERENCES);
 	type = getPackageFragment("JavaSearchBugs", "lib/b95152.jar", "b95152").getClassFile("T1$T12$T13.class").getType();
 	// search constructor second level member
-	search(type.getMethods()[0], REFERENCES);
+	search(type.getFunctions()[0], REFERENCES);
 	assertSearchResults(
 		"lib/b95152.jar b95152.T1() EXACT_MATCH\n" + 
 		"lib/b95152.jar b95152.T1() EXACT_MATCH"
@@ -3332,10 +3332,10 @@ public void testBug95152_jar01() throws CoreException {
 public void testBug95152_jar02() throws CoreException {
 	IType type = getPackageFragment("JavaSearchBugs", "lib/b95152.jar", "b95152").getClassFile("T2$T22.class").getType();
 	// search constructor first level member
-	search(type.getMethods()[0], REFERENCES);
+	search(type.getFunctions()[0], REFERENCES);
 	type = getPackageFragment("JavaSearchBugs", "lib/b95152.jar", "b95152").getClassFile("T2$T22$T23.class").getType();
 	// search constructor second level member
-	search(type.getMethods()[0], REFERENCES);
+	search(type.getFunctions()[0], REFERENCES);
 	assertSearchResults(
 		"lib/b95152.jar b95152.T2(int) EXACT_MATCH\n" + 
 		"lib/b95152.jar b95152.T2(int) EXACT_MATCH"
@@ -3344,10 +3344,10 @@ public void testBug95152_jar02() throws CoreException {
 public void testBug95152_jar03() throws CoreException {
 	IType type = getPackageFragment("JavaSearchBugs", "lib/b95152.jar", "b95152").getClassFile("T3$T32.class").getType();
 	// search constructor first level member
-	search(type.getMethods()[0], REFERENCES);
+	search(type.getFunctions()[0], REFERENCES);
 	type = getPackageFragment("JavaSearchBugs", "lib/b95152.jar", "b95152").getClassFile("T3$T32$T33.class").getType();
 	// search constructor second level member
-	search(type.getMethods()[0], REFERENCES);
+	search(type.getFunctions()[0], REFERENCES);
 	assertSearchResults(
 		"lib/b95152.jar b95152.T3(b95152.T3) EXACT_MATCH\n" + 
 		"lib/b95152.jar b95152.T3(b95152.T3) EXACT_MATCH"
@@ -3356,10 +3356,10 @@ public void testBug95152_jar03() throws CoreException {
 public void testBug95152_jar04() throws CoreException {
 	IType type = getPackageFragment("JavaSearchBugs", "lib/b95152.jar", "b95152").getClassFile("T4$T42.class").getType();
 	// search constructor first level member
-	search(type.getMethods()[0], REFERENCES);
+	search(type.getFunctions()[0], REFERENCES);
 	type = getPackageFragment("JavaSearchBugs", "lib/b95152.jar", "b95152").getClassFile("T4$T42$T43.class").getType();
 	// search constructor second level member
-	search(type.getMethods()[0], REFERENCES);
+	search(type.getFunctions()[0], REFERENCES);
 	assertSearchResults(
 		"lib/b95152.jar b95152.T4(b95152.T4, java.lang.String) EXACT_MATCH\n" + 
 		"lib/b95152.jar b95152.T4(b95152.T4, java.lang.String) EXACT_MATCH"
@@ -3386,10 +3386,10 @@ public void testBug95152_wc01() throws CoreException {
 	);
 	// search constructor first level member
 	IType type = workingCopies[0].getType("T").getType("T2");
-	search(type.getMethods()[0], REFERENCES);
+	search(type.getFunctions()[0], REFERENCES);
 	// search constructor second level member
 	type = type.getType("T3");
-	search(type.getMethods()[0], REFERENCES);
+	search(type.getFunctions()[0], REFERENCES);
 	// verify searches results
 	assertSearchResults(
 		"src/b95152/T.java b95152.T() [new T2()] EXACT_MATCH\n" +
@@ -3417,10 +3417,10 @@ public void testBug95152_wc02() throws CoreException {
 	);
 	// search constructor first level member
 	IType type = workingCopies[0].getType("T").getType("T2");
-	search(type.getMethods()[0], REFERENCES);
+	search(type.getFunctions()[0], REFERENCES);
 	// search constructor second level member
 	type = type.getType("T3");
-	search(type.getMethods()[0], REFERENCES);
+	search(type.getFunctions()[0], REFERENCES);
 	// verify searches results
 	assertSearchResults(
 		"src/b95152/T.java b95152.T(int) [new T2(c)] EXACT_MATCH\n" +
@@ -3448,10 +3448,10 @@ public void testBug95152_wc03() throws CoreException {
 	);
 	// search constructor first level member
 	IType type = workingCopies[0].getType("T").getType("T2");
-	search(type.getMethods()[0], REFERENCES);
+	search(type.getFunctions()[0], REFERENCES);
 	// search constructor second level member
 	type = type.getType("T3");
-	search(type.getMethods()[0], REFERENCES);
+	search(type.getFunctions()[0], REFERENCES);
 	// verify searches results
 	assertSearchResults(
 		"src/b95152/T.java b95152.T(T) [new T2(c)] EXACT_MATCH\n" +
@@ -3479,10 +3479,10 @@ public void testBug95152_wc04() throws CoreException {
 	);
 	// search constructor first level member
 	IType type = workingCopies[0].getType("T").getType("T2");
-	search(type.getMethods()[0], REFERENCES);
+	search(type.getFunctions()[0], REFERENCES);
 	// search constructor second level member
 	type = type.getType("T3");
-	search(type.getMethods()[0], REFERENCES);
+	search(type.getFunctions()[0], REFERENCES);
 	// verify searches results
 	assertSearchResults(
 		"src/b95152/T.java b95152.T(T, String) [new T2(c, str)] EXACT_MATCH\n" + 
@@ -3579,7 +3579,7 @@ public void testBug96761() throws CoreException {
 		"}"
 	);
 	IType type = workingCopies[0].getType("Generic");
-	IFunction method= type.getMethods()[0];
+	IFunction method= type.getFunctions()[0];
 	search(method, REFERENCES);
 	assertSearchResults(""); // Expect no result
 }
@@ -3601,7 +3601,7 @@ public void testBug96763() throws CoreException {
 		"    public void second(Exception t) {}\n" + 
 		"}\n"
 	);
-	IFunction method = workingCopies[0].getType("Sub").getMethods()[0];
+	IFunction method = workingCopies[0].getType("Sub").getFunctions()[0];
 	search(method, DECLARATIONS|IGNORE_DECLARING_TYPE|IGNORE_RETURN_TYPE);
 	assertSearchResults(
 		"src/b96763/Test.java void b96763.Test.first(Exception) [first] EXACT_MATCH\n" + 
@@ -3621,7 +3621,7 @@ public void testBug96763b() throws CoreException {
 		"    public void second(Exception t) {}\n" + 
 		"}\n"
 	);
-	IFunction method = workingCopies[0].getType("Sub").getMethods()[1];
+	IFunction method = workingCopies[0].getType("Sub").getFunctions()[1];
 	search(method, DECLARATIONS|IGNORE_DECLARING_TYPE|IGNORE_RETURN_TYPE);
 	assertSearchResults(
 		"src/b96763/Test.java void b96763.Test.second(T) [second] EXACT_MATCH\n" + 
@@ -3639,7 +3639,7 @@ public void testBug96763c() throws CoreException {
 		"	void methodT(X x) {} // overrides Super#methodT(T)\n" + 
 		"}\n"
 	);
-	IFunction method = workingCopies[0].getType("Sub").getMethods()[0];
+	IFunction method = workingCopies[0].getType("Sub").getFunctions()[0];
 	search(method, DECLARATIONS|IGNORE_DECLARING_TYPE|IGNORE_RETURN_TYPE);
 	assertSearchResults(
 		"src/b96763/Test.java void b96763.Test.methodT(T) [methodT] EXACT_MATCH\n" + 
@@ -3667,7 +3667,7 @@ public void testBug97087() throws CoreException {
 		"}"
 	);
 	IType type = workingCopies[0].getType("Bug");
-	IFunction method= type.getMethods()[0];
+	IFunction method= type.getFunctions()[0];
 	search(method, REFERENCES, SearchPattern.R_ERASURE_MATCH);
 	assertSearchResults(
 		"src/b97087/Bug.java b97087.Foo() [Foo] EXACT_MATCH\n" + 
@@ -3718,7 +3718,7 @@ public void testBug97322() throws CoreException {
 		"}"
 	);
 	IType type = workingCopies[0].getType("Test");
-	IFunction method= type.getMethods()[0];
+	IFunction method= type.getFunctions()[0];
 	search(method, REFERENCES);
 	assertSearchResults(""); // Expect no result
 }
@@ -3928,7 +3928,7 @@ public void testBug98378() throws CoreException {
 	);
 	String jclPath = getExternalJCLPathString("1.5");
 	IType type = getClassFile("JavaSearchBugs", jclPath, "java.lang", "CharSequence.class").getType();
-	IFunction method = type.getMethod("length", new String[] {});
+	IFunction method = type.getFunction("length", new String[] {});
 	search(method, DECLARATIONS, SearchEngine.createHierarchyScope(type, this.wcOwner));
 	assertSearchResults(
 		jclPath + " int java.lang.CharSequence.length() EXACT_MATCH\n" + 
@@ -3955,7 +3955,7 @@ public void testBug98378b() throws CoreException {
 	);
 	String jclPath = getExternalJCLPathString("1.5");
 	IType type = getClassFile("JavaSearchBugs", jclPath, "java.lang", "CharSequence.class").getType();
-	IFunction method = type.getMethod("length", new String[] {});
+	IFunction method = type.getFunction("length", new String[] {});
 	search(method, DECLARATIONS|IGNORE_DECLARING_TYPE|IGNORE_RETURN_TYPE, SearchEngine.createHierarchyScope(type, this.wcOwner));
 	assertSearchResults(
 		"src/b98378/X.java int b98378.X.length() [length] EXACT_MATCH\n" + 
@@ -4143,7 +4143,7 @@ public void testBug100695d() throws CoreException {
 		"	  }\n" + 
 		"}\n"
 	);
-	IFunction method = workingCopies[0].getType("Test").getMethods()[0];
+	IFunction method = workingCopies[0].getType("Test").getFunctions()[0];
 	search(method, ALL_OCCURRENCES);
 	assertSearchResults(
 		"src/b100695/Test.java Class<Class>[] b100695.Test.foo(Class<Class>[]) [foo] EXACT_MATCH\n" + 
@@ -4163,7 +4163,7 @@ public void testBug100695e() throws CoreException {
 		"	  }\n" + 
 		"}\n"
 	);
-	IFunction method = workingCopies[0].getType("Test").getMethods()[0];
+	IFunction method = workingCopies[0].getType("Test").getFunctions()[0];
 	search(method, ALL_OCCURRENCES);
 	assertSearchResults(
 		"src/b100695/Test.java Class<Class> b100695.Test.foo(Class<Class>) [foo] EXACT_MATCH\n" + 
@@ -4183,7 +4183,7 @@ public void testBug100695f() throws CoreException {
 		"	  }\n" + 
 		"}\n"
 	);
-	IFunction method = workingCopies[0].getType("Test").getMethods()[0];
+	IFunction method = workingCopies[0].getType("Test").getFunctions()[0];
 	search(method, ALL_OCCURRENCES);
 	assertSearchResults(
 		"src/b100695/Test.java Class[] b100695.Test.foo(Class[]) [foo] EXACT_MATCH\n" + 
@@ -4212,7 +4212,7 @@ private void setUpBug100772_HierarchyScope_ClassAndSubclass() throws CoreExcepti
 public void testBug100772_HierarchyScope_ClassAndSubclass01() throws CoreException {
 	setUpBug100772_HierarchyScope_ClassAndSubclass();
 	IType type = workingCopies[0].getType("Test");
-	IFunction method = type.getMethod("foo", new String[] { "QT;" });
+	IFunction method = type.getFunction("foo", new String[] { "QT;" });
 	search(method, UI_DECLARATIONS, SearchEngine.createHierarchyScope(type));
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.Test.foo(T) [foo] EXACT_MATCH\n" + 
@@ -4222,7 +4222,7 @@ public void testBug100772_HierarchyScope_ClassAndSubclass01() throws CoreExcepti
 public void testBug100772_HierarchyScope_ClassAndSubclass02() throws CoreException {
 	setUpBug100772_HierarchyScope_ClassAndSubclass();
 	IType type = workingCopies[0].getType("Test");
-	IFunction method = type.getMethod("foo", new String[] { "QT;" });
+	IFunction method = type.getFunction("foo", new String[] { "QT;" });
 	search(method, DECLARATIONS, SearchEngine.createHierarchyScope(type));
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.Test.foo(T) [foo] EXACT_MATCH\n" + 
@@ -4232,7 +4232,7 @@ public void testBug100772_HierarchyScope_ClassAndSubclass02() throws CoreExcepti
 public void testBug100772_HierarchyScope_ClassAndSubclass03() throws CoreException {
 	setUpBug100772_HierarchyScope_ClassAndSubclass();
 	IType type = workingCopies[0].getType("Test");
-	IFunction method = type.getMethod("foo", new String[] { "QClass;" });
+	IFunction method = type.getFunction("foo", new String[] { "QClass;" });
 	search(method, UI_DECLARATIONS, SearchEngine.createHierarchyScope(type));
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.Test.foo(Class) [foo] EXACT_MATCH"
@@ -4241,7 +4241,7 @@ public void testBug100772_HierarchyScope_ClassAndSubclass03() throws CoreExcepti
 public void testBug100772_HierarchyScope_ClassAndSubclass04() throws CoreException {
 	setUpBug100772_HierarchyScope_ClassAndSubclass();
 	IType type = workingCopies[0].getType("Sub");
-	IFunction method = type.getMethod("foo", new String[] { "QString;" });
+	IFunction method = type.getFunction("foo", new String[] { "QString;" });
 	search(method, UI_DECLARATIONS, SearchEngine.createHierarchyScope(type));
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.Test.foo(T) [foo] EXACT_MATCH\n" + 
@@ -4251,7 +4251,7 @@ public void testBug100772_HierarchyScope_ClassAndSubclass04() throws CoreExcepti
 public void testBug100772_HierarchyScope_ClassAndSubclass05() throws CoreException {
 	setUpBug100772_HierarchyScope_ClassAndSubclass();
 	IType type = workingCopies[0].getType("Sub");
-	IFunction method = type.getMethod("foo", new String[] { "QException;" });
+	IFunction method = type.getFunction("foo", new String[] { "QException;" });
 	search(method, UI_DECLARATIONS, SearchEngine.createHierarchyScope(type));
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.Sub.foo(Exception) [foo] EXACT_MATCH"
@@ -4279,7 +4279,7 @@ private void setUpBug100772_HierarchyScope_InterfacesAndClass() throws CoreExcep
 public void testBug100772_HierarchyScope_InterfacesAndClass01() throws CoreException {
 	setUpBug100772_HierarchyScope_InterfacesAndClass();
 	IType type = workingCopies[0].getType("Test");
-	IFunction method = type.getMethod("foo", new String[] { "QT;" });
+	IFunction method = type.getFunction("foo", new String[] { "QT;" });
 	search(method, UI_DECLARATIONS, SearchEngine.createHierarchyScope(type));
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.Test.foo(T) [foo] EXACT_MATCH\n" + 
@@ -4290,7 +4290,7 @@ public void testBug100772_HierarchyScope_InterfacesAndClass01() throws CoreExcep
 public void testBug100772_HierarchyScope_InterfacesAndClass02() throws CoreException {
 	setUpBug100772_HierarchyScope_InterfacesAndClass();
 	IType type = workingCopies[0].getType("Test");
-	IFunction method = type.getMethod("foo", new String[] { "QT;" });
+	IFunction method = type.getFunction("foo", new String[] { "QT;" });
 	search(method, DECLARATIONS, SearchEngine.createHierarchyScope(type));
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.Test.foo(T) [foo] EXACT_MATCH\n" + 
@@ -4301,7 +4301,7 @@ public void testBug100772_HierarchyScope_InterfacesAndClass02() throws CoreExcep
 public void testBug100772_HierarchyScope_InterfacesAndClass03() throws CoreException {
 	setUpBug100772_HierarchyScope_InterfacesAndClass();
 	IType type = workingCopies[0].getType("Test");
-	IFunction method = type.getMethod("foo", new String[] { "QClass;" });
+	IFunction method = type.getFunction("foo", new String[] { "QClass;" });
 	search(method, UI_DECLARATIONS, SearchEngine.createHierarchyScope(type));
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.Test.foo(Class) [foo] EXACT_MATCH\n" + 
@@ -4311,7 +4311,7 @@ public void testBug100772_HierarchyScope_InterfacesAndClass03() throws CoreExcep
 public void testBug100772_HierarchyScope_InterfacesAndClass04() throws CoreException {
 	setUpBug100772_HierarchyScope_InterfacesAndClass();
 	IType type = workingCopies[0].getType("Sub");
-	IFunction method = type.getMethod("foo", new String[] { "QString;" });
+	IFunction method = type.getFunction("foo", new String[] { "QString;" });
 	search(method, UI_DECLARATIONS, SearchEngine.createHierarchyScope(type));
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.Test.foo(T) [foo] EXACT_MATCH\n" + 
@@ -4321,7 +4321,7 @@ public void testBug100772_HierarchyScope_InterfacesAndClass04() throws CoreExcep
 public void testBug100772_HierarchyScope_InterfacesAndClass05() throws CoreException {
 	setUpBug100772_HierarchyScope_InterfacesAndClass();
 	IType type = workingCopies[0].getType("Sub");
-	IFunction method = type.getMethod("foo", new String[] { "QException;" });
+	IFunction method = type.getFunction("foo", new String[] { "QException;" });
 	search(method, UI_DECLARATIONS, SearchEngine.createHierarchyScope(type));
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.Sub.foo(Exception) [foo] EXACT_MATCH"
@@ -4330,7 +4330,7 @@ public void testBug100772_HierarchyScope_InterfacesAndClass05() throws CoreExcep
 public void testBug100772_HierarchyScope_InterfacesAndClass06() throws CoreException {
 	setUpBug100772_HierarchyScope_InterfacesAndClass();
 	IType type = workingCopies[0].getType("X");
-	IFunction method = type.getMethod("foo", new String[] { "QString;" });
+	IFunction method = type.getFunction("foo", new String[] { "QString;" });
 	search(method, UI_DECLARATIONS, SearchEngine.createHierarchyScope(type));
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.Test.foo(T) [foo] EXACT_MATCH\n" + 
@@ -4340,7 +4340,7 @@ public void testBug100772_HierarchyScope_InterfacesAndClass06() throws CoreExcep
 public void testBug100772_HierarchyScope_InterfacesAndClass07() throws CoreException {
 	setUpBug100772_HierarchyScope_InterfacesAndClass();
 	IType type = workingCopies[0].getType("X");
-	IFunction method = type.getMethod("foo", new String[] { "QClass;" });
+	IFunction method = type.getFunction("foo", new String[] { "QClass;" });
 	search(method, UI_DECLARATIONS, SearchEngine.createHierarchyScope(type));
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.Test.foo(Class) [foo] EXACT_MATCH\n" + 
@@ -4350,7 +4350,7 @@ public void testBug100772_HierarchyScope_InterfacesAndClass07() throws CoreExcep
 public void testBug100772_HierarchyScope_InterfacesAndClass08() throws CoreException {
 	setUpBug100772_HierarchyScope_InterfacesAndClass();
 	IType type = workingCopies[0].getType("X");
-	IFunction method = type.getMethod("foo", new String[] { "QException;" });
+	IFunction method = type.getFunction("foo", new String[] { "QException;" });
 	search(method, UI_DECLARATIONS, SearchEngine.createHierarchyScope(type));
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.X.foo(Exception) [foo] EXACT_MATCH"
@@ -4386,7 +4386,7 @@ private void setUpBug100772_HierarchyScope_Complex() throws CoreException {
 public void testBug100772_HierarchyScope_Complex01() throws CoreException {
 	setUpBug100772_HierarchyScope_Complex();
 	IType type = workingCopies[0].getType("IX");
-	IFunction method = type.getMethod("foo", new String[] { "QU;" });
+	IFunction method = type.getFunction("foo", new String[] { "QU;" });
 	search(method, DECLARATIONS, SearchEngine.createHierarchyScope(type));
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.X.foo(T) [foo] EXACT_MATCH\n" + 
@@ -4399,7 +4399,7 @@ public void testBug100772_HierarchyScope_Complex01() throws CoreException {
 public void testBug100772_HierarchyScope_Complex02() throws CoreException {
 	setUpBug100772_HierarchyScope_Complex();
 	IType type = workingCopies[0].getType("Z");
-	IFunction method = type.getMethod("foo", new String[] { "QString;" });
+	IFunction method = type.getFunction("foo", new String[] { "QString;" });
 	search(method, UI_DECLARATIONS, SearchEngine.createHierarchyScope(type));
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.IX.foo(U) [foo] EXACT_MATCH\n" + 
@@ -4410,7 +4410,7 @@ public void testBug100772_HierarchyScope_Complex02() throws CoreException {
 public void testBug100772_HierarchyScope_Complex03() throws CoreException {
 	setUpBug100772_HierarchyScope_Complex();
 	IType type = workingCopies[0].getType("Z");
-	IFunction method = type.getMethod("foo", new String[] { "QException;" });
+	IFunction method = type.getFunction("foo", new String[] { "QException;" });
 	search(method, UI_DECLARATIONS, SearchEngine.createHierarchyScope(type));
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.Y.foo(Exception) [foo] EXACT_MATCH\n" + 
@@ -4421,7 +4421,7 @@ public void testBug100772_HierarchyScope_Complex03() throws CoreException {
 public void testBug100772_HierarchyScope_Complex04() throws CoreException {
 	setUpBug100772_HierarchyScope_Complex();
 	IType type = workingCopies[0].getType("X");
-	IFunction method = type.getMethod("foo", new String[] { "QT;" });
+	IFunction method = type.getFunction("foo", new String[] { "QT;" });
 	search(method, UI_DECLARATIONS, SearchEngine.createHierarchyScope(type));
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.X.foo(T) [foo] EXACT_MATCH\n" + 
@@ -4449,7 +4449,7 @@ private void setUpBug100772_ProjectScope_ClassAndSubclass() throws CoreException
 public void testBug100772_ProjectScope_ClassAndSubclass01() throws CoreException {
 	setUpBug100772_ProjectScope_ClassAndSubclass();
 	IType type = workingCopies[0].getType("Test");
-	IFunction method = type.getMethod("foo", new String[] { "QT;" });
+	IFunction method = type.getFunction("foo", new String[] { "QT;" });
 	search(method, UI_DECLARATIONS);
 	assertSearchResults(
 		"src/b100772/Sub.java void b100772.Sub.foo(String) [foo] EXACT_MATCH\n" + 
@@ -4459,7 +4459,7 @@ public void testBug100772_ProjectScope_ClassAndSubclass01() throws CoreException
 public void testBug100772_ProjectScope_ClassAndSubclass02() throws CoreException {
 	setUpBug100772_ProjectScope_ClassAndSubclass();
 	IType type = workingCopies[0].getType("Test");
-	IFunction method = type.getMethod("foo", new String[] { "QT;" });
+	IFunction method = type.getFunction("foo", new String[] { "QT;" });
 	search(method, DECLARATIONS);
 	assertSearchResults(
 		"src/b100772/Sub.java void b100772.Sub.foo(String) [foo] EXACT_MATCH\n" + 
@@ -4469,7 +4469,7 @@ public void testBug100772_ProjectScope_ClassAndSubclass02() throws CoreException
 public void testBug100772_ProjectScope_ClassAndSubclass03() throws CoreException {
 	setUpBug100772_ProjectScope_ClassAndSubclass();
 	IType type = workingCopies[0].getType("Test");
-	IFunction method = type.getMethod("foo", new String[] { "QClass;" });
+	IFunction method = type.getFunction("foo", new String[] { "QClass;" });
 	search(method, UI_DECLARATIONS);
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.Test.foo(Class) [foo] EXACT_MATCH"
@@ -4478,7 +4478,7 @@ public void testBug100772_ProjectScope_ClassAndSubclass03() throws CoreException
 public void testBug100772_ProjectScope_ClassAndSubclass04() throws CoreException {
 	setUpBug100772_ProjectScope_ClassAndSubclass();
 	IType type = workingCopies[1].getType("Sub");
-	IFunction method = type.getMethod("foo", new String[] { "QString;" });
+	IFunction method = type.getFunction("foo", new String[] { "QString;" });
 	search(method, UI_DECLARATIONS);
 	assertSearchResults(
 		"src/b100772/Sub.java void b100772.Sub.foo(String) [foo] EXACT_MATCH\n" + 
@@ -4488,7 +4488,7 @@ public void testBug100772_ProjectScope_ClassAndSubclass04() throws CoreException
 public void testBug100772_ProjectScope_ClassAndSubclass05() throws CoreException {
 	setUpBug100772_ProjectScope_ClassAndSubclass();
 	IType type = workingCopies[1].getType("Sub");
-	IFunction method = type.getMethod("foo", new String[] { "QException;" });
+	IFunction method = type.getFunction("foo", new String[] { "QException;" });
 	search(method, UI_DECLARATIONS);
 	assertSearchResults(
 		"src/b100772/Sub.java void b100772.Sub.foo(Exception) [foo] EXACT_MATCH"
@@ -4522,7 +4522,7 @@ private void setUpBug100772_ProjectScope_InterfacesAndClass() throws CoreExcepti
 public void testBug100772_ProjectScope_InterfacesAndClass01() throws CoreException {
 	setUpBug100772_ProjectScope_InterfacesAndClass();
 	IType type = workingCopies[0].getType("Test");
-	IFunction method = type.getMethod("foo", new String[] { "QT;" });
+	IFunction method = type.getFunction("foo", new String[] { "QT;" });
 	search(method, UI_DECLARATIONS);
 	assertSearchResults(
 		"src/b100772/Sub.java void b100772.Sub.foo(String) [foo] EXACT_MATCH\n" + 
@@ -4533,7 +4533,7 @@ public void testBug100772_ProjectScope_InterfacesAndClass01() throws CoreExcepti
 public void testBug100772_ProjectScope_InterfacesAndClass02() throws CoreException {
 	setUpBug100772_ProjectScope_InterfacesAndClass();
 	IType type = workingCopies[0].getType("Test");
-	IFunction method = type.getMethod("foo", new String[] { "QT;" });
+	IFunction method = type.getFunction("foo", new String[] { "QT;" });
 	search(method, DECLARATIONS);
 	assertSearchResults(
 		"src/b100772/Sub.java void b100772.Sub.foo(String) [foo] EXACT_MATCH\n" + 
@@ -4544,7 +4544,7 @@ public void testBug100772_ProjectScope_InterfacesAndClass02() throws CoreExcepti
 public void testBug100772_ProjectScope_InterfacesAndClass03() throws CoreException {
 	setUpBug100772_ProjectScope_InterfacesAndClass();
 	IType type = workingCopies[0].getType("Test");
-	IFunction method = type.getMethod("foo", new String[] { "QClass;" });
+	IFunction method = type.getFunction("foo", new String[] { "QClass;" });
 	search(method, UI_DECLARATIONS);
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.Test.foo(Class) [foo] EXACT_MATCH\n" + 
@@ -4554,7 +4554,7 @@ public void testBug100772_ProjectScope_InterfacesAndClass03() throws CoreExcepti
 public void testBug100772_ProjectScope_InterfacesAndClass04() throws CoreException {
 	setUpBug100772_ProjectScope_InterfacesAndClass();
 	IType type = workingCopies[1].getType("Sub");
-	IFunction method = type.getMethod("foo", new String[] { "QString;" });
+	IFunction method = type.getFunction("foo", new String[] { "QString;" });
 	search(method, UI_DECLARATIONS);
 	assertSearchResults(
 		"src/b100772/Sub.java void b100772.Sub.foo(String) [foo] EXACT_MATCH\n" + 
@@ -4565,7 +4565,7 @@ public void testBug100772_ProjectScope_InterfacesAndClass04() throws CoreExcepti
 public void testBug100772_ProjectScope_InterfacesAndClass05() throws CoreException {
 	setUpBug100772_ProjectScope_InterfacesAndClass();
 	IType type = workingCopies[1].getType("Sub");
-	IFunction method = type.getMethod("foo", new String[] { "QException;" });
+	IFunction method = type.getFunction("foo", new String[] { "QException;" });
 	search(method, UI_DECLARATIONS);
 	assertSearchResults(
 		"src/b100772/Sub.java void b100772.Sub.foo(Exception) [foo] EXACT_MATCH\n" + 
@@ -4575,7 +4575,7 @@ public void testBug100772_ProjectScope_InterfacesAndClass05() throws CoreExcepti
 public void testBug100772_ProjectScope_InterfacesAndClass06() throws CoreException {
 	setUpBug100772_ProjectScope_InterfacesAndClass();
 	IType type = workingCopies[2].getType("X");
-	IFunction method = type.getMethod("foo", new String[] { "QString;" });
+	IFunction method = type.getFunction("foo", new String[] { "QString;" });
 	search(method, UI_DECLARATIONS);
 	assertSearchResults(
 		"src/b100772/Sub.java void b100772.Sub.foo(String) [foo] EXACT_MATCH\n" + 
@@ -4586,7 +4586,7 @@ public void testBug100772_ProjectScope_InterfacesAndClass06() throws CoreExcepti
 public void testBug100772_ProjectScope_InterfacesAndClass07() throws CoreException {
 	setUpBug100772_ProjectScope_InterfacesAndClass();
 	IType type = workingCopies[2].getType("X");
-	IFunction method = type.getMethod("foo", new String[] { "QClass;" });
+	IFunction method = type.getFunction("foo", new String[] { "QClass;" });
 	search(method, UI_DECLARATIONS);
 	assertSearchResults(
 		"src/b100772/Test.java void b100772.Test.foo(Class) [foo] EXACT_MATCH\n" + 
@@ -4596,7 +4596,7 @@ public void testBug100772_ProjectScope_InterfacesAndClass07() throws CoreExcepti
 public void testBug100772_ProjectScope_InterfacesAndClass08() throws CoreException {
 	setUpBug100772_ProjectScope_InterfacesAndClass();
 	IType type = workingCopies[2].getType("X");
-	IFunction method = type.getMethod("foo", new String[] { "QException;" });
+	IFunction method = type.getFunction("foo", new String[] { "QException;" });
 	search(method, UI_DECLARATIONS);
 	assertSearchResults(
 		"src/b100772/Sub.java void b100772.Sub.foo(Exception) [foo] EXACT_MATCH\n" + 
@@ -4648,7 +4648,7 @@ private void setUpBug100772_ProjectScope_Complex() throws CoreException {
 public void testBug100772_ProjectScope_Complex01() throws CoreException {
 	setUpBug100772_ProjectScope_Complex();
 	IType type = workingCopies[2].getType("IX");
-	IFunction method = type.getMethod("foo", new String[] { "QU;" });
+	IFunction method = type.getFunction("foo", new String[] { "QU;" });
 	search(method, DECLARATIONS);
 	assertSearchResults(
 		"src/b100772/IX.java void b100772.IX.foo(U) [foo] EXACT_MATCH\n" + 
@@ -4661,7 +4661,7 @@ public void testBug100772_ProjectScope_Complex01() throws CoreException {
 public void testBug100772_ProjectScope_Complex02() throws CoreException {
 	setUpBug100772_ProjectScope_Complex();
 	IType type = workingCopies[5].getType("Z");
-	IFunction method = type.getMethod("foo", new String[] { "QString;" });
+	IFunction method = type.getFunction("foo", new String[] { "QString;" });
 	search(method, UI_DECLARATIONS);
 	assertSearchResults(
 		"src/b100772/IX.java void b100772.IX.foo(U) [foo] EXACT_MATCH\n" + 
@@ -4673,7 +4673,7 @@ public void testBug100772_ProjectScope_Complex02() throws CoreException {
 public void testBug100772_ProjectScope_Complex03() throws CoreException {
 	setUpBug100772_ProjectScope_Complex();
 	IType type = workingCopies[5].getType("Z");
-	IFunction method = type.getMethod("foo", new String[] { "QException;" });
+	IFunction method = type.getFunction("foo", new String[] { "QException;" });
 	search(method, UI_DECLARATIONS);
 	assertSearchResults(
 		"src/b100772/IXX.java void b100772.IXX.foo(V) [foo] EXACT_MATCH\n" + 
@@ -4685,7 +4685,7 @@ public void testBug100772_ProjectScope_Complex03() throws CoreException {
 public void testBug100772_ProjectScope_Complex04() throws CoreException {
 	setUpBug100772_ProjectScope_Complex();
 	IType type = workingCopies[0].getType("X");
-	IFunction method = type.getMethod("foo", new String[] { "QT;" });
+	IFunction method = type.getFunction("foo", new String[] { "QT;" });
 	search(method, UI_DECLARATIONS);
 	assertSearchResults(
 		"src/b100772/X.java void b100772.X.foo(T) [foo] EXACT_MATCH\n" + 
@@ -4701,7 +4701,7 @@ public void testBug100772_ProjectScope_Complex04() throws CoreException {
 public void testBug108088() throws CoreException {
 	IJavaScriptUnit unit = getCompilationUnit("JavaSearchBugs", "src", "b108088", "Test108088.js");
 	IType type = unit.getType("A108088");
-	IFunction method = type.getMethod("subroutine", new String[] { "F" });
+	IFunction method = type.getFunction("subroutine", new String[] { "F" });
 	SearchPattern pattern = SearchPattern.createPattern(method, REFERENCES, EXACT_RULE);
 	assertNotNull("Pattern should not be null", pattern);
 	search(pattern, getJavaSearchScopeBugs(), resultCollector);
@@ -5803,7 +5803,7 @@ public void testBug119545() throws CoreException {
 		"}\n"
 	);
 	IType type = workingCopies[0].getType("Test");
-	IFunction method = type.getMethods()[0];
+	IFunction method = type.getFunctions()[0];
 	searchDeclarationsOfSentMessages(method, this.resultCollector);
 	assertSearchResults(
 		""+ getExternalJCLPathString("1.5") + " boolean java.lang.Object.equals(java.lang.Object) EXACT_MATCH"
@@ -6386,7 +6386,7 @@ public void testBug127628() throws CoreException {
  */
 public void testBug128877a() throws CoreException {
 	IType type = getPackageFragment("JavaSearchBugs", "lib/b128877.jar", "pack").getClassFile("Test.class").getType();
-	IFunction method = type.getMethod("Test", new String[0]);
+	IFunction method = type.getFunction("Test", new String[0]);
 	search(method, REFERENCES);
 	assertSearchResults(
 		"lib/b128877.jar pack.X$Sub(pack.X) EXACT_MATCH"
@@ -6394,7 +6394,7 @@ public void testBug128877a() throws CoreException {
 }
 public void testBug128877b() throws CoreException {
 	IType type = getPackageFragment("JavaSearchBugs", "lib/b128877.jar", "pack").getClassFile("Test.class").getType();
-	IFunction method = type.getMethod("Test", new String[] { "Ljava.lang.String;" });
+	IFunction method = type.getFunction("Test", new String[] { "Ljava.lang.String;" });
 	search(method, REFERENCES);
 	assertSearchResults(
 		"lib/b128877.jar pack.X$Sub(pack.X, java.lang.String) EXACT_MATCH"
@@ -6402,7 +6402,7 @@ public void testBug128877b() throws CoreException {
 }
 public void testBug128877c() throws CoreException {
 	IType type = getPackageFragment("JavaSearchBugs", "lib/b128877.jar", "pack").getClassFile("Test.class").getType();
-	IFunction method = type.getMethod("foo128877", new String[] { "I" });
+	IFunction method = type.getFunction("foo128877", new String[] { "I" });
 	search(method, REFERENCES);
 	assertSearchResults(
 		"lib/b128877.jar pack.X$Sub(pack.X) EXACT_MATCH"
@@ -6798,7 +6798,7 @@ public void testBug137984_wc() throws CoreException {
  */
 public void testBug140156() throws CoreException {
 	IType type = getPackageFragment("JavaSearchBugs", "lib/b140156.jar", "").getClassFile("X.class").getType();
-	IFunction method = type.getMethods()[1];
+	IFunction method = type.getFunctions()[1];
 	assertEquals("Search wrong method!!!", "foo", method.getElementName());
 	search(method, DECLARATIONS);
 	assertSearchResults(
@@ -6880,7 +6880,7 @@ public void testBug148215_Types() throws CoreException {
 	addLibraryEntry(JAVA_PROJECT, "/JavaSearchBugs/lib/b148215.jar", false);
 	try {
 		IType type = getClassFile("JavaSearchBugs", "lib/b148215.jar", "test.pack", "Test.class").getType();
-		IFunction method = type.getMethods()[1];
+		IFunction method = type.getFunctions()[1];
 		searchDeclarationsOfReferencedTypes(method, this.resultCollector);
 		assertSearchResults(
 			""+ getExternalJCLPathString("1.5") + " java.lang.Object EXACT_MATCH\n" + 
@@ -6896,7 +6896,7 @@ public void testBug148215_Messages() throws CoreException {
 	addLibraryEntry(JAVA_PROJECT, "/JavaSearchBugs/lib/b148215.jar", false);
 	try {
 		IType type = getClassFile("JavaSearchBugs", "lib/b148215.jar", "test.pack", "Test.class").getType();
-		IFunction method = type.getMethods()[1];
+		IFunction method = type.getFunctions()[1];
 		searchDeclarationsOfSentMessages(method, this.resultCollector);
 		assertSearchResults(
 			"lib/b148215.jar void test.pack.Test.bar(java.lang.String) EXACT_MATCH\n" + 
@@ -6911,7 +6911,7 @@ public void testBug148215_Fields() throws CoreException {
 	addLibraryEntry(JAVA_PROJECT, "/JavaSearchBugs/lib/b148215.jar", false);
 	try {
 		IType type = getClassFile("JavaSearchBugs", "lib/b148215.jar", "test.pack", "Test.class").getType();
-		IFunction method = type.getMethods()[1];
+		IFunction method = type.getFunctions()[1];
 		searchDeclarationsOfAccessedFields(method, this.resultCollector);
 		assertSearchResults(
 			"lib/b148215.jar test.pack.Test.sField EXACT_MATCH\n" + 
@@ -7123,7 +7123,7 @@ public void testBug156491() throws CoreException {
 		"	}\n" + 
 		"}\n"
 	);
-	IFunction method = workingCopies[0].getType("X").getMethod("toString", new String[0]);
+	IFunction method = workingCopies[0].getType("X").getFunction("toString", new String[0]);
 	this.resultCollector.showFlavors = PatternLocator.SUPER_INVOCATION_FLAVOR;
 	search(method, REFERENCES);
 	assertSearchResults(
@@ -7161,7 +7161,7 @@ private void setUpBug156491() throws CoreException {
 public void testBug156491a() throws CoreException {
 	resultCollector.showRule = true;
 	setUpBug156491();
-	IFunction method = workingCopies[0].getType("L2").getMethod("test", new String[0]);
+	IFunction method = workingCopies[0].getType("L2").getFunction("test", new String[0]);
 	this.resultCollector.showFlavors = PatternLocator.SUPER_INVOCATION_FLAVOR;
 	search(method, REFERENCES);
 	assertSearchResults(
@@ -7173,7 +7173,7 @@ public void testBug156491a() throws CoreException {
 public void testBug156491b() throws CoreException {
 	resultCollector.showRule = true;
 	setUpBug156491();
-	IFunction method = workingCopies[0].getType("L1").getMethod("test", new String[0]);
+	IFunction method = workingCopies[0].getType("L1").getFunction("test", new String[0]);
 	this.resultCollector.showFlavors = PatternLocator.SUPER_INVOCATION_FLAVOR;
 	search(method, REFERENCES);
 	assertSearchResults(
@@ -7212,7 +7212,7 @@ public void testBug160301() throws CoreException {
 		"	}\n" + 
 		"}"
 	);
-	IFunction method = workingCopies[0].getType("Test").getType("A").getMethod("foo", new String[0]);
+	IFunction method = workingCopies[0].getType("Test").getType("A").getFunction("foo", new String[0]);
 	search(method, REFERENCES);
 	assertSearchResults(
 		"src/Test.java void Test$A.bar() [foo()] EXACT_MATCH"
@@ -7247,7 +7247,7 @@ public void testBug160301b() throws CoreException {
 		"	\n" + 
 		"}"
 	);
-	IFunction method = workingCopies[0].getType("Test").getType("A").getMethod("foo", new String[0]);
+	IFunction method = workingCopies[0].getType("Test").getType("A").getFunction("foo", new String[0]);
 	search(method, REFERENCES);
 	assertSearchResults(
 		"src/test/Test.java void test.Test.a() [foo()] EXACT_MATCH\n" + 
@@ -7298,7 +7298,7 @@ public void testBug160301_Interface() throws CoreException {
 		"	}\n" + 
 		"}"
 	);
-	IFunction method = workingCopies[0].getType("Test").getType("I").getMethod("foo", new String[0]);
+	IFunction method = workingCopies[0].getType("Test").getType("I").getFunction("foo", new String[0]);
 	search(method, REFERENCES);
 	assertSearchResults(
 		"src/Test.java void Test$A1.a1() [foo()] EXACT_MATCH\n" + 
@@ -7346,7 +7346,7 @@ public void testBug160301_Abstract() throws CoreException {
 		"	}\n" + 
 		"}"
 	);
-	IFunction method = workingCopies[0].getType("Test").getType("Abstract").getMethod("foo", new String[0]);
+	IFunction method = workingCopies[0].getType("Test").getType("Abstract").getFunction("foo", new String[0]);
 	search(method, REFERENCES);
 	assertSearchResults(
 		"src/Test.java void Test$A1.a1() [foo()] EXACT_MATCH\n" + 
@@ -7383,7 +7383,7 @@ public void testBug160301_Abstract2() throws CoreException {
 		"	}\n" + 
 		"}"
 	);
-	IFunction method = workingCopies[0].getType("Test").getType("Abstract").getMethod("foo", new String[0]);
+	IFunction method = workingCopies[0].getType("Test").getType("Abstract").getFunction("foo", new String[0]);
 	search(method, REFERENCES);
 	assertSearchResults(
 		"src/Test.java void Test$A.a() [foo()] EXACT_MATCH\n" + 
@@ -7418,7 +7418,7 @@ public void testBug160301_Abstract3() throws CoreException {
 		"	}\n" + 
 		"}"
 	);
-	IFunction method = workingCopies[0].getType("Test").getType("Abstract").getMethod("foo", new String[0]);
+	IFunction method = workingCopies[0].getType("Test").getType("Abstract").getFunction("foo", new String[0]);
 	search(method, REFERENCES);
 	assertSearchResults(
 		"src/Test.java void Test$A.a() [foo()] EXACT_MATCH"

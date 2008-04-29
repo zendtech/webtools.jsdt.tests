@@ -85,7 +85,13 @@ public class CompletionTests2 extends ModifyingResourceTests implements Relevanc
 				this.areExported = areExported;
 				this.forbiddenReferences = forbiddenReferences;
 			}
+			/**
+			 * @deprecated Use {@link #getIncludepathEntries()} instead
+			 */
 			public IIncludePathEntry[] getClasspathEntries() {
+				return getIncludepathEntries();
+			}
+			public IIncludePathEntry[] getIncludepathEntries() {
 				int length = this.libPaths.length;
 				IIncludePathEntry[] entries = new IIncludePathEntry[length];
 				for (int j = 0; j < length; j++) {
@@ -2251,7 +2257,7 @@ public void testBug33560() throws Exception {
 //		cu.codeComplete(cursorLocation, requestor);
 //		
 //		assertResults(
-//			"foo[METHOD_REF]{foo(), La.XX1;, ()V, foo, "+(R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC) + "}",
+//			"foo[FUNCTION_REF]{foo(), La.XX1;, ()V, foo, "+(R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC) + "}",
 //			requestor.getResults());
 //	} finally {
 //		this.deleteProject("P1");
@@ -2376,8 +2382,8 @@ public void testBug33560() throws Exception {
 //		int cursorLocation = source.lastIndexOf(completeBehind) + completeBehind.length();
 //		unit.codeComplete(cursorLocation, requestor);
 //		assertResults(
-//			"doit2A[METHOD_REF]{doit2A, Lpack.Util;, (II)V, doit2A, "+(R_DEFAULT + R_CASE + R_INTERESTING + R_NON_RESTRICTED + R_NON_STATIC) + "}\n" +
-//			"doit2B[METHOD_REF]{doit2B, Lpack.Util;, (I)V, doit2B, "+(R_DEFAULT + R_CASE + R_INTERESTING + R_NON_RESTRICTED + R_NON_STATIC) + "}",
+//			"doit2A[FUNCTION_REF]{doit2A, Lpack.Util;, (II)V, doit2A, "+(R_DEFAULT + R_CASE + R_INTERESTING + R_NON_RESTRICTED + R_NON_STATIC) + "}\n" +
+//			"doit2B[FUNCTION_REF]{doit2B, Lpack.Util;, (I)V, doit2B, "+(R_DEFAULT + R_CASE + R_INTERESTING + R_NON_RESTRICTED + R_NON_STATIC) + "}",
 //			requestor.getResults());
 //
 //		// change class file to add a third doXXX method and refresh
@@ -2405,9 +2411,9 @@ public void testBug33560() throws Exception {
 //		requestor = new CompletionTestsRequestor2();
 //		unit.codeComplete(cursorLocation, requestor);
 //		assertResults(
-//			"doit2A[METHOD_REF]{doit2A, Lpack.Util;, (II)V, doit2A, "+(R_DEFAULT + R_CASE + R_INTERESTING + R_NON_RESTRICTED + R_NON_STATIC) + "}\n" +
-//			"doit2B[METHOD_REF]{doit2B, Lpack.Util;, (I)V, doit2B, "+(R_DEFAULT + R_CASE + R_INTERESTING + R_NON_RESTRICTED + R_NON_STATIC) + "}\n" +
-//			"doit2C[METHOD_REF]{doit2C, Lpack.Util;, (I)V, doit2C, "+(R_DEFAULT + R_CASE + R_INTERESTING + R_NON_RESTRICTED + R_NON_STATIC) + "}",
+//			"doit2A[FUNCTION_REF]{doit2A, Lpack.Util;, (II)V, doit2A, "+(R_DEFAULT + R_CASE + R_INTERESTING + R_NON_RESTRICTED + R_NON_STATIC) + "}\n" +
+//			"doit2B[FUNCTION_REF]{doit2B, Lpack.Util;, (I)V, doit2B, "+(R_DEFAULT + R_CASE + R_INTERESTING + R_NON_RESTRICTED + R_NON_STATIC) + "}\n" +
+//			"doit2C[FUNCTION_REF]{doit2C, Lpack.Util;, (I)V, doit2C, "+(R_DEFAULT + R_CASE + R_INTERESTING + R_NON_RESTRICTED + R_NON_STATIC) + "}",
 //			requestor.getResults());
 //	} finally {
 //		removeLibraryEntry(this.currentProject, new Path(jarName));

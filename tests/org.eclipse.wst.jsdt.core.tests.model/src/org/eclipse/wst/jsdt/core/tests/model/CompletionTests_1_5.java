@@ -1768,7 +1768,7 @@ public void test0065() throws JavaScriptModelException {
 		this.workingCopies[0].codeComplete(cursorLocation, requestor, this.wcOwner);
 		
 		assertResults(
-				"zzfoozz2[METHOD_REF]{zzfoozz2(), Lpkgstaticimport.QQType7;, ()V, zzfoozz2, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}",
+				"zzfoozz2[FUNCTION_REF]{zzfoozz2(), Lpkgstaticimport.QQType7;, ()V, zzfoozz2, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}",
 				requestor.getResults());
 	} finally {
 		this.discardWorkingCopies(qqTypes);
@@ -1821,9 +1821,9 @@ public void test0066() throws JavaScriptModelException {
 		this.workingCopies[0].codeComplete(cursorLocation, requestor, this.wcOwner);
 		
 		assertResults(
-				"zzfoozz2[METHOD_REF]{zzfoozz2(), Ltest0066.QQType8;, ()V, zzfoozz2, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}\n" +
-				"zzfoozz4[METHOD_REF]{zzfoozz4(), Ltest0066.QQType8;, ()V, zzfoozz4, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}\n" +
-				"zzfoozz8[METHOD_REF]{zzfoozz8(), Ltest0066.QQType8;, ()V, zzfoozz8, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}",
+				"zzfoozz2[FUNCTION_REF]{zzfoozz2(), Ltest0066.QQType8;, ()V, zzfoozz2, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}\n" +
+				"zzfoozz4[FUNCTION_REF]{zzfoozz4(), Ltest0066.QQType8;, ()V, zzfoozz4, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}\n" +
+				"zzfoozz8[FUNCTION_REF]{zzfoozz8(), Ltest0066.QQType8;, ()V, zzfoozz8, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}",
 				requestor.getResults());
 	} finally {
 		this.discardWorkingCopies(qqTypes);
@@ -1853,10 +1853,10 @@ public void test0067() throws JavaScriptModelException {
 		cu.codeComplete(cursorLocation, requestor, this.wcOwner);
 	
 		assertResults(
-				"zzfoozz1[METHOD_REF]{zzfoozz1(), Lpkgstaticimport.QQType7;, ()V, zzfoozz1, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}\n" +
-				"zzfoozz2[METHOD_REF]{zzfoozz2(), Lpkgstaticimport.QQType7;, ()V, zzfoozz2, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}\n" +
-				"zzfoozz3[METHOD_REF]{zzfoozz3(), Lpkgstaticimport.QQType7;, ()V, zzfoozz3, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}\n" +
-				"zzfoozz4[METHOD_REF]{zzfoozz4(), Lpkgstaticimport.QQType7;, ()V, zzfoozz4, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}",
+				"zzfoozz1[FUNCTION_REF]{zzfoozz1(), Lpkgstaticimport.QQType7;, ()V, zzfoozz1, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}\n" +
+				"zzfoozz2[FUNCTION_REF]{zzfoozz2(), Lpkgstaticimport.QQType7;, ()V, zzfoozz2, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}\n" +
+				"zzfoozz3[FUNCTION_REF]{zzfoozz3(), Lpkgstaticimport.QQType7;, ()V, zzfoozz3, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}\n" +
+				"zzfoozz4[FUNCTION_REF]{zzfoozz4(), Lpkgstaticimport.QQType7;, ()V, zzfoozz4, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}",
 				requestor.getResults());
 	} finally {
 		this.discardWorkingCopies(qqTypes);
@@ -1884,7 +1884,7 @@ public void test0068() throws JavaScriptModelException {
 		cu.codeComplete(cursorLocation, requestor, this.wcOwner);
 	
 		assertResults(
-				"zzfoozz2[METHOD_REF]{zzfoozz2(), Lpkgstaticimport.QQType7;, ()V, zzfoozz2, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}",
+				"zzfoozz2[FUNCTION_REF]{zzfoozz2(), Lpkgstaticimport.QQType7;, ()V, zzfoozz2, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}",
 				requestor.getResults());
 	} finally {
 		this.discardWorkingCopies(qqTypes);
@@ -1905,7 +1905,7 @@ public void test0069() throws JavaScriptModelException {
 	cu.codeComplete(cursorLocation, requestor);
 
 	assertResults(
-			"putValue[METHOD_REF]{putValue(), Ltest0069.Test<Ljava.lang.String;>;, (Ljava.lang.String;)V, putValue, (value), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
+			"putValue[FUNCTION_REF]{putValue(), Ltest0069.Test<Ljava.lang.String;>;, (Ljava.lang.String;)V, putValue, (value), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 /*
@@ -2339,8 +2339,8 @@ public void test0084() throws JavaScriptModelException {
 				"foo");
 		
 		assertResults(
-				"foo[METHOD_REF]{foo(), Lpkgstaticimport.MyClass0084;, ()I, foo, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_EXACT_EXPECTED_TYPE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}\n" +
-				"foo[METHOD_REF]{foo(), Lpkgstaticimport.MyClass0084;, (I)I, foo, (i), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_EXACT_EXPECTED_TYPE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}",
+				"foo[FUNCTION_REF]{foo(), Lpkgstaticimport.MyClass0084;, ()I, foo, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_EXACT_EXPECTED_TYPE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}\n" +
+				"foo[FUNCTION_REF]{foo(), Lpkgstaticimport.MyClass0084;, (I)I, foo, (i), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_EXACT_EXPECTED_TYPE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}",
 				result.proposals);
 	} finally {
 		if(imported != null) {
@@ -5956,7 +5956,7 @@ public void test0187() throws JavaScriptModelException {
     
     assertResults(
             "zzz1[FIELD_REF]{zzz1, Ltest0187.ZZClass1<!+TU;>;, [Ltest0187.ZZClass2<!+TU;>;, zzz1, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}\n" +
-            "zzz2[METHOD_REF]{zzz2(), Ltest0187.ZZClass1<!+TU;>;, ()[Ltest0187.ZZClass2<!+TU;>;, zzz2, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + + R_NON_STATIC + R_NON_RESTRICTED) + "}",
+            "zzz2[FUNCTION_REF]{zzz2(), Ltest0187.ZZClass1<!+TU;>;, ()[Ltest0187.ZZClass2<!+TU;>;, zzz2, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + + R_NON_STATIC + R_NON_RESTRICTED) + "}",
             result.proposals);
 }
 // completion test with capture
@@ -6045,7 +6045,7 @@ public void test0190() throws JavaScriptModelException {
     
     assertResults(
             "zzz1[FIELD_REF]{zzz1, Ltest0190.ZZClass1<!+Ljava.lang.Object;>;, [Ltest0190.ZZClass2<!+Ljava.lang.Object;>;, zzz1, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC+ R_NON_RESTRICTED) + "}\n" +
-            "zzz2[METHOD_REF]{zzz2(), Ltest0190.ZZClass1<!+Ljava.lang.Object;>;, ()[Ltest0190.ZZClass2<!+Ljava.lang.Object;>;, zzz2, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + + R_NON_STATIC + R_NON_RESTRICTED) + "}",
+            "zzz2[FUNCTION_REF]{zzz2(), Ltest0190.ZZClass1<!+Ljava.lang.Object;>;, ()[Ltest0190.ZZClass2<!+Ljava.lang.Object;>;, zzz2, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + + R_NON_STATIC + R_NON_RESTRICTED) + "}",
             result.proposals);
 }
 // completion test with capture
@@ -6967,8 +6967,8 @@ public void test0214() throws JavaScriptModelException {
 	
 		assertResults(
 				"foo[POTENTIAL_METHOD_DECLARATION]{foo, Ltest0214.Test<TZ;>;, ()V, foo, null, " + (R_DEFAULT + R_INTERESTING + R_NON_RESTRICTED) + "}\n" +
-				"foo[METHOD_DECLARATION]{public <M extends AClass1> void foo(M p1), Ltest0214.SuperClass<TZ;>;, <M:Ltest0214.AClass1;>(TM;)V, foo, (p1), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}\n" +
-				"foo[METHOD_DECLARATION]{public <M extends AClass2> void foo(M p2), Ltest0214.SuperClass<TZ;>;, <M:Ltest0214.AClass2;>(TM;)V, foo, (p2), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}",
+				"foo[FUNCTION_DECLARATION]{public <M extends AClass1> void foo(M p1), Ltest0214.SuperClass<TZ;>;, <M:Ltest0214.AClass1;>(TM;)V, foo, (p1), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}\n" +
+				"foo[FUNCTION_DECLARATION]{public <M extends AClass2> void foo(M p2), Ltest0214.SuperClass<TZ;>;, <M:Ltest0214.AClass2;>(TM;)V, foo, (p2), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}",
 				result.proposals);
 	} finally {
 		if(paramClass1 != null) {
@@ -7025,7 +7025,7 @@ public void test0215() throws JavaScriptModelException {
 	
 		assertResults(
 				"foo[POTENTIAL_METHOD_DECLARATION]{foo, Ltest0215.Test<TZ;>;, ()V, foo, null, " + (R_DEFAULT + R_INTERESTING + R_NON_RESTRICTED) + "}\n" +
-				"foo[METHOD_DECLARATION]{public <M extends test0215.SuperClass<Z>> test0215.SuperClass<?> foo(test0215.p.ParamClass.MemberParamClass<? super Z> p1, int p2) throws Exception, Ltest0215.SuperClass<TZ;>;, <M:Ltest0215.SuperClass<TZ;>;>(Ltest0215.p.ParamClass$MemberParamClass<-TZ;>;I)Ltest0215.SuperClass<*>;, foo, (p1, p2), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}",
+				"foo[FUNCTION_DECLARATION]{public <M extends test0215.SuperClass<Z>> test0215.SuperClass<?> foo(test0215.p.ParamClass.MemberParamClass<? super Z> p1, int p2) throws Exception, Ltest0215.SuperClass<TZ;>;, <M:Ltest0215.SuperClass<TZ;>;>(Ltest0215.p.ParamClass$MemberParamClass<-TZ;>;I)Ltest0215.SuperClass<*>;, foo, (p1, p2), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}",
 				result.proposals);
 	} finally {
 		if(paramClass != null) {
@@ -7086,8 +7086,8 @@ public void test0216() throws JavaScriptModelException {
 	
 		assertResults(
 				"foo[POTENTIAL_METHOD_DECLARATION]{foo, Ltest0216.Test<TZ;>;, ()V, foo, null, " + (R_DEFAULT + R_INTERESTING + R_NON_RESTRICTED) + "}\n" +
-				"foo[METHOD_DECLARATION]{public void foo(test0216.p.ParamClass p1), Ltest0216.SuperClass<TZ;>;, (Ltest0216.p.ParamClass;)V, foo, (p1), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}\n" +
-				"foo[METHOD_DECLARATION]{public void foo(test0216.q.ParamClass p2), Ltest0216.SuperClass<TZ;>;, (Ltest0216.q.ParamClass;)V, foo, (p2), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}",
+				"foo[FUNCTION_DECLARATION]{public void foo(test0216.p.ParamClass p1), Ltest0216.SuperClass<TZ;>;, (Ltest0216.p.ParamClass;)V, foo, (p1), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}\n" +
+				"foo[FUNCTION_DECLARATION]{public void foo(test0216.q.ParamClass p2), Ltest0216.SuperClass<TZ;>;, (Ltest0216.q.ParamClass;)V, foo, (p2), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}",
 				result.proposals);
 	} finally {
 		if(paramClass1 != null) {
@@ -7689,7 +7689,7 @@ public void test0236() throws JavaScriptModelException {
             result.context);
 
 	assertResults(
-			"Test[METHOD_REF<CONSTRUCTOR>]{, Ltest0236.Test<Ljava.lang.String;>;, ()V, Test, null, " + (R_DEFAULT + R_INTERESTING + R_NON_RESTRICTED) + "}\n" +
+			"Test[FUNCTION_REF<CONSTRUCTOR>]{, Ltest0236.Test<Ljava.lang.String;>;, ()V, Test, null, " + (R_DEFAULT + R_INTERESTING + R_NON_RESTRICTED) + "}\n" +
 			"Test<java.lang.String>[ANONYMOUS_CLASS_DECLARATION]{, Ltest0236.Test<Ljava.lang.String;>;, ()V, null, null, " + (R_DEFAULT + R_INTERESTING + R_NON_RESTRICTED) + "}",
 			result.proposals);
 }
@@ -7834,7 +7834,7 @@ public void test0242() throws JavaScriptModelException {
 			"foo(new Object() {}).b");
 
 		assertResults(
-			"bar[METHOD_REF]{bar(), Ltest0243.Y<LObject;>;, ()LObject;, bar, null, 29}", 
+			"bar[FUNCTION_REF]{bar(), Ltest0243.Y<LObject;>;, ()LObject;, bar, null, 29}", 
 			result.proposals);
 }
 // https://bugs.eclipse.org/bugs/show_bug.cgi?id=100009
@@ -7850,8 +7850,8 @@ public void test0244() throws JavaScriptModelException {
 
 		assertResults(
 			"foo[POTENTIAL_METHOD_DECLARATION]{foo, Ltest0244.X;, ()V, foo, null, " + (R_DEFAULT + R_INTERESTING + R_NON_RESTRICTED) + "}\n" +
-			"foo[METHOD_DECLARATION]{public Object foo(Object t), Lgenerics.ZAGenericType;, (Ljava.lang.Object;)Ljava.lang.Object;, foo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}\n" +
-			"foo[METHOD_DECLARATION]{public Object foo(ZAGenericType var), Lgenerics.ZAGenericType;, (Lgenerics.ZAGenericType;)Ljava.lang.Object;, foo, (var), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}",
+			"foo[FUNCTION_DECLARATION]{public Object foo(Object t), Lgenerics.ZAGenericType;, (Ljava.lang.Object;)Ljava.lang.Object;, foo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}\n" +
+			"foo[FUNCTION_DECLARATION]{public Object foo(ZAGenericType var), Lgenerics.ZAGenericType;, (Lgenerics.ZAGenericType;)Ljava.lang.Object;, foo, (var), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}",
 			result.proposals);
 }
 // https://bugs.eclipse.org/bugs/show_bug.cgi?id=101456
@@ -7909,7 +7909,7 @@ public void test0247() throws JavaScriptModelException {
 			"Type<String, String> (");
 
 		assertResults(
-			"Type[METHOD_REF<CONSTRUCTOR>]{, LType<Ljava.lang.String;Ljava.lang.String;>;, ()V, Type, null, " + (R_DEFAULT + R_INTERESTING + R_NON_RESTRICTED) + "}\n" +
+			"Type[FUNCTION_REF<CONSTRUCTOR>]{, LType<Ljava.lang.String;Ljava.lang.String;>;, ()V, Type, null, " + (R_DEFAULT + R_INTERESTING + R_NON_RESTRICTED) + "}\n" +
 			"Type<java.lang.String,java.lang.String>[ANONYMOUS_CLASS_DECLARATION]{, LType<Ljava.lang.String;Ljava.lang.String;>;, ()V, null, null, " + (R_DEFAULT + R_INTERESTING + R_NON_RESTRICTED) + "}",
 			result.proposals);
 }
@@ -7947,8 +7947,8 @@ public void test0248() throws JavaScriptModelException {
 		this.workingCopies[0].codeComplete(cursorLocation, requestor, this.wcOwner);
 	
 		assertResults(
-				"oneTwoThree[METHOD_REF]{oneTwoThree(), Lcamelcase.ImportedType;, ()V, oneTwoThree, null, " + (R_DEFAULT + R_INTERESTING + R_CAMEL_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}\n" +
-				"oTTMethod[METHOD_REF]{oTTMethod(), Lcamelcase.ImportedType;, ()V, oTTMethod, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}",
+				"oneTwoThree[FUNCTION_REF]{oneTwoThree(), Lcamelcase.ImportedType;, ()V, oneTwoThree, null, " + (R_DEFAULT + R_INTERESTING + R_CAMEL_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}\n" +
+				"oTTMethod[FUNCTION_REF]{oTTMethod(), Lcamelcase.ImportedType;, ()V, oTTMethod, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED) + "}",
 				requestor.getResults());
 	} finally {
 		JavaScriptCore.setOptions(oldOptions);
@@ -8099,7 +8099,7 @@ public void test0261() throws JavaScriptModelException {
 
 	assertResults(
 			"zzfield[FIELD_REF]{zzfield, Ltest.SuperClass;, I, zzfield, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}\n" +
-			"zzmethod[METHOD_REF]{zzmethod(), Ltest.SuperClass;, ()V, zzmethod, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
+			"zzmethod[FUNCTION_REF]{zzmethod(), Ltest.SuperClass;, ()V, zzmethod, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=113945
@@ -8130,7 +8130,7 @@ public void test0262() throws JavaScriptModelException {
 
 	assertResults(
 			"zzfield[FIELD_REF]{zzfield, Ltest.SuperInterface;, I, zzfield, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_RESTRICTED) + "}\n" +
-			"zzmethod[METHOD_REF]{zzmethod(), Ltest.SuperInterface;, ()V, zzmethod, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
+			"zzmethod[FUNCTION_REF]{zzmethod(), Ltest.SuperInterface;, ()V, zzmethod, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 
@@ -8171,8 +8171,8 @@ public void test0263() throws JavaScriptModelException {
 	assertResults(
 			"zzfield2[FIELD_REF]{zzfield2, Ltest.SuperInterface;, I, zzfield2, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_RESTRICTED) + "}\n" +
 			"zzfield[FIELD_REF]{zzfield, Ltest.SuperClass;, I, zzfield, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}\n" +
-			"zzmethod[METHOD_REF]{zzmethod(), Ltest.SuperClass;, ()V, zzmethod, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}\n" +
-			"zzmethod2[METHOD_REF]{zzmethod2(), Ltest.SuperInterface;, ()V, zzmethod2, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
+			"zzmethod[FUNCTION_REF]{zzmethod(), Ltest.SuperClass;, ()V, zzmethod, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}\n" +
+			"zzmethod2[FUNCTION_REF]{zzmethod2(), Ltest.SuperInterface;, ()V, zzmethod2, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=120522
@@ -8266,7 +8266,7 @@ public void test0266() throws JavaScriptModelException {
 
 	assertResults(
 			"foo[POTENTIAL_METHOD_DECLARATION]{foo, Ltest.Test<TT;TU;TTU;>;, ()V, foo, null, " + (R_DEFAULT + R_INTERESTING + R_NON_RESTRICTED) + "}\n" +
-			"foo[METHOD_DECLARATION]{public <V, W, TU2> V foo(test.SuperTest<V> t, test.SuperTest<W> u, test.SuperTest<TU2> tu, test.SuperTest<T> e), " +
+			"foo[FUNCTION_DECLARATION]{public <V, W, TU2> V foo(test.SuperTest<V> t, test.SuperTest<W> u, test.SuperTest<TU2> tu, test.SuperTest<T> e), " +
 				"Ltest.SuperTest<TT;>;, <V:Ljava.lang.Object;W:Ljava.lang.Object;TU2:Ljava.lang.Object;>(Ltest.SuperTest<TV;>;Ltest.SuperTest<TW;>;" +
 				"Ltest.SuperTest<TTU2;>;Ltest.SuperTest<TT;>;)TV;, foo, (t, u, tu, e), " +
 				(R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}",
@@ -8299,7 +8299,7 @@ public void test0267() throws JavaScriptModelException {
 
 	assertResults(
 			"foo[POTENTIAL_METHOD_DECLARATION]{foo, Ltest.Test<TT;TU;TTU;>;, ()V, foo, null, " + (R_DEFAULT + R_INTERESTING + R_NON_RESTRICTED) + "}\n" +
-			"foo[METHOD_DECLARATION]{public Object foo(SuperTest t, SuperTest u, SuperTest tu, SuperTest e), Ltest.SuperTest;, (Ltest.SuperTest;" +
+			"foo[FUNCTION_DECLARATION]{public Object foo(SuperTest t, SuperTest u, SuperTest tu, SuperTest e), Ltest.SuperTest;, (Ltest.SuperTest;" +
 				"Ltest.SuperTest;Ltest.SuperTest;Ltest.SuperTest;)Ljava.lang.Object;, foo, (t, u, tu, e), " +
 				(R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
@@ -8330,7 +8330,7 @@ public void test0268() throws JavaScriptModelException {
 
 	assertResults(
 			"foo[POTENTIAL_METHOD_DECLARATION]{foo, Ltest.Test<TT;TU;TTU;>;, ()V, foo, null, " + (R_DEFAULT + R_INTERESTING + R_NON_RESTRICTED) + "}\n" +
-			"foo[METHOD_DECLARATION]{public <V, W, TU2> V foo(V t, W u, TU2 tu), Ltest.SuperTest;, <V:Ljava.lang.Object;W:Ljava.lang.Object;TU2:Ljava.lang.Object;>(TV;TW;TTU2;)TV;, foo, (t, u, tu), " +
+			"foo[FUNCTION_DECLARATION]{public <V, W, TU2> V foo(V t, W u, TU2 tu), Ltest.SuperTest;, <V:Ljava.lang.Object;W:Ljava.lang.Object;TU2:Ljava.lang.Object;>(TV;TW;TTU2;)TV;, foo, (t, u, tu), " +
 				(R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
@@ -8360,7 +8360,7 @@ public void test0269() throws JavaScriptModelException {
 
 	assertResults(
 			"foo[POTENTIAL_METHOD_DECLARATION]{foo, Ltest.Test;, ()V, foo, null, " + (R_DEFAULT + R_INTERESTING + R_NON_RESTRICTED) + "}\n" +
-			"foo[METHOD_DECLARATION]{public <T> void foo(), Ltest.SuperTest;, <T:Ljava.lang.Object;>()V, foo, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}",
+			"foo[FUNCTION_DECLARATION]{public <T> void foo(), Ltest.SuperTest;, <T:Ljava.lang.Object;>()V, foo, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_METHOD_OVERIDE + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 public void test0270() throws JavaScriptModelException {
@@ -8423,7 +8423,7 @@ public void test0271() throws JavaScriptModelException {
 	this.workingCopies[0].codeComplete(cursorLocation, requestor, this.wcOwner);
 
 	assertResults(
-			"zzz2[METHOD_REF]{zzz2(), Ltest.TestCollections;, (Ljava.lang.Object;)V, zzz2, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_INHERITED + R_NON_RESTRICTED) + "}",
+			"zzz2[FUNCTION_REF]{zzz2(), Ltest.TestCollections;, (Ljava.lang.Object;)V, zzz2, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_INHERITED + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 // https://bugs.eclipse.org/bugs/show_bug.cgi?id=106450
@@ -8454,8 +8454,8 @@ public void test0272() throws JavaScriptModelException {
 	this.workingCopies[0].codeComplete(cursorLocation, requestor, this.wcOwner);
 
 	assertResults(
-			"zzz2[METHOD_REF]{zzz2(), Ltest.TestCollections;, (Ljava.lang.Object;)V, zzz2, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_RESTRICTED) + "}\n" +
-			"zzz1[METHOD_REF]{zzz1(), Ltest.TestCollections;, (Ljava.lang.Object;)V, zzz1, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
+			"zzz2[FUNCTION_REF]{zzz2(), Ltest.TestCollections;, (Ljava.lang.Object;)V, zzz2, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_RESTRICTED) + "}\n" +
+			"zzz1[FUNCTION_REF]{zzz1(), Ltest.TestCollections;, (Ljava.lang.Object;)V, zzz1, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 // https://bugs.eclipse.org/bugs/show_bug.cgi?id=106450
@@ -8489,8 +8489,8 @@ public void test0273() throws JavaScriptModelException {
 	this.workingCopies[0].codeComplete(cursorLocation, requestor, this.wcOwner);
 
 	assertResults(
-			"zzz2[METHOD_REF]{zzz2(), Ltest.TestCollections;, (Ljava.lang.Object;)V, zzz2, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_RESTRICTED) + "}\n" +
-			"zzz1[METHOD_REF]{zzz1(), Ltest.TestCollections;, (Ljava.lang.Object;)V, zzz1, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
+			"zzz2[FUNCTION_REF]{zzz2(), Ltest.TestCollections;, (Ljava.lang.Object;)V, zzz2, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_RESTRICTED) + "}\n" +
+			"zzz1[FUNCTION_REF]{zzz1(), Ltest.TestCollections;, (Ljava.lang.Object;)V, zzz1, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 // https://bugs.eclipse.org/bugs/show_bug.cgi?id=106450
@@ -8642,7 +8642,7 @@ public void test0278() throws JavaScriptModelException {
 	this.workingCopies[0].codeComplete(cursorLocation, requestor, this.wcOwner);
 
 	assertResults(
-			"zzz2[METHOD_REF]{zzz2(), Ltest.Test;, (Ljava.lang.Object;)V, zzz2, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_INHERITED + R_NON_RESTRICTED) + "}",
+			"zzz2[FUNCTION_REF]{zzz2(), Ltest.Test;, (Ljava.lang.Object;)V, zzz2, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_INHERITED + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 // https://bugs.eclipse.org/bugs/show_bug.cgi?id=106450
@@ -8673,7 +8673,7 @@ public void test0279() throws JavaScriptModelException {
 	this.workingCopies[0].codeComplete(cursorLocation, requestor, this.wcOwner);
 
 	assertResults(
-			"zzz2[METHOD_REF]{zzz2(), Ltest.TestCollections;, (Ljava.lang.Object;)V, zzz2, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_INHERITED + R_NON_RESTRICTED) + "}",
+			"zzz2[FUNCTION_REF]{zzz2(), Ltest.TestCollections;, (Ljava.lang.Object;)V, zzz2, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_INHERITED + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 // https://bugs.eclipse.org/bugs/show_bug.cgi?id=106450
@@ -8735,7 +8735,7 @@ public void test0281() throws JavaScriptModelException {
 	this.workingCopies[0].codeComplete(cursorLocation, requestor, this.wcOwner);
 
 	assertResults(
-			"zzz2[METHOD_REF]{zzz2(), Ltest.TestCollections;, <T:Ljava.lang.Object;>(TT;)V, zzz2, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_INHERITED + R_NON_RESTRICTED) + "}",
+			"zzz2[FUNCTION_REF]{zzz2(), Ltest.TestCollections;, <T:Ljava.lang.Object;>(TT;)V, zzz2, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_INHERITED + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 // https://bugs.eclipse.org/bugs/show_bug.cgi?id=106450
@@ -8816,7 +8816,7 @@ public void test0284() throws JavaScriptModelException {
 	this.workingCopies[0].codeComplete(cursorLocation, requestor, this.wcOwner);
 
 	assertResults(
-			"zzz2[METHOD_REF]{zzz2(), Ltest.Test;, (Ljava.lang.Object;)V, zzz2, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_INHERITED + R_NON_RESTRICTED) + "}",
+			"zzz2[FUNCTION_REF]{zzz2(), Ltest.Test;, (Ljava.lang.Object;)V, zzz2, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_INHERITED + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 // https://bugs.eclipse.org/bugs/show_bug.cgi?id=133491
@@ -8892,7 +8892,7 @@ public void test0286() throws JavaScriptModelException {
 	this.workingCopies[0].codeComplete(cursorLocation, requestor, this.wcOwner);
 
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.Test2<Ljava.lang.Object;>;, <T:Ljava.lang.Object;>([TT;)[TT;, foo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
+			"foo[FUNCTION_REF]{foo(), Ltest.Test2<Ljava.lang.Object;>;, <T:Ljava.lang.Object;>([TT;)[TT;, foo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 // https://bugs.eclipse.org/bugs/show_bug.cgi?id=95829
@@ -8928,7 +8928,7 @@ public void test0287() throws JavaScriptModelException {
 
 	assertResults(
 			"fo[POTENTIAL_METHOD_DECLARATION]{fo, Ltest.Test;, ()V, fo, null, " + (R_DEFAULT + R_INTERESTING + R_NON_RESTRICTED) + "}\n" +
-			"foo[METHOD_DECLARATION]{public <T> T[] foo(T[] t), Ltest.Test2<Ljava.lang.Object;>;, <T:Ljava.lang.Object;>([TT;)[TT;, foo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_METHOD_OVERIDE + R_ABSTRACT_METHOD + R_NON_RESTRICTED) + "}",
+			"foo[FUNCTION_DECLARATION]{public <T> T[] foo(T[] t), Ltest.Test2<Ljava.lang.Object;>;, <T:Ljava.lang.Object;>([TT;)[TT;, foo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_METHOD_OVERIDE + R_ABSTRACT_METHOD + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 // https://bugs.eclipse.org/bugs/show_bug.cgi?id=97085
@@ -9055,7 +9055,7 @@ public void test0291() throws JavaScriptModelException {
 	this.workingCopies[0].codeComplete(cursorLocation, requestor, this.wcOwner);
 
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.Test2<Ltest.Test4;>;, (Ltest.Test3;)V, foo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_NON_STATIC + R_NON_RESTRICTED) + "}",
+			"foo[FUNCTION_REF]{foo(), Ltest.Test2<Ltest.Test4;>;, (Ltest.Test3;)V, foo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_NON_STATIC + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=123225
@@ -9110,8 +9110,8 @@ public void test0292() throws JavaScriptModelException {
 	this.workingCopies[0].codeComplete(cursorLocation, requestor, this.wcOwner);
 
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.Test2<Ltest.Test4;>;, (Ltest.Test3;)V, foo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_NON_STATIC + R_NON_RESTRICTED) + "}\n" +
-			"foo[METHOD_REF]{foo(), Ltest.Test5;, (Ltest.Test4;)V, foo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_NON_STATIC + R_NON_RESTRICTED) + "}",
+			"foo[FUNCTION_REF]{foo(), Ltest.Test2<Ltest.Test4;>;, (Ltest.Test3;)V, foo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_NON_STATIC + R_NON_RESTRICTED) + "}\n" +
+			"foo[FUNCTION_REF]{foo(), Ltest.Test5;, (Ltest.Test4;)V, foo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_NON_STATIC + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=123225
@@ -9160,8 +9160,8 @@ public void test0293() throws JavaScriptModelException {
 	this.workingCopies[0].codeComplete(cursorLocation, requestor, this.wcOwner);
 
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.Test2<Ltest.Test4;>;, (Ltest.Test3;)V, foo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED + R_NON_RESTRICTED) + "}\n" +
-			"foo[METHOD_REF]{foo(), Ltest.Test;, (Ltest.Test4;)V, foo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED + R_NON_RESTRICTED) + "}",
+			"foo[FUNCTION_REF]{foo(), Ltest.Test2<Ltest.Test4;>;, (Ltest.Test3;)V, foo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED + R_NON_RESTRICTED) + "}\n" +
+			"foo[FUNCTION_REF]{foo(), Ltest.Test;, (Ltest.Test4;)V, foo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=161557
@@ -9250,7 +9250,7 @@ public void test0295() throws JavaScriptModelException {
 	this.workingCopies[0].codeComplete(cursorLocation, requestor, this.wcOwner);
 
 	assertResults(
-			"compareTo[METHOD_REF]{compareTo, Ltest.ComparableTest<!*>;, (!*)I, compareTo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
+			"compareTo[FUNCTION_REF]{compareTo, Ltest.ComparableTest<!*>;, (!*)I, compareTo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=99928
@@ -9305,7 +9305,7 @@ public void test0296() throws JavaScriptModelException {
 	this.workingCopies[0].codeComplete(cursorLocation, requestor, this.wcOwner);
 
 	assertResults(
-			"compareTo[METHOD_REF]{compareTo(), Ltest.ComparableTest<!*>;, (!*)I, compareTo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
+			"compareTo[FUNCTION_REF]{compareTo(), Ltest.ComparableTest<!*>;, (!*)I, compareTo, (t), " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=154993
@@ -9362,7 +9362,7 @@ public void test0298() throws JavaScriptModelException {
 	this.workingCopies[0].codeComplete(cursorLocation, requestor, this.wcOwner);
 
 	assertResults(
-			"clone[METHOD_REF]{clone(), [Ltest.ZZZ;, ()[Ltest.ZZZ;, clone, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
+			"clone[FUNCTION_REF]{clone(), [Ltest.ZZZ;, ()[Ltest.ZZZ;, clone, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=164792
@@ -9390,7 +9390,7 @@ public void test0299() throws JavaScriptModelException {
 	this.workingCopies[0].codeComplete(cursorLocation, requestor, this.wcOwner);
 
 	assertResults(
-			"clone[METHOD_REF]{clone(), Ljava.lang.Object;, ()Ljava.lang.Object;, clone, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
+			"clone[FUNCTION_REF]{clone(), Ljava.lang.Object;, ()Ljava.lang.Object;, clone, null, " + (R_DEFAULT + R_INTERESTING + R_CASE + R_NON_STATIC + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=157584
@@ -9541,7 +9541,7 @@ public void testFavoriteImports002() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("public class");
 	int end2 = start2 + "".length();
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
+			"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
 			"   foo[METHOD_IMPORT]{import static test.p.ZZZ.foo;\n, Ltest.p.ZZZ;, ()I, foo, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 			requestor.getResults());
 }
@@ -9681,7 +9681,7 @@ public void testFavoriteImports006() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("public class");
 	int end2 = start2 + "".length();
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
+			"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
 			"   foo[METHOD_IMPORT]{import static test.p.ZZZ.foo;\n, Ltest.p.ZZZ;, ()I, foo, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 			requestor.getResults());
 }
@@ -9720,7 +9720,7 @@ public void testFavoriteImports007() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("public class");
 	int end2 = start2 + "".length();
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
+			"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
 			"   foo[METHOD_IMPORT]{import static test.p.ZZZ.foo;\n, Ltest.p.ZZZ;, ()I, foo, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 			requestor.getResults());
 }
@@ -9756,7 +9756,7 @@ public void testFavoriteImports008() throws JavaScriptModelException {
 	int start1 = str.lastIndexOf("foo") + "".length();
 	int end1 = start1 + "foo".length();
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED +R_NON_RESTRICTED)+"}",
+			"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED +R_NON_RESTRICTED)+"}",
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=152123
@@ -9794,7 +9794,7 @@ public void testFavoriteImports009() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("public class");
 	int end2 = start2 + "".length();
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
+			"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
 			"   foo[METHOD_IMPORT]{import static test.p.ZZZ.foo;\n, Ltest.p.ZZZ;, ()I, foo, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 			requestor.getResults());
 }
@@ -9830,7 +9830,7 @@ public void testFavoriteImports010() throws JavaScriptModelException {
 	int start1 = str.lastIndexOf("foo") + "".length();
 	int end1 = start1 + "foo".length();
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED +R_NON_RESTRICTED)+"}",
+			"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED +R_NON_RESTRICTED)+"}",
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=152123
@@ -9868,7 +9868,7 @@ public void testFavoriteImports011() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("public class");
 	int end2 = start2 + "".length();
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
+			"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
 			"   foo[METHOD_IMPORT]{import static test.p.ZZZ.foo;\n, Ltest.p.ZZZ;, ()I, foo, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 			requestor.getResults());
 }
@@ -9904,7 +9904,7 @@ public void testFavoriteImports012() throws JavaScriptModelException {
 	int start1 = str.lastIndexOf("foo") + "".length();
 	int end1 = start1 + "foo".length();
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED +R_NON_RESTRICTED)+"}",
+			"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED +R_NON_RESTRICTED)+"}",
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=152123
@@ -9942,7 +9942,7 @@ public void testFavoriteImports013() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("public class");
 	int end2 = start2 + "".length();
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
+			"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
 			"   foo[METHOD_IMPORT]{import static test.p.ZZZ.foo;\n, Ltest.p.ZZZ;, ()I, foo, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 			requestor.getResults());
 }
@@ -9978,7 +9978,7 @@ public void testFavoriteImports014() throws JavaScriptModelException {
 	int start1 = str.lastIndexOf("foo") + "".length();
 	int end1 = start1 + "foo".length();
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED +R_NON_RESTRICTED)+"}",
+			"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED +R_NON_RESTRICTED)+"}",
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=152123
@@ -10020,7 +10020,7 @@ public void testFavoriteImports015() throws JavaScriptModelException {
 	int start1 = str.lastIndexOf("foo") + "".length();
 	int end1 = start1 + "foo".length();
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED + R_NON_RESTRICTED) + "}",
+			"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=152123
@@ -10059,7 +10059,7 @@ public void testFavoriteImports016() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("public class Test");
 	int end2 = start2 + "".length();
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+			"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 			"   foo[METHOD_IMPORT]{import static test.p.ZZZ.foo;\n, Ltest.p.ZZZ;, ()I, foo, null, ["+start2+", "+end2+"], " + (relevance1) + "}\n" +
 			"Test.foo[TYPE_REF]{foo, test, Ltest.Test$foo;, null, null, ["+start1+", "+end1+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED + R_NON_RESTRICTED)+"}",
 			requestor.getResults());
@@ -10095,7 +10095,7 @@ public void testFavoriteImports017() throws JavaScriptModelException {
 	int start1 = str.lastIndexOf("foo") + "".length();
 	int end1 = start1 + "foo".length();
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.Test;, ()V, foo, null, ["+start1+", "+end1+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED + R_NON_RESTRICTED)+"}",
+			"foo[FUNCTION_REF]{foo(), Ltest.Test;, ()V, foo, null, ["+start1+", "+end1+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED + R_NON_RESTRICTED)+"}",
 			requestor.getResults());
 }
 //https://bugs.eclipse.org/bugs/show_bug.cgi?id=152123
@@ -10133,7 +10133,7 @@ public void testFavoriteImports018() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("public class");
 	int end2 = start2 + "".length();
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
+			"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
 			"   foo[METHOD_IMPORT]{import static test.p.ZZZ.foo;\n, Ltest.p.ZZZ;, ()I, foo, null, ["+start2+", "+end2+"], " + (relevance1) + "}\n"+
 			"foo[FIELD_REF]{foo, Ltest.Test;, I, foo, null, ["+start1+", "+end1+"], " + (R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED + R_NON_RESTRICTED) + "}",
 			requestor.getResults());
@@ -10173,7 +10173,7 @@ public void testFavoriteImports019() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("public class");
 	int end2 = start2 + "".length();
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
+			"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
 			"   foo[METHOD_IMPORT]{import static test.p.ZZZ.foo;\n, Ltest.p.ZZZ;, ()I, foo, null, ["+start2+", "+end2+"], " + (relevance1) + "}\n"+
 			"foo[LOCAL_VARIABLE_REF]{foo, null, I, foo, null, ["+start1+", "+end1+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_EXACT_NAME + R_UNQUALIFIED + R_NON_RESTRICTED)+"}",
 			requestor.getResults());
@@ -10213,9 +10213,9 @@ public void testFavoriteImports020() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("public class");
 	int end2 = start2 + "".length();
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
+			"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
 			"   foo[METHOD_IMPORT]{import static test.p.ZZZ.foo;\n, Ltest.p.ZZZ;, ()I, foo, null, ["+start2+", "+end2+"], " + (relevance1) + "}\n"+
-			"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, (I)I, foo, (i), ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
+			"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, (I)I, foo, (i), ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
 			"   foo[METHOD_IMPORT]{import static test.p.ZZZ.foo;\n, Ltest.p.ZZZ;, (I)I, foo, (i), ["+start2+", "+end2+"], " + (relevance1) + "}",
 			requestor.getResults());
 }
@@ -10253,7 +10253,7 @@ public void testFavoriteImports021() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("public class");
 	int end2 = start2 + "".length();
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, <T:Ljava.lang.Object;>()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
+			"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, <T:Ljava.lang.Object;>()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
 			"   foo[METHOD_IMPORT]{import static test.p.ZZZ.foo;\n, Ltest.p.ZZZ;, <T:Ljava.lang.Object;>()I, foo, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 			requestor.getResults());
 }
@@ -10491,7 +10491,7 @@ public void testFavoriteImports029() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("public class");
 	int end2 = start2 + "".length();
 	assertResults(
-			"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
+			"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
 			"   foo[METHOD_IMPORT]{import static test.p.ZZZ.foo;\n, Ltest.p.ZZZ;, ()I, foo, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 			requestor.getResults());
 }
@@ -10536,7 +10536,7 @@ public void testFavoriteImports030() throws JavaScriptModelException {
 		int start2 = str.lastIndexOf("public class");
 		int end2 = start2 + "".length();
 		assertResults(
-				"foo[METHOD_REF]{ZZZ.foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
+				"foo[FUNCTION_REF]{ZZZ.foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
 				"   ZZZ[TYPE_IMPORT]{import test.p.ZZZ;\n, test.p, Ltest.p.ZZZ;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 				requestor.getResults());
 	} finally {
@@ -10584,7 +10584,7 @@ public void testFavoriteImports031() throws JavaScriptModelException {
 		int start2 = str.lastIndexOf("public class");
 		int end2 = start2 + "".length();
 		assertResults(
-				"foo[METHOD_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
+				"foo[FUNCTION_REF]{foo(), Ltest.p.ZZZ;, ()I, foo, null, ["+start1+", "+end1+"], "+(relevance1)+"}\n" +
 				"   foo[METHOD_IMPORT]{import static test.p.ZZZ.foo;\n, Ltest.p.ZZZ;, ()I, foo, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 				requestor.getResults());
 	} finally {

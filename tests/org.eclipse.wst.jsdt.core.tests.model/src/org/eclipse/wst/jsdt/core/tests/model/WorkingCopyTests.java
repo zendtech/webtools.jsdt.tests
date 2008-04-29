@@ -292,10 +292,10 @@ public void testGeneral() throws JavaScriptModelException, CoreException {
 		assertTrue("working copies should be unique ", !(this.copy.equals(copy2)));
 	
 		// delete a method from the 2nd working copy.
-		IFunction method= copy2.getMethod("foo", null);
+		IFunction method= copy2.getFunction("foo", null);
 	
 		assertDeletion(method);
-		IFunction originalMethod= this.cu.getMethod("foo", null);
+		IFunction originalMethod= this.cu.getFunction("foo", null);
 		assertTrue("method should still be present in original", originalMethod.exists());
 	
 		// commit the changes from the 2nd copy.
@@ -444,7 +444,7 @@ public void testGetPrimaryField() {
  * Ensures that the primary method can be retrieved.
  */
 public void testGetPrimaryMethod() throws JavaScriptModelException {
-	IJavaScriptElement primary= this.copy.getMethods()[0].getPrimaryElement();
+	IJavaScriptElement primary= this.copy.getFunctions()[0].getPrimaryElement();
 	assertTrue("Element is not a method", primary instanceof IFunction);
 	assertTrue("Element should exist", primary.exists());
 }
@@ -454,10 +454,10 @@ public void testGetPrimaryMethod() throws JavaScriptModelException {
  * unit.
  */
 public void testRenameMethod() throws JavaScriptModelException {
-	IFunction method = this.copy.getMethods()[0];
+	IFunction method = this.copy.getFunctions()[0];
 	IJavaScriptElement primary= method.getPrimaryElement();
 	method.rename("bar", false, null);
-	assertEquals("Invalid name of working copy method", "bar", this.copy.getMethods()[0].getElementName());
+	assertEquals("Invalid name of working copy method", "bar", this.copy.getFunctions()[0].getElementName());
 	assertEquals("Invalid name of primary method", "foo", primary.getElementName());
 }
 ///**
@@ -565,7 +565,7 @@ public void testMultipleCommit() {
 	
 	// new method added
 	assertTrue("method should exist after commit", 
-		this.cu.getMethod("anotherMethod", new String[]{}).exists());
+		this.cu.getFunction("anotherMethod", new String[]{}).exists());
 
 	//add another method
 	try {
@@ -583,7 +583,7 @@ public void testMultipleCommit() {
 
 	// new method added
 	assertTrue("second method added should exist after commit", 
-		this.cu.getMethod("anotherAnotherMethod", new String[]{}).exists());
+		this.cu.getFunction("anotherAnotherMethod", new String[]{}).exists());
 }
 /**
  * Creates a working copy on a non-existing compilation unit.

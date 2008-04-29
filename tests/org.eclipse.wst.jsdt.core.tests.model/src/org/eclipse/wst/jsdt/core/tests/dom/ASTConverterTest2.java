@@ -57,7 +57,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		ASTNode result = runConversion(sourceUnit, true);
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Block block = methodDeclaration.getBody();
 		List statements = block.statements();
@@ -100,7 +100,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertTrue("Not an expression statement", node.getNodeType() == ASTNode.EXPRESSION_STATEMENT); //$NON-NLS-1$
 		ExpressionStatement expressionStatement = (ExpressionStatement) node;
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		Expression expression2 = methodInvocation.getExpression();
 		assertTrue("Not a simple name", expression2.getNodeType() == ASTNode.SIMPLE_NAME); //$NON-NLS-1$
@@ -134,7 +134,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertTrue("Not an expression statement", node.getNodeType() == ASTNode.EXPRESSION_STATEMENT); //$NON-NLS-1$
 		ExpressionStatement expressionStatement = (ExpressionStatement) node;
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		Expression expression2 = methodInvocation.getExpression();
 		assertTrue("Not a simple name", expression2.getNodeType() == ASTNode.SIMPLE_NAME); //$NON-NLS-1$
@@ -165,7 +165,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertTrue("Not an expression statement", node.getNodeType() == ASTNode.EXPRESSION_STATEMENT); //$NON-NLS-1$
 		ExpressionStatement expressionStatement = (ExpressionStatement) node;
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		Expression expression2 = methodInvocation.getExpression();
 		assertTrue("Not a simple name", expression2.getNodeType() == ASTNode.SIMPLE_NAME); //$NON-NLS-1$
@@ -197,7 +197,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertTrue("Not an expression statement", node.getNodeType() == ASTNode.EXPRESSION_STATEMENT); //$NON-NLS-1$
 		ExpressionStatement expressionStatement = (ExpressionStatement) node;
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		Expression expression2 = methodInvocation.getExpression();
 		assertTrue("Not a simple name", expression2.getNodeType() == ASTNode.SIMPLE_NAME); //$NON-NLS-1$
@@ -227,7 +227,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		SimpleName simpleName = methodDeclaration.getName();
 		IBinding binding = simpleName.resolveBinding();
@@ -258,7 +258,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("Wrong number of problems", 0, ((JavaScriptUnit) result).getProblems().length); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Type type = methodDeclaration.getReturnType();
 		assertTrue("Not a simple type", type.isSimpleType()); //$NON-NLS-1$
@@ -289,7 +289,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 			JavaScriptCore.setOptions(newOptions);
 			IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0409", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			ASTNode result = runConversion(sourceUnit, true);
-			assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+			assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 			JavaScriptUnit compilationUnit = (JavaScriptUnit) result; 
 			assertProblemsSize(compilationUnit, 0);
 			BindingsCollectorVisitor bindingsCollectorVisitor = new BindingsCollectorVisitor();
@@ -319,7 +319,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 					case ASTNode.FIELD_ACCESS :
 					case ASTNode.INFIX_EXPRESSION :
 					case ASTNode.INSTANCEOF_EXPRESSION :
-					case ASTNode.METHOD_INVOCATION :
+					case ASTNode.FUNCTION_INVOCATION :
 					case ASTNode.NULL_LITERAL :
 					case ASTNode.NUMBER_LITERAL :
 					case ASTNode.POSTFIX_EXPRESSION :
@@ -355,7 +355,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 					case ASTNode.IMPORT_DECLARATION :
 						assertTrue("binding not equals", binding.equals(((ImportDeclaration) detachedNode).resolveBinding())); //$NON-NLS-1$
 						break;
-					case ASTNode.METHOD_DECLARATION :
+					case ASTNode.FUNCTION_DECLARATION :
 						assertTrue("binding not equals", binding.equals(((FunctionDeclaration) detachedNode).resolveBinding())); //$NON-NLS-1$
 						break;
 					case ASTNode.PACKAGE_DECLARATION :
@@ -411,7 +411,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0412() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0412", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(unit, 0);
@@ -441,12 +441,12 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0413() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0413", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(unit, 1, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		List throwsException = methodDeclaration.thrownExceptions();
 		assertEquals("wrong size", 2, throwsException.size()); //$NON-NLS-1$
@@ -462,12 +462,12 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0414() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0414", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(unit, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Type type = methodDeclaration.getReturnType();
 		ITypeBinding typeBinding = type.resolveBinding();
@@ -477,7 +477,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 
 		node = getASTNode(unit, 0, 1);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration2 = (FunctionDeclaration) node;
 		Type type2 = methodDeclaration2.getReturnType();
 		ITypeBinding typeBinding2 = type2.resolveBinding();
@@ -488,7 +488,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit2 = getCompilationUnit("Converter" , "src", "test0414", "B.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		
 		result = runConversion(sourceUnit2, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit2 = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit2.getProblems().length); //$NON-NLS-1$
 		ASTNode declaringNode3 = unit2.findDeclaringNode(typeBinding);
@@ -505,7 +505,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0415", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0, 0);
@@ -527,7 +527,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0416() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0416", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 1, 0, 0);
@@ -560,7 +560,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0417() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0417", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0, 0);
@@ -585,7 +585,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0418() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0418", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 1, 0);
@@ -593,7 +593,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertTrue("not an expression statement ", node.getNodeType() == ASTNode.EXPRESSION_STATEMENT); //$NON-NLS-1$
 		ExpressionStatement expressionStatement = (ExpressionStatement) node;
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("not an method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("not an method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		Name name = methodInvocation.getName();
 		IBinding binding = name.resolveBinding();
@@ -606,7 +606,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0419() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0419", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 1, 0, 0);
@@ -629,7 +629,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0420", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0, 0);
@@ -656,7 +656,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0421", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0, 0);
@@ -684,7 +684,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0422", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0, 0);
@@ -712,7 +712,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0423", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0, 0);
@@ -739,7 +739,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0424", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0, 0);
@@ -763,7 +763,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0425", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0, 0);
@@ -790,7 +790,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0426() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0426", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 1, 0, 0);
@@ -811,7 +811,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0427() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0427", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 1, 0, 0);
@@ -836,7 +836,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0428() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0428", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 1, 0, 0);
@@ -861,7 +861,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0429() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0429", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 1, 0, 0);
@@ -887,7 +887,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0430", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0, 0);
@@ -897,7 +897,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		List arguments = constructorInvocation.arguments();
 		assertEquals("Wrong size", 1, arguments.size());
 		Expression expression = (Expression) arguments.get(0);
-		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION);
+		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION);
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		SimpleName simpleName = methodInvocation.getName();
 		IBinding binding = simpleName.resolveBinding();
@@ -910,7 +910,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0431() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0431", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0, 0);
@@ -931,7 +931,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0432() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0432", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 1, 0, 0);
@@ -953,7 +953,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0433() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0433", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 1, 0, 0);
@@ -982,7 +982,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0434() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0434", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 1, 0, 0);
@@ -1006,7 +1006,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0435() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0435", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 1, 0, 0);
@@ -1030,7 +1030,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0436() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0436", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertProblemsSize(unit, 1, "The type A.CInner is not visible"); //$NON-NLS-1$
 		ASTNode node = getASTNode(unit, 1, 0, 0);
@@ -1056,7 +1056,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0437() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0437", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertProblemsSize(unit, 1, "The type CInner is not visible"); //$NON-NLS-1$
 		ASTNode node = getASTNode(unit, 1, 0, 0);
@@ -1078,7 +1078,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0438() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0438", "D.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$<
 		List imports = unit.imports();
@@ -1094,7 +1094,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0439() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0439", "E.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0, 0);
@@ -1115,7 +1115,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0440", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0, 0);
@@ -1155,7 +1155,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0441", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0, 0);
@@ -1183,7 +1183,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0442", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0, 0);
@@ -1212,11 +1212,11 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0443() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0443", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 2, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0);
-		assertEquals("Wrong type", ASTNode.METHOD_DECLARATION, node.getNodeType());
+		assertEquals("Wrong type", ASTNode.FUNCTION_DECLARATION, node.getNodeType());
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertNotNull("No body", methodDeclaration.getBody());
 		assertNotNull("No binding", methodDeclaration.resolveBinding());
@@ -1230,7 +1230,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0444() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0444", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 2, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0);
@@ -1239,12 +1239,12 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		List bodyDeclarations = typeDeclaration.bodyDeclarations();
 		assertEquals("Wrong size", 2, bodyDeclarations.size());
 		BodyDeclaration bodyDeclaration = (BodyDeclaration)bodyDeclarations.get(0);
-		assertEquals("Wrong type", ASTNode.METHOD_DECLARATION, bodyDeclaration.getNodeType());
+		assertEquals("Wrong type", ASTNode.FUNCTION_DECLARATION, bodyDeclaration.getNodeType());
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) bodyDeclaration;
 		assertEquals("Wrong name", "foo", methodDeclaration.getName().getIdentifier());
 		assertNull("Got a binding", methodDeclaration.resolveBinding());
 		bodyDeclaration = (BodyDeclaration)bodyDeclarations.get(1);
-		assertEquals("Wrong type", ASTNode.METHOD_DECLARATION, bodyDeclaration.getNodeType());
+		assertEquals("Wrong type", ASTNode.FUNCTION_DECLARATION, bodyDeclaration.getNodeType());
 		assertEquals("Wrong name", "foo", ((FunctionDeclaration) bodyDeclaration).getName().getIdentifier());
 	}
 
@@ -1254,7 +1254,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0445() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0445", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$<
 	}
@@ -1265,7 +1265,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0446() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0446", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 2, unit.getProblems().length); //$NON-NLS-1$<
 	}
@@ -1276,7 +1276,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0447() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0447", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 3, unit.getProblems().length); //$NON-NLS-1$<
 	}
@@ -1288,11 +1288,11 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0448() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0448", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0);
-		assertEquals("Not a method declaration", node.getNodeType(), ASTNode.METHOD_DECLARATION);
+		assertEquals("Not a method declaration", node.getNodeType(), ASTNode.FUNCTION_DECLARATION);
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Not a constructor", methodDeclaration.isConstructor());
 		ITypeBinding returnTypeBinding = methodDeclaration.getReturnType().resolveBinding();
@@ -1308,11 +1308,11 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0449() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0449", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0);
-		assertEquals("Not a method declaration", node.getNodeType(), ASTNode.METHOD_DECLARATION);
+		assertEquals("Not a method declaration", node.getNodeType(), ASTNode.FUNCTION_DECLARATION);
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Not a constructor", methodDeclaration.isConstructor());
 		Block block = methodDeclaration.getBody();
@@ -1326,7 +1326,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0450() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0450", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(unit, 0);
@@ -1415,12 +1415,12 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0451", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 2, unit.getProblems().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(unit, 0, 0);
 		assertNotNull("No node", node);
-		assertTrue("not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Type type = methodDeclaration.getReturnType();
 		checkSourceRange(type, "int", source);
@@ -1432,11 +1432,11 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0452() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "", "NO_WORKING.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, false);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) result;
 		ASTNode node = getASTNode(compilationUnit, 0, 0);
 		assertNotNull("No node", node);
-		assertTrue("not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		SimpleName name = methodDeclaration.getName();
 		assertEquals("wrong line number", 3, compilationUnit.getLineNumber(name.getStartPosition()));
@@ -1448,7 +1448,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0453() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0453", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) result;
 		ASTNode node = getASTNode(compilationUnit, 0, 0,0);
 		assertNotNull("No node", node);
@@ -1468,7 +1468,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0454", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) result;
 		ASTNode node = getASTNode(compilationUnit, 0, 0,1);
 		assertNotNull("No node", node);
@@ -1493,7 +1493,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0455", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) result;
 		ASTNode node = getASTNode(compilationUnit, 0, 0, 0);
 		assertNotNull("No node", node);
@@ -1521,7 +1521,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0456", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) result;
 		ASTNode node = getASTNode(compilationUnit, 0, 0, 0);
 		assertNotNull("No node", node);
@@ -1542,7 +1542,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0457", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) result;
 		ASTNode node = getASTNode(compilationUnit, 0, 0, 0);
 		assertNotNull("No node", node);
@@ -1569,7 +1569,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0458", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) result;
 		ASTNode node = getASTNode(compilationUnit, 0, 0, 0);
 		assertNotNull("No node", node);
@@ -1598,7 +1598,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0459", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) result;
 		ASTNode node = getASTNode(compilationUnit, 0, 0, 0);
 		assertNotNull("No node", node);
@@ -1626,7 +1626,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0460() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0460", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) result;
 		assertTrue("Has error", compilationUnit.getProblems().length == 0); //$NON-NLS-1$
 		ASTNode node = getASTNode(compilationUnit, 0, 0, 0);
@@ -1641,7 +1641,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0461", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, false);
 		char[] source = sourceUnit.getSource().toCharArray();
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) result;
 		assertTrue("Has error", compilationUnit.getProblems().length == 0); //$NON-NLS-1$
 		ASTNode node = getASTNode(compilationUnit, 0, 0, 0);
@@ -1655,7 +1655,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		checkSourceRange(assignment, "z= foo().y.toList()", source);
 		Expression expression2 = assignment.getRightHandSide();
 		checkSourceRange(expression2, "foo().y.toList()", source);
-		assertTrue("not a method invocation", expression2.getNodeType() == ASTNode.METHOD_INVOCATION);
+		assertTrue("not a method invocation", expression2.getNodeType() == ASTNode.FUNCTION_INVOCATION);
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression2;
 		Expression expression3 = methodInvocation.getExpression();
 		checkSourceRange(expression3, "foo().y", source);
@@ -1665,7 +1665,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		checkSourceRange(fieldAccess.getName(), "y", source);
 		Expression expression4 = fieldAccess.getExpression();
 		checkSourceRange(expression4, "foo()", source);
-		assertTrue("not a method invocation", expression4.getNodeType() == ASTNode.METHOD_INVOCATION);
+		assertTrue("not a method invocation", expression4.getNodeType() == ASTNode.FUNCTION_INVOCATION);
 		FunctionInvocation methodInvocation2 = (FunctionInvocation) expression4;
 		checkSourceRange(methodInvocation2.getName(), "foo", source);
 		assertNull("no null", methodInvocation2.getExpression());
@@ -1677,7 +1677,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0462() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "", "Test462.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) result;
 		assertTrue("Has error", compilationUnit.getProblems().length == 0); //$NON-NLS-1$
 		ASTNode node = getASTNode(compilationUnit, 0);
@@ -1907,13 +1907,13 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("No error", 1, compilationUnit.getProblems().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(compilationUnit, 0, 0);
 		assertNotNull("No node", node);
-		assertTrue("not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Is a constructor", !methodDeclaration.isConstructor());
 		checkSourceRange(methodDeclaration, "private void foo(){", source);
 		node = getASTNode(compilationUnit, 0, 1);
 		assertNotNull("No node", node);
-		assertTrue("not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Is a constructor", !methodDeclaration.isConstructor());
 	}
@@ -1928,7 +1928,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("No error", 2, compilationUnit.getProblems().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(compilationUnit, 0, 2);
 		assertNotNull("No node", node);
-		assertTrue("not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Not a constructor", methodDeclaration.isConstructor());
 	}	
@@ -2064,16 +2064,16 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertNotNull(types);
 		assertEquals("wrong size", 2, types.length);
 		IType type = types[1];
-		IFunction[] methods = type.getMethods();
+		IFunction[] methods = type.getFunctions();
 		assertNotNull(methods);
 		assertEquals("wrong size", 1, methods.length);
 		IFunction method = methods[0];
 		ISourceRange sourceRange = method.getSourceRange(); 
 		ASTNode result = runConversion(sourceUnit, sourceRange.getOffset() + sourceRange.getLength() / 2, true);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 1, 0);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertEquals("wrong name", "test", methodDeclaration.getName().getIdentifier());
 		IFunctionBinding methodBinding = methodDeclaration.resolveBinding();
@@ -2085,7 +2085,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertTrue("Not an expression statement", node2.getNodeType() == ASTNode.EXPRESSION_STATEMENT); //$NON-NLS-1$
 		ExpressionStatement expressionStatement = (ExpressionStatement) node2;
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		Expression expression2 = methodInvocation.getExpression();
 		assertTrue("Not a simple name", expression2.getNodeType() == ASTNode.SIMPLE_NAME); //$NON-NLS-1$
@@ -2113,16 +2113,16 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertNotNull(types);
 		assertEquals("wrong size", 2, types.length);
 		IType type = types[1];
-		IFunction[] methods = type.getMethods();
+		IFunction[] methods = type.getFunctions();
 		assertNotNull(methods);
 		assertEquals("wrong size", 1, methods.length);
 		IFunction method = methods[0];
 		ISourceRange sourceRange = method.getSourceRange(); 
 		ASTNode result = runConversion(sourceUnit, sourceRange.getOffset() + sourceRange.getLength() / 2, false);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 1, 0);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertEquals("wrong name", "test", methodDeclaration.getName().getIdentifier());
 		List statements = ((FunctionDeclaration) node).getBody().statements();
@@ -2132,7 +2132,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertTrue("Not an expression statement", node2.getNodeType() == ASTNode.EXPRESSION_STATEMENT); //$NON-NLS-1$
 		ExpressionStatement expressionStatement = (ExpressionStatement) node2;
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		Expression expression2 = methodInvocation.getExpression();
 		assertTrue("Not a simple name", expression2.getNodeType() == ASTNode.SIMPLE_NAME); //$NON-NLS-1$
@@ -2152,16 +2152,16 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertNotNull(types);
 		assertEquals("wrong size", 1, types.length);
 		IType type = types[0];
-		IFunction[] methods = type.getMethods();
+		IFunction[] methods = type.getFunctions();
 		assertNotNull(methods);
 		assertEquals("wrong size", 1, methods.length);
 		IFunction method = methods[0];
 		ISourceRange sourceRange = method.getSourceRange(); 
 		ASTNode result = runConversion(sourceUnit, sourceRange.getOffset() + sourceRange.getLength() / 2, false);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertEquals("wrong name", "test", methodDeclaration.getName().getIdentifier());
 		List statements = ((FunctionDeclaration) node).getBody().statements();
@@ -2180,16 +2180,16 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertNotNull(types);
 		assertEquals("wrong size", 1, types.length);
 		IType type = types[0];
-		IFunction[] methods = type.getMethods();
+		IFunction[] methods = type.getFunctions();
 		assertNotNull(methods);
 		assertEquals("wrong size", 1, methods.length);
 		IFunction method = methods[0];
 		ISourceRange sourceRange = method.getSourceRange(); 
 		ASTNode result = runConversion(sourceUnit, sourceRange.getOffset() + sourceRange.getLength() / 2, true);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertEquals("wrong name", "test", methodDeclaration.getName().getIdentifier());
 		List statements = ((FunctionDeclaration) node).getBody().statements();
@@ -2221,15 +2221,15 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertNotNull(memberTypes);
 		assertEquals("wrong size", 1, memberTypes.length);
 		IType memberType = memberTypes[0];
-		IFunction[] methods = memberType.getMethods();
+		IFunction[] methods = memberType.getFunctions();
 		assertEquals("wrong size", 1, methods.length);
 		IFunction method = methods[0];
 		ISourceRange sourceRange = method.getSourceRange(); 
 		ASTNode result = runConversion(sourceUnit, sourceRange.getOffset() + sourceRange.getLength() / 2, true);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0, 0);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertEquals("wrong name", "test", methodDeclaration.getName().getIdentifier());
 		List statements = ((FunctionDeclaration) node).getBody().statements();
@@ -2259,15 +2259,15 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertNotNull(types);
 		assertEquals("wrong size", 1, types.length);
 		IType type = types[0];
-		IFunction[] methods = type.getMethods();
+		IFunction[] methods = type.getFunctions();
 		assertEquals("wrong size", 1, methods.length);
 		IFunction method = methods[0];
 		ISourceRange sourceRange = method.getSourceRange(); 
 		ASTNode result = runConversion(sourceUnit, sourceRange.getOffset() + sourceRange.getLength() / 2, true);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertEquals("wrong name", "A", methodDeclaration.getName().getIdentifier());
 		assertTrue("Not a constructor", methodDeclaration.isConstructor());
@@ -2308,7 +2308,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		ISourceRange sourceRange = memberType.getSourceRange(); 
 		ASTNode result = runConversion(sourceUnit, sourceRange.getOffset() + sourceRange.getLength() / 2, true);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertTrue("Not a type declaration", node.getNodeType() == ASTNode.TYPE_DECLARATION); //$NON-NLS-1$
 		TypeDeclaration typeDeclaration = (TypeDeclaration) node;
@@ -2316,7 +2316,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		List bodyDeclarations = typeDeclaration.bodyDeclarations();
 		assertEquals("Wrong size", 1, bodyDeclarations.size());
 		BodyDeclaration bodyDeclaration = (BodyDeclaration) bodyDeclarations.get(0);
-		assertTrue("Not a method declaration", bodyDeclaration.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", bodyDeclaration.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) bodyDeclaration;
 		Block block = methodDeclaration.getBody();
 		List statements = block.statements();
@@ -2339,7 +2339,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		ISourceRange sourceRange = memberType.getSourceRange(); 
 		ASTNode result = runConversion(sourceUnit, sourceRange.getOffset() + sourceRange.getLength() / 2, false);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertTrue("Not a type declaration", node.getNodeType() == ASTNode.TYPE_DECLARATION); //$NON-NLS-1$
 		TypeDeclaration typeDeclaration = (TypeDeclaration) node;
@@ -2347,7 +2347,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		List bodyDeclarations = typeDeclaration.bodyDeclarations();
 		assertEquals("Wrong size", 1, bodyDeclarations.size());
 		BodyDeclaration bodyDeclaration = (BodyDeclaration) bodyDeclarations.get(0);
-		assertTrue("Not a method declaration", bodyDeclaration.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", bodyDeclaration.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) bodyDeclaration;
 		Block block = methodDeclaration.getBody();
 		List statements = block.statements();
@@ -2363,22 +2363,22 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertNotNull(types);
 		assertEquals("wrong size", 1, types.length);
 		IType type = types[0];
-		IFunction[] methods = type.getMethods();
+		IFunction[] methods = type.getFunctions();
 		assertEquals("wrong size", 2, methods.length);
 		IFunction method = methods[1];
 		ISourceRange sourceRange = method.getSourceRange(); 
 		ASTNode result = runConversion(sourceUnit, sourceRange.getOffset() + sourceRange.getLength() / 2, false);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 2);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Block block = methodDeclaration.getBody();
 		List statements = block.statements();
 		assertEquals("Wrong size", 2, statements.size());
 
 		node = getASTNode((JavaScriptUnit) result, 0, 1);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		methodDeclaration = (FunctionDeclaration) node;
 		block = methodDeclaration.getBody();
 		statements = block.statements();
@@ -2394,23 +2394,23 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertNotNull(types);
 		assertEquals("wrong size", 1, types.length);
 		IType type = types[0];
-		IFunction[] methods = type.getMethods();
+		IFunction[] methods = type.getFunctions();
 		assertEquals("wrong size", 3, methods.length);
 		IFunction method = methods[1];
 		ISourceRange sourceRange = method.getSourceRange(); 
 		ASTNode result = runConversion(sourceUnit, sourceRange.getOffset() + sourceRange.getLength() / 2, false);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 5);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Block block = methodDeclaration.getBody();
 		List statements = block.statements();
 		assertEquals("Wrong size", 2, statements.size());
 
 		node = getASTNode((JavaScriptUnit) result, 0, 4);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		methodDeclaration = (FunctionDeclaration) node;
 		block = methodDeclaration.getBody();
 		statements = block.statements();
@@ -2451,7 +2451,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("Wrong size", 0, statements.size());
 		
 		node = getASTNode((JavaScriptUnit) result, 0, 6);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		methodDeclaration = (FunctionDeclaration) node;
 		block = methodDeclaration.getBody();
 		statements = block.statements();
@@ -2473,17 +2473,17 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		ISourceRange sourceRange = init.getSourceRange(); 
 		ASTNode result = runConversion(sourceUnit, sourceRange.getOffset() + sourceRange.getLength() / 2, false);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 5);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Block block = methodDeclaration.getBody();
 		List statements = block.statements();
 		assertEquals("Wrong size", 0, statements.size());
 
 		node = getASTNode((JavaScriptUnit) result, 0, 4);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		methodDeclaration = (FunctionDeclaration) node;
 		block = methodDeclaration.getBody();
 		statements = block.statements();
@@ -2524,7 +2524,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("Wrong size", 1, statements.size());
 		
 		node = getASTNode((JavaScriptUnit) result, 0, 6);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		methodDeclaration = (FunctionDeclaration) node;
 		block = methodDeclaration.getBody();
 		statements = block.statements();
@@ -2536,7 +2536,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0489() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0489", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0);
@@ -2552,7 +2552,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0490() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0490", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 	}
@@ -2569,7 +2569,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 			IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0491", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			char[] source = sourceUnit.getSource().toCharArray();
 			ASTNode result = runConversion(sourceUnit, true);
-			assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+			assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 			JavaScriptUnit unit = (JavaScriptUnit) result;
 			assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 			ASTNode node = getASTNode(unit, 0, 0, 0);
@@ -2595,7 +2595,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 			IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0492", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			char[] source = sourceUnit.getSource().toCharArray();
 			ASTNode result = runConversion(sourceUnit, true);
-			assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+			assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 			JavaScriptUnit unit = (JavaScriptUnit) result;
 			assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 			ASTNode node = getASTNode(unit, 0, 0, 0);
@@ -2615,7 +2615,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0493", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0);
@@ -2641,7 +2641,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0494", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0);
@@ -2671,7 +2671,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0495", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0);
@@ -2701,7 +2701,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0496", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0);
@@ -2735,7 +2735,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0497", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$<
 		ASTNode node = getASTNode(unit, 0, 0);
@@ -2755,7 +2755,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0498() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0498", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 	}
 	
 	/**
@@ -2764,7 +2764,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0499() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0499", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(unit, 0, 0, 1);
@@ -2795,7 +2795,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	 */
 	public void test0500() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0500", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		IJavaScriptProject project = sourceUnit.getJavaProject();
+		IJavaScriptProject project = sourceUnit.getJavaScriptProject();
 		Map originalOptions = project.getOptions(false);
 		try {
 			project.setOption(JavaScriptCore.COMPILER_PB_INVALID_JAVADOC, JavaScriptCore.ERROR);
@@ -2817,7 +2817,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0501", "JavaEditor.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, false);
 		assertNotNull(result);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 	}	
 
 	/**
@@ -3119,12 +3119,12 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0504", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(unit, 1, 0);
 		assertNotNull(node);
-		assertTrue("Not a constructor declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a constructor declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration declaration = (FunctionDeclaration) node;
 		assertTrue("A constructor", !declaration.isConstructor());
 		checkSourceRange(declaration, "public method(final int parameter);", source);
@@ -3137,12 +3137,12 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0505", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(unit, 1, 0);
 		assertNotNull(node);
-		assertTrue("Not a constructor declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a constructor declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration declaration = (FunctionDeclaration) node;
 		assertTrue("A constructor", !declaration.isConstructor());
 		checkSourceRange(declaration, "public method(final int parameter) {     }", source);
@@ -3279,7 +3279,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		ASTNode node = getASTNode(unit, 0, 0);
 		assertEquals("Wrong number of problems", 2, unit.getProblems().length); //$NON-NLS-1$
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration declaration = (FunctionDeclaration) node;
 		assertTrue("Not a constructor", declaration.isConstructor());
 		checkSourceRange(declaration, "public A();", source);
@@ -3341,7 +3341,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("Wrong number of problems", 0, unit.getProblems().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(unit, 0, 0);
 		assertNotNull("No node", node);
-		assertTrue("not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION);
+		assertTrue("not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION);
 		FunctionDeclaration declaration = (FunctionDeclaration) node;
 		ASTParser parser = ASTParser.newParser(AST.JLS2);
 		parser.setKind(ASTParser.K_CLASS_BODY_DECLARATIONS);
@@ -3358,7 +3358,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertTrue(declaration.subtreeMatch(new ASTMatcher(), bodyDeclaration));
 		ASTNode root = bodyDeclaration.getRoot();
 		assertNotNull("No root", root);
-		assertTrue("not a compilation unit", root.getNodeType() == ASTNode.COMPILATION_UNIT);
+		assertTrue("not a compilation unit", root.getNodeType() == ASTNode.JAVASCRIPT_UNIT);
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) root;
 		assertEquals("wrong problem size", 0, compilationUnit.getProblems().length);
 		assertNotNull("No comments", compilationUnit.getCommentList());
@@ -3395,7 +3395,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertTrue(declaration.subtreeMatch(new ASTMatcher(), bodyDeclaration));
 		ASTNode root = bodyDeclaration.getRoot();
 		assertNotNull("No root", root);
-		assertTrue("not a compilation unit", root.getNodeType() == ASTNode.COMPILATION_UNIT);
+		assertTrue("not a compilation unit", root.getNodeType() == ASTNode.JAVASCRIPT_UNIT);
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) root;
 		assertEquals("wrong problem size", 0, compilationUnit.getProblems().length);
 		assertNotNull("No comments", compilationUnit.getCommentList());
@@ -3430,7 +3430,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertTrue(declaration.subtreeMatch(new ASTMatcher(), bodyDeclaration));
 		ASTNode root = bodyDeclaration.getRoot();
 		assertNotNull("No root", root);
-		assertTrue("not a compilation unit", root.getNodeType() == ASTNode.COMPILATION_UNIT);
+		assertTrue("not a compilation unit", root.getNodeType() == ASTNode.JAVASCRIPT_UNIT);
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) root;
 		assertEquals("wrong problem size", 0, compilationUnit.getProblems().length);
 		assertNotNull("No comments", compilationUnit.getCommentList());
@@ -3466,7 +3466,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertTrue(statement.subtreeMatch(new ASTMatcher(), statement2));
 		ASTNode root = statement2.getRoot();
 		assertNotNull("No root", root);
-		assertTrue("not a compilation unit", root.getNodeType() == ASTNode.COMPILATION_UNIT);
+		assertTrue("not a compilation unit", root.getNodeType() == ASTNode.JAVASCRIPT_UNIT);
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) root;
 		assertEquals("wrong problem size", 0, compilationUnit.getProblems().length);
 		assertNotNull("No comments", compilationUnit.getCommentList());
@@ -3496,11 +3496,11 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		parser.setCompilerOptions(JavaScriptCore.getOptions());
 		ASTNode result2 = parser.createAST(null);
 		assertNotNull("No node", result2);
-		assertTrue("not a method invocation", result2.getNodeType() == ASTNode.METHOD_INVOCATION);
+		assertTrue("not a method invocation", result2.getNodeType() == ASTNode.FUNCTION_INVOCATION);
 		assertTrue(expression.subtreeMatch(new ASTMatcher(), result2));
 		ASTNode root = result2.getRoot();
 		assertNotNull("No root", root);
-		assertTrue("not a compilation unit", root.getNodeType() == ASTNode.COMPILATION_UNIT);
+		assertTrue("not a compilation unit", root.getNodeType() == ASTNode.JAVASCRIPT_UNIT);
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) root;
 		assertEquals("wrong problem size", 0, compilationUnit.getProblems().length);
 		assertNotNull("No comments", compilationUnit.getCommentList());
@@ -3554,16 +3554,16 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertNotNull(classFile.getSource());
 		IType type = classFile.getType();
 		assertNotNull(type);
-		IFunction[] methods = type.getMethods();
+		IFunction[] methods = type.getFunctions();
 		assertNotNull(methods);
 		assertEquals("wrong size", 2, methods.length);
 		IFunction method = methods[1];
 		ISourceRange sourceRange = method.getSourceRange(); 
 		ASTNode result = runConversion(classFile, sourceRange.getOffset() + sourceRange.getLength() / 2, true);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 1, 0);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertEquals("wrong name", "test", methodDeclaration.getName().getIdentifier());
 		IFunctionBinding methodBinding = methodDeclaration.resolveBinding();
@@ -3575,7 +3575,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertTrue("Not an expression statement", node2.getNodeType() == ASTNode.EXPRESSION_STATEMENT); //$NON-NLS-1$
 		ExpressionStatement expressionStatement = (ExpressionStatement) node2;
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		Expression expression2 = methodInvocation.getExpression();
 		assertTrue("Not a simple name", expression2.getNodeType() == ASTNode.SIMPLE_NAME); //$NON-NLS-1$
@@ -3603,16 +3603,16 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertNotNull(classFile.getSource());
 		IType type = classFile.getType();
 		assertNotNull(type);
-		IFunction[] methods = type.getMethods();
+		IFunction[] methods = type.getFunctions();
 		assertNotNull(methods);
 		assertEquals("wrong size", 2, methods.length);
 		IFunction method = methods[1];
 		ISourceRange sourceRange = method.getSourceRange(); 
 		ASTNode result = runConversion(classFile, sourceRange.getOffset() + sourceRange.getLength() / 2, false);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 1, 0);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertEquals("wrong name", "test", methodDeclaration.getName().getIdentifier());
 		List statements = ((FunctionDeclaration) node).getBody().statements();
@@ -3622,7 +3622,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertTrue("Not an expression statement", node2.getNodeType() == ASTNode.EXPRESSION_STATEMENT); //$NON-NLS-1$
 		ExpressionStatement expressionStatement = (ExpressionStatement) node2;
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		Expression expression2 = methodInvocation.getExpression();
 		assertTrue("Not a simple name", expression2.getNodeType() == ASTNode.SIMPLE_NAME); //$NON-NLS-1$
@@ -3642,16 +3642,16 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertNotNull(classFile.getSource());
 		IType type = classFile.getType();
 		assertNotNull(type);
-		IFunction[] methods = type.getMethods();
+		IFunction[] methods = type.getFunctions();
 		assertNotNull(methods);
 		assertEquals("wrong size", 2, methods.length);
 		IFunction method = methods[1];
 		ISourceRange sourceRange = method.getSourceRange(); 
 		ASTNode result = runConversion(classFile, sourceRange.getOffset() + sourceRange.getLength() / 2, false);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertEquals("wrong name", "test", methodDeclaration.getName().getIdentifier());
 		List statements = ((FunctionDeclaration) node).getBody().statements();
@@ -3670,16 +3670,16 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertNotNull(classFile.getSource());
 		IType type = classFile.getType();
 		assertNotNull(type);
-		IFunction[] methods = type.getMethods();
+		IFunction[] methods = type.getFunctions();
 		assertNotNull(methods);
 		assertEquals("wrong size", 2, methods.length);
 		IFunction method = methods[1];
 		ISourceRange sourceRange = method.getSourceRange(); 
 		ASTNode result = runConversion(classFile, sourceRange.getOffset() + sourceRange.getLength() / 2, true);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertEquals("wrong name", "test", methodDeclaration.getName().getIdentifier());
 		List statements = ((FunctionDeclaration) node).getBody().statements();
@@ -3710,15 +3710,15 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertNotNull(memberTypes);
 		assertEquals("wrong size", 1, memberTypes.length);
 		IType memberType = memberTypes[0];
-		IFunction[] methods = memberType.getMethods();
+		IFunction[] methods = memberType.getFunctions();
 		assertEquals("wrong size", 2, methods.length);
 		IFunction method = methods[1];
 		ISourceRange sourceRange = method.getSourceRange(); 
 		ASTNode result = runConversion(classFile, sourceRange.getOffset() + sourceRange.getLength() / 2, true);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0, 0);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertEquals("wrong name", "test", methodDeclaration.getName().getIdentifier());
 		List statements = ((FunctionDeclaration) node).getBody().statements();
@@ -3748,15 +3748,15 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertNotNull(classFile.getSource());
 		IType type = classFile.getType();
 		assertNotNull(type);
-		IFunction[] methods = type.getMethods();
+		IFunction[] methods = type.getFunctions();
 		assertEquals("wrong size", 1, methods.length);
 		IFunction method = methods[0];
 		ISourceRange sourceRange = method.getSourceRange(); 
 		ASTNode result = runConversion(classFile, sourceRange.getOffset() + sourceRange.getLength() / 2, true);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertEquals("wrong name", "A", methodDeclaration.getName().getIdentifier());
 		assertTrue("Not a constructor", methodDeclaration.isConstructor());
@@ -3795,7 +3795,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		ISourceRange sourceRange = memberType.getSourceRange(); 
 		ASTNode result = runConversion(classFile, sourceRange.getOffset() + sourceRange.getLength() / 2, true);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertTrue("Not a type declaration", node.getNodeType() == ASTNode.TYPE_DECLARATION); //$NON-NLS-1$
 		TypeDeclaration typeDeclaration = (TypeDeclaration) node;
@@ -3803,7 +3803,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		List bodyDeclarations = typeDeclaration.bodyDeclarations();
 		assertEquals("Wrong size", 1, bodyDeclarations.size());
 		BodyDeclaration bodyDeclaration = (BodyDeclaration) bodyDeclarations.get(0);
-		assertTrue("Not a method declaration", bodyDeclaration.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", bodyDeclaration.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) bodyDeclaration;
 		Block block = methodDeclaration.getBody();
 		List statements = block.statements();
@@ -3824,7 +3824,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		ISourceRange sourceRange = memberType.getSourceRange(); 
 		ASTNode result = runConversion(classFile, sourceRange.getOffset() + sourceRange.getLength() / 2, false);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertTrue("Not a type declaration", node.getNodeType() == ASTNode.TYPE_DECLARATION); //$NON-NLS-1$
 		TypeDeclaration typeDeclaration = (TypeDeclaration) node;
@@ -3832,7 +3832,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		List bodyDeclarations = typeDeclaration.bodyDeclarations();
 		assertEquals("Wrong size", 1, bodyDeclarations.size());
 		BodyDeclaration bodyDeclaration = (BodyDeclaration) bodyDeclarations.get(0);
-		assertTrue("Not a method declaration", bodyDeclaration.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", bodyDeclaration.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) bodyDeclaration;
 		Block block = methodDeclaration.getBody();
 		List statements = block.statements();
@@ -3847,22 +3847,22 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertNotNull(classFile);
 		assertNotNull(classFile.getSource());
 		IType type = classFile.getType();
-		IFunction[] methods = type.getMethods();
+		IFunction[] methods = type.getFunctions();
 		assertEquals("wrong size", 3, methods.length);
 		IFunction method = methods[2];
 		ISourceRange sourceRange = method.getSourceRange(); 
 		ASTNode result = runConversion(classFile, sourceRange.getOffset() + sourceRange.getLength() / 2, false);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 2);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Block block = methodDeclaration.getBody();
 		List statements = block.statements();
 		assertEquals("Wrong size", 2, statements.size());
 
 		node = getASTNode((JavaScriptUnit) result, 0, 1);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		methodDeclaration = (FunctionDeclaration) node;
 		block = methodDeclaration.getBody();
 		statements = block.statements();
@@ -3876,23 +3876,23 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertNotNull(classFile);
 		assertNotNull(classFile.getSource());
 		IType type = classFile.getType();
-		IFunction[] methods = type.getMethods();
+		IFunction[] methods = type.getFunctions();
 		assertEquals("wrong size", 5, methods.length);
 		IFunction method = methods[3];
 		ISourceRange sourceRange = method.getSourceRange(); 
 		ASTNode result = runConversion(classFile, sourceRange.getOffset() + sourceRange.getLength() / 2, false);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 5);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Block block = methodDeclaration.getBody();
 		List statements = block.statements();
 		assertEquals("Wrong size", 2, statements.size());
 
 		node = getASTNode((JavaScriptUnit) result, 0, 4);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		methodDeclaration = (FunctionDeclaration) node;
 		block = methodDeclaration.getBody();
 		statements = block.statements();
@@ -3933,7 +3933,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("Wrong size", 0, statements.size());
 		
 		node = getASTNode((JavaScriptUnit) result, 0, 6);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		methodDeclaration = (FunctionDeclaration) node;
 		block = methodDeclaration.getBody();
 		statements = block.statements();
@@ -3963,17 +3963,17 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("wrong size", 0, initializers.length);
 		ASTNode result = runConversion(classFile, position, false);
 		assertNotNull(result);
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT); //$NON-NLS-1$
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT); //$NON-NLS-1$
 	
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 5);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Block block = methodDeclaration.getBody();
 		List statements = block.statements();
 		assertEquals("Wrong size", 0, statements.size());
 	
 		node = getASTNode((JavaScriptUnit) result, 0, 4);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		methodDeclaration = (FunctionDeclaration) node;
 		block = methodDeclaration.getBody();
 		statements = block.statements();
@@ -4014,7 +4014,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("Wrong size", 1, statements.size());
 		
 		node = getASTNode((JavaScriptUnit) result, 0, 6);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		methodDeclaration = (FunctionDeclaration) node;
 		block = methodDeclaration.getBody();
 		statements = block.statements();
@@ -4032,7 +4032,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(unit, 0, 0);
 		assertNotNull("No node", node);
-		assertTrue("not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION);
+		assertTrue("not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION);
 		FunctionDeclaration declaration = (FunctionDeclaration) node;
 		ASTParser parser = ASTParser.newParser(AST.JLS2);
 		parser.setKind(ASTParser.K_CLASS_BODY_DECLARATIONS);
@@ -4041,7 +4041,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		parser.setCompilerOptions(JavaScriptCore.getOptions());
 		ASTNode result2 = parser.createAST(null);
 		assertNotNull("No node", result2);
-		assertTrue("not a compilation unit", result2.getNodeType() == ASTNode.COMPILATION_UNIT);
+		assertTrue("not a compilation unit", result2.getNodeType() == ASTNode.JAVASCRIPT_UNIT);
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) result2;
 		assertEquals("wrong problem size", 1, compilationUnit.getProblems().length);
 	}	
@@ -4066,7 +4066,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		parser.setCompilerOptions(JavaScriptCore.getOptions());
 		ASTNode result2 = parser.createAST(null);
 		assertNotNull("No node", result2);
-		assertTrue("not a compilation unit", result2.getNodeType() == ASTNode.COMPILATION_UNIT);
+		assertTrue("not a compilation unit", result2.getNodeType() == ASTNode.JAVASCRIPT_UNIT);
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) result2;
 		assertEquals("wrong problem size", 1, compilationUnit.getProblems().length);
 	}
@@ -4091,7 +4091,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		parser.setCompilerOptions(JavaScriptCore.getOptions());
 		ASTNode result2 = parser.createAST(null);
 		assertNotNull("No node", result2);
-		assertTrue("not a compilation unit", result2.getNodeType() == ASTNode.COMPILATION_UNIT);
+		assertTrue("not a compilation unit", result2.getNodeType() == ASTNode.JAVASCRIPT_UNIT);
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) result2;
 		assertEquals("wrong problem size", 1, compilationUnit.getProblems().length);
 	}
@@ -4600,7 +4600,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		final JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertEquals("Wrong number of problems", 1, unit.getProblems().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(unit, 0, 0);
-		assertEquals("not a method declaration", ASTNode.METHOD_DECLARATION, node.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a method declaration", ASTNode.FUNCTION_DECLARATION, node.getNodeType()); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Not an abstract method", (methodDeclaration.getModifiers() & Modifier.ABSTRACT) != 0);
 		IFunctionBinding methodBinding = methodDeclaration.resolveBinding();
@@ -4684,7 +4684,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("not a expression statement", ASTNode.EXPRESSION_STATEMENT, node.getNodeType()); //$NON-NLS-1$
 		ExpressionStatement statement = (ExpressionStatement) node;
 		Expression expression = statement.getExpression();
-		assertEquals("not a method invocation", ASTNode.METHOD_INVOCATION, expression.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a method invocation", ASTNode.FUNCTION_INVOCATION, expression.getNodeType()); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		Expression expression2 = methodInvocation.getExpression();
 		assertEquals("not a simple name", ASTNode.SIMPLE_NAME, expression2.getNodeType()); //$NON-NLS-1$
@@ -4730,7 +4730,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0548() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0548", "PaletteStackEditPart.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, false);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 	}
 	
 	/**
@@ -4739,7 +4739,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0549() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0549", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, false);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 	}
 	
 	/**
@@ -4748,7 +4748,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0550() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0550", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, false);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 	}
 	
 	/**
@@ -4758,7 +4758,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0551", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, false);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		final IProblem[] problems = unit.getProblems();
 		assertEquals("Wrong number of problems", 1, problems.length); //$NON-NLS-1$
@@ -4801,7 +4801,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0553() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0553", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		final IProblem[] problems = unit.getProblems();
 		assertEquals("Wrong number of problems", 0, problems.length); //$NON-NLS-1$
@@ -4824,7 +4824,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0554", "B.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		final IProblem[] problems = unit.getProblems();
 		assertEquals("Wrong number of problems", 0, problems.length); //$NON-NLS-1$
@@ -4833,7 +4833,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		ReturnStatement returnStatement = (ReturnStatement) node;
 		Expression expression = returnStatement.getExpression();
 		assertNotNull("No expression", expression);
-		assertEquals("Not a method invocation", ASTNode.METHOD_INVOCATION, expression.getNodeType());
+		assertEquals("Not a method invocation", ASTNode.FUNCTION_INVOCATION, expression.getNodeType());
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		Expression expression2 = methodInvocation.getExpression();
 		checkSourceRange(expression2, "A", source);
@@ -4853,7 +4853,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0555", "B.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		final IProblem[] problems = unit.getProblems();
 		assertEquals("Wrong number of problems", 0, problems.length); //$NON-NLS-1$
@@ -4882,7 +4882,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0556", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		final IProblem[] problems = unit.getProblems();
 		assertEquals("Wrong number of problems", 0, problems.length); //$NON-NLS-1$
@@ -4890,7 +4890,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("Not an expression statement", ASTNode.EXPRESSION_STATEMENT, node.getNodeType());
 		ExpressionStatement expressionStatement = (ExpressionStatement) node;
 		Expression expression = expressionStatement.getExpression();
-		assertEquals("Not an method invocation", ASTNode.METHOD_INVOCATION, expression.getNodeType());
+		assertEquals("Not an method invocation", ASTNode.FUNCTION_INVOCATION, expression.getNodeType());
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		Expression expression2 = methodInvocation.getExpression();
 		checkSourceRange(expression2, "(aa.bar())", source);
@@ -4907,7 +4907,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0557", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		final IProblem[] problems = unit.getProblems();
 		assertEquals("Wrong number of problems", 0, problems.length); //$NON-NLS-1$
@@ -4915,7 +4915,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("Not an expression statement", ASTNode.EXPRESSION_STATEMENT, node.getNodeType());
 		ExpressionStatement expressionStatement = (ExpressionStatement) node;
 		Expression expression = expressionStatement.getExpression();
-		assertEquals("Not an method invocation", ASTNode.METHOD_INVOCATION, expression.getNodeType());
+		assertEquals("Not an method invocation", ASTNode.FUNCTION_INVOCATION, expression.getNodeType());
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		Expression expression2 = methodInvocation.getExpression();
 		checkSourceRange(expression2, "(aa.bar())", source);
@@ -4951,7 +4951,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0559", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		final IProblem[] problems = unit.getProblems();
 		assertEquals("Wrong number of problems", 0, problems.length); //$NON-NLS-1$
@@ -4962,7 +4962,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("Wrong type", ASTNode.INFIX_EXPRESSION, expression.getNodeType());
 		InfixExpression infixExpression = (InfixExpression) expression;
 		Expression expression2 = infixExpression.getLeftOperand();
-		assertEquals("Wrong type", ASTNode.METHOD_INVOCATION, expression2.getNodeType());
+		assertEquals("Wrong type", ASTNode.FUNCTION_INVOCATION, expression2.getNodeType());
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression2;
 		Expression expression3 = methodInvocation.getExpression();
 		assertEquals("Wrong type", ASTNode.PARENTHESIZED_EXPRESSION, expression3.getNodeType());
@@ -4979,7 +4979,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0560", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		final IProblem[] problems = unit.getProblems();
 		assertEquals("Wrong number of problems", 0, problems.length); //$NON-NLS-1$
@@ -4990,7 +4990,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("Wrong type", ASTNode.INFIX_EXPRESSION, expression.getNodeType());
 		InfixExpression infixExpression = (InfixExpression) expression;
 		Expression expression2 = infixExpression.getLeftOperand();
-		assertEquals("Wrong type", ASTNode.METHOD_INVOCATION, expression2.getNodeType());
+		assertEquals("Wrong type", ASTNode.FUNCTION_INVOCATION, expression2.getNodeType());
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression2;
 		Expression expression3 = methodInvocation.getExpression();
 		assertEquals("Wrong type", ASTNode.PARENTHESIZED_EXPRESSION, expression3.getNodeType());
@@ -5007,7 +5007,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0561", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		final IProblem[] problems = unit.getProblems();
 		assertEquals("Wrong number of problems", 0, problems.length); //$NON-NLS-1$
@@ -5018,7 +5018,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("Wrong type", ASTNode.INFIX_EXPRESSION, expression.getNodeType());
 		InfixExpression infixExpression = (InfixExpression) expression;
 		Expression expression2 = infixExpression.getLeftOperand();
-		assertEquals("Wrong type", ASTNode.METHOD_INVOCATION, expression2.getNodeType());
+		assertEquals("Wrong type", ASTNode.FUNCTION_INVOCATION, expression2.getNodeType());
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression2;
 		Expression expression3 = methodInvocation.getExpression();
 		assertEquals("Wrong type", ASTNode.PARENTHESIZED_EXPRESSION, expression3.getNodeType());
@@ -5035,7 +5035,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0562", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		final IProblem[] problems = unit.getProblems();
 		assertEquals("Wrong number of problems", 0, problems.length); //$NON-NLS-1$
@@ -5046,7 +5046,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("Wrong type", ASTNode.INFIX_EXPRESSION, expression.getNodeType());
 		InfixExpression infixExpression = (InfixExpression) expression;
 		Expression expression2 = infixExpression.getLeftOperand();
-		assertEquals("Wrong type", ASTNode.METHOD_INVOCATION, expression2.getNodeType());
+		assertEquals("Wrong type", ASTNode.FUNCTION_INVOCATION, expression2.getNodeType());
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression2;
 		Expression expression3 = methodInvocation.getExpression();
 		assertEquals("Wrong type", ASTNode.PARENTHESIZED_EXPRESSION, expression3.getNodeType());
@@ -5063,7 +5063,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0563", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		final IProblem[] problems = unit.getProblems();
 		assertEquals("Wrong number of problems", 0, problems.length); //$NON-NLS-1$
@@ -5074,7 +5074,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("Wrong type", ASTNode.INFIX_EXPRESSION, expression.getNodeType());
 		InfixExpression infixExpression = (InfixExpression) expression;
 		Expression expression2 = infixExpression.getLeftOperand();
-		assertEquals("Wrong type", ASTNode.METHOD_INVOCATION, expression2.getNodeType());
+		assertEquals("Wrong type", ASTNode.FUNCTION_INVOCATION, expression2.getNodeType());
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression2;
 		Expression expression3 = methodInvocation.getExpression();
 		assertEquals("Wrong type", ASTNode.PARENTHESIZED_EXPRESSION, expression3.getNodeType());
@@ -5090,7 +5090,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0564", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		final IProblem[] problems = unit.getProblems();
 		assertEquals("Wrong number of problems", 0, problems.length); //$NON-NLS-1$
@@ -5101,7 +5101,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("Wrong type", ASTNode.INFIX_EXPRESSION, expression.getNodeType());
 		InfixExpression infixExpression = (InfixExpression) expression;
 		Expression expression2 = infixExpression.getLeftOperand();
-		assertEquals("Wrong type", ASTNode.METHOD_INVOCATION, expression2.getNodeType());
+		assertEquals("Wrong type", ASTNode.FUNCTION_INVOCATION, expression2.getNodeType());
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression2;
 		Expression expression3 = methodInvocation.getExpression();
 		assertEquals("Wrong type", ASTNode.PARENTHESIZED_EXPRESSION, expression3.getNodeType());
@@ -5117,7 +5117,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0565", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		final IProblem[] problems = unit.getProblems();
 		assertEquals("Wrong number of problems", 0, problems.length); //$NON-NLS-1$
@@ -5128,7 +5128,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("Wrong type", ASTNode.INFIX_EXPRESSION, expression.getNodeType());
 		InfixExpression infixExpression = (InfixExpression) expression;
 		Expression expression2 = infixExpression.getLeftOperand();
-		assertEquals("Wrong type", ASTNode.METHOD_INVOCATION, expression2.getNodeType());
+		assertEquals("Wrong type", ASTNode.FUNCTION_INVOCATION, expression2.getNodeType());
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression2;
 		Expression expression3 = methodInvocation.getExpression();
 		assertEquals("Wrong type", ASTNode.PARENTHESIZED_EXPRESSION, expression3.getNodeType());
@@ -5144,12 +5144,12 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0566", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		final IProblem[] problems = unit.getProblems();
 		assertEquals("Wrong number of problems", 0, problems.length); //$NON-NLS-1$
 		ASTNode node = getASTNode(unit, 0, 0);
-		assertEquals("Wrong type", ASTNode.METHOD_DECLARATION, node.getNodeType());
+		assertEquals("Wrong type", ASTNode.FUNCTION_DECLARATION, node.getNodeType());
 		assertEquals("Wrong character", '}', source[node.getStartPosition() + node.getLength() - 1]);
 	}
 	
@@ -5160,12 +5160,12 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0567", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(sourceUnit, true);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		final IProblem[] problems = unit.getProblems();
 		assertEquals("Wrong number of problems", 0, problems.length); //$NON-NLS-1$
 		ASTNode node = getASTNode(unit, 0, 0);
-		assertEquals("Wrong type", ASTNode.METHOD_DECLARATION, node.getNodeType());
+		assertEquals("Wrong type", ASTNode.FUNCTION_DECLARATION, node.getNodeType());
 		assertEquals("Wrong character", '}', source[node.getStartPosition() + node.getLength() - 1]);
 	}
 	
@@ -5176,7 +5176,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0569() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0569", "A.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		final IProblem[] problems = unit.getProblems();
 		assertEquals("Wrong number of problems", 0, problems.length); //$NON-NLS-1$
@@ -5192,7 +5192,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 		assertEquals("wrong name", "A", typeDeclaration.getName().getIdentifier());
 		assertNotNull("No javadoc", typeDeclaration.getJavadoc());
 		node = getASTNode(unit, 0, 0);
-		assertEquals("not a method declaration", ASTNode.METHOD_DECLARATION, node.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a method declaration", ASTNode.FUNCTION_DECLARATION, node.getNodeType()); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertEquals("wrong name", "method", methodDeclaration.getName().getIdentifier());
 		assertNotNull("No javadoc", methodDeclaration.getJavadoc());
@@ -5439,7 +5439,7 @@ public class ASTConverterTest2 extends ConverterTestSetup {
 	public void test0606() throws JavaScriptModelException {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter", "src", "test0606", "X.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		ASTNode result = runConversion(sourceUnit, true);
-		assertEquals("not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType()); //$NON-NLS-1$
+		assertEquals("not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType()); //$NON-NLS-1$
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertProblemsSize(unit, 0);
 		unit.accept(new ASTVisitor() {

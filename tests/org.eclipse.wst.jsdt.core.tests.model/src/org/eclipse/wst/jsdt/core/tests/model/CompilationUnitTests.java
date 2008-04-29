@@ -125,7 +125,7 @@ public void test00Class() throws CoreException {
 		assertEquals("Incorrect name for the  field", "field1", fields[0].getElementName());
 		assertTrue("Field should exist " , fields[0].exists());
 
-		IFunction[] methods= type.getMethods();
+		IFunction[] methods= type.getFunctions();
 		assertEquals("Wrong number of methods returned",  2, methods.length);
 		assertEquals("Incorrect name for the  method", "someMethod", methods[0].getElementName());
 		assertTrue("Field should exist " ,methods[0].exists());
@@ -202,7 +202,7 @@ public void testDeprecatedFlag04() throws JavaScriptModelException {
  * (regression test fo bug 23207 Flags.isDeprecated(IFunction.getFlags()) doesn't work)
  */
 public void testDeprecatedFlag05() throws JavaScriptModelException {
-	IFunction method = this.cu.getMethod("bar", new String[]{});
+	IFunction method = this.cu.getFunction("bar", new String[]{});
 	assertTrue("Method bar should not be deprecated", !Flags.isDeprecated(method.getFlags()));
 }
 
@@ -211,7 +211,7 @@ public void testDeprecatedFlag05() throws JavaScriptModelException {
  * (regression test fo bug 23207 Flags.isDeprecated(IFunction.getFlags()) doesn't work)
  */
 public void testDeprecatedFlag06() throws JavaScriptModelException {
-	IFunction method = this.cu.getMethod("fred", new String[]{});
+	IFunction method = this.cu.getFunction("fred", new String[]{});
 	assertTrue("Method fred should be deprecated", Flags.isDeprecated(method.getFlags()));
 }
 
@@ -238,7 +238,7 @@ public void testDeprecatedFlag08() throws JavaScriptModelException {
  * (regression test fo bug 89807 Outliner should recognize @Deprecated annotation)
  */
 public void testDeprecatedFlag09() throws JavaScriptModelException {
-	IFunction method = this.cu.getType("X").getMethod("fred2", new String[0]);
+	IFunction method = this.cu.getType("X").getFunction("fred2", new String[0]);
 	assertTrue("Method fred2 should be deprecated", Flags.isDeprecated(method.getFlags()));
 }
 
@@ -331,7 +331,7 @@ public void testGetCategories05() throws CoreException {
 		"  void foo() {}\n" +
 		"}"
 	);
-	String[] categories = workingCopy.getType("Y").getMethod("foo", new String[0]).getCategories();
+	String[] categories = workingCopy.getType("Y").getFunction("foo", new String[0]).getCategories();
 	assertStringsEqual(
 		"Unexpected categories",
 		"test\n",
@@ -351,7 +351,7 @@ public void testGetCategories06() throws CoreException {
 		"  public Y() {}\n" +
 		"}"
 	);
-	String[] categories = workingCopy.getType("Y").getMethod("Y", new String[0]).getCategories();
+	String[] categories = workingCopy.getType("Y").getFunction("Y", new String[0]).getCategories();
 	assertStringsEqual(
 		"Unexpected categories",
 		"test\n",
@@ -410,7 +410,7 @@ public void testGetCategories09() throws CoreException {
 		"  void foo() {}\n" +
 		"}"
 	);
-	String[] categories = workingCopy.getType("Y").getMethod("foo", new String[0]).getCategories();
+	String[] categories = workingCopy.getType("Y").getFunction("foo", new String[0]).getCategories();
 	assertStringsEqual(
 		"Unexpected categories",
 		"",
@@ -431,7 +431,7 @@ public void testGetCategories10() throws CoreException {
 		"  void foo() {}\n" +
 		"}"
 	);
-	String[] categories = workingCopy.getType("Y").getMethod("foo", new String[0]).getCategories();
+	String[] categories = workingCopy.getType("Y").getFunction("foo", new String[0]).getCategories();
 	assertStringsEqual(
 		"Unexpected categories",
 		"test1\n" +
@@ -452,7 +452,7 @@ public void testGetCategories11() throws CoreException {
 		"  void foo() {}\n" +
 		"}"
 	);
-	String[] categories = workingCopy.getType("Y").getMethod("foo", new String[0]).getCategories();
+	String[] categories = workingCopy.getType("Y").getFunction("foo", new String[0]).getCategories();
 	assertStringsEqual(
 		"Unexpected categories",
 		"test1\n" +
@@ -469,7 +469,7 @@ public void testGetCategories12() throws CoreException {
 		"  void foo() {}\n" +
 		"}"
 	);
-	String[] categories = this.workingCopy.getType("Y").getMethod("foo", new String[0]).getCategories();
+	String[] categories = this.workingCopy.getType("Y").getFunction("foo", new String[0]).getCategories();
 	assertStringsEqual(
 		"Unexpected categories",
 		"test1\n" +
@@ -488,7 +488,7 @@ public void testGetCategories13() throws CoreException {
 		"  void foo() {}\n" +
 		"}"
 	);
-	String[] categories = this.workingCopy.getType("Y").getMethod("foo", new String[0]).getCategories();
+	String[] categories = this.workingCopy.getType("Y").getFunction("foo", new String[0]).getCategories();
 	assertStringsEqual(
 		"Unexpected categories",
 		"",
@@ -505,7 +505,7 @@ public void testGetCategories14() throws CoreException {
 		"  void foo() {}\n" +
 		"}"
 	);
-	String[] categories = this.workingCopy.getType("Y").getMethod("foo", new String[0]).getCategories();
+	String[] categories = this.workingCopy.getType("Y").getFunction("foo", new String[0]).getCategories();
 	assertStringsEqual(
 		"Unexpected categories",
 		"",
@@ -522,7 +522,7 @@ public void testGetCategories15() throws CoreException {
 		"  void foo() {}\n" +
 		"}"
 	);
-	String[] categories = this.workingCopy.getType("Y").getMethod("foo", new String[0]).getCategories();
+	String[] categories = this.workingCopy.getType("Y").getFunction("foo", new String[0]).getCategories();
 	assertStringsEqual(
 		"Unexpected categories",
 		"test1\n",
@@ -861,7 +861,7 @@ public void testGetKey3() {
  * Ensures that the key for an anonymous type is correct
  */
 public void testGetKey4() {
-	IType type = this.cu.getType("X").getMethod("foo", new String[0]).getType("", 1);
+	IType type = this.cu.getType("X").getFunction("foo", new String[0]).getType("", 1);
 	assertEquals("Lp/X$1;", type.getKey());
 }
 /**
@@ -869,7 +869,7 @@ public void testGetKey4() {
  */
 public void testGetMethod1() throws JavaScriptModelException {
 //	IType type = this.cu.getType("X");
-	IFunction foo = this.cu.getMethod("foo", new String[]{null});
+	IFunction foo = this.cu.getFunction("foo", new String[]{null});
 //	String[] exceptionTypes= foo.getExceptionTypes();
 //	assertEquals("Wrong number of exception types", 1, exceptionTypes.length);
 //	assertEquals("Unxepected exception type", "QIOException;", exceptionTypes[0]);
@@ -901,7 +901,7 @@ public void testGetMethod1() throws JavaScriptModelException {
  */
 public void testGetMethods() throws JavaScriptModelException {
 //	IType type = this.cu.getType("X");
-	IFunction[] methods= this.cu.getMethods();
+	IFunction[] methods= this.cu.getFunctions();
 	String[] methodNames = new String[] {"foo", "bar", "fred", "fred2"};
 	String[] flags = new String[] {"public", "protected static", "private", "private"};
 	assertEquals("Wrong number of methods returned", methodNames.length, methods.length);
@@ -1082,7 +1082,7 @@ public void testNameWithoutJavaLikeExtension() {
  * false to #exists() and #isOpen()
  */
 public void testNotPresent1() {
-	IJavaScriptUnit compilationUnit = ((IPackageFragment)this.cu.getParent()).getCompilationUnit("DoesNotExist.js");
+	IJavaScriptUnit compilationUnit = ((IPackageFragment)this.cu.getParent()).getJavaScriptUnit("DoesNotExist.js");
 	assertTrue("CU should not be open", !compilationUnit.isOpen());
 	assertTrue("CU should not exist", !compilationUnit.exists());
 	assertTrue("CU should still not be open", !compilationUnit.isOpen());
@@ -1338,7 +1338,7 @@ public void test110172() throws CoreException {
 		for (int i = 0; i < length; i++) {
 			final IJavaScriptElement element = members[i];
 			assertTrue(element instanceof IMember);
-			final ISourceRange javadocRange = ((IMember) element).getJavadocRange();
+			final ISourceRange javadocRange = ((IMember) element).getJSdocRange();
 			final String elementName = element.getElementName();
 			if ("f".equals(elementName)) {
 				assertNotNull("No javadoc source range", javadocRange);
@@ -1412,12 +1412,12 @@ public void test120902() throws CoreException {
 			"}";
 		createFile("/P/src/X.js", source);
 		final IJavaScriptUnit compilationUnit = getCompilationUnit("/P/src/X.js");
-		IFunction type = compilationUnit.getMethod("foo",null);
-		ISourceRange javadocRange = type.getJavadocRange();
+		IFunction type = compilationUnit.getFunction("foo",null);
+		ISourceRange javadocRange = type.getJSdocRange();
 		assertNotNull("No source range", javadocRange);
 		compilationUnit.getBuffer().setContents("");
 		try {
-			javadocRange = type.getJavadocRange();
+			javadocRange = type.getJSdocRange();
 			assertNull("Got a source range", javadocRange);
 		} catch (ArrayIndexOutOfBoundsException e) {
 			assertFalse("Should not happen", true);

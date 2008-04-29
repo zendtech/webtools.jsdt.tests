@@ -168,7 +168,7 @@ class DefaultJavaElementComparator implements Comparator {
 	 */
 	private int getCategory(BodyDeclaration node) {
 		switch(node.getNodeType()) {
-			case ASTNode.METHOD_DECLARATION :
+			case ASTNode.FUNCTION_DECLARATION :
 				FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 				if (methodDeclaration.isConstructor()) {
 					return this.categories[CONSTRUCTOR_CATEGORY];
@@ -250,7 +250,7 @@ class DefaultJavaElementComparator implements Comparator {
 
 	private String buildSignature(BodyDeclaration node) {
 		switch(node.getNodeType()) {
-			case ASTNode.METHOD_DECLARATION :
+			case ASTNode.FUNCTION_DECLARATION :
 				FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 				StringBuffer buffer = new StringBuffer();
 				buffer.append(methodDeclaration.getName().getIdentifier());

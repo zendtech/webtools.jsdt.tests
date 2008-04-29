@@ -56,7 +56,7 @@ public void testAddPackageFragmentRootAndPackageFrament() throws CoreException {
 			new IIncludePathEntry[] {
 				JavaScriptCore.newProjectEntry(new Path("/P1"))
 			};
-		p2.setRawClasspath(classpath, null);
+		p2.setRawIncludepath(classpath, null);
 		
 		IPackageFragment[] res = getNameLookup((JavaProject)p2).findPackageFragments("p1", false);
 		assertTrue("Should get no package fragment", res == null);
@@ -66,7 +66,7 @@ public void testAddPackageFragmentRootAndPackageFrament() throws CoreException {
 				JavaScriptCore.newSourceEntry(new Path("/P1/src1")),
 				JavaScriptCore.newSourceEntry(new Path("/P1/src2"))
 			};
-		p1.setRawClasspath(classpath2, null);
+		p1.setRawIncludepath(classpath2, null);
 		createFolder("/P1/src2/p1");
 		
 		res = getNameLookup((JavaProject)p2).findPackageFragments("p1", false);
@@ -89,7 +89,7 @@ public void testAddPackageFragment() throws CoreException {
 			new IIncludePathEntry[] {
 				JavaScriptCore.newProjectEntry(new Path("/P1"))
 			};
-		p2.setRawClasspath(classpath, null);
+		p2.setRawIncludepath(classpath, null);
 		
 		IPackageFragment[] res = getNameLookup((JavaProject)p2).findPackageFragments("p1", false);
 		assertTrue("Should get no package fragment", res == null);

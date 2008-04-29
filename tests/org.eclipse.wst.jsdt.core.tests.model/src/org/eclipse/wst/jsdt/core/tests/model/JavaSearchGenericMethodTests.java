@@ -90,7 +90,7 @@ public class JavaSearchGenericMethodTests extends AbstractJavaSearchGenericTests
 	public void testMethodReferencesElementPatternSingleTypeParameter01() throws CoreException {
 		IType type = getCompilationUnit("JavaSearch15/src/g5/m/def/Single.js").getType("Single");
 		// search reference to a standard method
-		IFunction method = type.getMethod("standard", new String[] { "QT;" });
+		IFunction method = type.getFunction("standard", new String[] { "QT;" });
 		IJavaScriptSearchScope scope = getJavaSearchScope15();
 		search(method, REFERENCES, scope, resultCollector);
 		assertSearchResults(
@@ -103,7 +103,7 @@ public class JavaSearchGenericMethodTests extends AbstractJavaSearchGenericTests
 	public void testMethodReferencesElementPatternSingleTypeParameter02() throws CoreException {
 		IType type = getCompilationUnit("JavaSearch15/src/g5/m/def/Single.js").getType("Single");
 		// search reference to a generic method
-		IFunction method = type.getMethod("generic", new String[] { "QU;" });
+		IFunction method = type.getFunction("generic", new String[] { "QU;" });
 		IJavaScriptSearchScope scope = getJavaSearchScope15();
 		search(method, REFERENCES, scope, resultCollector);
 		assertSearchResults(
@@ -116,7 +116,7 @@ public class JavaSearchGenericMethodTests extends AbstractJavaSearchGenericTests
 	public void testMethodReferencesElementPatternSingleTypeParameter03() throws CoreException {
 		IType type = getCompilationUnit("JavaSearch15/src/g5/m/def/Single.js").getType("Single");
 		// search reference to a method returning a parameterized type
-		IFunction method = type.getMethod("returnParamType", new String[] {});
+		IFunction method = type.getFunction("returnParamType", new String[] {});
 		IJavaScriptSearchScope scope = getJavaSearchScope15();
 		search(method, REFERENCES, scope, resultCollector);
 		assertSearchResults(
@@ -133,7 +133,7 @@ public class JavaSearchGenericMethodTests extends AbstractJavaSearchGenericTests
 	public void testMethodReferencesElementPatternSingleTypeParameter04() throws CoreException {
 		IType type = getCompilationUnit("JavaSearch15/src/g5/m/def/Single.js").getType("Single");
 		// search reference to a method with parameterized type arguments
-		IFunction method = type.getMethod("paramTypesArgs", new String[] { "QSingle<QT;>;" });
+		IFunction method = type.getFunction("paramTypesArgs", new String[] { "QSingle<QT;>;" });
 		IJavaScriptSearchScope scope = getJavaSearchScope15();
 		search(method, REFERENCES, scope, resultCollector);
 		assertSearchResults(
@@ -149,7 +149,7 @@ public class JavaSearchGenericMethodTests extends AbstractJavaSearchGenericTests
 	public void testMethodReferencesElementPatternSingleTypeParameter05() throws CoreException {
 		IType type = getCompilationUnit("JavaSearch15/src/g5/m/def/Single.js").getType("Single");
 		// search reference to a generic method returning a param type with param type parameters (=complete)
-		IFunction method = type.getMethod("complete", new String[] { "QU;", "QSingle<QT;>;" });
+		IFunction method = type.getFunction("complete", new String[] { "QU;", "QSingle<QT;>;" });
 		IJavaScriptSearchScope scope = getJavaSearchScope15();
 		search(method, REFERENCES, scope, resultCollector);
 		assertSearchResults(
@@ -166,7 +166,7 @@ public class JavaSearchGenericMethodTests extends AbstractJavaSearchGenericTests
 	// Search references to methods defined in a multiple type parameters class
 	public void testMethodReferencesElementPatternMultipleTypeParameter01() throws CoreException {
 		IType type = getCompilationUnit("JavaSearch15/src/g5/m/def/Multiple.js").getType("Multiple");
-		IFunction method = type.getMethod("standard", new String[] { "QT1;","QT2;","QT3;" });
+		IFunction method = type.getFunction("standard", new String[] { "QT1;","QT2;","QT3;" });
 		IJavaScriptSearchScope scope = getJavaSearchScope15();
 		search(method, REFERENCES, scope, resultCollector);
 		assertSearchResults(
@@ -176,7 +176,7 @@ public class JavaSearchGenericMethodTests extends AbstractJavaSearchGenericTests
 	}
 	public void testMethodReferencesElementPatternMultipleTypeParameter02() throws CoreException {
 		IType type = getCompilationUnit("JavaSearch15/src/g5/m/def/Multiple.js").getType("Multiple");
-		IFunction method = type.getMethod("generic", new String[] { "QU1;","QU2;","QU3;" });
+		IFunction method = type.getFunction("generic", new String[] { "QU1;","QU2;","QU3;" });
 		IJavaScriptSearchScope scope = getJavaSearchScope15();
 		search(method, REFERENCES, scope, resultCollector);
 		assertSearchResults(
@@ -188,7 +188,7 @@ public class JavaSearchGenericMethodTests extends AbstractJavaSearchGenericTests
 	}
 	public void testMethodReferencesElementPatternMultipleTypeParameter03() throws CoreException {
 		IType type = getCompilationUnit("JavaSearch15/src/g5/m/def/Multiple.js").getType("Multiple");
-		IFunction method = type.getMethod("returnParamType", new String[] {});
+		IFunction method = type.getFunction("returnParamType", new String[] {});
 		IJavaScriptSearchScope scope = getJavaSearchScope15();
 		search(method, REFERENCES, scope, resultCollector);
 		assertSearchResults(
@@ -202,7 +202,7 @@ public class JavaSearchGenericMethodTests extends AbstractJavaSearchGenericTests
 	}
 	public void testMethodReferencesElementPatternMultipleTypeParameter04() throws CoreException {
 		IType type = getCompilationUnit("JavaSearch15/src/g5/m/def/Multiple.js").getType("Multiple");
-		IFunction method = type.getMethod("paramTypesArgs", new String[] { "QSingle<QT1;>;","QSingle<QT2;>;","QSingle<QT3;>;","QMultiple<QT1;QT2;QT3;>;" });
+		IFunction method = type.getFunction("paramTypesArgs", new String[] { "QSingle<QT1;>;","QSingle<QT2;>;","QSingle<QT3;>;","QMultiple<QT1;QT2;QT3;>;" });
 		IJavaScriptSearchScope scope = getJavaSearchScope15();
 		search(method, REFERENCES, scope, resultCollector);
 		assertSearchResults(
@@ -215,7 +215,7 @@ public class JavaSearchGenericMethodTests extends AbstractJavaSearchGenericTests
 	}
 	public void testMethodReferencesElementPatternMultipleTypeParameter05() throws CoreException {
 		IType type = getCompilationUnit("JavaSearch15/src/g5/m/def/Multiple.js").getType("Multiple");
-		IFunction method = type.getMethod("complete", new String[] { "QU1;","QU2;","QU3;", "QMultiple<QT1;QT2;QT3;>;" });
+		IFunction method = type.getFunction("complete", new String[] { "QU1;","QU2;","QU3;", "QMultiple<QT1;QT2;QT3;>;" });
 		IJavaScriptSearchScope scope = getJavaSearchScope15();
 		search(method, REFERENCES, scope, resultCollector);
 		assertSearchResults(

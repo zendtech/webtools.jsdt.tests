@@ -82,17 +82,17 @@ public abstract class ConverterTestSetup extends AbstractASTTests {
 
 	public void setUpJCLClasspathVariables(String compliance) throws JavaScriptModelException, IOException {
 		if ("1.5".equals(compliance)) {
-			if (JavaScriptCore.getClasspathVariable("CONVERTER_JCL15_LIB") == null) {
+			if (JavaScriptCore.getIncludepathVariable("CONVERTER_JCL15_LIB") == null) {
 //				setupExternalJCL("converterJclMin1.5");
-				JavaScriptCore.setClasspathVariables(
+				JavaScriptCore.setIncludepathVariables(
 					new String[] {"CONVERTER_JCL15_LIB", "CONVERTER_JCL15_SRC", "CONVERTER_JCL15_SRCROOT"},
 					new IPath[] {getConverterJCLPath(compliance), getConverterJCLSourcePath(compliance), getConverterJCLRootSourcePath()},
 					null);
 			} 
 		} else {
-			if (JavaScriptCore.getClasspathVariable("CONVERTER_JCL_LIB") == null) {
+			if (JavaScriptCore.getIncludepathVariable("CONVERTER_JCL_LIB") == null) {
 //				setupExternalJCL("converterJclMin");
-				JavaScriptCore.setClasspathVariables(
+				JavaScriptCore.setIncludepathVariables(
 					new String[] {"CONVERTER_JCL_LIB", "CONVERTER_JCL_SRC", "CONVERTER_JCL_SRCROOT"},
 					new IPath[] {getConverterJCLPath(), getConverterJCLSourcePath(), getConverterJCLRootSourcePath()},
 					null);
@@ -413,7 +413,7 @@ public abstract class ConverterTestSetup extends AbstractASTTests {
 		ASTNode result = parser.createAST(null);
 		
 		// Verify we get a compilation unit node and that binding are correct
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT);
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT);
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) result;
 		if (resolveBindings && compilationUnit.getProblems().length == 0) {
 			compilationUnit.accept(new NullBindingVerifier());
@@ -433,7 +433,7 @@ public abstract class ConverterTestSetup extends AbstractASTTests {
 		ASTNode result = parser.createAST(null);
 		
 		// Verify we get a compilation unit node and that binding are correct
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT);
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT);
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) result;
 		if (resolveBindings && compilationUnit.getProblems().length == 0) {
 			compilationUnit.accept(new NullBindingVerifier());
@@ -453,7 +453,7 @@ public abstract class ConverterTestSetup extends AbstractASTTests {
 		ASTNode result = parser.createAST(null);
 		
 		// Verify we get a compilation unit node and that binding are correct
-		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.COMPILATION_UNIT);
+		assertTrue("Not a compilation unit", result.getNodeType() == ASTNode.JAVASCRIPT_UNIT);
 		JavaScriptUnit compilationUnit = (JavaScriptUnit) result;
 		if (resolveBindings && compilationUnit.getProblems().length == 0) {
 			compilationUnit.accept(new NullBindingVerifier());

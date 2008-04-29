@@ -133,7 +133,7 @@ public class ImportRewriteTest extends AbstractJavaModelTests {
 	
 	public void testAddImportsNoEmptyLines() throws Exception {
 
-		sourceFolder.getJavaProject().setOption(DefaultCodeFormatterConstants.FORMATTER_BLANK_LINES_BETWEEN_IMPORT_GROUPS, String.valueOf(0));
+		sourceFolder.getJavaScriptProject().setOption(DefaultCodeFormatterConstants.FORMATTER_BLANK_LINES_BETWEEN_IMPORT_GROUPS, String.valueOf(0));
 
 		IPackageFragment pack1= sourceFolder.createPackageFragment("pack1", false, null);
 		StringBuffer buf= new StringBuffer();
@@ -168,7 +168,7 @@ public class ImportRewriteTest extends AbstractJavaModelTests {
 	
 	public void testAddImportsMoreEmptyLines() throws Exception {
 		
-		sourceFolder.getJavaProject().setOption(DefaultCodeFormatterConstants.FORMATTER_BLANK_LINES_BETWEEN_IMPORT_GROUPS, String.valueOf(2));
+		sourceFolder.getJavaScriptProject().setOption(DefaultCodeFormatterConstants.FORMATTER_BLANK_LINES_BETWEEN_IMPORT_GROUPS, String.valueOf(2));
 
 		IPackageFragment pack1= sourceFolder.createPackageFragment("pack1", false, null);
 		StringBuffer buf= new StringBuffer();

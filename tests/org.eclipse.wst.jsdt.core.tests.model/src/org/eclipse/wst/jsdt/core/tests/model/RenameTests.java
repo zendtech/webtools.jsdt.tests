@@ -172,7 +172,7 @@ public void setUpSuite() throws Exception {
 	);
 	project.getProject().build(IncrementalProjectBuilder.FULL_BUILD, null);
 	waitForAutoBuild();
-	project.setRawClasspath(
+	project.setRawIncludepath(
 		new IIncludePathEntry[] {
 			JavaScriptCore.newLibraryEntry(new Path("/BinaryProject/lib"), null, null)
 		},
@@ -217,7 +217,7 @@ public void testRenameBinaryField() throws JavaScriptModelException {
  */
 public void testRenameBinaryMethod() throws JavaScriptModelException {
 	IClassFile cf = getClassFile("BinaryProject", "lib", "", "X.class");
-	IFunction binaryMethod = cf.getType().getMethods()[0];
+	IFunction binaryMethod = cf.getType().getFunctions()[0];
 	renameNegative(binaryMethod, "fred", false, IJavaScriptModelStatusConstants.READ_ONLY);
 }
 /**
@@ -309,7 +309,7 @@ public void testRenameCompilationUnitWithNull() throws JavaScriptModelException 
  * <code>RenameElementsOperation</code>.  
  */
 public void testRenameConstructor() {
-	IFunction constructor = this.cu.getType("X").getMethod("X",  new String[] {"I"});
+	IFunction constructor = this.cu.getType("X").getFunction("X",  new String[] {"I"});
 	renameNegative(constructor, "newName", false, IJavaScriptModelStatusConstants.NAME_COLLISION);
 }
 
@@ -506,7 +506,7 @@ public void testRenameFieldsMultiStatus() throws CoreException {
 
 	boolean e = false;
 	try {
-		type.getJavaModel().rename(iFields, new IJavaScriptElement[] {type}, newNames, false, null);
+		type.getJavaScriptModel().rename(iFields, new IJavaScriptElement[] {type}, newNames, false, null);
 	} catch (JavaScriptModelException jme) {
 		assertTrue("Should not be multistatus (only one failure)", !jme.getStatus().isMultiStatus());
 		assertTrue("Should be an invalid destination", jme.getStatus().getCode() == IJavaScriptModelStatusConstants.INVALID_NAME);
@@ -611,15 +611,15 @@ public void testRenameMainTypes() throws CoreException {
 		false);
 
 	//test that both the compilation unit, main type and constructors have been renamed.
-	IJavaScriptUnit renamedCU1= pkg.getCompilationUnit("NewX.js");
-	IJavaScriptUnit renamedCU2= pkg.getCompilationUnit("NewY.js");
+	IJavaScriptUnit renamedCU1= pkg.getJavaScriptUnit("NewX.js");
+	IJavaScriptUnit renamedCU2= pkg.getJavaScriptUnit("NewY.js");
 	IType newType1 = renamedCU1.getType("NewX");
 	IType newType2 = renamedCU2.getType("NewY");
 	assertTrue("NewX should be present", newType1.exists());
 	assertTrue("NewY should be present", newType2.exists());
 	
-	IFunction constructor1 = newType1.getMethod("NewX", new String[] {"I"});
-	IFunction constructor2 = newType2.getMethod("NewY", new String[] {});
+	IFunction constructor1 = newType1.getFunction("NewX", new String[] {"I"});
+	IFunction constructor2 = newType2.getFunction("NewY", new String[] {});
 	assertTrue("NewX(int) should be present", constructor1.exists());
 	assertTrue("NewY() should be present", constructor2.exists());
 }
@@ -658,11 +658,11 @@ public void testRenameMainTypesAndAChild() throws CoreException {
 
 	//test that both the compilation unit and the main type have been renamed.
 	IPackageFragment pkg = (IPackageFragment) this.cu.getParent();
-	IJavaScriptUnit renamedCU1= pkg.getCompilationUnit("NewX.js");
+	IJavaScriptUnit renamedCU1= pkg.getJavaScriptUnit("NewX.js");
 	IType newX = renamedCU1.getType("NewX");
 	assertTrue("NewX should be present", newX.exists());
 	
-	IJavaScriptUnit renamedCU2= pkg.getCompilationUnit("NewY.js");
+	IJavaScriptUnit renamedCU2= pkg.getJavaScriptUnit("NewY.js");
 	IType newY = renamedCU2.getType("NewY");
 	assertTrue("NewY should be present", newY.exists());
 	
@@ -674,28 +674,28 @@ public void testRenameMainTypesAndAChild() throws CoreException {
  */
 public void testRenameMethod() throws JavaScriptModelException {
 	IType type = this.cu.getType("X");
-	IFunction method = type.getMethod("foo", new String[] {"QString;"});
+	IFunction method = type.getFunction("foo", new String[] {"QString;"});
 	renamePositive(method, "newFoo", false);
 	
 	//ensure that the method did not move as a result of the rename
 	ensureCorrectPositioning(
 		type, 
-		type.getMethod("newFoo", new String[] {"QString;"}), 
-		type.getMethod("otherMethod", new String[] {"QString;"}));
+		type.getFunction("newFoo", new String[] {"QString;"}), 
+		type.getFunction("otherMethod", new String[] {"QString;"}));
 }
 /**
  * Ensures that a method cannot be renamed to an existing method name.
  */
 public void testRenameMethodResultingInCollision() {
 	IType type = this.cu.getType("X");
-	IFunction method = type.getMethod("foo", new String[] {"QString;"});
+	IFunction method = type.getFunction("foo", new String[] {"QString;"});
 	renameNegative(method, "otherMethod", false, IJavaScriptModelStatusConstants.NAME_COLLISION);
 }
 /**
  * Ensures that a method cannot be renamed to an invalid method name
  */
 public void testRenameMethodsWithInvalidName() {
-	IFunction method = this.cu.getType("X").getMethod("foo", new String[] {"QString;"});
+	IFunction method = this.cu.getType("X").getFunction("foo", new String[] {"QString;"});
 	renameNegative(method, "%%someInvalidName", false, IJavaScriptModelStatusConstants.INVALID_NAME);
 }
 public void testRenamePF() throws CoreException {
@@ -715,7 +715,7 @@ public void testRenamePF() throws CoreException {
 	assertTrue("Old package should not exist", !frag.exists());
 	assertTrue("New package should exist", newFrag.exists());
 
-	IJavaScriptUnit compilationUnit = newFrag.getCompilationUnit("A.js");
+	IJavaScriptUnit compilationUnit = newFrag.getJavaScriptUnit("A.js");
 	assertTrue("A.java should exits in new package", compilationUnit.exists());
 	
 	IType[] types = compilationUnit.getTypes();
@@ -755,7 +755,7 @@ public void testRenamePF2() throws CoreException {
 	assertTrue("Old package should not exist", !frag.exists());
 	assertTrue("New package should exist", newFrag.exists());
 
-	IJavaScriptUnit compilationUnit = newFrag.getCompilationUnit("A.js");
+	IJavaScriptUnit compilationUnit = newFrag.getJavaScriptUnit("A.js");
 	assertTrue("A.java should exits in new package", compilationUnit.exists());
 	
 	IType[] types = compilationUnit.getTypes();
@@ -817,7 +817,7 @@ public void testRenamePFWithSubPackages() throws CoreException {
 	IPackageFragment newFrag = getPackage("/P/src/newX");
 	assertTrue("New package should exist", newFrag.exists());
 
-	IJavaScriptUnit compilationUnit = oldFrag.getCompilationUnit("A.js");
+	IJavaScriptUnit compilationUnit = oldFrag.getJavaScriptUnit("A.js");
 	assertTrue("A.java should exits in old inner package", compilationUnit.exists());
 	
 	assertDeltas(
@@ -838,14 +838,14 @@ public void testRenameSyntaxErrorMethod() throws CoreException {
 		"  }\n" +
 		"}"
 	);
-	IFunction method = getCompilationUnit("/P/src/Y.js").getType("Y").getMethod("foo", null);
+	IFunction method = getCompilationUnit("/P/src/Y.js").getType("Y").getFunction("foo", null);
 	renamePositive(method, "newFoo", false);
 }
 /**
  * Ensures that attempting to rename with an incorrect number of renamings fails
  */
 public void testRenameWithInvalidRenamings() {
-	IFunction method = getCompilationUnit("/P/src/X.js").getType("X").getMethod("foo", null);
+	IFunction method = getCompilationUnit("/P/src/X.js").getType("X").getFunction("foo", null);
 
 	renameNegative(
 		new IJavaScriptElement[] {method}, 

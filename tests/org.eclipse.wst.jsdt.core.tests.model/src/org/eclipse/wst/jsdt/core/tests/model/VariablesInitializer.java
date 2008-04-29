@@ -25,9 +25,9 @@ public class VariablesInitializer extends JsGlobalScopeVariableInitializer {
 	
 	public static void reset() {
 		initializer = null;
-		String[] varNames = JavaScriptCore.getClasspathVariableNames();
+		String[] varNames = JavaScriptCore.getIncludepathVariableNames();
 		try {
-			JavaScriptCore.setClasspathVariables(varNames, new IPath[varNames.length], null);
+			JavaScriptCore.setIncludepathVariables(varNames, new IPath[varNames.length], null);
 		} catch (JavaScriptModelException e) {
 			e.printStackTrace();
 		}

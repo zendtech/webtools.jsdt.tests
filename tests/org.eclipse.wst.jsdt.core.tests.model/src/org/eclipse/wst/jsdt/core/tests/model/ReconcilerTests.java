@@ -127,13 +127,13 @@ protected void assertNoProblem(char[] source, IJavaScriptUnit unit) throws Inter
 }
 protected void addClasspathEntries(IIncludePathEntry[] entries, boolean enableForbiddenReferences) throws JavaScriptModelException {
 	IJavaScriptProject project = getJavaProject("Reconciler");
-	IIncludePathEntry[] oldClasspath = project.getRawClasspath();
+	IIncludePathEntry[] oldClasspath = project.getRawIncludepath();
 	int oldLength = oldClasspath.length;
 	int length = entries.length;
 	IIncludePathEntry[] newClasspath = new IIncludePathEntry[oldLength+length];
 	System.arraycopy(oldClasspath, 0, newClasspath, 0, oldLength);
 	System.arraycopy(entries, 0, newClasspath, oldLength, length);
-	project.setRawClasspath(newClasspath, null);
+	project.setRawIncludepath(newClasspath, null);
 	
 	if (enableForbiddenReferences) {
 		project.setOption(JavaScriptCore.COMPILER_PB_FORBIDDEN_REFERENCE, JavaScriptCore.ERROR);
@@ -141,12 +141,12 @@ protected void addClasspathEntries(IIncludePathEntry[] entries, boolean enableFo
 }
 protected void removeClasspathEntries(IIncludePathEntry[] entries) throws JavaScriptModelException {
 	IJavaScriptProject project = getJavaProject("Reconciler");
-	IIncludePathEntry[] oldClasspath = project.getRawClasspath();
+	IIncludePathEntry[] oldClasspath = project.getRawIncludepath();
 	int oldLength = oldClasspath.length;
 	int length = entries.length;
 	IIncludePathEntry[] newClasspath = new IIncludePathEntry[oldLength-length];
 	System.arraycopy(oldClasspath, 0, newClasspath, 0, oldLength-length);
-	project.setRawClasspath(newClasspath, null);
+	project.setRawIncludepath(newClasspath, null);
 }
 /**
  * Setup for the next test.
@@ -2308,7 +2308,7 @@ public void testReconcileParticipant06() throws CoreException {
  * (regression test for bug 125291 Enable conditional loading of APT)
  */
 public void testReconcileParticipant07() throws CoreException {
-	IJavaScriptProject project = this.workingCopy.getJavaProject();
+	IJavaScriptProject project = this.workingCopy.getJavaScriptProject();
 	String originalSourceLevel = project.getOption(JavaScriptCore.COMPILER_SOURCE, true);
 	try {
 		project.setOption(JavaScriptCore.COMPILER_SOURCE, JavaScriptCore.VERSION_1_1);

@@ -84,7 +84,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Block block = methodDeclaration.getBody();
 		List statements = block.statements();
@@ -94,7 +94,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		ExpressionStatement expressionStatement = (ExpressionStatement) statement;
 		checkSourceRange(expressionStatement, "bar(0)", source); //$NON-NLS-1$
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		checkSourceRange(methodInvocation, "bar(0)", source); //$NON-NLS-1$
 		List list = methodInvocation.arguments();
@@ -110,7 +110,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		ExpressionStatement expressionStatement2 = (ExpressionStatement) statement2;
 		checkSourceRange(expressionStatement2, "baz(1);", source); //$NON-NLS-1$
 		Expression expression2 = expressionStatement2.getExpression();
-		assertTrue("Not a method invocation", expression2.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression2.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation2 = (FunctionInvocation) expression2;
 		checkSourceRange(methodInvocation2, "baz(1)", source); //$NON-NLS-1$
 		List list2 = methodInvocation2.arguments();
@@ -151,7 +151,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Block block = methodDeclaration.getBody();
 		List statements = block.statements();
@@ -161,7 +161,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		ExpressionStatement expressionStatement = (ExpressionStatement) statement;
 		checkSourceRange(expressionStatement, "baz(0);", source); //$NON-NLS-1$
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		checkSourceRange(methodInvocation, "baz(0)", source); //$NON-NLS-1$
 		List list = methodInvocation.arguments();
@@ -177,7 +177,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		ExpressionStatement expressionStatement2 = (ExpressionStatement) statement2;
 		checkSourceRange(expressionStatement2, "bar(1", source); //$NON-NLS-1$
 		Expression expression2 = expressionStatement2.getExpression();
-		assertTrue("Not a method invocation", expression2.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression2.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation2 = (FunctionInvocation) expression2;
 		checkSourceRange(methodInvocation2, "bar(1", source); //$NON-NLS-1$
 		List list2 = methodInvocation2.arguments();
@@ -219,7 +219,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Block block = methodDeclaration.getBody();
 		List statements = block.statements();
@@ -229,7 +229,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		ExpressionStatement expressionStatement = (ExpressionStatement) statement;
 		checkSourceRange(expressionStatement, "baz(0);", source); //$NON-NLS-1$
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		checkSourceRange(methodInvocation, "baz(0)", source); //$NON-NLS-1$
 		List list = methodInvocation.arguments();
@@ -245,7 +245,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		ExpressionStatement expressionStatement2 = (ExpressionStatement) statement2;
 		checkSourceRange(expressionStatement2, "bar(1,\n\t    foo(3);", source); //$NON-NLS-1$
 		Expression expression2 = expressionStatement2.getExpression();
-		assertTrue("Not a method invocation", expression2.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression2.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation2 = (FunctionInvocation) expression2;
 		checkSourceRange(methodInvocation2, "bar(1,\n\t    foo(3)", source); //$NON-NLS-1$
 		List list2 = methodInvocation2.arguments();
@@ -287,7 +287,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Block block = methodDeclaration.getBody();
 		List statements = block.statements();
@@ -328,7 +328,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Block block = methodDeclaration.getBody();
 		List statements = block.statements();
@@ -385,7 +385,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Flag as RECOVERED", (methodDeclaration.getFlags() & ASTNode.RECOVERED) == 0);
 		Block block = methodDeclaration.getBody();
@@ -398,7 +398,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		checkSourceRange(expressionStatement, "bar()", source); //$NON-NLS-1$
 		assertTrue("Not flag as RECOVERED", (expressionStatement.getFlags() & ASTNode.RECOVERED) != 0);
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation)expression;
 		checkSourceRange(methodInvocation, "bar()", source); //$NON-NLS-1$
 		assertTrue("Flag as RECOVERED", (methodInvocation.getFlags() & ASTNode.RECOVERED) == 0);
@@ -431,7 +431,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Flag as RECOVERED", (methodDeclaration.getFlags() & ASTNode.RECOVERED) == 0);
 		Block block = methodDeclaration.getBody();
@@ -444,14 +444,14 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		checkSourceRange(expressionStatement, "bar(baz()", source); //$NON-NLS-1$
 		assertTrue("Not flag as RECOVERED", (expressionStatement.getFlags() & ASTNode.RECOVERED) != 0);
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation)expression;
 		checkSourceRange(methodInvocation, "bar(baz()", source); //$NON-NLS-1$
 		assertTrue("Not flag as RECOVERED", (methodInvocation.getFlags() & ASTNode.RECOVERED) != 0);
 		List arguments = methodInvocation.arguments();
 		assertEquals("wrong size", 1, arguments.size()); //$NON-NLS-1$
 		Expression argument = (Expression) arguments.get(0);
-		assertTrue("Not a method invocation", argument.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", argument.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation2 = (FunctionInvocation) argument;
 		checkSourceRange(methodInvocation2, "baz()", source); //$NON-NLS-1$
 		assertTrue("Flag as RECOVERED", (methodInvocation2.getFlags() & ASTNode.RECOVERED) == 0);
@@ -484,7 +484,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Flag as RECOVERED", (methodDeclaration.getFlags() & ASTNode.RECOVERED) == 0);
 		Block block = methodDeclaration.getBody();
@@ -545,7 +545,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Flag as RECOVERED", (methodDeclaration.getFlags() & ASTNode.RECOVERED) == 0);
 		Block block = methodDeclaration.getBody();
@@ -558,14 +558,14 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		checkSourceRange(expressionStatement, "bar(baz());", source); //$NON-NLS-1$
 		assertTrue("Flag as RECOVERED", (expressionStatement.getFlags() & ASTNode.RECOVERED) == 0);
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation)expression;
 		checkSourceRange(methodInvocation, "bar(baz())", source); //$NON-NLS-1$
 		assertTrue("Flag as RECOVERED", (methodInvocation.getFlags() & ASTNode.RECOVERED) == 0);
 		List arguments = methodInvocation.arguments();
 		assertEquals("wrong size", 1, arguments.size()); //$NON-NLS-1$
 		Expression argument = (Expression) arguments.get(0);
-		assertTrue("Not a method invocation", argument.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", argument.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation2 = (FunctionInvocation) argument;
 		checkSourceRange(methodInvocation2, "baz()", source); //$NON-NLS-1$
 		assertTrue("Flag as RECOVERED", (methodInvocation2.getFlags() & ASTNode.RECOVERED) == 0);
@@ -598,7 +598,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Flag as RECOVERED", (methodDeclaration.getFlags() & ASTNode.RECOVERED) == 0);
 		Block block = methodDeclaration.getBody();
@@ -611,14 +611,14 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		checkSourceRange(expressionStatement, "bar(baz())#;", source); //$NON-NLS-1$
 		assertTrue("Not flag as RECOVERED", (expressionStatement.getFlags() & ASTNode.RECOVERED) != 0);
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation)expression;
 		checkSourceRange(methodInvocation, "bar(baz())", source); //$NON-NLS-1$
 		assertTrue("Flag as RECOVERED", (methodInvocation.getFlags() & ASTNode.RECOVERED) == 0);
 		List arguments = methodInvocation.arguments();
 		assertEquals("wrong size", 1, arguments.size()); //$NON-NLS-1$
 		Expression argument = (Expression) arguments.get(0);
-		assertTrue("Not a method invocation", argument.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", argument.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation2 = (FunctionInvocation) argument;
 		checkSourceRange(methodInvocation2, "baz()", source); //$NON-NLS-1$
 		assertTrue("Flag as RECOVERED", (methodInvocation2.getFlags() & ASTNode.RECOVERED) == 0);
@@ -651,7 +651,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Flag as RECOVERED", (methodDeclaration.getFlags() & ASTNode.RECOVERED) == 0);
 		Block block = methodDeclaration.getBody();
@@ -664,14 +664,14 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		checkSourceRange(expressionStatement, "bar(baz()#);", source); //$NON-NLS-1$
 		assertTrue("Flag as RECOVERED", (expressionStatement.getFlags() & ASTNode.RECOVERED) == 0);
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation)expression;
 		checkSourceRange(methodInvocation, "bar(baz()#)", source); //$NON-NLS-1$
 		assertTrue("Not flag as RECOVERED", (methodInvocation.getFlags() & ASTNode.RECOVERED) != 0);
 		List arguments = methodInvocation.arguments();
 		assertEquals("wrong size", 1, arguments.size()); //$NON-NLS-1$
 		Expression argument = (Expression) arguments.get(0);
-		assertTrue("Not a method invocation", argument.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", argument.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation2 = (FunctionInvocation) argument;
 		checkSourceRange(methodInvocation2, "baz()", source); //$NON-NLS-1$
 		assertTrue("Flag as RECOVERED", (methodInvocation2.getFlags() & ASTNode.RECOVERED) == 0);
@@ -704,7 +704,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Flag as RECOVERED", (methodDeclaration.getFlags() & ASTNode.RECOVERED) == 0);
 		Block block = methodDeclaration.getBody();
@@ -717,7 +717,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		checkSourceRange(expressionStatement, "bar()#", source); //$NON-NLS-1$
 		assertTrue("Not flag as RECOVERED", (expressionStatement.getFlags() & ASTNode.RECOVERED) != 0);
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation)expression;
 		checkSourceRange(methodInvocation, "bar()", source); //$NON-NLS-1$
 		assertTrue("Flag as RECOVERED", (methodInvocation.getFlags() & ASTNode.RECOVERED) == 0);
@@ -750,7 +750,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Flag as RECOVERED", (methodDeclaration.getFlags() & ASTNode.RECOVERED) == 0);
 		Block block = methodDeclaration.getBody();
@@ -800,7 +800,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Flag as RECOVERED", (methodDeclaration.getFlags() & ASTNode.RECOVERED) == 0);
 		Block block = methodDeclaration.getBody();
@@ -845,7 +845,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Flag as RECOVERED", (methodDeclaration.getFlags() & ASTNode.RECOVERED) == 0);
 		Block block = methodDeclaration.getBody();
@@ -890,7 +890,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Flag as RECOVERED", (methodDeclaration.getFlags() & ASTNode.RECOVERED) == 0);
 		Block block = methodDeclaration.getBody();
@@ -934,7 +934,7 @@ public class ASTConverterRecoveryTest extends ConverterTestSetup {
 		
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Flag as RECOVERED", (methodDeclaration.getFlags() & ASTNode.RECOVERED) == 0);
 		Block block = methodDeclaration.getBody();

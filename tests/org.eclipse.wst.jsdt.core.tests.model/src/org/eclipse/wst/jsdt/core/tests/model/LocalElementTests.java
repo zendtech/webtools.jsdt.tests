@@ -297,7 +297,7 @@ public class LocalElementTests extends ModifyingResourceTests {
 				"}"
 			);
 			IJavaScriptUnit cu = getCompilationUnit("/P/X.js");
-			IType type = cu.getType("X").getMethod("foo", new String[0]).getType("", 1);
+			IType type = cu.getType("X").getFunction("foo", new String[0]).getType("", 1);
 			assertEquals(
 				"Unexpected superclass name",
 				"X",
@@ -317,8 +317,8 @@ public class LocalElementTests extends ModifyingResourceTests {
 		types[0] = topLevelType.getInitializer(1).getType("", 1);
 		types[1] = topLevelType.getInitializer(1).getType("Y", 1);
 		types[2] = topLevelType.getField("f").getType("", 1);
-		types[3] = topLevelType.getMethod("foo", new String[] {"I", "QString;"}).getType("", 1);
-		types[4] = topLevelType.getMethod("foo", new String[] {"I", "QString;"}).getType("Z", 1);
+		types[3] = topLevelType.getFunction("foo", new String[] {"I", "QString;"}).getType("", 1);
+		types[4] = topLevelType.getFunction("foo", new String[] {"I", "QString;"}).getType("Z", 1);
 		assertElementsEqual(
 			"Unexpected types",
 			"<anonymous #1> [in <initializer #1> [in X [in X.java [in <default> [in <project root> [in P]]]]]]\n" + 

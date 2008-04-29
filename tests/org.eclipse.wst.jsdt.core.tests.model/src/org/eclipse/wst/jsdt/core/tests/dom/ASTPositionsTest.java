@@ -74,7 +74,7 @@ public class ASTPositionsTest extends ConverterTestSetup {
     			contents,
     			this.workingCopy,
     			false);
-    	assertEquals("Not a compilation unit", ASTNode.COMPILATION_UNIT, node.getNodeType());
+    	assertEquals("Not a compilation unit", ASTNode.JAVASCRIPT_UNIT, node.getNodeType());
     	JavaScriptUnit compilationUnit = (JavaScriptUnit) node;
     	assertEquals("Wrong char", 'X', contents.charAt(compilationUnit.getPosition(2, 13)));
     	assertEquals("Wrong char", 'i', contents.charAt(compilationUnit.getPosition(1, 0)));
@@ -99,7 +99,7 @@ public class ASTPositionsTest extends ConverterTestSetup {
     			contents,
     			this.workingCopy,
     			false);
-    	assertEquals("Not a compilation unit", ASTNode.COMPILATION_UNIT, node.getNodeType());
+    	assertEquals("Not a compilation unit", ASTNode.JAVASCRIPT_UNIT, node.getNodeType());
     	JavaScriptUnit compilationUnit = (JavaScriptUnit) node;
     	sanityCheck(contents, compilationUnit);
 	}
@@ -115,7 +115,7 @@ public class ASTPositionsTest extends ConverterTestSetup {
     			contents,
     			this.workingCopy,
     			false);
-    	assertEquals("Not a compilation unit", ASTNode.COMPILATION_UNIT, node.getNodeType());
+    	assertEquals("Not a compilation unit", ASTNode.JAVASCRIPT_UNIT, node.getNodeType());
     	JavaScriptUnit compilationUnit = (JavaScriptUnit) node;
     	sanityCheck(contents, compilationUnit);
 	}
@@ -128,7 +128,7 @@ public class ASTPositionsTest extends ConverterTestSetup {
     			contents,
     			this.workingCopy,
     			false);
-       	assertEquals("Not a compilation unit", ASTNode.COMPILATION_UNIT, node.getNodeType());
+       	assertEquals("Not a compilation unit", ASTNode.JAVASCRIPT_UNIT, node.getNodeType());
        	JavaScriptUnit compilationUnit = (JavaScriptUnit) node;
        	sanityCheck(contents, compilationUnit);
 		assertEquals(1, compilationUnit.getLineNumber(0));
@@ -142,7 +142,7 @@ public class ASTPositionsTest extends ConverterTestSetup {
     			contents,
     			this.workingCopy,
     			false);
-       	assertEquals("Not a compilation unit", ASTNode.COMPILATION_UNIT, node.getNodeType());
+       	assertEquals("Not a compilation unit", ASTNode.JAVASCRIPT_UNIT, node.getNodeType());
        	JavaScriptUnit compilationUnit = (JavaScriptUnit) node;
 		assertEquals(1, compilationUnit.getLineNumber(0));
        	sanityCheck(contents, compilationUnit);

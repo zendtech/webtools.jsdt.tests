@@ -64,7 +64,7 @@ public class CreateImportsTests extends AbstractJavaModelTests {
 		CodeFormatter formatter = ToolFactory.createCodeFormatter(options);
 		String source = workingCopy.getSource();
 		Document document = new Document(source);
-		TextEdit edit = formatter.format(CodeFormatter.K_COMPILATION_UNIT, source, 0, source.length() - 1, 0, "\n");
+		TextEdit edit = formatter.format(CodeFormatter.K_JAVASCRIPT_UNIT, source, 0, source.length() - 1, 0, "\n");
 		try {
 			edit.apply(document, TextEdit.NONE);
 		} catch(MalformedTreeException e) {

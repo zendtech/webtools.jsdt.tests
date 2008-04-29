@@ -46,15 +46,15 @@ protected void copy(IPackageFragmentRoot root, IPath destination, IIncludePathEn
 	root.copy(
 		destination,
 		IResource.NONE,
-		IPackageFragmentRoot.DESTINATION_PROJECT_CLASSPATH,
+		IPackageFragmentRoot.DESTINATION_PROJECT_INCLUDEPATH,
 		sibling,
 		null);
 }
 protected void delete(IPackageFragmentRoot root) throws JavaScriptModelException {
 	root.delete(
 		IResource.NONE,
-		IPackageFragmentRoot.ORIGINATING_PROJECT_CLASSPATH
-			| IPackageFragmentRoot.OTHER_REFERRING_PROJECTS_CLASSPATH,
+		IPackageFragmentRoot.ORIGINATING_PROJECT_INCLUDEPATH
+			| IPackageFragmentRoot.OTHER_REFERRING_PROJECTS_INCLUDEPATH,
 		null);
 }
 protected void move(IPackageFragmentRoot root, IPath destination) throws JavaScriptModelException {
@@ -64,9 +64,9 @@ protected void move(IPackageFragmentRoot root, IPath destination, IIncludePathEn
 	root.move(
 		destination, 
 		IResource.NONE, 
-		IPackageFragmentRoot.DESTINATION_PROJECT_CLASSPATH
-			| IPackageFragmentRoot.ORIGINATING_PROJECT_CLASSPATH
-			| IPackageFragmentRoot.OTHER_REFERRING_PROJECTS_CLASSPATH,
+		IPackageFragmentRoot.DESTINATION_PROJECT_INCLUDEPATH
+			| IPackageFragmentRoot.ORIGINATING_PROJECT_INCLUDEPATH
+			| IPackageFragmentRoot.OTHER_REFERRING_PROJECTS_INCLUDEPATH,
 		sibling, 
 		null);
 }
@@ -94,11 +94,11 @@ protected void populate(StringBuffer buffer, IJavaScriptElement element, int ind
 	Object[] nonJavaResources = null;
 	try {
 		if (element instanceof IJavaScriptProject) {
-			nonJavaResources = ((IJavaScriptProject)element).getNonJavaResources();
+			nonJavaResources = ((IJavaScriptProject)element).getNonJavaScriptResources();
 		} else if (element instanceof IPackageFragmentRoot) {
-			nonJavaResources = ((IPackageFragmentRoot)element).getNonJavaResources();
+			nonJavaResources = ((IPackageFragmentRoot)element).getNonJavaScriptResources();
 		} else if (element instanceof IPackageFragment) {
-			nonJavaResources = ((IPackageFragment)element).getNonJavaResources();
+			nonJavaResources = ((IPackageFragment)element).getNonJavaScriptResources();
 		}
 	} catch (JavaScriptModelException e) {
 	}
@@ -196,7 +196,7 @@ public void testCopySourceFolder2() throws CoreException {
 public void testCopySourceFolder3() throws CoreException {
 	try {
 		IJavaScriptProject p1 = this.createJavaProject("P1", new String[] {}, "bin");
-		p1.setRawClasspath(createClasspath(new String[] {"/P1/src1", "src2/**", "/P1/src1/src2", ""}, false/*no inclusion*/, true/*exclusion*/), null);
+		p1.setRawIncludepath(createClasspath(new String[] {"/P1/src1", "src2/**", "/P1/src1/src2", ""}, false/*no inclusion*/, true/*exclusion*/), null);
 		this.createJavaProject("P2", new String[] {}, "bin");
 		this.createFolder("/P1/src1/p");
 		this.createFile(
@@ -364,7 +364,7 @@ public void testCopySourceFolder6() throws CoreException {
 		root.copy(
 			new Path("/P/src1"), 
 			IResource.KEEP_HISTORY, 
-			IPackageFragmentRoot.REPLACE | IPackageFragmentRoot.DESTINATION_PROJECT_CLASSPATH, 
+			IPackageFragmentRoot.REPLACE | IPackageFragmentRoot.DESTINATION_PROJECT_INCLUDEPATH, 
 			null, 
 			null);
 		assertDeltas(
@@ -403,7 +403,7 @@ public void testFailCopySourceFolder1() throws CoreException {
 
 		IPackageFragmentRoot root = this.getPackageFragmentRoot("/P1/src");
 		try {
-			root.copy(new Path("/P2/src"), IResource.NONE, IPackageFragmentRoot.DESTINATION_PROJECT_CLASSPATH, null, null);
+			root.copy(new Path("/P2/src"), IResource.NONE, IPackageFragmentRoot.DESTINATION_PROJECT_INCLUDEPATH, null, null);
 		} catch (JavaScriptModelException e) {
 			assertEquals("/P2/src already exists in target", e.getMessage());
 			return;
@@ -427,7 +427,7 @@ public void testFailCopySourceFolder2() throws CoreException {
 
 		IPackageFragmentRoot root = this.getPackageFragmentRoot("/P1/src");
 		try {
-			root.copy(new Path("/P2/src"), IResource.NONE, IPackageFragmentRoot.DESTINATION_PROJECT_CLASSPATH, null, null);
+			root.copy(new Path("/P2/src"), IResource.NONE, IPackageFragmentRoot.DESTINATION_PROJECT_INCLUDEPATH, null, null);
 		} catch (JavaScriptModelException e) {
 			assertEquals("/P2/src already exists in target", e.getMessage());
 			return;
@@ -580,7 +580,7 @@ public void testDeleteSourceFolder1() throws CoreException {
 public void testDeleteSourceFolder2() throws CoreException {
 	try {
 		IJavaScriptProject project = this.createJavaProject("P", new String[] {}, "bin");
-		project.setRawClasspath(createClasspath(new String[] {"/P/src1", "src2/**", "/P/src1/src2", ""}, false/*no inclusion*/, true/*exclusion*/), null);
+		project.setRawIncludepath(createClasspath(new String[] {"/P/src1", "src2/**", "/P/src1/src2", ""}, false/*no inclusion*/, true/*exclusion*/), null);
 		IFolder folder = this.createFolder("/P/src1/p");
 		IFile file = this.createFile(
 			"/P/src1/p/X.js", 
@@ -729,7 +729,7 @@ public void testMoveSourceFolder2() throws CoreException {
 public void testMoveSourceFolder3() throws CoreException {
 	try {
 		IJavaScriptProject p1 = this.createJavaProject("P1", new String[] {}, "bin");
-		p1.setRawClasspath(createClasspath(new String[] {"/P1/src1", "src2/**", "/P1/src1/src2", ""}, false/*no inclusion*/, true/*exclusion*/), null);
+		p1.setRawIncludepath(createClasspath(new String[] {"/P1/src1", "src2/**", "/P1/src1/src2", ""}, false/*no inclusion*/, true/*exclusion*/), null);
 		IJavaScriptProject p2 = this.createJavaProject("P2", new String[] {}, "bin");
 		this.createFolder("/P1/src1/p");
 		this.createFile(
@@ -1198,8 +1198,8 @@ public void testRenameJarFile3() throws CoreException {
 		root.move(
 			new Path("/P/myLib2.jar"),
 			IResource.NONE,
-			IPackageFragmentRoot.ORIGINATING_PROJECT_CLASSPATH 
-				| IPackageFragmentRoot.DESTINATION_PROJECT_CLASSPATH 
+			IPackageFragmentRoot.ORIGINATING_PROJECT_INCLUDEPATH 
+				| IPackageFragmentRoot.DESTINATION_PROJECT_INCLUDEPATH 
 				| IPackageFragmentRoot.REPLACE,
 			null,
 			null);

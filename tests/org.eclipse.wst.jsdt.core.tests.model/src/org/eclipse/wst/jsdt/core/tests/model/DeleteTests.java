@@ -119,7 +119,7 @@ public void testDeleteBinaryMethod() throws CoreException {
 		this.createFile("P1/lib/X.class", bytes);
 		
 		IClassFile cf = getClassFile("P1/lib/X.class");
-		IFunction method = cf.getType().getMethod("foo", new String[] {});
+		IFunction method = cf.getType().getFunction("foo", new String[] {});
 		
 		try {
 			method.delete(false, null);
@@ -156,7 +156,7 @@ public void testDeleteBinaryType() throws CoreException {
 		IType binaryType = cf.getType();
 		
 		try {
-			cf.getJavaModel().delete(new IJavaScriptElement[] {binaryType}, false, null);
+			cf.getJavaScriptModel().delete(new IJavaScriptElement[] {binaryType}, false, null);
 		} catch (JavaScriptModelException e) {
 			assertTrue("Should be read-only", e.getStatus().getCode() == IJavaScriptModelStatusConstants.READ_ONLY);
 			return;
@@ -305,7 +305,7 @@ public void testDeleteConstructor() throws CoreException {
 			"}"
 		);
 		IJavaScriptUnit cu = getCompilationUnit("P/X.js");
-		IFunction constructor = cu.getType("X").getMethod("X", new String[] {"QString;"});
+		IFunction constructor = cu.getType("X").getFunction("X", new String[] {"QString;"});
 
 		startDeltas();
 		assertDeletion(constructor);
@@ -535,7 +535,7 @@ public void testDeleteMethod() throws CoreException {
 			"}"
 		);
 		IJavaScriptUnit cu = getCompilationUnit("P/X.js");
-		IFunction method = cu.getType("X").getMethod("foo", new String[] {});
+		IFunction method = cu.getType("X").getFunction("foo", new String[] {});
 
 		startDeltas();
 		assertDeletion(method);
@@ -610,17 +610,17 @@ public void testDeleteMultipleMembersFromVariousCUs() throws CoreException {
 	
 		IJavaScriptElement[] toBeDeleted = new IJavaScriptElement[8];
 		toBeDeleted[0] = cuX.getImport("java.util.Vector");
-		toBeDeleted[1] = typeX.getMethod("main", new String[] {"[QString;"});
+		toBeDeleted[1] = typeX.getFunction("main", new String[] {"[QString;"});
 		toBeDeleted[2] = typeBar;
-		toBeDeleted[3] = typeBar.getMethod("Bar", new String[] {});
-		toBeDeleted[4] = typeBar.getMethod("test", new String[] {});
+		toBeDeleted[3] = typeBar.getFunction("Bar", new String[] {});
+		toBeDeleted[4] = typeBar.getFunction("test", new String[] {});
 		toBeDeleted[5] = typeBar;
 		
 		IJavaScriptUnit cuY = getCompilationUnit("P/a/b/Y.js");
 		IType typeY = cuY.getType("Y");
 		
 		toBeDeleted[6] = typeY.getField("foo");
-		toBeDeleted[7] = typeY.getMethod("main", new String[] {"[QString;"});
+		toBeDeleted[7] = typeY.getFunction("main", new String[] {"[QString;"});
 	
 		startDeltas();
 		assertDeletion(toBeDeleted);
@@ -844,7 +844,7 @@ public void testDeleteSyntaxErrorInMethod1() throws CoreException {
 			"}"
 		);
 		IJavaScriptUnit cu = getCompilationUnit("P/X.js");
-		IFunction method = cu.getType("X").getMethod("foo", new String[] {});
+		IFunction method = cu.getType("X").getFunction("foo", new String[] {});
 
 		startDeltas();
 		assertDeletion(method);
@@ -874,7 +874,7 @@ public void testDeleteSyntaxErrorInMethod2() throws CoreException {
 			"}"
 		);
 		IJavaScriptUnit cu = getCompilationUnit("P/X.js");
-		IFunction method = cu.getType("X").getMethod("foo", new String[] {});
+		IFunction method = cu.getType("X").getFunction("foo", new String[] {});
 
 		startDeltas();
 		assertDeletion(method);
@@ -905,7 +905,7 @@ public void testDeleteSyntaxErrorInMethod3() throws CoreException {
 			"}"
 		);
 		IJavaScriptUnit cu = getCompilationUnit("P/X.js");
-		IFunction method = cu.getType("X").getMethod("foo", new String[] {});
+		IFunction method = cu.getType("X").getFunction("foo", new String[] {});
 
 		startDeltas();
 		assertDeletion(method);

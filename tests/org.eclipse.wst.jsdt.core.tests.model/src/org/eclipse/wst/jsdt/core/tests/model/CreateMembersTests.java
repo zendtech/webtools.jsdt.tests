@@ -91,7 +91,7 @@ public class CreateMembersTests extends AbstractJavaModelTests {
 		assertNotNull("No types", types);
 		assertEquals("Wrong size", 1, types.length);
 		IType type = types[0];
-		IFunction sibling = type.getMethod("foo", new String[]{});
+		IFunction sibling = type.getFunction("foo", new String[]{});
 		type.createMethod("String bar();", sibling, true, null);
 		String expectedSource = 
 			"public @interface Annot {\n" + 

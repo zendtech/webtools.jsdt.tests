@@ -529,7 +529,7 @@ public void testClassNameWithDollar() throws JavaScriptModelException, CoreExcep
 		tab[371]=0;
 		IJavaScriptProject javaProject = createJavaProject("P", new String[] {"src"}, "bin");
 		IFile jarFile = createFile("P/lib.jar", tab);
-		javaProject.setRawClasspath(new IIncludePathEntry[] {JavaScriptCore.newLibraryEntry(jarFile.getFullPath(), null, null, false)}, new NullProgressMonitor());
+		javaProject.setRawIncludepath(new IIncludePathEntry[] {JavaScriptCore.newLibraryEntry(jarFile.getFullPath(), null, null, false)}, new NullProgressMonitor());
 		javaProject.findType("p1.A$");
 	} catch (CoreException e) {
 		e.printStackTrace();
@@ -1050,7 +1050,7 @@ public void testSearchTypeNameInJars() throws JavaScriptModelException, CoreExce
 		tab[477]=0;
 		IJavaScriptProject javaProject = createJavaProject("P1", new String[] {"src"}, "bin");
 		IFile jarFile = createFile("P1/lib.jar", tab);
-		javaProject.setRawClasspath(new IIncludePathEntry[] {JavaScriptCore.newLibraryEntry(jarFile.getFullPath(), null, null, false)}, new NullProgressMonitor());
+		javaProject.setRawIncludepath(new IIncludePathEntry[] {JavaScriptCore.newLibraryEntry(jarFile.getFullPath(), null, null, false)}, new NullProgressMonitor());
 		assertNotNull(javaProject.findType("p1.p2.p3.X"));
 	} catch(JavaScriptModelException e) {
 		e.printStackTrace();

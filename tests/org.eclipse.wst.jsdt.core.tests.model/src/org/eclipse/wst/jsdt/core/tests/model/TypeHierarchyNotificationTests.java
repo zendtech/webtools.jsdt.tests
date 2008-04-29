@@ -126,7 +126,7 @@ public void testAddAnonymousInRegion() throws CoreException {
 		
 		IRegion region = JavaScriptCore.newRegion();
 		region.add(copy.getParent());
-		h = copy.getJavaProject().newTypeHierarchy(region, null);
+		h = copy.getJavaScriptProject().newTypeHierarchy(region, null);
 		h.addTypeHierarchyChangedListener(this);
 
 		// add a field initialized with a 'new B() {...}' anonymous type
@@ -414,7 +414,7 @@ public void testAddExternalProject() throws CoreException {
 	ITypeHierarchy h = type.newTypeHierarchy(project, null);
 	h.addTypeHierarchyChangedListener(this);
 
-	project.getJavaModel().getWorkspace().getRoot().getProject("NewProject").create(null);
+	project.getJavaScriptModel().getWorkspace().getRoot().getProject("NewProject").create(null);
 	try {
 		assertTrue("Should not receive change", !this.changeReceived);
 	} finally {
@@ -476,7 +476,7 @@ public void testAddPackageFragmentRoot() throws CoreException {
 	h.addTypeHierarchyChangedListener(this);
 
 	// prepare a classpath entry for the new root
-	IIncludePathEntry[] originalCP= project.getRawClasspath();
+	IIncludePathEntry[] originalCP= project.getRawIncludepath();
 	IIncludePathEntry newEntry= JavaScriptCore.newSourceEntry(project.getProject().getFullPath().append("extra"));
 	IIncludePathEntry[] newCP= new IIncludePathEntry[originalCP.length + 1];
 	System.arraycopy(originalCP, 0 , newCP, 0, originalCP.length);
@@ -484,7 +484,7 @@ public void testAddPackageFragmentRoot() throws CoreException {
 
 	try {
 		// set new classpath
-		project.setRawClasspath(newCP, null);
+		project.setRawIncludepath(newCP, null);
 
 		// now create the actual resource for the root and populate it
 		this.reset();
@@ -508,7 +508,7 @@ public void testAddProject() throws CoreException {
 	h.addTypeHierarchyChangedListener(this);
 
 	// prepare a new classpath entry for the new project
-	IIncludePathEntry[] originalCP= project.getRawClasspath();
+	IIncludePathEntry[] originalCP= project.getRawIncludepath();
 	IIncludePathEntry newEntry= JavaScriptCore.newProjectEntry(new Path("/NewProject"), false);
 	IIncludePathEntry[] newCP= new IIncludePathEntry[originalCP.length + 1];
 	System.arraycopy(originalCP, 0 , newCP, 0, originalCP.length);
@@ -516,11 +516,11 @@ public void testAddProject() throws CoreException {
 
 	try {
 		// set the new classpath
-		project.setRawClasspath(newCP, null);
+		project.setRawIncludepath(newCP, null);
 
 		// now create the actual resource for the root and populate it
 		this.reset();
-		final IProject newProject = project.getJavaModel().getWorkspace().getRoot().getProject("NewProject");
+		final IProject newProject = project.getJavaScriptModel().getWorkspace().getRoot().getProject("NewProject");
 		IWorkspaceRunnable create = new IWorkspaceRunnable() {
 			public void run(IProgressMonitor monitor) throws CoreException {
 				newProject.create(null, null);
@@ -553,7 +553,7 @@ public void testAddRemoveClassFile() throws CoreException {
 	IFolder pathFolder = project.getProject().getFolder("patch");
 	pathFolder.create(true, true, null);
 	IIncludePathEntry newEntry = JavaScriptCore.newLibraryEntry(pathFolder.getFullPath(), null, null, false);
-	IIncludePathEntry[] classpath = project.getRawClasspath();
+	IIncludePathEntry[] classpath = project.getRawIncludepath();
 	IIncludePathEntry[] newClassPath = new IIncludePathEntry[classpath.length+1];
 	newClassPath[0] = newEntry;
 	System.arraycopy(classpath, 0, newClassPath, 1, classpath.length);
@@ -717,7 +717,7 @@ public void testAddExtendsSourceType2() throws CoreException {
 		
 		IRegion region = JavaScriptCore.newRegion();
 		region.add(copy.getParent());
-		h = copy.getJavaProject().newTypeHierarchy(region, null);
+		h = copy.getJavaScriptProject().newTypeHierarchy(region, null);
 		h.addTypeHierarchyChangedListener(this);
 
 		// add p2.B as the superclass of p2.A
@@ -993,7 +993,7 @@ public void testRemoveExternalPackageFragmentRoot() throws CoreException {
 	h.addTypeHierarchyChangedListener(this);
 
 	// add a classpath entry for the new root
-	IIncludePathEntry[] originalCP= project.getRawClasspath();
+	IIncludePathEntry[] originalCP= project.getRawIncludepath();
 	IIncludePathEntry newEntry= JavaScriptCore.newSourceEntry(project.getProject().getFullPath().append("extra"));
 	IIncludePathEntry[] newCP= new IIncludePathEntry[originalCP.length + 1];
 	System.arraycopy(originalCP, 0 , newCP, 0, originalCP.length);
@@ -1001,7 +1001,7 @@ public void testRemoveExternalPackageFragmentRoot() throws CoreException {
 	
 	try {
 		// set classpath
-		project.setRawClasspath(newCP, null);
+		project.setRawIncludepath(newCP, null);
 
 		// now create the actual resource for the root and populate it
 		this.reset();
@@ -1013,7 +1013,7 @@ public void testRemoveExternalPackageFragmentRoot() throws CoreException {
 
 		// remove a classpath entry that does not impact the type hierarchy
 		this.reset();
-		project.setRawClasspath(originalCP, null);
+		project.setRawIncludepath(originalCP, null);
 		assertTrue("Should not receive change", !this.changeReceived);
 	} finally {
 		h.removeTypeHierarchyChangedListener(this);
@@ -1113,7 +1113,7 @@ public void testRemovePackageFragmentRoots() throws CoreException {
 	h.addTypeHierarchyChangedListener(this);
 	
 	try {
-		project.setRawClasspath(null, null);
+		project.setRawIncludepath(null, null);
 		this.assertOneChange(h);
 	} finally {
 		h.removeTypeHierarchyChangedListener(this);

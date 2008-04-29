@@ -206,9 +206,9 @@ public class ProfilingASTConvertionTest extends AbstractJavaModelTests {
 		super.setUpSuite();
 
 		// ensure variables are set
-		if (JavaScriptCore.getClasspathVariable("CONVERTER_JCL_LIB") == null) { //$NON-NLS-1$
+		if (JavaScriptCore.getIncludepathVariable("CONVERTER_JCL_LIB") == null) { //$NON-NLS-1$
 			setupExternalJCL("converterJclMin");
-			JavaScriptCore.setClasspathVariables(
+			JavaScriptCore.setIncludepathVariables(
 				new String[] {"CONVERTER_JCL_LIB", "CONVERTER_JCL_SRC", "CONVERTER_JCL_SRCROOT"}, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				new Path[] {new Path(getExternalPath() + "converterJclMin.jar"), new Path(getExternalPath() + "converterJclMinsrc.zip"), new Path("")},
 				null);
@@ -220,7 +220,7 @@ public class ProfilingASTConvertionTest extends AbstractJavaModelTests {
 		assertNotNull("No package fragments", packageFragments);
 		ArrayList collector = new ArrayList();
 		for (int i = 0, max = packageFragments.length; i < max; i++) {
-			IJavaScriptUnit[] units = packageFragments[i].getCompilationUnits();
+			IJavaScriptUnit[] units = packageFragments[i].getJavaScriptUnits();
 			if (units != null) {
 				for (int j = 0, max2 = units.length; j < max2; j++) {
 					collector.add(units[j]);
@@ -249,7 +249,7 @@ public class ProfilingASTConvertionTest extends AbstractJavaModelTests {
 				times[i] = System.currentTimeMillis() - time;
 				totalTime += times[i];
 				assertNotNull("No node", node);
-				assertEquals("Wrong type", ASTNode.COMPILATION_UNIT, node.getNodeType());
+				assertEquals("Wrong type", ASTNode.JAVASCRIPT_UNIT, node.getNodeType());
 				JavaScriptUnit unit = (JavaScriptUnit) node;
 				assertEquals("Has problem", 0, unit.getProblems().length);
 				TypeDeclaration typeDeclaration = (TypeDeclaration) unit.types().get(0);
@@ -287,7 +287,7 @@ public class ProfilingASTConvertionTest extends AbstractJavaModelTests {
 				times[i] = System.currentTimeMillis() - time;
 				totalTime += times[i];
 				assertNotNull("No node", node);
-				assertEquals("Wrong type", ASTNode.COMPILATION_UNIT, node.getNodeType());
+				assertEquals("Wrong type", ASTNode.JAVASCRIPT_UNIT, node.getNodeType());
 				JavaScriptUnit unit = (JavaScriptUnit) node;
 				assertEquals("Has problem", 0, unit.getProblems().length);
 				TypeDeclaration typeDeclaration = (TypeDeclaration) unit.types().get(0);
@@ -326,7 +326,7 @@ public class ProfilingASTConvertionTest extends AbstractJavaModelTests {
 				times[i] = System.currentTimeMillis() - time;
 				totalTime += times[i];
 				assertNotNull("No node", node);
-				assertEquals("Wrong type", ASTNode.COMPILATION_UNIT, node.getNodeType());
+				assertEquals("Wrong type", ASTNode.JAVASCRIPT_UNIT, node.getNodeType());
 				JavaScriptUnit unit = (JavaScriptUnit) node;
 				assertEquals("Has problem", 0, unit.getProblems().length);
 				TypeDeclaration typeDeclaration = (TypeDeclaration) unit.types().get(0);
@@ -366,7 +366,7 @@ public class ProfilingASTConvertionTest extends AbstractJavaModelTests {
 				times[i] = System.currentTimeMillis() - time;
 				totalTime += times[i];
 				assertNotNull("No node", node);
-				assertEquals("Wrong type", ASTNode.COMPILATION_UNIT, node.getNodeType());
+				assertEquals("Wrong type", ASTNode.JAVASCRIPT_UNIT, node.getNodeType());
 				JavaScriptUnit unit = (JavaScriptUnit) node;
 				assertEquals("Has problem", 0, unit.getProblems().length);
 				TypeDeclaration typeDeclaration = (TypeDeclaration) unit.types().get(0);
@@ -406,7 +406,7 @@ public class ProfilingASTConvertionTest extends AbstractJavaModelTests {
 				times[i] = System.currentTimeMillis() - time;
 				totalTime += times[i];
 				assertNotNull("No node", node);
-				assertEquals("Wrong type", ASTNode.COMPILATION_UNIT, node.getNodeType());
+				assertEquals("Wrong type", ASTNode.JAVASCRIPT_UNIT, node.getNodeType());
 				JavaScriptUnit unit = (JavaScriptUnit) node;
 				assertEquals("Has problem", 0, unit.getProblems().length);
 				TypeDeclaration typeDeclaration = (TypeDeclaration) unit.types().get(0);

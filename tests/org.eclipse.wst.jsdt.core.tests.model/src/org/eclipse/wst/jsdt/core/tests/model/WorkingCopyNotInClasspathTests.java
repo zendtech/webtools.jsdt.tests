@@ -265,7 +265,7 @@ public void testIsOnClasspath() throws CoreException {
 		copy = cu.getWorkingCopy(null);
 		
 		// working creation will cause it to open, and thus request project options
-		boolean isOnClasspath = copy.getJavaProject().isOnClasspath(copy);
+		boolean isOnClasspath = copy.getJavaScriptProject().isOnIncludepath(copy);
 		assertTrue("working copy shouldn't answer to isOnClasspath", !isOnClasspath);
 	} finally {
 		if (copy != null) copy.discardWorkingCopy();

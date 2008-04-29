@@ -481,7 +481,7 @@ public class OptionTests extends ModifyingResourceTests {
 	 * (regression test for bug 98720 [preferences] classpath variables are not exported if the session is closed and restored)
 	 */
 	public void test10() throws CoreException {
-		JavaScriptCore.setClasspathVariable("TEST", new Path("testing"), null);
+		JavaScriptCore.setIncludepathVariable("TEST", new Path("testing"), null);
 		simulateExitRestart();
 		JavaModelManager manager = JavaModelManager.getJavaModelManager();
 		IEclipsePreferences preferences = manager.getInstancePreferences();
@@ -496,8 +496,8 @@ public class OptionTests extends ModifyingResourceTests {
 	 * (regression test for bug 98720 [preferences] classpath variables are not exported if the session is closed and restored)
 	 */
 	public void test11() throws CoreException {
-		JavaScriptCore.setClasspathVariable("TEST", new Path("testing"), null);
-		JavaScriptCore.removeClasspathVariable("TEST", null);
+		JavaScriptCore.setIncludepathVariable("TEST", new Path("testing"), null);
+		JavaScriptCore.removeIncludepathVariable("TEST", null);
 		JavaModelManager manager = JavaModelManager.getJavaModelManager();
 		IEclipsePreferences preferences = manager.getInstancePreferences();
 		assertEquals(
@@ -630,13 +630,13 @@ public class OptionTests extends ModifyingResourceTests {
 		try {
 			defaultPreferences.put("org.eclipse.wst.jsdt.core.classpathVariable.MY_DEFAULT_LIB", "c:\\temp\\lib.jar");
 			simulateExitRestart();
-			String[] variableNames = JavaScriptCore.getClasspathVariableNames();
+			String[] variableNames = JavaScriptCore.getIncludepathVariableNames();
 			for (int i = 0, length = variableNames.length; i < length; i++) {
 				if ("MY_DEFAULT_LIB".equals(variableNames[i])) {
 					assertEquals(
 						"Unexpected value for MY_DEFAULT_LIB", 
 						new Path("c:\\temp\\lib.jar"), 
-						JavaScriptCore.getClasspathVariable("MY_DEFAULT_LIB"));
+						JavaScriptCore.getIncludepathVariable("MY_DEFAULT_LIB"));
 					return;
 				}
 			}

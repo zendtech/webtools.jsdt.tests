@@ -238,7 +238,7 @@ public class BatchASTCreationTests extends AbstractASTTests {
 			MarkerInfo[] markerInfos = createMarkerInfos(pathAndSources);
 			copies = createWorkingCopies(markerInfos, this.owner);
 			BindingResolver resolver = new BindingResolver(markerInfos);
-			resolveASTs(copies, expectedKeys == null ? new String[0] : expectedKeys, resolver, copies.length > 0 ? copies[0].getJavaProject() : getJavaProject("P"), this.owner);
+			resolveASTs(copies, expectedKeys == null ? new String[0] : expectedKeys, resolver, copies.length > 0 ? copies[0].getJavaScriptProject() : getJavaProject("P"), this.owner);
 			return resolver;
 		} finally {
 			discardWorkingCopies(copies);
@@ -1746,7 +1746,7 @@ public void test074_Bug155003() throws CoreException {
 			"}";
 	this.workingCopies = createWorkingCopies(new String[] { "/P/X.js", content }, true /*resolve*/);
 	ASTNode node = buildAST(content, this.workingCopies[0]);
-	assertEquals("Invalid node type!", ASTNode.METHOD_INVOCATION, node.getNodeType());
+	assertEquals("Invalid node type!", ASTNode.FUNCTION_INVOCATION, node.getNodeType());
 	IBinding binding = resolveBinding(node);
 	BindingKey bindingKey = new BindingKey(binding.getKey());
 	assertStringsEqual("Unexpected thrown exceptions",
@@ -1766,7 +1766,7 @@ public void test075_Bug155003() throws CoreException {
 		"}";
 	this.workingCopies = createWorkingCopies(new String[] { "/P/X.js", content }, true /*resolve*/);
 	ASTNode node = buildAST(content, this.workingCopies[0]);
-	assertEquals("Invalid node type!", ASTNode.METHOD_INVOCATION, node.getNodeType());
+	assertEquals("Invalid node type!", ASTNode.FUNCTION_INVOCATION, node.getNodeType());
 	IBinding binding = resolveBinding(node);
 	BindingKey bindingKey = new BindingKey(binding.getKey());
 	assertStringsEqual("Unexpected thrown exceptions",
@@ -1786,7 +1786,7 @@ public void test076_Bug155003() throws CoreException {
 		"}";
 	this.workingCopies = createWorkingCopies(new String[] { "/P/X.js", content }, true /*resolve*/);
 	ASTNode node = buildAST(content, this.workingCopies[0]);
-	assertEquals("Invalid node type!", ASTNode.METHOD_INVOCATION, node.getNodeType());
+	assertEquals("Invalid node type!", ASTNode.FUNCTION_INVOCATION, node.getNodeType());
 	IBinding binding = resolveBinding(node);
 	BindingKey bindingKey = new BindingKey(binding.getKey());
 	assertStringsEqual("Unexpected thrown exceptions",
@@ -1818,7 +1818,7 @@ public void test077_Bug163647() throws CoreException {
 		"}";
 	this.workingCopies = createWorkingCopies(new String[] { "/P/Test.js", content }, true /*resolve*/);
 	ASTNode node = buildAST(content, this.workingCopies[0]);
-	assertEquals("Invalid node type!", ASTNode.METHOD_INVOCATION, node.getNodeType());
+	assertEquals("Invalid node type!", ASTNode.FUNCTION_INVOCATION, node.getNodeType());
 	IBinding binding = resolveBinding(node);
 	BindingKey bindingKey = new BindingKey(binding.getKey());
 	assertStringsEqual("Unexpected thrown exceptions",

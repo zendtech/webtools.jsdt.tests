@@ -29,7 +29,7 @@ public CodeCorrectionTests(String name) {
 private IMarker[] getMarkers(IJavaScriptUnit unit){
 	try {
 		IResource resource = unit.getCorrespondingResource();
-		return resource.findMarkers(IJavaScriptModelMarker.JAVA_MODEL_PROBLEM_MARKER, true, IResource.DEPTH_INFINITE);
+		return resource.findMarkers(IJavaScriptModelMarker.JAVASCRIPT_MODEL_PROBLEM_MARKER, true, IResource.DEPTH_INFINITE);
 	} catch (CoreException e) {
 	}
 	return new IMarker[0];

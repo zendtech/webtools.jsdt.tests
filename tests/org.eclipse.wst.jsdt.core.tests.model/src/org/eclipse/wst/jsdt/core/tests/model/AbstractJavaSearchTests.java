@@ -79,7 +79,7 @@ public class AbstractJavaSearchTests extends AbstractJavaModelTests implements I
 				IJavaScriptElement element = getElement(match);
 				line = new StringBuffer(getPathString(resource, element));
 				if (this.showProject) {
-					IProject project = element.getJavaProject().getProject();
+					IProject project = element.getJavaScriptProject().getProject();
 					line.append(" [in ");
 					line.append(project.getName());
 					line.append("]");
@@ -89,22 +89,22 @@ public class AbstractJavaSearchTests extends AbstractJavaModelTests implements I
 					line.append(" ");
 					IFunction method = (IFunction)element;
 					append(method);
-					unit = method.getCompilationUnit();
+					unit = method.getJavaScriptUnit();
 				} else if (element instanceof IType) {
 					line.append(" ");
 					IType type = (IType)element;
 					append(type);
-					unit = type.getCompilationUnit();
+					unit = type.getJavaScriptUnit();
 				} else if (element instanceof IField) {
 					line.append(" ");
 					IField field = (IField)element;
 					append(field);
-					unit = field.getCompilationUnit();
+					unit = field.getJavaScriptUnit();
 				} else if (element instanceof IInitializer) {
 					line.append(" ");
 					IInitializer initializer = (IInitializer)element;
 					append(initializer);
-					unit = initializer.getCompilationUnit();
+					unit = initializer.getJavaScriptUnit();
 				} else if (element instanceof IPackageFragment) {
 					line.append(" ");
 					append((IPackageFragment)element);
@@ -130,11 +130,11 @@ public class AbstractJavaSearchTests extends AbstractJavaModelTests implements I
 					if (parent instanceof IType) {
 						IType type = (IType)parent;
 						append(type);
-						unit = type.getCompilationUnit();
+						unit = type.getJavaScriptUnit();
 					} else if (parent instanceof IFunction) {
 						IFunction method = (IFunction)parent;
 						append(method);
-						unit = method.getCompilationUnit();
+						unit = method.getJavaScriptUnit();
 					} else {
 						line.append("<Unexpected kind of parent for type parameter>");
 						unit = (IJavaScriptUnit)typeParam.getAncestor(IJavaScriptElement.COMPILATION_UNIT);

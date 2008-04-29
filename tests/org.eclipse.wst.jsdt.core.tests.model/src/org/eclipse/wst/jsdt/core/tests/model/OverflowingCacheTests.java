@@ -307,7 +307,7 @@ public class OverflowingCacheTests extends ModifyingResourceTests {
 					classpath[i] = JavaScriptCore.newSourceEntry(new Path("/P/src" + i));
 			}
 			classpath[rootSize] = JavaScriptCore.newVariableEntry(new Path("JCL_LIB"), null, null);
-			project.setRawClasspath(classpath, new Path("/P/bin"), null);
+			project.setRawIncludepath(classpath, new Path("/P/bin"), null);
 			
 			// Open all roots
 			IJavaScriptElement[] roots = project.getChildren();
@@ -505,7 +505,7 @@ public class OverflowingCacheTests extends ModifyingResourceTests {
 				);
 			}
 			IPackageFragment pkg= getPackage("P");
-			IJavaScriptUnit[] cus = pkg.getCompilationUnits();
+			IJavaScriptUnit[] cus = pkg.getJavaScriptUnits();
 		
 			// fill the cache - open 60 buffers
 			int max = 60;

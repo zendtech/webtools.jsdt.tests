@@ -4589,7 +4589,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0197", "Test.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		char[] source = sourceUnit.getSource().toCharArray();
 		ASTNode result = runConversion(AST.JLS3, sourceUnit, true);
-		assertEquals("Not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType());
+		assertEquals("Not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType());
 		JavaScriptUnit unit = (JavaScriptUnit) result;
 		assertProblemsSize(unit, 0);
 		ASTNode node2 = getASTNode(unit, 1, 0, 1);
@@ -7939,7 +7939,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		assertTrue("not a constructor", methods[0].isConstructor()); //$NON-NLS-1$
 		assertTrue("wrong name", !methods[0].getName().equals("foo")); //$NON-NLS-1$ //$NON-NLS-2$
 		node = getASTNode(compilationUnit, 0, 0);
-		assertTrue("Not a methodDeclaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a methodDeclaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		IFunctionBinding methodBinding = methodDeclaration.resolveBinding();
 		assertNull("method binding not null", methodBinding); //$NON-NLS-1$
@@ -8240,7 +8240,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		assertTrue("Not an expression statement", node.getNodeType() == ASTNode.EXPRESSION_STATEMENT); //$NON-NLS-1$
 		ExpressionStatement expressionStatement = (ExpressionStatement) node;
 		Expression expression = expressionStatement.getExpression();
-		assertTrue("Not an method invocation", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not an method invocation", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		Expression expression2 = methodInvocation.getExpression();
 		assertNotNull("No receiver", expression2); //$NON-NLS-1$
@@ -8269,7 +8269,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		assertTrue("Not an expression statement", node.getNodeType() == ASTNode.EXPRESSION_STATEMENT); //$NON-NLS-1$
 		ExpressionStatement expressionStatement2 = (ExpressionStatement) node;
 		Expression expression3 = expressionStatement2.getExpression();
-		assertTrue("Not an method invocation", expression3.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not an method invocation", expression3.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation2 = (FunctionInvocation) expression3;
 		Expression expression4 = methodInvocation2.getExpression();
 		assertNotNull("No receiver", expression4); //$NON-NLS-1$
@@ -8427,7 +8427,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		String compiler_compliance = null;
 		try {
 			IJavaScriptUnit sourceUnit = getCompilationUnit("Converter" , "src", "test0344", "Test.js"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-			project = sourceUnit.getJavaProject();
+			project = sourceUnit.getJavaScriptProject();
 			pb_assert = project.getOption(JavaScriptCore.COMPILER_PB_ASSERT_IDENTIFIER, true);
 			compiler_source = project.getOption(JavaScriptCore.COMPILER_SOURCE, true);
 			compiler_compliance = project.getOption(JavaScriptCore.COMPILER_COMPLIANCE, true);
@@ -8654,7 +8654,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		assertEquals("errors found", 0, compilationUnit.getMessages().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(compilationUnit, 0, 0);
 		assertNotNull("not null", node); //$NON-NLS-1$
-		assertTrue("Not an method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not an method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		List parameters = methodDeclaration.parameters();
 		assertEquals("wrong size", 2, parameters.size()); //$NON-NLS-1$
@@ -8664,7 +8664,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		checkSourceRange(singleVariableDeclaration, "int[] b", source); //$NON-NLS-1$
 		node = getASTNode(compilationUnit, 0, 1);
 		assertNotNull("not null", node); //$NON-NLS-1$
-		assertTrue("Not an method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not an method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		methodDeclaration = (FunctionDeclaration) node;
 		parameters = methodDeclaration.parameters();
 		assertEquals("wrong size", 2, parameters.size()); //$NON-NLS-1$
@@ -8687,7 +8687,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		assertEquals("errors found", 0, compilationUnit.getMessages().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(compilationUnit, 0, 0);
 		assertNotNull("not null", node); //$NON-NLS-1$
-		assertTrue("Not an method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not an method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		List parameters = methodDeclaration.parameters();
 		assertEquals("wrong size", 2, parameters.size()); //$NON-NLS-1$
@@ -8697,7 +8697,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		checkSourceRange(singleVariableDeclaration, "final int[] b", source); //$NON-NLS-1$
 		node = getASTNode(compilationUnit, 0, 1);
 		assertNotNull("not null", node); //$NON-NLS-1$
-		assertTrue("Not an method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not an method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		methodDeclaration = (FunctionDeclaration) node;
 		parameters = methodDeclaration.parameters();
 		assertEquals("wrong size", 2, parameters.size()); //$NON-NLS-1$
@@ -8772,7 +8772,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		assertTrue("Not an infixExpression", condition.getNodeType() == ASTNode.INFIX_EXPRESSION); //$NON-NLS-1$
 		InfixExpression infixExpression = (InfixExpression) condition;
 		Expression expression = infixExpression.getLeftOperand();
-		assertTrue("Not a method invocation expression", expression.getNodeType() == ASTNode.METHOD_INVOCATION); //$NON-NLS-1$
+		assertTrue("Not a method invocation expression", expression.getNodeType() == ASTNode.FUNCTION_INVOCATION); //$NON-NLS-1$
 		FunctionInvocation methodInvocation = (FunctionInvocation) expression;
 		Expression expression2 = methodInvocation.getExpression();
 		assertTrue("Not a parenthesis expression", expression2.getNodeType() == ASTNode.PARENTHESIZED_EXPRESSION); //$NON-NLS-1$
@@ -8842,7 +8842,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		assertEquals("errors found", 0, compilationUnit.getMessages().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(compilationUnit, 0,0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration statement", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration statement", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		SimpleName name = methodDeclaration.getName();
 		checkSourceRange(name, "mdd", source); //$NON-NLS-1$
@@ -8861,7 +8861,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		assertEquals("errors found", 0, compilationUnit.getMessages().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(compilationUnit, 0,0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration statement", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration statement", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		SimpleName name = methodDeclaration.getName();
 		checkSourceRange(name, "mdd", source); //$NON-NLS-1$
@@ -9537,7 +9537,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		assertEquals("errors found", 0, compilationUnit.getMessages().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(compilationUnit, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Type type = methodDeclaration.getReturnType2();
 		ITypeBinding typeBinding = type.resolveBinding();
@@ -9557,7 +9557,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		assertEquals("errors found", 0, compilationUnit.getMessages().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(compilationUnit, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Type type = methodDeclaration.getReturnType2();
 		ITypeBinding typeBinding = type.resolveBinding();
@@ -9577,7 +9577,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		assertEquals("errors found", 0, compilationUnit.getMessages().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(compilationUnit, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Type type = methodDeclaration.getReturnType2();
 		ITypeBinding typeBinding = type.resolveBinding();
@@ -9598,7 +9598,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		assertEquals("errors found", 0, compilationUnit.getMessages().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(compilationUnit, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Type type = methodDeclaration.getReturnType2();
 		checkSourceRange(type, "String", source); //$NON-NLS-1$
@@ -9628,7 +9628,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		assertEquals("errors found", 0, compilationUnit.getMessages().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(compilationUnit, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Type type = methodDeclaration.getReturnType2();
 		checkSourceRange(type, "String", source); //$NON-NLS-1$
@@ -9652,7 +9652,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		assertEquals("errors found", 0, compilationUnit.getMessages().length); //$NON-NLS-1$
 		ASTNode node = getASTNode(compilationUnit, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		Type type = methodDeclaration.getReturnType2();
 		checkSourceRange(type, "String[]", source); //$NON-NLS-1$
@@ -9678,7 +9678,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		ASTNode result = runConversion(AST.JLS3, sourceUnit, true);
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration method = (FunctionDeclaration) node;
 		SingleVariableDeclaration singleVariableDeclaration = (SingleVariableDeclaration) method.parameters().get(0);
 		assertNotNull("Expression should not be null", singleVariableDeclaration); //$NON-NLS-1$
@@ -9710,7 +9710,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		ASTNode result = runConversion(AST.JLS3, sourceUnit, true);
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration method = (FunctionDeclaration) node;
 		SingleVariableDeclaration singleVariableDeclaration = (SingleVariableDeclaration) method.parameters().get(0);
 		assertNotNull("Expression should not be null", singleVariableDeclaration); //$NON-NLS-1$
@@ -9767,7 +9767,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		ASTNode result = runConversion(AST.JLS3, sourceUnit, true);
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Not a constructor", methodDeclaration.isConstructor()); //$NON-NLS-1$
 		Block block = methodDeclaration.getBody();
@@ -9784,7 +9784,7 @@ public class ASTConverterAST3Test extends ConverterTestSetup {
 		ASTNode result = runConversion(AST.JLS3, sourceUnit, true);
 		ASTNode node = getASTNode((JavaScriptUnit) result, 0, 0);
 		assertNotNull(node);
-		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.METHOD_DECLARATION); //$NON-NLS-1$
+		assertTrue("Not a method declaration", node.getNodeType() == ASTNode.FUNCTION_DECLARATION); //$NON-NLS-1$
 		FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 		assertTrue("Not a constructor", methodDeclaration.isConstructor()); //$NON-NLS-1$
 		Block block = methodDeclaration.getBody();

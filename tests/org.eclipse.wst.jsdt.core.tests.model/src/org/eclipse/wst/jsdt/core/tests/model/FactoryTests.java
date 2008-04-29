@@ -73,7 +73,7 @@ public void testCreateCompilationUnits() throws CoreException {
 		assertTrue("wrong object B created", objectB instanceof IJavaScriptUnit);
 		assertTrue("compilation unit B does not exist", objectB.exists());
 
-		assertEquals("should share project", ((IJavaScriptUnit)objectA).getJavaProject(), ((IJavaScriptUnit)objectB).getJavaProject());
+		assertEquals("should share project", ((IJavaScriptUnit)objectA).getJavaScriptProject(), ((IJavaScriptUnit)objectB).getJavaScriptProject());
 	} finally {
 		this.deleteProject("P");
 	}
@@ -100,7 +100,7 @@ public void testCreateCompilationUnitsNotOnClasspath() throws CoreException {
 		assertTrue("wrong object B created", objectB instanceof IJavaScriptUnit);
 		assertTrue("compilation unit B should not exist", !objectB.exists());
 
-		assertEquals("should share project", ((IJavaScriptUnit)objectA).getJavaProject(), ((IJavaScriptUnit)objectB).getJavaProject());
+		assertEquals("should share project", ((IJavaScriptUnit)objectA).getJavaScriptProject(), ((IJavaScriptUnit)objectB).getJavaScriptProject());
 
 		IJavaScriptElement objectC = JavaScriptCore.create(fileC);
 		assertTrue("tooling object C not created", objectC != null);
@@ -134,7 +134,7 @@ public void testCreateFolderToolObjects() throws CoreException {
 	
 		//set a classpath
 		IIncludePathEntry[] classpath= new IIncludePathEntry[] {JavaScriptCore.newSourceEntry(src.getFullPath())};
-		javaProject.setRawClasspath(classpath, null);
+		javaProject.setRawIncludepath(classpath, null);
 	
 		//test with a class path
 		object = JavaScriptCore.create(src);

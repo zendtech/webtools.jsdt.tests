@@ -219,7 +219,7 @@ public void testASTParsing2() throws JavaScriptModelException {
  */
 public void testChangeSourceAttachmentFile() throws CoreException {
 	IClassFile cf = this.pkgFragmentRoot.getPackageFragment("x.y").getClassFile("A.class");
-	IFunction method = cf.getType().getMethod("foo", new String[] {});
+	IFunction method = cf.getType().getFunction("foo", new String[] {});
 	
 	// check initial source
 	assertSourceEquals(
@@ -337,7 +337,7 @@ public void testDetachSource() throws JavaScriptModelException {
  * Ensures that the source of a generic method can be retrieved.
  */
 public void testGeneric1() throws JavaScriptModelException {
-	IFunction method = this.genericType.getMethod("foo", new String[] {"QX<QT;>;"});
+	IFunction method = this.genericType.getFunction("foo", new String[] {"QX<QT;>;"});
 	assertSourceEquals(
 		"Unexpected source",
 		"void foo(X<T> x) {\n" + 
@@ -348,7 +348,7 @@ public void testGeneric1() throws JavaScriptModelException {
  * Ensures that the source of a generic method can be retrieved.
  */
 public void testGeneric2() throws JavaScriptModelException {
-	IFunction method = this.genericType.getMethod("foo", new String[] {"QK;", "QV;"});
+	IFunction method = this.genericType.getFunction("foo", new String[] {"QK;", "QV;"});
 	assertSourceEquals(
 		"Unexpected source",
 		"<K, V> V foo(K key, V value) {\n" + 
@@ -361,7 +361,7 @@ public void testGeneric2() throws JavaScriptModelException {
  * (regression test for bug 129317 Outline view inconsistent with code
  */
 public void testGeneric3() throws JavaScriptModelException {
-	IFunction method = this.genericType.getMethod("foo", new String[] {"I", "Lgeneric.X<[Ljava.lang.Object;>;"});
+	IFunction method = this.genericType.getFunction("foo", new String[] {"I", "Lgeneric.X<[Ljava.lang.Object;>;"});
 	assertSourceEquals(
 		"Unexpected source",
 		"void foo(int i, X<Object[]> x) {\n" + 
@@ -369,7 +369,7 @@ public void testGeneric3() throws JavaScriptModelException {
 		method.getSource());
 }
 public void testGeneric4() throws JavaScriptModelException {
-	IFunction method = this.genericType.getMethod("foo", new String[] {"Z", "Lgeneric.X<+Lgeneric.X;>;"});
+	IFunction method = this.genericType.getFunction("foo", new String[] {"Z", "Lgeneric.X<+Lgeneric.X;>;"});
 	assertSourceEquals(
 		"Unexpected source",
 		"void foo(boolean b, X<? extends X> x) {\n" + 
@@ -377,7 +377,7 @@ public void testGeneric4() throws JavaScriptModelException {
 		method.getSource());
 }
 public void testGeneric5() throws JavaScriptModelException {
-	IFunction method = this.genericType.getMethod("foo", new String[] {"F", "Lgeneric.X<*>;"});
+	IFunction method = this.genericType.getFunction("foo", new String[] {"F", "Lgeneric.X<*>;"});
 	assertSourceEquals(
 		"Unexpected source",
 		"void foo(float f, X<?> x) {\n" + 
@@ -385,7 +385,7 @@ public void testGeneric5() throws JavaScriptModelException {
 		method.getSource());
 }
 public void testGeneric6() throws JavaScriptModelException {
-	IFunction method = this.genericType.getMethod("foo", new String[] {"Lgeneric.Y<+Ljava.lang.Integer;+Ljava.lang.Object;>;"});
+	IFunction method = this.genericType.getFunction("foo", new String[] {"Lgeneric.Y<+Ljava.lang.Integer;+Ljava.lang.Object;>;"});
 	assertSourceEquals(
 		"Unexpected source",
 		"void foo(Y<? extends Integer, ? extends Object> y) {\n" + 
@@ -393,7 +393,7 @@ public void testGeneric6() throws JavaScriptModelException {
 		method.getSource());
 }
 public void testGeneric7() throws JavaScriptModelException {
-	IFunction method = this.genericType.getMethod("foo", new String[] {"Lgeneric.Z.Inner<Ljava.lang.Object;>;"});
+	IFunction method = this.genericType.getFunction("foo", new String[] {"Lgeneric.Z.Inner<Ljava.lang.Object;>;"});
 	assertSourceEquals(
 		"Unexpected source",
 		"void foo(Z.Inner<Object> inner) {\n" + 
@@ -401,7 +401,7 @@ public void testGeneric7() throws JavaScriptModelException {
 		method.getSource());
 }
 public void testGeneric8() throws JavaScriptModelException {
-	IFunction method = this.genericType.getMethod("foo", new String[] {"Lgeneric.AType<Ljava.lang.Object;>;"});
+	IFunction method = this.genericType.getFunction("foo", new String[] {"Lgeneric.AType<Ljava.lang.Object;>;"});
 	assertSourceEquals(
 		"Unexpected source",
 		"void foo(AType<Object> t) {\n" + 
@@ -414,7 +414,7 @@ public void testGeneric8() throws JavaScriptModelException {
  */
 public void testGetNameRange01() throws JavaScriptModelException {
 	IClassFile classFile = this.pkgFragmentRoot.getPackageFragment("x.y").getClassFile("A.class");
-	IFunction method = classFile.getType().getMethod("foo", null);
+	IFunction method = classFile.getType().getFunction("foo", null);
 	assertSourceEquals("Unexpected name source", "foo", getNameSource(classFile.getSource(), method));
 }
 /**
@@ -431,7 +431,7 @@ public void testGetNameRange02() throws JavaScriptModelException {
  */
 public void testGetNameRange03() throws JavaScriptModelException {
 	IClassFile classFile = this.innerClasses.getClassFile("X$V.class");
-	IFunction constructor = classFile.getType().getMethod("V", new String[] {"Linner.X;", "Ljava.lang.String;"});
+	IFunction constructor = classFile.getType().getFunction("V", new String[] {"Linner.X;", "Ljava.lang.String;"});
 	assertSourceEquals("Unexpected name source", "V", getNameSource(classFile.getSource(), constructor));
 }
 /**
@@ -613,7 +613,7 @@ public void testLibFolder() throws JavaScriptModelException {
  */
 public void testMethodRetrieval() throws JavaScriptModelException {
 	IClassFile cf = this.pkgFragmentRoot.getPackageFragment("x.y").getClassFile("A.class");
-	IFunction[] methods = cf.getType().getMethods();
+	IFunction[] methods = cf.getType().getFunctions();
 	for (int i = 0; i < methods.length; i++) {
 		IFunction method = methods[i];
 		assertTrue("source code does not exist for the method " + method, method.getSource() != null);
@@ -1041,7 +1041,7 @@ public void testBug110172() throws JavaScriptModelException {
 		for (int i = 0; i < length; i++) {
 			element = members[i];
 			assertTrue(element instanceof IMember);
-			final ISourceRange javadocRange = ((IMember) element).getJavadocRange();
+			final ISourceRange javadocRange = ((IMember) element).getJSdocRange();
 			final String elementName = element.getElementName();
 			if ("f".equals(elementName)) {
 				assertNotNull("No javadoc source range", javadocRange);
@@ -1124,7 +1124,7 @@ public void testBug153133() throws JavaScriptModelException {
 			if (((IMember)members[i]).getElementType() == IJavaScriptElement.TYPE) {
 				IType typeMember = (IType) members[i];
 				String typeName = typeMember.getElementName();
-				IFunction[] methods = typeMember.getMethods();
+				IFunction[] methods = typeMember.getFunctions();
 				assertEquals("Expected only one constructor defined in type "+typeName, 1, methods.length);
 				// Verify that source range is valid
 				assertTrue("Expected a constructor instead of a method in type "+typeName, methods[0].isConstructor());

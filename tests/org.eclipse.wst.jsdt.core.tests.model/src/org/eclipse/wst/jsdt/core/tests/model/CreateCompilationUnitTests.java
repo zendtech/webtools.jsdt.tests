@@ -77,7 +77,7 @@ public void testCUAndImportContainer() throws JavaScriptModelException {
  */
 public void testDefaultCU() throws CoreException {
 	IPackageFragment pkg = getPackage("/P/p");
-	IJavaScriptUnit cu= pkg.getCompilationUnit("Default.js");
+	IJavaScriptUnit cu= pkg.getJavaScriptUnit("Default.js");
 	IType type= cu.createType("public class Default {}", null, false, null);
 	assertCreation(cu);
 	assertCreation(type);
@@ -127,7 +127,7 @@ public void testEmptyCU() {
 		pkg.createCompilationUnit("Empty.js", "", true, null);
 	} catch (JavaScriptModelException jme) {
 	}
-	IJavaScriptUnit cu= pkg.getCompilationUnit("Empty.js");
+	IJavaScriptUnit cu= pkg.getJavaScriptUnit("Empty.js");
 	assertCreation(cu);
 }
 /*

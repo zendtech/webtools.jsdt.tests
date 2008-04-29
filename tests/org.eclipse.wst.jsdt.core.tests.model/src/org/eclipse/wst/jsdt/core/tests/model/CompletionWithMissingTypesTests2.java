@@ -149,9 +149,9 @@ public void test0001() throws Exception {
 		int start2 = str.lastIndexOf("XX");
 		int end2 = start2 + "XX".length();
 		assertResults(
-				"foo[METHOD_REF]{foo(), La.XX;, ()V, foo, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+				"foo[FUNCTION_REF]{foo(), La.XX;, ()V, foo, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 				"   XX[TYPE_REF]{a.XX, a, La.XX;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}\n" +
-				"foo[METHOD_REF]{foo(), Lb.XX;, ()V, foo, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+				"foo[FUNCTION_REF]{foo(), Lb.XX;, ()V, foo, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 				"   XX[TYPE_REF]{b.XX, b, Lb.XX;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 				requestor.getResults());
 	} finally {
@@ -243,7 +243,7 @@ public void test0002() throws Exception {
 		int start2 = str.lastIndexOf("XX");
 		int end2 = start2 + "XX".length();
 		assertResults(
-				"foo[METHOD_REF]{foo(), Lb.XX;, ()V, foo, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+				"foo[FUNCTION_REF]{foo(), Lb.XX;, ()V, foo, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 				"   XX[TYPE_REF]{b.XX, b, Lb.XX;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 				requestor.getResults());
 	} finally {

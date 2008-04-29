@@ -48,8 +48,8 @@ protected void addLibrary(String projectName, String jarName, String sourceZipNa
 	} else {
 		extraAttributes =
 			new IIncludePathAttribute[]{
-				JavaScriptCore.newClasspathAttribute(
-						IIncludePathAttribute.JAVADOC_LOCATION_ATTRIBUTE_NAME,
+				JavaScriptCore.newIncludepathAttribute(
+						IIncludePathAttribute.JSDOC_LOCATION_ATTRIBUTE_NAME,
 						"jar:platform:/resource"+projectPath+docZipName+"!/")};
 	}
 	

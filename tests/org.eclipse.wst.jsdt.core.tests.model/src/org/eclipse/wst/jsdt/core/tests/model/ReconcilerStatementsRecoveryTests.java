@@ -94,13 +94,13 @@ protected void assertNoProblem(char[] source, IJavaScriptUnit unit) throws Inter
 }
 protected void addClasspathEntries(IIncludePathEntry[] entries, boolean enableForbiddenReferences) throws JavaScriptModelException {
 	IJavaScriptProject project = getJavaProject("Reconciler");
-	IIncludePathEntry[] oldClasspath = project.getRawClasspath();
+	IIncludePathEntry[] oldClasspath = project.getRawIncludepath();
 	int oldLength = oldClasspath.length;
 	int length = entries.length;
 	IIncludePathEntry[] newClasspath = new IIncludePathEntry[oldLength+length];
 	System.arraycopy(oldClasspath, 0, newClasspath, 0, oldLength);
 	System.arraycopy(entries, 0, newClasspath, oldLength, length);
-	project.setRawClasspath(newClasspath, null);
+	project.setRawIncludepath(newClasspath, null);
 	
 	if (enableForbiddenReferences) {
 		project.setOption(JavaScriptCore.COMPILER_PB_FORBIDDEN_REFERENCE, JavaScriptCore.ERROR);
@@ -108,12 +108,12 @@ protected void addClasspathEntries(IIncludePathEntry[] entries, boolean enableFo
 }
 protected void removeClasspathEntries(IIncludePathEntry[] entries) throws JavaScriptModelException {
 	IJavaScriptProject project = getJavaProject("Reconciler");
-	IIncludePathEntry[] oldClasspath = project.getRawClasspath();
+	IIncludePathEntry[] oldClasspath = project.getRawIncludepath();
 	int oldLength = oldClasspath.length;
 	int length = entries.length;
 	IIncludePathEntry[] newClasspath = new IIncludePathEntry[oldLength-length];
 	System.arraycopy(oldClasspath, 0, newClasspath, 0, oldLength-length);
-	project.setRawClasspath(newClasspath, null);
+	project.setRawIncludepath(newClasspath, null);
 }
 /**
  * Setup for the next test.

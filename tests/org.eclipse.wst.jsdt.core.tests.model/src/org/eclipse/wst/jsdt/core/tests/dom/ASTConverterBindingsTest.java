@@ -503,7 +503,7 @@ public class ASTConverterBindingsTest extends ConverterTestSetup {
 		IPackageFragment[] packageFragments = javaProject.getPackageFragments();
 		ArrayList compilationUnitscollector = new ArrayList();
 		for (int j = 0, max2 = packageFragments.length; j < max2; j++) {
-			IJavaScriptUnit[] units = packageFragments[j].getCompilationUnits();
+			IJavaScriptUnit[] units = packageFragments[j].getJavaScriptUnits();
 			if (units != null) {
 				for (int k = 0, max3 = units.length; k < max3; k++) {
 					compilationUnitscollector.add(units[k]);
@@ -517,10 +517,10 @@ public class ASTConverterBindingsTest extends ConverterTestSetup {
 		for (int j = 0; j < length; j++) {
 			IJavaScriptUnit currentUnit = units[j];
 			ASTNode result = runConversion(AST.JLS3, currentUnit, true);
-			assertEquals("Not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType());
+			assertEquals("Not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType());
 			JavaScriptUnit unit = (JavaScriptUnit) result;
 			result = runConversion(AST.JLS3, currentUnit, true);
-			assertEquals("Not a compilation unit", ASTNode.COMPILATION_UNIT, result.getNodeType());
+			assertEquals("Not a compilation unit", ASTNode.JAVASCRIPT_UNIT, result.getNodeType());
 			if (DEBUG) {
 				if (unit.types().size() > 0 ) {
 					AbstractTypeDeclaration typeDeclaration = (AbstractTypeDeclaration) unit.types().get(0);

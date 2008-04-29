@@ -195,7 +195,7 @@ public void testAddCuAfterProjectOpen() throws CoreException {
 		project.close(null);
 		
 		// invalidate roots
-		p1.setRawClasspath(new IIncludePathEntry[] {}, null);
+		p1.setRawIncludepath(new IIncludePathEntry[] {}, null);
 		
 		// open project
 		project.open(null);
@@ -362,7 +362,7 @@ public void testAddJavaNatureAndClasspath() throws CoreException {
 				public void run(IProgressMonitor monitor) throws CoreException {
 					addJavaNature("P");
 					createFolder("/P/src");
-					getJavaProject("P").setRawClasspath(
+					getJavaProject("P").setRawIncludepath(
 						new IIncludePathEntry[] {JavaScriptCore.newSourceEntry(new Path("/P/src"))},
 						new Path("/P/bin"),
 						null
@@ -471,7 +471,7 @@ public void testAddTwoJavaProjectsWithExtraSetClasspath() throws CoreException {
 				public void run(IProgressMonitor monitor) throws CoreException {
 					IJavaScriptProject p1 = createJavaProject("P1", new String[] {""}, "");
 					// should be a no-op and no extra delta volley should be fired
-					p1.setRawClasspath(p1.getRawClasspath(), p1.getOutputLocation(), null);
+					p1.setRawIncludepath(p1.getRawIncludepath(), p1.getOutputLocation(), null);
 					createJavaProject("P2", new String[] {"src"}, "bin");
 				}
 			},
@@ -932,7 +932,7 @@ public void testDeleteProjectAfterChangingClasspath() throws CoreException {
 		final IJavaScriptProject project = createJavaProject("P");
 		IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
 			public void run(IProgressMonitor monitor) throws CoreException {
-				project.setRawClasspath(createClasspath("P", new String[] {"/P/src", ""}), new Path("/P/bin"), monitor);
+				project.setRawIncludepath(createClasspath("P", new String[] {"/P/src", ""}), new Path("/P/bin"), monitor);
 				deleteProject("P");
 			}
 		};
@@ -961,7 +961,7 @@ public void testDeleteProjectSetCPAnotherProject() throws CoreException {
 			new IWorkspaceRunnable() {
 				public void run(IProgressMonitor monitor) throws CoreException {
 					deleteProject("P2");
-					project.setRawClasspath(
+					project.setRawIncludepath(
 						new IIncludePathEntry[] {
 							JavaScriptCore.newSourceEntry(project.getPath())
 						},
@@ -1762,7 +1762,7 @@ public void testRemoveAddBinaryProject() throws CoreException {
 	try {
 		IJavaScriptProject project = createJavaProject("P", new String[] {""}, "");
 		createFile("P/lib.jar", "");
-		project.setRawClasspath(
+		project.setRawIncludepath(
 			new IIncludePathEntry[] {
 				JavaScriptCore.newLibraryEntry(new Path("/P/lib.jar"), null, null)
 			},
@@ -1870,7 +1870,7 @@ public void testRemoveCPEntryAndRoot2() throws CoreException {
 		JavaScriptCore.run(
 			new IWorkspaceRunnable() {
 				public void run(IProgressMonitor monitor) throws CoreException {
-					project.setRawClasspath(new IIncludePathEntry[] {}, null);
+					project.setRawIncludepath(new IIncludePathEntry[] {}, null);
 					deleteFolder("/P/src");
 				}
 			},
@@ -1903,7 +1903,7 @@ public void testRemoveCPEntryAndRoot3() throws CoreException {
 			new IWorkspaceRunnable() {
 				public void run(IProgressMonitor monitor) throws CoreException {
 					deleteFolder("/P/src");
-					project.setRawClasspath(new IIncludePathEntry[] {}, null);
+					project.setRawIncludepath(new IIncludePathEntry[] {}, null);
 				}
 			},
 			null);
@@ -2215,7 +2215,7 @@ public void testSetClasspathOnFreshProject() throws CoreException {
 				JavaScriptCore.newSourceEntry(new Path("/P1/src2")),
 				JavaScriptCore.newLibraryEntry(new Path("/LibProj/mylib.jar"), null, null)
 			};
-		p1.setRawClasspath(classpath, null);
+		p1.setRawIncludepath(classpath, null);
 		assertDeltas(
 			"Should notice src2 and myLib additions to the classpath", 
 			"P1[*]: {CHILDREN | CLASSPATH CHANGED}\n" + 
@@ -2239,10 +2239,10 @@ public void testSetClasspathVariable1() throws CoreException {
 		createProject("LibProj");
 		createFile("LibProj/mylib.jar", "");
 		createFile("LibProj/otherlib.jar", "");
-		JavaScriptCore.setClasspathVariables(new String[] {"LIB"}, new IPath[] {new Path("/LibProj/mylib.jar")}, null);
+		JavaScriptCore.setIncludepathVariables(new String[] {"LIB"}, new IPath[] {new Path("/LibProj/mylib.jar")}, null);
 		createJavaProject("P", new String[] {""}, new String[] {"LIB"}, "");
 		startDeltas();
-		JavaScriptCore.setClasspathVariables(new String[] {"LIB"}, new IPath[] {new Path("/LibProj/otherlib.jar")}, null);
+		JavaScriptCore.setIncludepathVariables(new String[] {"LIB"}, new IPath[] {new Path("/LibProj/otherlib.jar")}, null);
 		assertDeltas(
 			"Unexpected delta after setting classpath variable", 
 			"P[*]: {CHILDREN}\n" +
@@ -2264,11 +2264,11 @@ public void testSetClasspathVariable2() throws CoreException {
 		createProject("LibProj");
 		createFile("LibProj/mylib.jar", "");
 		createFile("LibProj/otherlib.jar", "");
-		JavaScriptCore.setClasspathVariables(new String[] {"LIB"}, new IPath[] {new Path("/LibProj/mylib.jar")}, null);
+		JavaScriptCore.setIncludepathVariables(new String[] {"LIB"}, new IPath[] {new Path("/LibProj/mylib.jar")}, null);
 		createJavaProject("P1", new String[] {""}, new String[] {"LIB"}, "");
 		createJavaProject("P2", new String[] {""}, new String[] {"LIB"}, "");
 		startDeltas();
-		JavaScriptCore.setClasspathVariables(new String[] {"LIB"}, new IPath[] {new Path("/LibProj/otherlib.jar")}, null);
+		JavaScriptCore.setIncludepathVariables(new String[] {"LIB"}, new IPath[] {new Path("/LibProj/otherlib.jar")}, null);
 		assertEquals(
 			"Unexpected delta after setting classpath variable", 
 			"P1[*]: {CHILDREN}\n" +

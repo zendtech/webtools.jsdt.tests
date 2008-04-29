@@ -52,7 +52,7 @@ protected int indexOf(String projectName, IJavaScriptProject[] projects) {
  */
 public void testAddFileToNonJavaProject() throws CoreException {
 	IJavaScriptModel model = this.getJavaModel();
-	IJavaScriptProject[] projects = model.getJavaProjects();
+	IJavaScriptProject[] projects = model.getJavaScriptProjects();
 	assertTrue(
 		"Project P should not be present already",
 		this.indexOf("P", projects) == -1
@@ -60,7 +60,7 @@ public void testAddFileToNonJavaProject() throws CoreException {
 	try {
 		this.createProject("P");
 		this.createFile("/P/toto.txt", "");
-		projects = model.getJavaProjects();
+		projects = model.getJavaScriptProjects();
 		assertTrue(
 			"Project P should not be present",
 			this.indexOf("P", projects) == -1
@@ -377,7 +377,7 @@ public void testFindLineSeparator04() throws CoreException {
  */
 public void testGetJavaProject() {
 	IJavaScriptModel model= getJavaModel();
-	assertTrue("project should be null", model.getJavaProject() == null);
+	assertTrue("project should be null", model.getJavaScriptProject() == null);
 }
 /*
  * Ensure that a java project that is added appears in the list of known java project,
@@ -385,20 +385,20 @@ public void testGetJavaProject() {
  */
 public void testGetJavaProjects1() throws CoreException {
 	IJavaScriptModel model = this.getJavaModel();
-	IJavaScriptProject[] projects = model.getJavaProjects();
+	IJavaScriptProject[] projects = model.getJavaScriptProjects();
 	assertTrue(
 		"Project P should not be present already",
 		this.indexOf("P", projects) == -1
 	);
 	try {
 		this.createJavaProject("P", new String[] {}, "");
-		projects = model.getJavaProjects();
+		projects = model.getJavaScriptProjects();
 		assertTrue(
 			"Project P should be present",
 			this.indexOf("P", projects) != -1
 		);
 		this.deleteProject("P");
-		projects = model.getJavaProjects();
+		projects = model.getJavaScriptProjects();
 		assertTrue(
 			"Project P should not be present any longer",
 			this.indexOf("P", projects) == -1
@@ -412,14 +412,14 @@ public void testGetJavaProjects1() throws CoreException {
  */
 public void testGetJavaProjects2() throws CoreException {
 	IJavaScriptModel model = this.getJavaModel();
-	IJavaScriptProject[] projects = model.getJavaProjects();
+	IJavaScriptProject[] projects = model.getJavaScriptProjects();
 	assertTrue(
 		"Project P should not be present already",
 		this.indexOf("P", projects) == -1
 	);
 	try {
 		this.createProject("P");
-		projects = model.getJavaProjects();
+		projects = model.getJavaScriptProjects();
 		assertTrue(
 			"Project P should not be present",
 			this.indexOf("P", projects) == -1
@@ -439,26 +439,26 @@ public void testGetNonJavaResources() throws CoreException {
 		assertResourceNamesEqual(
 			"Unexpected non-Java resources",
 			"",
-			model.getNonJavaResources());
+			model.getNonJavaScriptResources());
 
 		this.createProject("SP1");
 		assertResourceNamesEqual(
 			"Unexpected non-Java resources after creation of SP1",
 			"SP1",
-			model.getNonJavaResources());
+			model.getNonJavaScriptResources());
 		
 		this.createProject("SP2");
 		assertResourceNamesEqual(
 			"Unexpected non-Java resources after creation of SP2",
 			"SP1\n" +
 			"SP2",
-			model.getNonJavaResources());
+			model.getNonJavaScriptResources());
 
 		this.deleteProject("SP1");
 		assertResourceNamesEqual(
 			"Unexpected non-Java resources after deletion of SP1",
 			"SP2",
-			model.getNonJavaResources());
+			model.getNonJavaScriptResources());
 	} finally {
 		this.deleteProject("SP1");
 		this.deleteProject("SP2");

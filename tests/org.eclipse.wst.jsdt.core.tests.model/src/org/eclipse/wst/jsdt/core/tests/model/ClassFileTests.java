@@ -142,7 +142,7 @@ public void testDotName() throws JavaScriptModelException {
  */
 public void testExceptionTypes1() throws JavaScriptModelException {
 	IType type = this.jarRoot.getPackageFragment("generic").getClassFile("X.class").getType();
-	IFunction method = type.getMethod("foo", new String[] {"TK;", "TV;"});
+	IFunction method = type.getFunction("foo", new String[] {"TK;", "TV;"});
 	assertStringsEqual(
 		"Unexpected return type",
 		"Ljava.lang.Exception;\n",
@@ -154,7 +154,7 @@ public void testExceptionTypes1() throws JavaScriptModelException {
  */
 public void testExceptionTypes2() throws JavaScriptModelException {
 	IType type = this.jarRoot.getPackageFragment("generic").getClassFile("X.class").getType();
-	IFunction method = type.getMethod("foo", new String[] {"Lgeneric.X<TT;>;"});
+	IFunction method = type.getFunction("foo", new String[] {"Lgeneric.X<TT;>;"});
 	assertStringsEqual(
 		"Unexpected return type",
 		"Ljava.lang.RuntimeException;\n" + 
@@ -245,7 +245,7 @@ public void testGetCategories05() throws CoreException, IOException {
 		"  void foo() {}\n" +
 		"}"
 	);
-	String[] categories = this.classFile.getType().getMethod("foo", new String[0]).getCategories();
+	String[] categories = this.classFile.getType().getFunction("foo", new String[0]).getCategories();
 	assertStringsEqual(
 		"Unexpected categories",
 		"test\n",
@@ -261,7 +261,7 @@ public void testGetCategories06() throws CoreException, IOException {
 		"  void foo() {}\n" +
 		"}"
 	);
-	String[] categories = this.classFile.getType().getMethod("foo", new String[0]).getCategories();
+	String[] categories = this.classFile.getType().getFunction("foo", new String[0]).getCategories();
 	assertStringsEqual(
 		"Unexpected categories",
 		"test1\ntest2\ntest3\ntest4\ntest5\n",
@@ -279,7 +279,7 @@ public void testGetCategories07() throws CoreException, IOException {
 		"  void foo() {}\n" +
 		"}"
 	);
-	String[] categories = this.classFile.getType().getMethod("foo", new String[0]).getCategories();
+	String[] categories = this.classFile.getType().getFunction("foo", new String[0]).getCategories();
 	assertStringsEqual(
 		"Unexpected categories",
 		"",
@@ -296,7 +296,7 @@ public void testGetCategories08() throws CoreException, IOException {
 		"  void foo() {}\n" +
 		"}"
 	);
-	String[] categories = this.classFile.getType().getMethod("foo", new String[0]).getCategories();
+	String[] categories = this.classFile.getType().getFunction("foo", new String[0]).getCategories();
 	assertStringsEqual(
 		"Unexpected categories",
 		"",
@@ -313,7 +313,7 @@ public void testGetCategories09() throws CoreException, IOException {
 		"  void foo() {}\n" +
 		"}"
 	);
-	String[] categories = this.classFile.getType().getMethod("foo", new String[0]).getCategories();
+	String[] categories = this.classFile.getType().getFunction("foo", new String[0]).getCategories();
 	assertStringsEqual(
 		"Unexpected categories",
 		"test1\n",
@@ -453,7 +453,7 @@ public void testGetSuperInterfaceTypeSignatures() throws JavaScriptModelExceptio
  * Ensures that the parameter names of a binary method with source attached are correct.
  */
 public void testParameterNames01() throws CoreException {
-	IFunction method = this.jarRoot.getPackageFragment("generic").getClassFile("X.class").getType().getMethod("foo", new String[] {"TK;", "TV;"});
+	IFunction method = this.jarRoot.getPackageFragment("generic").getClassFile("X.class").getType().getFunction("foo", new String[] {"TK;", "TV;"});
 	String[] parameterNames = method.getParameterNames();
 	assertStringsEqual(
 		"Unexpected parameter names", 
@@ -469,7 +469,7 @@ public void testParameterNames02() throws CoreException {
 	IPath sourceAttachmentPath = this.jarRoot.getSourceAttachmentPath();
 	try {
 		attachSource(this.jarRoot, null, null);
-		IFunction method = this.jarRoot.getPackageFragment("generic").getClassFile("X.class").getType().getMethod("foo", new String[] {"TK;", "TV;"});
+		IFunction method = this.jarRoot.getPackageFragment("generic").getClassFile("X.class").getType().getFunction("foo", new String[] {"TK;", "TV;"});
 		String[] parameterNames = method.getParameterNames();
 		assertStringsEqual(
 			"Unexpected parameter names", 
@@ -544,7 +544,7 @@ public void testParameterTypeSignatures5() throws JavaScriptModelException {
  */
 public void testParameterTypeSignatures6() throws JavaScriptModelException {
 	IType type = this.jarRoot.getPackageFragment("generic").getClassFile("X.class").getType();
-	IFunction method = type.getMethod("foo", new String[] {"TK;", "TV;"});
+	IFunction method = type.getFunction("foo", new String[] {"TK;", "TV;"});
 	assertStringsEqual(
 		"Unexpected type parameters",
 		"K:Ljava.lang.Object;\n" + 
@@ -556,7 +556,7 @@ public void testParameterTypeSignatures6() throws JavaScriptModelException {
  * Ensures that the raw parameter names of a binary method with source attached are correct.
  */
 public void testRawParameterNames01() throws CoreException {
-	IFunction method = this.jarRoot.getPackageFragment("generic").getClassFile("X.class").getType().getMethod("foo", new String[] {"TK;", "TV;"});
+	IFunction method = this.jarRoot.getPackageFragment("generic").getClassFile("X.class").getType().getFunction("foo", new String[] {"TK;", "TV;"});
 	String[] parameterNames = method.getRawParameterNames();
 	assertStringsEqual(
 		"Unexpected parameter names", 
@@ -572,7 +572,7 @@ public void testRawParameterNames02() throws CoreException {
 	IPath sourceAttachmentPath = this.jarRoot.getSourceAttachmentPath();
 	try {
 		attachSource(this.jarRoot, null, null);
-		IFunction method = this.jarRoot.getPackageFragment("generic").getClassFile("X.class").getType().getMethod("foo", new String[] {"TK;", "TV;"});
+		IFunction method = this.jarRoot.getPackageFragment("generic").getClassFile("X.class").getType().getFunction("foo", new String[] {"TK;", "TV;"});
 		String[] parameterNames = method.getParameterNames();
 		assertStringsEqual(
 			"Unexpected parameter names", 
@@ -589,7 +589,7 @@ public void testRawParameterNames02() throws CoreException {
  */
 public void testReturnType1() throws JavaScriptModelException {
 	IType type = this.jarRoot.getPackageFragment("generic").getClassFile("X.class").getType();
-	IFunction method = type.getMethod("foo", new String[] {"TK;", "TV;"});
+	IFunction method = type.getFunction("foo", new String[] {"TK;", "TV;"});
 	assertEquals(
 		"Unexpected return type",
 		"TV;",
@@ -601,7 +601,7 @@ public void testReturnType1() throws JavaScriptModelException {
  */
 public void testReturnType2() throws JavaScriptModelException {
 	IType type = this.jarRoot.getPackageFragment("generic").getClassFile("X.class").getType();
-	IFunction method = type.getMethod("foo", new String[] {"Lgeneric.X<TT;>;"});
+	IFunction method = type.getFunction("foo", new String[] {"Lgeneric.X<TT;>;"});
 	assertEquals(
 		"Unexpected return type",
 		"Lgeneric.X<TT;>;",
@@ -664,7 +664,7 @@ public void testTypeParameter() throws CoreException {
  */
 public void testVarargs() throws JavaScriptModelException {
 	IType type = this.jarRoot.getPackageFragment("varargs").getClassFile("X.class").getType();
-	IFunction method = type.getMethod("foo", new String[]{"Ljava.lang.String;", "[Ljava.lang.Object;"});
+	IFunction method = type.getFunction("foo", new String[]{"Ljava.lang.String;", "[Ljava.lang.Object;"});
 	assertTrue("Should have the AccVarargs flag set", Flags.isVarargs(method.getFlags()));
 }
 

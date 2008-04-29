@@ -2008,7 +2008,7 @@ public void test033() throws CoreException {
 		unit.becomeWorkingCopy(null, null);
 		String source = unit.getSource();
 		Document document = new Document(source);
-		CompilerOptions options = new CompilerOptions(unit.getJavaProject().getOptions(true));
+		CompilerOptions options = new CompilerOptions(unit.getJavaScriptProject().getOptions(true));
 		ASTParser parser = ASTParser.newParser(AST.JLS3);
 		parser.setCompilerOptions(options.getMap());
 		parser.setSource(unit);
@@ -2059,7 +2059,7 @@ public void test034() throws CoreException {
 		);
 		unit = this.getCompilationUnit("/P/src/X.js");
 		unit.becomeWorkingCopy(null, null);
-		CompilerOptions options = new CompilerOptions(unit.getJavaProject().getOptions(true));
+		CompilerOptions options = new CompilerOptions(unit.getJavaScriptProject().getOptions(true));
 		ASTParser parser = ASTParser.newParser(AST.JLS3);
 		parser.setCompilerOptions(options.getMap());
 		parser.setSource(unit);

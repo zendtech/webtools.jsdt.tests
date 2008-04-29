@@ -70,7 +70,7 @@ public void test0001() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("MissingType");
 	int end2 = start2 + "MissingType".length();
 	assertResults(
-			"bar[METHOD_REF]{bar(), Lmissing.MissingType<Ljava.lang.Object;>;, ()V, bar, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+			"bar[FUNCTION_REF]{bar(), Lmissing.MissingType<Ljava.lang.Object;>;, ()V, bar, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 			"   MissingType<T>[TYPE_REF]{missing.MissingType, missing, Lmissing.MissingType<TT;>;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 			requestor.getResults());
 }
@@ -116,10 +116,10 @@ public void test0002() throws JavaScriptModelException {
 	int start3 = str.lastIndexOf("MissingType<");
 	int end3 = start3 + "MissingType".length();
 	assertResults(
-			"bar[METHOD_REF]{bar(), Lmissing.MissingType<Lmissing.MissingType2;>;, ()V, bar, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+			"bar[FUNCTION_REF]{bar(), Lmissing.MissingType<Lmissing.MissingType2;>;, ()V, bar, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 			"   MissingType2[TYPE_REF]{missing.MissingType2, missing, Lmissing.MissingType2;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}\n" +
 			"   MissingType<T>[TYPE_REF]{missing.MissingType, missing, Lmissing.MissingType<TT;>;, null, null, ["+start3+", "+end3+"], " + (relevance1) + "}\n" +
-			"bar[METHOD_REF]{bar(), Lmissing.MissingType<Lmissing.MissingType2;>;, (Lmissing.MissingType2;)V, bar, (t), ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+			"bar[FUNCTION_REF]{bar(), Lmissing.MissingType<Lmissing.MissingType2;>;, (Lmissing.MissingType2;)V, bar, (t), ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 			"   MissingType2[TYPE_REF]{missing.MissingType2, missing, Lmissing.MissingType2;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}\n" +
 			"   MissingType<T>[TYPE_REF]{missing.MissingType, missing, Lmissing.MissingType<TT;>;, null, null, ["+start3+", "+end3+"], " + (relevance1) + "}",
 			requestor.getResults());
@@ -165,9 +165,9 @@ public void test0003() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("MissingType2");
 	int end2 = start2 + "MissingType2".length();
 	assertResults(
-			"bar[METHOD_REF]{bar(), Lmissing.MissingType<Lmissing.MissingType2;>;, ()V, bar, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+			"bar[FUNCTION_REF]{bar(), Lmissing.MissingType<Lmissing.MissingType2;>;, ()V, bar, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 			"   MissingType2[TYPE_REF]{missing.MissingType2, missing, Lmissing.MissingType2;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}\n" +
-			"bar[METHOD_REF]{bar(), Lmissing.MissingType<Lmissing.MissingType2;>;, (Lmissing.MissingType2;)V, bar, (t), ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+			"bar[FUNCTION_REF]{bar(), Lmissing.MissingType<Lmissing.MissingType2;>;, (Lmissing.MissingType2;)V, bar, (t), ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 			"   MissingType2[TYPE_REF]{missing.MissingType2, missing, Lmissing.MissingType2;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 			requestor.getResults());
 }
@@ -212,9 +212,9 @@ public void test0004() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("MissingType<");
 	int end2 = start2 + "MissingType".length();
 	assertResults(
-			"bar[METHOD_REF]{bar(), Lmissing.MissingType<Lmissing.MissingType2;>;, ()V, bar, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+			"bar[FUNCTION_REF]{bar(), Lmissing.MissingType<Lmissing.MissingType2;>;, ()V, bar, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 			"   MissingType<T>[TYPE_REF]{missing.MissingType, missing, Lmissing.MissingType<TT;>;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}\n" +
-			"bar[METHOD_REF]{bar(), Lmissing.MissingType<Lmissing.MissingType2;>;, (Lmissing.MissingType2;)V, bar, (t), ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+			"bar[FUNCTION_REF]{bar(), Lmissing.MissingType<Lmissing.MissingType2;>;, (Lmissing.MissingType2;)V, bar, (t), ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 			"   MissingType<T>[TYPE_REF]{missing.MissingType, missing, Lmissing.MissingType<TT;>;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 			requestor.getResults());
 }
@@ -279,19 +279,19 @@ public void test0005() throws JavaScriptModelException {
 	int start4 = str.lastIndexOf("MissingType<");
 	int end4 = start4 + "MissingType".length();
 	assertResults(
-			"bar[METHOD_REF]{bar(), Lmissing.MissingType<Lmissing.MissingType1;Lmissing.MissingType2;>;, (Lmissing.MissingType1;Lmissing.MissingType2;)V, bar, (t, u), ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+			"bar[FUNCTION_REF]{bar(), Lmissing.MissingType<Lmissing.MissingType1;Lmissing.MissingType2;>;, (Lmissing.MissingType1;Lmissing.MissingType2;)V, bar, (t, u), ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 			"   MissingType1[TYPE_REF]{missing.MissingType1, missing, Lmissing.MissingType1;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}\n" +
 			"   MissingType2[TYPE_REF]{missing.MissingType2, missing, Lmissing.MissingType2;, null, null, ["+start3+", "+end3+"], " + (relevance1) + "}\n" +
 			"   MissingType<T,U>[TYPE_REF]{missing.MissingType, missing, Lmissing.MissingType<TT;TU;>;, null, null, ["+start4+", "+end4+"], " + (relevance1) + "}\n" +
-			"bar[METHOD_REF]{bar(), Lmissing.MissingType<Lmissing.MissingType1;Lmissing2.MissingType2;>;, (Lmissing.MissingType1;Lmissing2.MissingType2;)V, bar, (t, u), ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+			"bar[FUNCTION_REF]{bar(), Lmissing.MissingType<Lmissing.MissingType1;Lmissing2.MissingType2;>;, (Lmissing.MissingType1;Lmissing2.MissingType2;)V, bar, (t, u), ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 			"   MissingType1[TYPE_REF]{missing.MissingType1, missing, Lmissing.MissingType1;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}\n" +
 			"   MissingType2[TYPE_REF]{missing2.MissingType2, missing2, Lmissing2.MissingType2;, null, null, ["+start3+", "+end3+"], " + (relevance1) + "}\n" +
 			"   MissingType<T,U>[TYPE_REF]{missing.MissingType, missing, Lmissing.MissingType<TT;TU;>;, null, null, ["+start4+", "+end4+"], " + (relevance1) + "}\n" +
-			"bar[METHOD_REF]{bar(), Lmissing.MissingType<Lmissing2.MissingType1;Lmissing.MissingType2;>;, (Lmissing2.MissingType1;Lmissing.MissingType2;)V, bar, (t, u), ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+			"bar[FUNCTION_REF]{bar(), Lmissing.MissingType<Lmissing2.MissingType1;Lmissing.MissingType2;>;, (Lmissing2.MissingType1;Lmissing.MissingType2;)V, bar, (t, u), ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 			"   MissingType1[TYPE_REF]{missing2.MissingType1, missing2, Lmissing2.MissingType1;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}\n" +
 			"   MissingType2[TYPE_REF]{missing.MissingType2, missing, Lmissing.MissingType2;, null, null, ["+start3+", "+end3+"], " + (relevance1) + "}\n" +
 			"   MissingType<T,U>[TYPE_REF]{missing.MissingType, missing, Lmissing.MissingType<TT;TU;>;, null, null, ["+start4+", "+end4+"], " + (relevance1) + "}\n" +
-			"bar[METHOD_REF]{bar(), Lmissing.MissingType<Lmissing2.MissingType1;Lmissing2.MissingType2;>;, (Lmissing2.MissingType1;Lmissing2.MissingType2;)V, bar, (t, u), ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+			"bar[FUNCTION_REF]{bar(), Lmissing.MissingType<Lmissing2.MissingType1;Lmissing2.MissingType2;>;, (Lmissing2.MissingType1;Lmissing2.MissingType2;)V, bar, (t, u), ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 			"   MissingType1[TYPE_REF]{missing2.MissingType1, missing2, Lmissing2.MissingType1;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}\n" +
 			"   MissingType2[TYPE_REF]{missing2.MissingType2, missing2, Lmissing2.MissingType2;, null, null, ["+start3+", "+end3+"], " + (relevance1) + "}\n" +
 			"   MissingType<T,U>[TYPE_REF]{missing.MissingType, missing, Lmissing.MissingType<TT;TU;>;, null, null, ["+start4+", "+end4+"], " + (relevance1) + "}",
@@ -330,7 +330,7 @@ public void test0006() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("MissingType");
 	int end2 = start2 + "MissingType".length();
 	assertResults(
-			"bar[METHOD_REF]{bar(), Lmissing.MissingType;, ()V, bar, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+			"bar[FUNCTION_REF]{bar(), Lmissing.MissingType;, ()V, bar, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 			"   MissingType[TYPE_REF]{missing.MissingType, missing, Lmissing.MissingType;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 			requestor.getResults());
 }
@@ -373,7 +373,7 @@ public void test0007() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("MissingType");
 	int end2 = start2 + "MissingType".length();
 	assertResults(
-			"bar[METHOD_REF]{bar(), Ltest.AType<!+Lmissing.MissingType;>;, (!+Lmissing.MissingType;)V, bar, (t), ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+			"bar[FUNCTION_REF]{bar(), Ltest.AType<!+Lmissing.MissingType;>;, (!+Lmissing.MissingType;)V, bar, (t), ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 			"   MissingType[TYPE_REF]{missing.MissingType, missing, Lmissing.MissingType;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 			requestor.getResults());
 }
@@ -412,7 +412,7 @@ public void test0008() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("MissingType");
 	int end2 = start2 + "MissingType".length();
 	assertResults(
-			"bar[METHOD_REF]{bar(), Lmissing.MissingType$MissingMemberType<Ljava.lang.Object;>;, ()V, bar, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+			"bar[FUNCTION_REF]{bar(), Lmissing.MissingType$MissingMemberType<Ljava.lang.Object;>;, ()V, bar, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 			"   MissingType[TYPE_REF]{missing.MissingType, missing, Lmissing.MissingType;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 			requestor.getResults());
 }
@@ -482,7 +482,7 @@ public void test0010() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("MissingType");
 	int end2 = start2 + "MissingType".length();
 	assertResults(
-			"bar[METHOD_REF]{bar(), Lmissing.MissingType<Ljava.lang.Object;>.MissingMemberType<Ljava.lang.Object;>;, ()V, bar, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+			"bar[FUNCTION_REF]{bar(), Lmissing.MissingType<Ljava.lang.Object;>.MissingMemberType<Ljava.lang.Object;>;, ()V, bar, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 			"   MissingType<T>[TYPE_REF]{missing.MissingType, missing, Lmissing.MissingType<TT;>;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}",
 			requestor.getResults());
 }
@@ -560,9 +560,9 @@ public void test0012() throws JavaScriptModelException {
 	int start2 = str.lastIndexOf("MissingType");
 	int end2 = start2 + "MissingType".length();
 	assertResults(
-			"bar[METHOD_REF]{bar(), Lmissing1.MissingType;, ()V, bar, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
+			"bar[FUNCTION_REF]{bar(), Lmissing1.MissingType;, ()V, bar, null, ["+start1+", "+end1+"], " + (relevance1) + "}\n" +
 			"   MissingType<T>[TYPE_REF]{missing1.MissingType, missing1, Lmissing1.MissingType<TT;>;, null, null, ["+start2+", "+end2+"], " + (relevance1) + "}\n" +
-			"bar[METHOD_REF]{bar(), Lmissing2.MissingType;, ()V, bar, null, ["+start1+", "+end1+"], " + (relevance2) + "}\n" +
+			"bar[FUNCTION_REF]{bar(), Lmissing2.MissingType;, ()V, bar, null, ["+start1+", "+end1+"], " + (relevance2) + "}\n" +
 			"   MissingType[TYPE_REF]{missing2.MissingType, missing2, Lmissing2.MissingType;, null, null, ["+start2+", "+end2+"], " + (relevance2) + "}",
 			requestor.getResults());
 }

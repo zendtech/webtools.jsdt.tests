@@ -118,9 +118,9 @@ public class JavaConventionTests extends AbstractJavaModelTests {
 			case IMPORT_DECLARATION:
 				return JavaScriptConventions.validateImportDeclaration(string, sourceLevel, complianceLevel).getSeverity();
 			case JAVA_TYPE_NAME:
-				return JavaScriptConventions.validateJavaTypeName(string, sourceLevel, complianceLevel).getSeverity();
+				return JavaScriptConventions.validateJavaScriptTypeName(string, sourceLevel, complianceLevel).getSeverity();
 			case METHOD_NAME:
-				return JavaScriptConventions.validateMethodName(string, sourceLevel, complianceLevel).getSeverity();
+				return JavaScriptConventions.validateFunctionName(string, sourceLevel, complianceLevel).getSeverity();
 			case PACKAGE_NAME:
 				return JavaScriptConventions.validatePackageName(string, sourceLevel, complianceLevel).getSeverity();
 			case TYPE_VARIABLE_NAME:

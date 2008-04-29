@@ -149,9 +149,9 @@ public class EncodingTests extends ModifyingResourceTests {
 			IJavaScriptUnit cu= pkg.createCompilationUnit("A.js", source, false, new NullProgressMonitor());
 			assertCreation(cu);
 			cu.rename("B.js", true, new NullProgressMonitor());
-			cu = pkg.getCompilationUnit("B.js");
+			cu = pkg.getJavaScriptUnit("B.js");
 			cu.rename("A.js", true, new NullProgressMonitor());
-			cu = pkg.getCompilationUnit("A.js");
+			cu = pkg.getJavaScriptUnit("A.js");
 			byte[] tab = null;
 			try {
 				tab = cu.getSource().getBytes(encoding);
@@ -735,7 +735,7 @@ public class EncodingTests extends ModifyingResourceTests {
 		try {
 			// Move file
 			cu.move(packFrag, null, null, false, null);
-			IJavaScriptUnit destSource = packFrag.getCompilationUnit(fileName);
+			IJavaScriptUnit destSource = packFrag.getJavaScriptUnit(fileName);
 			IFile destFile = (IFile) destSource.getUnderlyingResource();
 			assertEquals("Moved file should keep encoding", encoding, destFile.getCharset());
 	
@@ -744,7 +744,7 @@ public class EncodingTests extends ModifyingResourceTests {
 			
 			// Rename file
 			destSource.rename("TestUTF8.js", false, null);
-			IJavaScriptUnit renamedSource = packFrag.getCompilationUnit("TestUTF8.js");
+			IJavaScriptUnit renamedSource = packFrag.getJavaScriptUnit("TestUTF8.js");
 			IFile renamedFile = (IFile) renamedSource.getUnderlyingResource();
 			assertEquals("Moved file should keep encoding", encoding, renamedFile.getCharset());
 			
@@ -776,7 +776,7 @@ public class EncodingTests extends ModifyingResourceTests {
 					IJavaScriptUnit cu = getCompilationUnit(file.getFullPath().toString());
 					cu.copy(tmpFolder, null, null, true, null);
 					cu.close(); // purge buffer contents from cache
-					IJavaScriptUnit dest = tmpFolder.getCompilationUnit(fileName);
+					IJavaScriptUnit dest = tmpFolder.getJavaScriptUnit(fileName);
 					IFile destFile = (IFile) dest.getUnderlyingResource();
 					assertEquals("Copied file should keep encoding", encoding, destFile.getCharset());
 			
@@ -789,10 +789,10 @@ public class EncodingTests extends ModifyingResourceTests {
 			// Rename file
 			IWorkspaceRunnable rename = new IWorkspaceRunnable() {
 				public void run(IProgressMonitor monitor) throws CoreException {
-					IJavaScriptUnit cu = tmpFolder.getCompilationUnit(fileName);
+					IJavaScriptUnit cu = tmpFolder.getJavaScriptUnit(fileName);
 					cu.rename("Renamed.js", true, null);
 					cu.close(); // purge buffer contents from cache
-					IJavaScriptUnit ren = tmpFolder.getCompilationUnit("Renamed.js");
+					IJavaScriptUnit ren = tmpFolder.getJavaScriptUnit("Renamed.js");
 					IFile renFile = (IFile) ren.getUnderlyingResource();
 					assertEquals("Renamed file should keep encoding", encoding, renFile.getCharset());
 			
@@ -805,10 +805,10 @@ public class EncodingTests extends ModifyingResourceTests {
 			// Move file
 			IWorkspaceRunnable move = new IWorkspaceRunnable() {
 				public void run(IProgressMonitor monitor) throws CoreException {
-					IJavaScriptUnit cu = tmpFolder.getCompilationUnit("Renamed.js");
+					IJavaScriptUnit cu = tmpFolder.getJavaScriptUnit("Renamed.js");
 					cu.move(srcFolder, null, null, true, null);
 					cu.close(); // purge buffer contents from cache
-					IJavaScriptUnit moved = srcFolder.getCompilationUnit("Renamed.js");
+					IJavaScriptUnit moved = srcFolder.getJavaScriptUnit("Renamed.js");
 					IFile movedFile = (IFile) moved.getUnderlyingResource();
 					assertEquals("Renamed file should keep encoding", encoding, movedFile.getCharset());
 			
@@ -820,7 +820,7 @@ public class EncodingTests extends ModifyingResourceTests {
 		}
 		finally {
 			// Delete temporary file and folder
-			IJavaScriptUnit cu = srcFolder.getCompilationUnit("Renamed.js");
+			IJavaScriptUnit cu = srcFolder.getJavaScriptUnit("Renamed.js");
 			if (cu.exists()) cu.delete(true, null);
 			deleteFolder("/Encoding/src/tmp");
 		}
@@ -872,7 +872,7 @@ public class EncodingTests extends ModifyingResourceTests {
 		try {
 			// Copy file
 			testCU.copy(tmpPackage, null, null, false, null);
-			IJavaScriptUnit copiedCU = tmpPackage.getCompilationUnit(fileName);
+			IJavaScriptUnit copiedCU = tmpPackage.getJavaScriptUnit(fileName);
 			IFile copiedFile = (IFile) copiedCU.getUnderlyingResource();
 			verifyUtf8BOM(copiedFile);
 	
@@ -881,7 +881,7 @@ public class EncodingTests extends ModifyingResourceTests {
 
 			// Rename file
 			copiedCU.rename("TestUTF8.js", false, null);
-			IJavaScriptUnit renamedCU = tmpPackage.getCompilationUnit("TestUTF8.js");
+			IJavaScriptUnit renamedCU = tmpPackage.getJavaScriptUnit("TestUTF8.js");
 			IFile renamedFile = (IFile) renamedCU.getUnderlyingResource();
 			verifyUtf8BOM(renamedFile);
 			fileName = renamedFile.getName();
@@ -893,7 +893,7 @@ public class EncodingTests extends ModifyingResourceTests {
 			createFolder("/Encoding/src/tmp/sub");
 			IPackageFragment subPackage = getPackageFragment("Encoding", "src", "tmp.sub");
 			renamedCU.move(subPackage, null, null, false, null);
-			IJavaScriptUnit movedCU = subPackage.getCompilationUnit(fileName);
+			IJavaScriptUnit movedCU = subPackage.getJavaScriptUnit(fileName);
 			IFile movedFile = (IFile) movedCU.getUnderlyingResource();
 			verifyUtf8BOM(movedFile);
 	

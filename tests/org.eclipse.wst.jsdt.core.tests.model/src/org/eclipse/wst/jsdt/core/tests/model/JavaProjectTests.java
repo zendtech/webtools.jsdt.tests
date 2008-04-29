@@ -85,7 +85,7 @@ public void tearDownSuite() throws Exception {
 public void testAddNonJavaResourcePackageFragmentRoot() throws JavaScriptModelException, CoreException {
 	// get resources of source package fragment root at project level
 	IPackageFragmentRoot root = getPackageFragmentRoot("JavaProjectTests", "");
-	Object[] resources = root.getNonJavaResources();
+	Object[] resources = root.getNonJavaScriptResources();
 	assertResourceNamesEqual(
 		"unexpected non Java resources",
 		".classpath\n" + 
@@ -102,7 +102,7 @@ public void testAddNonJavaResourcePackageFragmentRoot() throws JavaScriptModelEx
 			null);
 		
 		// ensure the new resource is present
-		resources = root.getNonJavaResources();
+		resources = root.getNonJavaScriptResources();
 		assertResourcesEqual(
 			"incorrect non java resources", 
 			"/JavaProjectTests/.classpath\n" +
@@ -306,7 +306,7 @@ public void testExtraJavaLikeExtension2() throws CoreException {
 		assertResourceNamesEqual(
 			"Unexpected non-Java resources of package pack", 
 			"X.txt",
-			pkg.getNonJavaResources());
+			pkg.getNonJavaScriptResources());
 	} finally {
 		deleteProject("P");
 	}
@@ -443,7 +443,7 @@ public void testGetClasspathOnClosedProject() throws CoreException {
 		boolean gotException = false;
 		IJavaScriptProject javaProject = JavaScriptCore.create(project);
 		try {
-			javaProject.getRawClasspath();
+			javaProject.getRawIncludepath();
 		} catch (JavaScriptModelException e) {
 			if (e.isDoesNotExist()) {
 				gotException = true;
@@ -452,7 +452,7 @@ public void testGetClasspathOnClosedProject() throws CoreException {
 		assertTrue("Should get a not present exception for getRawClasspath()", gotException);
 		gotException = false;
 		try {
-			javaProject.getResolvedClasspath(true);
+			javaProject.getResolvedIncludepath(true);
 		} catch (JavaScriptModelException e) {
 			if (e.isDoesNotExist()) {
 				gotException = true;
@@ -473,7 +473,7 @@ public void testGetNonJavaResources1() throws CoreException {
 			"Unexpected non-java resources for project",
 			"/P/.classpath\n" +
 			"/P/.project",
-			project.getNonJavaResources());
+			project.getNonJavaScriptResources());
 	} finally {
 		this.deleteProject("P");
 	}
@@ -489,7 +489,7 @@ public void testGetNonJavaResources2() throws CoreException {
 			"Unexpected non-java resources for project",
 			"/P/.classpath\n" +
 			"/P/.project",
-			project.getNonJavaResources());
+			project.getNonJavaScriptResources());
 	} finally {
 		this.deleteProject("P");
 	}
@@ -505,7 +505,7 @@ public void testGetNonJavaResources3() throws CoreException {
 			"Unexpected non-java resources for project",
 			"/P/.classpath\n" +
 			"/P/.project",
-			project.getNonJavaResources());
+			project.getNonJavaScriptResources());
 	} finally {
 		this.deleteProject("P");
 	}
@@ -523,7 +523,7 @@ public void testGetNonJavaResources4() throws CoreException {
 			"/P/.classpath\n" + 
 			"/P/.project\n" + 
 			"/P/x.y",
-			project.getNonJavaResources());
+			project.getNonJavaScriptResources());
 	} finally {
 		this.deleteProject("P");
 	}
@@ -604,7 +604,7 @@ public void testOutputLocationNestedInRoot() throws JavaScriptModelException, Co
 	try {
 		project.setOutputLocation(folder.getFullPath(), null);
 	} catch (JavaScriptModelException e) {
-		assertTrue("should be an invalid classpath", e.getStatus().getCode() == IJavaScriptModelStatusConstants.INVALID_CLASSPATH);
+		assertTrue("should be an invalid classpath", e.getStatus().getCode() == IJavaScriptModelStatusConstants.INVALID_INCLUDEPATH);
 		failed= true;
 	}
 	assertTrue("should have failed", failed);
@@ -711,7 +711,7 @@ public void testPackageFragmentIsStructureKnown2() throws CoreException {
 public void testPackageFragmentNonJavaResources1() throws JavaScriptModelException {
 	// regular source package with resources
 	IPackageFragment pkg = getPackageFragment("JavaProjectTests", "", "x");
-	Object[] resources = pkg.getNonJavaResources();
+	Object[] resources = pkg.getNonJavaScriptResources();
 	assertResourcesEqual(
 		"Unexpected resources", 
 		"/JavaProjectTests/x/readme.txt\n" + 
@@ -724,7 +724,7 @@ public void testPackageFragmentNonJavaResources1() throws JavaScriptModelExcepti
  */
 public void testPackageFragmentNonJavaResources2() throws JavaScriptModelException {	
 	IPackageFragment pkg = getPackageFragment("JavaProjectTests", "", "x.y");
-	Object[] resources = pkg.getNonJavaResources();
+	Object[] resources = pkg.getNonJavaScriptResources();
 	assertResourcesEqual(
 		"Unexpected resources", 
 		"",
@@ -736,7 +736,7 @@ public void testPackageFragmentNonJavaResources2() throws JavaScriptModelExcepti
  */
 public void testPackageFragmentNonJavaResources3() throws JavaScriptModelException {	
 	IPackageFragment pkg = getPackageFragment("JavaProjectTests", "", "");
-	Object[] resources = pkg.getNonJavaResources();
+	Object[] resources = pkg.getNonJavaScriptResources();
 	assertResourcesEqual(
 		"Unexpected resources", 
 		"",
@@ -748,7 +748,7 @@ public void testPackageFragmentNonJavaResources3() throws JavaScriptModelExcepti
  */
 public void testPackageFragmentNonJavaResources4() throws JavaScriptModelException {	
 	IPackageFragment pkg = getPackageFragment("JavaProjectTests", "lib.jar", "p");
-	Object[] resources = pkg.getNonJavaResources();
+	Object[] resources = pkg.getNonJavaScriptResources();
 	assertResourcesEqual(
 		"Unexpected resources", 
 		"",
@@ -762,7 +762,7 @@ public void testPackageFragmentNonJavaResources4() throws JavaScriptModelExcepti
  */
 public void testPackageFragmentNonJavaResources5() throws JavaScriptModelException {	
 	IPackageFragment pkg = getPackageFragment("JavaProjectTests", "lib.jar", "");
-	Object[] resources = pkg.getNonJavaResources();
+	Object[] resources = pkg.getNonJavaScriptResources();
 	assertResourcesEqual(
 		"Unexpected resources", 
 		"",
@@ -776,7 +776,7 @@ public void testPackageFragmentNonJavaResources5() throws JavaScriptModelExcepti
 public void testPackageFragmentNonJavaResources6() throws JavaScriptModelException {	
 	// regular zip package without resources
 	IPackageFragment pkg = getPackageFragment("JavaProjectTests", "lib142530.jar", "p");
-	Object[] resources = pkg.getNonJavaResources();
+	Object[] resources = pkg.getNonJavaScriptResources();
 	assertResourcesEqual(
 		"Unexpected resources", 
 		"x.y/Test.txt",
@@ -790,7 +790,7 @@ public void testPackageFragmentNonJavaResources6() throws JavaScriptModelExcepti
 public void testPackageFragmentNonJavaResources7() throws JavaScriptModelException {	
 	// regular zip package without resources
 	IPackageFragment pkg = getPackageFragment("JavaProjectTests", "lib148949.jar", "p");
-	Object[] resources = pkg.getNonJavaResources();
+	Object[] resources = pkg.getNonJavaScriptResources();
 	assertResourceNamesEqual(
 		"Unexpected resources", 
 		"test.txt",
@@ -811,7 +811,7 @@ public void testPackageFragmentPackageInfoClass() throws CoreException {
 		assertResourceNamesEqual(
 			"Unexpected resources of /P/p1",
 			"",
-			pkg.getNonJavaResources());
+			pkg.getNonJavaScriptResources());
 	} finally {
 		deleteProject("P");
 	}
@@ -857,7 +857,7 @@ public void testPackageFragmentRootCorrespondingResource() throws JavaScriptMode
 public void testPackageFragmentRootNonJavaResources() throws JavaScriptModelException {
 	// source package fragment root with resources
 	IPackageFragmentRoot root = getPackageFragmentRoot("JavaProjectTests", "");
-	Object[] resources = root.getNonJavaResources();
+	Object[] resources = root.getNonJavaScriptResources();
 	assertResourceNamesEqual(
 		"unexpected non java resoures (test case 1)", 
 		".classpath\n" + 
@@ -867,7 +867,7 @@ public void testPackageFragmentRootNonJavaResources() throws JavaScriptModelExce
 
 	// source package fragment root without resources
  	root = getPackageFragmentRoot("JavaProjectSrcTests", "src");
-	resources = root.getNonJavaResources();
+	resources = root.getNonJavaScriptResources();
 	assertResourceNamesEqual(
 		"unexpected non java resoures (test case 2)", 
 		"",
@@ -878,7 +878,7 @@ public void testPackageFragmentRootNonJavaResources() throws JavaScriptModelExce
 	
 	// zip package fragment root without resources
 	root = getPackageFragmentRoot("JavaProjectTests", "lib.jar");
-	resources = root.getNonJavaResources();
+	resources = root.getNonJavaScriptResources();
 	assertResourceNamesEqual(
 		"unexpected non java resoures (test case 4)", 
 		"MANIFEST.MF",
@@ -891,7 +891,7 @@ public void testPackageFragmentRootRawEntry() throws CoreException, IOException 
 	File libDir = null;
 	try {
 		String libPath = getExternalPath() + "lib";
-		JavaScriptCore.setClasspathVariable("MyVar", new Path(libPath), null);
+		JavaScriptCore.setIncludepathVariable("MyVar", new Path(libPath), null);
 		IJavaScriptProject proj =  this.createJavaProject("P", new String[] {}, "bin");
 		libDir = new File(libPath);
 		libDir.mkdirs();
@@ -902,13 +902,13 @@ public void testPackageFragmentRootRawEntry() throws CoreException, IOException 
 			libJar.createNewFile();
 			classpath[i] = JavaScriptCore.newVariableEntry(new Path("/MyVar/lib"+i+".jar"), null, null);
 		}
-		proj.setRawClasspath(classpath, null);
+		proj.setRawIncludepath(classpath, null);
 		
 		IPackageFragmentRoot[] roots = proj.getPackageFragmentRoots();
 		assertEquals("wrong number of entries:", length, roots.length);
 		//long start = System.currentTimeMillis();
 		for (int i = 0; i < roots.length; i++){
-			IIncludePathEntry rawEntry = roots[i].getRawClasspathEntry();
+			IIncludePathEntry rawEntry = roots[i].getRawIncludepathEntry();
 			assertEquals("unexpected root raw entry:", classpath[i], rawEntry);
 		}
 		//System.out.println((System.currentTimeMillis() - start)+ "ms for "+roots.length+" roots");
@@ -917,7 +917,7 @@ public void testPackageFragmentRootRawEntry() throws CoreException, IOException 
 			org.eclipse.wst.jsdt.core.tests.util.Util.delete(libDir);
 		}
 		this.deleteProject("P");
-		JavaScriptCore.removeClasspathVariable("MyVar", null);
+		JavaScriptCore.removeIncludepathVariable("MyVar", null);
 	}
 }
 /**
@@ -929,7 +929,7 @@ public void testPackageFragmentRootRawEntryWhenDuplicate() throws CoreException,
 	try {
 		String externalPath = getExternalPath();
 		String libPath = externalPath + "lib";
-		JavaScriptCore.setClasspathVariable("MyVar", new Path(externalPath), null);
+		JavaScriptCore.setIncludepathVariable("MyVar", new Path(externalPath), null);
 		IJavaScriptProject proj =  this.createJavaProject("P", new String[] {}, "bin");
 		libDir = new File(libPath);
 		libDir.mkdirs();
@@ -938,19 +938,19 @@ public void testPackageFragmentRootRawEntryWhenDuplicate() throws CoreException,
 		libJar.createNewFile();
 		classpath[0] = JavaScriptCore.newLibraryEntry(new Path(libPath).append("lib.jar"), null, null);
 		classpath[1] = JavaScriptCore.newVariableEntry(new Path("/MyVar").append("lib.jar"), null, null);
-		proj.setRawClasspath(classpath, null);
-		JavaScriptCore.setClasspathVariable("MyVar", new Path(libPath), null); // change CP var value to cause collision
+		proj.setRawIncludepath(classpath, null);
+		JavaScriptCore.setIncludepathVariable("MyVar", new Path(libPath), null); // change CP var value to cause collision
 		
 		IPackageFragmentRoot[] roots = proj.getPackageFragmentRoots();
 		assertEquals("wrong number of entries:", 1, roots.length);
-		IIncludePathEntry rawEntry = roots[0].getRawClasspathEntry();
+		IIncludePathEntry rawEntry = roots[0].getRawIncludepathEntry();
 		assertEquals("unexpected root raw entry:", classpath[0], rawEntry); // ensure first entry is associated to the root
 	} finally {
 		if (libDir != null) {
 			org.eclipse.wst.jsdt.core.tests.util.Util.delete(libDir);
 		}
 		this.deleteProject("P");
-		JavaScriptCore.removeClasspathVariable("MyVar", null);
+		JavaScriptCore.removeIncludepathVariable("MyVar", null);
 	}
 }
 /*
@@ -1195,7 +1195,7 @@ public void testSourceFolderWithJarName() throws CoreException {
  */
 public void testSourceMethodCorrespondingResource() throws JavaScriptModelException {
 	IJavaScriptUnit element= getCompilationUnit("JavaProjectTests", "", "q", "A.js");
-	IFunction[] methods = element.getType("A").getMethods();
+	IFunction[] methods = element.getType("A").getFunctions();
 	assertTrue("missing methods", methods.length > 0);
 	IResource corr= methods[0].getCorrespondingResource();
 	assertTrue("incorrect corresponding resource", corr == null);
@@ -1226,8 +1226,8 @@ public void testUserLibrary() throws JavaScriptModelException {
 	pathRules[1] = JavaScriptCore.newAccessRule(new Path("**/discouraged/**"), IAccessRule.K_DISCOURAGED);
 	pathRules[2] = JavaScriptCore.newAccessRule(new Path("**/accessible/**"), IAccessRule.K_ACCESSIBLE);
 	IIncludePathAttribute[] extraAttributes = new IIncludePathAttribute[2];
-	extraAttributes[0] = JavaScriptCore.newClasspathAttribute("javadoc_location", "http://www.sample-url.org/doc/");
-	extraAttributes[1] = JavaScriptCore.newClasspathAttribute("org.eclipse.wst.jsdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY", "/tmp");
+	extraAttributes[0] = JavaScriptCore.newIncludepathAttribute("javadoc_location", "http://www.sample-url.org/doc/");
+	extraAttributes[1] = JavaScriptCore.newIncludepathAttribute("org.eclipse.wst.jsdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY", "/tmp");
 	userEntries[0] = JavaScriptCore.newLibraryEntry(path, null, null, pathRules, extraAttributes, false);
 
 	// Set second classpath entry
@@ -1237,8 +1237,8 @@ public void testUserLibrary() throws JavaScriptModelException {
 	pathRules[1] = JavaScriptCore.newAccessRule(new Path("/org/eclipse/discouraged/**"), IAccessRule.K_DISCOURAGED);
 	pathRules[2] = JavaScriptCore.newAccessRule(new Path("/org/eclipse/accessible/**"), IAccessRule.K_ACCESSIBLE);
 	extraAttributes = new IIncludePathAttribute[2];
-	extraAttributes[0] = JavaScriptCore.newClasspathAttribute("javadoc_location", "http://www.sample-url.org/doc/");
-	extraAttributes[1] = JavaScriptCore.newClasspathAttribute("org.eclipse.wst.jsdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY", "/tmp");
+	extraAttributes[0] = JavaScriptCore.newIncludepathAttribute("javadoc_location", "http://www.sample-url.org/doc/");
+	extraAttributes[1] = JavaScriptCore.newIncludepathAttribute("org.eclipse.wst.jsdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY", "/tmp");
 	userEntries[1] = JavaScriptCore.newLibraryEntry(path, null, null, pathRules, extraAttributes, false);
 	
 	// Create user library

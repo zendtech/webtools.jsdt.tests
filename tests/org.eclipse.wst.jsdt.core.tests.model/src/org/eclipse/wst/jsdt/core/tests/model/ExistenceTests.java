@@ -68,8 +68,8 @@ public void testBinaryMethodAfterNonExistingMember() throws CoreException {
 		IClassFile classFile = project.getPackageFragmentRoot(getExternalJCLPathString()).getPackageFragment("java.lang").getClassFile("Object.class");
 		classFile.open(null);
 		IType type = classFile.getType();
-		type.getMethod("foo", new String[0]).exists();
-		assertTrue("Object.toString() should exist", type.getMethod("toString", new String[0]).exists());
+		type.getFunction("foo", new String[0]).exists();
+		assertTrue("Object.toString() should exist", type.getFunction("toString", new String[0]).exists());
 	} finally {
 		deleteProject("P");
 	}
@@ -212,7 +212,7 @@ public void testMethodWithInvalidParameter() throws CoreException {
 			"P/X.js", 
 			"public class X {}"
 		);
-		IFunction method = getCompilationUnit("P/X.js").getType("X").getMethod("foo", new String[] {"~12345@"});
+		IFunction method = getCompilationUnit("P/X.js").getType("X").getFunction("foo", new String[] {"~12345@"});
 		assertTrue("Methodr should not exist", !method.exists()); 
 	} finally {
 		deleteProject("P");
@@ -372,7 +372,7 @@ public void testTypeParameter2() throws CoreException {
 			"  <T extends String> void foo() {}\n" +
 			"}"
 		);
-		ITypeParameter typeParameter = getCompilationUnit("P/X.js").getType("X").getMethod("foo", new String[0]).getTypeParameter("T");
+		ITypeParameter typeParameter = getCompilationUnit("P/X.js").getType("X").getFunction("foo", new String[0]).getTypeParameter("T");
 		assertTrue("Type parameter should exist", typeParameter.exists()); 
 	} finally {
 		deleteProject("P");
@@ -406,7 +406,7 @@ public void testTypeParameter4() throws CoreException {
 			"  <T extends String> void foo() {}\n" +
 			"}"
 		);
-		ITypeParameter typeParameter = getCompilationUnit("P/X.js").getType("X").getMethod("foo", new String[0]).getTypeParameter("String");
+		ITypeParameter typeParameter = getCompilationUnit("P/X.js").getType("X").getFunction("foo", new String[0]).getTypeParameter("String");
 		assertTrue("Type parameter should not exist", !typeParameter.exists()); 
 	} finally {
 		deleteProject("P");

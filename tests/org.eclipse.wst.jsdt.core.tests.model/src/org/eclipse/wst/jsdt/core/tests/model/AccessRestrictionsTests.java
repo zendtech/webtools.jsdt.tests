@@ -100,11 +100,11 @@ public void test001() throws CoreException {
 		);
 		IJavaScriptProject p2 = createJavaProject("P2", new String[] {"src"}, 
 				new String[] {"JCL_LIB"}, "bin");
-		IIncludePathEntry[] classpath = p2.getRawClasspath();
+		IIncludePathEntry[] classpath = p2.getRawIncludepath();
 		int length = classpath.length;
 		System.arraycopy(classpath, 0, classpath = new IIncludePathEntry[length+1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "-p/X1");
-		p2.setRawClasspath(classpath, null);
+		p2.setRawIncludepath(classpath, null);
 		// check the most basic case
 		String src =
 			"package p;\n" +
@@ -206,11 +206,11 @@ public void test002() throws CoreException {
 		);
 		IJavaScriptProject p2 = createJavaProject("P2", new String[] {"src"}, 
 				new String[] {"JCL_LIB"}, "bin");
-		IIncludePathEntry[] classpath = p2.getRawClasspath();
+		IIncludePathEntry[] classpath = p2.getRawIncludepath();
 		int length = classpath.length;
 		System.arraycopy(classpath, 0, classpath = new IIncludePathEntry[length+1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "-p/X1");
-		p2.setRawClasspath(classpath, null);
+		p2.setRawIncludepath(classpath, null);
 		String src = 
 			"package p;\n" +
 			"public class Y extends X2 {\n" +
@@ -294,11 +294,11 @@ public void test003() throws CoreException {
 		);
 		IJavaScriptProject p2 = createJavaProject("P2", new String[] {"src"}, 
 				new String[] {"JCL_LIB"}, "bin");
-		IIncludePathEntry[] classpath = p2.getRawClasspath();
+		IIncludePathEntry[] classpath = p2.getRawIncludepath();
 		int length = classpath.length;
 		System.arraycopy(classpath, 0, classpath = new IIncludePathEntry[length+1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "-p/X1");
-		p2.setRawClasspath(classpath, null);
+		p2.setRawIncludepath(classpath, null);
 		String src =
 			"package p;\n" +
 			"public class Y extends X2 {\n" +
@@ -395,11 +395,11 @@ public void test004() throws CoreException {
 		);
 		IJavaScriptProject p2 = createJavaProject("P2", new String[] {"src"}, 
 				new String[] {"JCL_LIB"}, "bin");
-		IIncludePathEntry[] classpath = p2.getRawClasspath();
+		IIncludePathEntry[] classpath = p2.getRawIncludepath();
 		int length = classpath.length;
 		System.arraycopy(classpath, 0, classpath = new IIncludePathEntry[length+1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "~p/X1");
-		p2.setRawClasspath(classpath, null);
+		p2.setRawIncludepath(classpath, null);
 		String src =
 			"package p;\n" +
 			"public class Z extends X1 {\n" +
@@ -498,12 +498,12 @@ public void test005() throws CoreException {
 			new String[] {"src"}, 
 			new String[] {"JCL_LIB"}, 
 			"bin");
-		IIncludePathEntry[] classpath = p2.getRawClasspath();
+		IIncludePathEntry[] classpath = p2.getRawIncludepath();
 		int length = classpath.length;
 		System.arraycopy(classpath, 0, 
 				classpath = new IIncludePathEntry[length + 1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "-p/X1");
-		p2.setRawClasspath(classpath, null);
+		p2.setRawIncludepath(classpath, null);
 		String src = 
 			"package r;\n" +
 			"public class Y {\n" +
@@ -580,11 +580,11 @@ public void test006() throws CoreException {
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.source", "1.5");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.targetPlatform", "1.5");
 		p2.setOption(JavaScriptCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaScriptCore.IGNORE);
-		IIncludePathEntry[] classpath = p2.getRawClasspath();
+		IIncludePathEntry[] classpath = p2.getRawIncludepath();
 		int length = classpath.length;
 		System.arraycopy(classpath, 0, classpath = new IIncludePathEntry[length+1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "-p/X");
-		p2.setRawClasspath(classpath, null);
+		p2.setRawIncludepath(classpath, null);
 		String src =
 			"package p;\n" +
 			"public class Y {\n" +
@@ -675,11 +675,11 @@ public void test007() throws CoreException {
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.source", "1.5");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.targetPlatform", "1.5");
 		p2.setOption(JavaScriptCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaScriptCore.IGNORE);
-		IIncludePathEntry[] classpath = p2.getRawClasspath();
+		IIncludePathEntry[] classpath = p2.getRawIncludepath();
 		int length = classpath.length;
 		System.arraycopy(classpath, 0, classpath = new IIncludePathEntry[length+1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "-p/X");
-		p2.setRawClasspath(classpath, null);
+		p2.setRawIncludepath(classpath, null);
 		String src =
 			"package p;\n" +
 			"public class Y {\n" +
@@ -777,11 +777,11 @@ public void test008() throws CoreException {
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.compliance", "1.5");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.source", "1.5");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.targetPlatform", "1.5");		
-		IIncludePathEntry[] classpath = p2.getRawClasspath();
+		IIncludePathEntry[] classpath = p2.getRawIncludepath();
 		int length = classpath.length;
 		System.arraycopy(classpath, 0, classpath = new IIncludePathEntry[length+1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "-p/X1");
-		p2.setRawClasspath(classpath, null);
+		p2.setRawIncludepath(classpath, null);
 		String src = 
 			"package p;\n" +
 			"public class Y extends X2 {\n" +
@@ -866,11 +866,11 @@ public void test009() throws CoreException {
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.compliance", "1.5");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.source", "1.5");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.targetPlatform", "1.5");		
-		IIncludePathEntry[] classpath = p2.getRawClasspath();
+		IIncludePathEntry[] classpath = p2.getRawIncludepath();
 		int length = classpath.length;
 		System.arraycopy(classpath, 0, classpath = new IIncludePathEntry[length+1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "-p/X1");
-		p2.setRawClasspath(classpath, null);
+		p2.setRawIncludepath(classpath, null);
 		String src = 
 			"package p;\n" +
 			"public class Y extends X2 {\n" +
@@ -961,11 +961,11 @@ public void test010() throws CoreException {
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.source", "1.5");
 		p2.setOption("org.eclipse.wst.jsdt.core.compiler.targetPlatform", "1.5");		
 		p2.setOption(JavaScriptCore.COMPILER_PB_RAW_TYPE_REFERENCE, JavaScriptCore.IGNORE);
-		IIncludePathEntry[] classpath = p2.getRawClasspath();
+		IIncludePathEntry[] classpath = p2.getRawIncludepath();
 		int length = classpath.length;
 		System.arraycopy(classpath, 0, classpath = new IIncludePathEntry[length+1], 0, length);
 		classpath[length] = createSourceEntry("P2", "/P1", "-p/X1");
-		p2.setRawClasspath(classpath, null);
+		p2.setRawIncludepath(classpath, null);
 		String src =
 			"package p;\n" +
 			"public class Y extends X2 {\n" +

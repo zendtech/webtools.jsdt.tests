@@ -2412,7 +2412,7 @@ public class ASTTest extends org.eclipse.wst.jsdt.core.tests.junit.extension.Tes
 		assertTrue(x.getPackage() == null);
 		assertTrue(x.imports().size() == 0);
 		assertTrue(x.types().size() == 0);
-		assertTrue(x.getNodeType() == ASTNode.COMPILATION_UNIT);
+		assertTrue(x.getNodeType() == ASTNode.JAVASCRIPT_UNIT);
 		assertTrue(x.structuralPropertiesForType() == JavaScriptUnit.propertyDescriptors(ast.apiLevel()));
 		// make sure that reading did not change modification count
 		assertTrue(ast.modificationCount() == previousCount);
@@ -3317,7 +3317,7 @@ public class ASTTest extends org.eclipse.wst.jsdt.core.tests.junit.extension.Tes
 		assertTrue(x.parameters().size() == 0);
 		assertTrue(x.thrownExceptions().size() == 0);
 		assertTrue(x.getBody() == null);
-		assertTrue(x.getNodeType() == ASTNode.METHOD_DECLARATION);
+		assertTrue(x.getNodeType() == ASTNode.FUNCTION_DECLARATION);
 		assertTrue(x.structuralPropertiesForType() == 
 			FunctionDeclaration.propertyDescriptors(ast.apiLevel()));
 		// make sure that reading did not change modification count
@@ -3594,7 +3594,7 @@ public class ASTTest extends org.eclipse.wst.jsdt.core.tests.junit.extension.Tes
 			assertTrue(x.getComment().startsWith("/**")); //$NON-NLS-1$
 			assertTrue(x.getComment().endsWith("*/")); //$NON-NLS-1$
 		}
-		assertTrue(x.getNodeType() == ASTNode.JAVADOC);
+		assertTrue(x.getNodeType() == ASTNode.JSDOC);
 		assertTrue(!x.isBlockComment());
 		assertTrue(!x.isLineComment());
 		assertTrue(x.isDocComment());
@@ -3934,7 +3934,7 @@ public class ASTTest extends org.eclipse.wst.jsdt.core.tests.junit.extension.Tes
 		previousCount = ast.modificationCount();
 		assertTrue(x.getAST() == ast);
 		assertTrue(x.getParent() == null);
-		assertTrue(x.getNodeType() == ASTNode.METHOD_REF);
+		assertTrue(x.getNodeType() == ASTNode.FUNCTION_REF);
 		assertTrue(x.getQualifier() == null);
 		assertTrue(x.getName().getParent() == x);
 		assertTrue(x.parameters().isEmpty());
@@ -3997,7 +3997,7 @@ public class ASTTest extends org.eclipse.wst.jsdt.core.tests.junit.extension.Tes
 		previousCount = ast.modificationCount();
 		assertTrue(x.getAST() == ast);
 		assertTrue(x.getParent() == null);
-		assertTrue(x.getNodeType() == ASTNode.METHOD_REF_PARAMETER);
+		assertTrue(x.getNodeType() == ASTNode.FUNCTION_REF_PARAMETER);
 		assertTrue(x.getType().getParent() == x);
 		if (ast.apiLevel() >= AST.JLS3) {
 			assertTrue(x.isVarargs() == false);
@@ -4106,7 +4106,7 @@ public class ASTTest extends org.eclipse.wst.jsdt.core.tests.junit.extension.Tes
 		assertTrue(x.getName().getParent() == x);
 		assertTrue(x.getExpression() == null);
 		assertTrue(x.arguments().size() == 0);
-		assertTrue(x.getNodeType() == ASTNode.METHOD_INVOCATION);
+		assertTrue(x.getNodeType() == ASTNode.FUNCTION_INVOCATION);
 		assertTrue(x.structuralPropertiesForType() == 
 			FunctionInvocation.propertyDescriptors(ast.apiLevel()));
 		// make sure that reading did not change modification count
@@ -8428,7 +8428,7 @@ public class ASTTest extends org.eclipse.wst.jsdt.core.tests.junit.extension.Tes
 		assertTrue(ASTNode.CATCH_CLAUSE == 12);
 		assertTrue(ASTNode.CHARACTER_LITERAL == 13);
 		assertTrue(ASTNode.CLASS_INSTANCE_CREATION == 14);
-		assertTrue(ASTNode.COMPILATION_UNIT == 15);
+		assertTrue(ASTNode.JAVASCRIPT_UNIT == 15);
 		assertTrue(ASTNode.CONDITIONAL_EXPRESSION == 16);
 		assertTrue(ASTNode.CONSTRUCTOR_INVOCATION == 17);
 		assertTrue(ASTNode.CONTINUE_STATEMENT == 18);
@@ -8442,10 +8442,10 @@ public class ASTTest extends org.eclipse.wst.jsdt.core.tests.junit.extension.Tes
 		assertTrue(ASTNode.IMPORT_DECLARATION == 26);
 		assertTrue(ASTNode.INFIX_EXPRESSION == 27);
 		assertTrue(ASTNode.INITIALIZER == 28);
-		assertTrue(ASTNode.JAVADOC == 29);
+		assertTrue(ASTNode.JSDOC == 29);
 		assertTrue(ASTNode.LABELED_STATEMENT == 30);
-		assertTrue(ASTNode.METHOD_DECLARATION == 31);
-		assertTrue(ASTNode.METHOD_INVOCATION == 32);
+		assertTrue(ASTNode.FUNCTION_DECLARATION == 31);
+		assertTrue(ASTNode.FUNCTION_INVOCATION == 32);
 		assertTrue(ASTNode.NULL_LITERAL == 33);
 		assertTrue(ASTNode.NUMBER_LITERAL == 34);
 		assertTrue(ASTNode.PACKAGE_DECLARATION == 35);
@@ -8480,8 +8480,8 @@ public class ASTTest extends org.eclipse.wst.jsdt.core.tests.junit.extension.Tes
 		assertTrue(ASTNode.TAG_ELEMENT == 65);
 		assertTrue(ASTNode.TEXT_ELEMENT == 66);
 		assertTrue(ASTNode.MEMBER_REF == 67);
-		assertTrue(ASTNode.METHOD_REF == 68);
-		assertTrue(ASTNode.METHOD_REF_PARAMETER == 69);
+		assertTrue(ASTNode.FUNCTION_REF == 68);
+		assertTrue(ASTNode.FUNCTION_REF_PARAMETER == 69);
 		assertTrue(ASTNode.ENHANCED_FOR_STATEMENT == 70);
 		assertTrue(ASTNode.ENUM_DECLARATION == 71);
 		assertTrue(ASTNode.ENUM_CONSTANT_DECLARATION == 72);
@@ -8517,7 +8517,7 @@ public class ASTTest extends org.eclipse.wst.jsdt.core.tests.junit.extension.Tes
               ASTNode.CATCH_CLAUSE,
               ASTNode.CHARACTER_LITERAL,
               ASTNode.CLASS_INSTANCE_CREATION,
-              ASTNode.COMPILATION_UNIT,
+              ASTNode.JAVASCRIPT_UNIT,
               ASTNode.CONDITIONAL_EXPRESSION,
               ASTNode.CONSTRUCTOR_INVOCATION,
               ASTNode.CONTINUE_STATEMENT,
@@ -8535,16 +8535,16 @@ public class ASTTest extends org.eclipse.wst.jsdt.core.tests.junit.extension.Tes
               ASTNode.INFIX_EXPRESSION,
               ASTNode.INSTANCEOF_EXPRESSION,
               ASTNode.INITIALIZER,
-              ASTNode.JAVADOC,
+              ASTNode.JSDOC,
               ASTNode.LABELED_STATEMENT,
         	  ASTNode.LINE_COMMENT,
       		  ASTNode.MARKER_ANNOTATION,
         	  ASTNode.MEMBER_REF,
       		  ASTNode.MEMBER_VALUE_PAIR,
-              ASTNode.METHOD_DECLARATION,
-              ASTNode.METHOD_INVOCATION,
-        	  ASTNode.METHOD_REF,
-        	  ASTNode.METHOD_REF_PARAMETER,
+              ASTNode.FUNCTION_DECLARATION,
+              ASTNode.FUNCTION_INVOCATION,
+        	  ASTNode.FUNCTION_REF,
+        	  ASTNode.FUNCTION_REF_PARAMETER,
       		  ASTNode.MODIFIER,              
 			  ASTNode.NORMAL_ANNOTATION,
               ASTNode.NULL_LITERAL,

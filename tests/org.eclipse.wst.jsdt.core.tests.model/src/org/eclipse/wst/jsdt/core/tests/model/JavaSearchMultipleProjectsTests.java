@@ -147,7 +147,7 @@ public void testHierarchyScope1() throws CoreException {
 		);
 		IJavaScriptUnit cu = getCompilationUnit("/P2/Y.js");
 		IType type = cu.getType("Y");
-		IFunction method = type.getMethod("foo", new String[] {});
+		IFunction method = type.getFunction("foo", new String[] {});
 		IJavaScriptSearchScope scope = SearchEngine.createHierarchyScope(type);
 		JavaSearchResultCollector resultCollector = new JavaSearchResultCollector();
 		resultCollector.showProject = true;
@@ -202,7 +202,7 @@ public void testHierarchyScope2() throws CoreException {
 
 		IJavaScriptUnit cu = getCompilationUnit("/P2/Z.js");
 		IType type = cu.getType("Z");
-		IFunction method = type.getMethod("foo", new String[] {});
+		IFunction method = type.getFunction("foo", new String[] {});
 		IJavaScriptSearchScope scope = SearchEngine.createHierarchyScope(type);
 		JavaSearchResultCollector resultCollector = new JavaSearchResultCollector();
 		resultCollector.showProject = true;
@@ -250,7 +250,7 @@ public void testHierarchyScope3() throws CoreException {
 
 		IJavaScriptUnit cu = getCompilationUnit("/P1/p/X.js");
 		IType type = cu.getType("X");
-		IFunction method = type.getMethod("foo", new String[] {});
+		IFunction method = type.getFunction("foo", new String[] {});
 		IJavaScriptSearchScope scope = SearchEngine.createHierarchyScope(type);
 		JavaSearchResultCollector resultCollector = new JavaSearchResultCollector();
 		resultCollector.showProject = true;
@@ -327,7 +327,7 @@ public void testHierarchyScope4() throws CoreException {
 
 		IJavaScriptUnit cu = getCompilationUnit("/P3/p3/Z.js");
 		IType type = cu.getType("Z");
-		IFunction method = type.getMethod("foo", new String[] {});
+		IFunction method = type.getFunction("foo", new String[] {});
 		IJavaScriptSearchScope scope = SearchEngine.createHierarchyScope(type);
 		JavaSearchResultCollector resultCollector = new JavaSearchResultCollector();
 		resultCollector.showAccuracy = true;
@@ -376,7 +376,7 @@ public void testMethodOccurences() throws CoreException {
 		IJavaScriptSearchScope scope = SearchEngine.createJavaSearchScope(new IJavaScriptElement[] {p1, p2});
 		JavaSearchResultCollector resultCollector = new JavaSearchResultCollector();
 		resultCollector.showProject = true;
-		IFunction method = getCompilationUnit("/P1/p/I.js").getType("I").getMethod("method", new String[] {"QObject;"});
+		IFunction method = getCompilationUnit("/P1/p/I.js").getType("I").getFunction("method", new String[] {"QObject;"});
 		search(
 			method, 
 			ALL_OCCURRENCES,
@@ -605,7 +605,7 @@ public void testReferenceInWorkingCopies() throws CoreException {
 		
 		IJavaScriptSearchScope scope = SearchEngine.createJavaSearchScope(new IJavaScriptElement[] {p1, p2});
 		JavaSearchResultCollector resultCollector = new JavaSearchResultCollector();
-		IFunction method = workingCopy1.getType("X").getMethod("bar", new String[] {"QTest;"});
+		IFunction method = workingCopy1.getType("X").getFunction("bar", new String[] {"QTest;"});
 		new SearchEngine(owner).search(
 			SearchPattern.createPattern(method, REFERENCES), 
 			new SearchParticipant[] {SearchEngine.getDefaultSearchParticipant()},
@@ -703,7 +703,7 @@ public void testBug151189_Workspace() throws CoreException {
 		);
 
 		// Get method
-		IFunction method = getCompilationUnit("/P2/test/Declaration_bis.js").getType("Declaration_bis").getMethod("doOperation", new String[] {"I"});
+		IFunction method = getCompilationUnit("/P2/test/Declaration_bis.js").getType("Declaration_bis").getFunction("doOperation", new String[] {"I"});
 
 		// search method declaration in workspace scope
 		IJavaScriptSearchScope scope = SearchEngine.createWorkspaceScope(); //JavaSearchScope(new IJavaScriptElement[] {p1, p2});
@@ -771,7 +771,7 @@ public void testBug151189_Project() throws CoreException {
 		);
 
 		// Get method
-		IFunction method = getCompilationUnit("/P2/test/Declaration_bis.js").getType("Declaration_bis").getMethod("doOperation", new String[] {"I"});
+		IFunction method = getCompilationUnit("/P2/test/Declaration_bis.js").getType("Declaration_bis").getFunction("doOperation", new String[] {"I"});
 
 		// search method declaration in project scope
 		IJavaScriptSearchScope scope = SearchEngine.createJavaSearchScope(new IJavaScriptElement[] {p2});
@@ -847,7 +847,7 @@ public void testBug163072() throws CoreException {
 		);
 
 		// Get method
-		IFunction method = getCompilationUnit("/P1/test/Test.js").getType("Test").getMethod("getType", new String[0]);
+		IFunction method = getCompilationUnit("/P1/test/Test.js").getType("Test").getFunction("getType", new String[0]);
 		assertTrue("Method 'Test.getType()' should exist!", method.exists());
 
 		// search method declaration in workspace scope

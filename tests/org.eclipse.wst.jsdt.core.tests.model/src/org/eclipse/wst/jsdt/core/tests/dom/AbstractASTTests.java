@@ -441,9 +441,9 @@ public class AbstractASTTests extends ModifyingResourceTests {
 				return ((AnonymousClassDeclaration) node).resolveBinding();
 			case ASTNode.TYPE_DECLARATION_STATEMENT:
 				return ((TypeDeclarationStatement) node).resolveBinding();
-			case ASTNode.METHOD_DECLARATION:
+			case ASTNode.FUNCTION_DECLARATION:
 				return ((FunctionDeclaration) node).resolveBinding();
-			case ASTNode.METHOD_INVOCATION:
+			case ASTNode.FUNCTION_INVOCATION:
 				return ((FunctionInvocation) node).resolveMethodBinding();
 			case ASTNode.TYPE_PARAMETER:
 				return ((TypeParameter) node).resolveBinding();

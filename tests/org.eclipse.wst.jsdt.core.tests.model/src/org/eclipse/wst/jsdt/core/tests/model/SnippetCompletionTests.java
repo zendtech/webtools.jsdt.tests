@@ -273,7 +273,7 @@ public void testCodeSnippetAssistForClassFileInInterface2() throws JavaScriptMod
 	assertResults(
 		"void[KEYWORD]{void, null, null, void, ["+tokenStart+", "+tokenEnd+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_NON_RESTRICTED)+"}\n"+
 		"var[LOCAL_VARIABLE_REF]{var, null, I, var, ["+tokenStart+", "+tokenEnd+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED)+"}\n"+
-		"varFoo[METHOD_REF]{varFoo(), Lxx.yy.MyInterface2;, ()V, varFoo, ["+tokenStart+", "+tokenEnd+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED)+"}\n"+
+		"varFoo[FUNCTION_REF]{varFoo(), Lxx.yy.MyInterface2;, ()V, varFoo, ["+tokenStart+", "+tokenEnd+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED)+"}\n"+
 		"varX[LOCAL_VARIABLE_REF]{varX, null, I, varX, ["+tokenStart+", "+tokenEnd+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED)+"}\n"+
 		"varY[LOCAL_VARIABLE_REF]{varY, null, I, varY, ["+tokenStart+", "+tokenEnd+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED)+"}\n"+
 		"varsc[LOCAL_VARIABLE_REF]{varsc, null, LSuperClass;, varsc, ["+tokenStart+", "+tokenEnd+"], "+(R_DEFAULT + R_INTERESTING + R_CASE + R_UNQUALIFIED + R_NON_RESTRICTED)+"}",

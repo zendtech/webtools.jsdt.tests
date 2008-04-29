@@ -150,7 +150,7 @@ public void testResolveTypeInInner() throws JavaScriptModelException {
  * (regression test for bug 48350 IType#resolveType(String) fails on local types)
  */
 public void testResolveTypeInInner2() throws JavaScriptModelException {
-	IType type = this.getCompilationUnit("/TypeResolve/src/p5/A.js").getType("A").getMethod("foo", new String[] {}).getType("Local", 1);
+	IType type = this.getCompilationUnit("/TypeResolve/src/p5/A.js").getType("A").getFunction("foo", new String[] {}).getType("Local", 1);
 	
 	String[][] types = type.resolveType("Object");
 	assertEquals(

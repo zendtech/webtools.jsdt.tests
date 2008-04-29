@@ -161,7 +161,7 @@ public class GetSourceTests extends ModifyingResourceTests {
 	 */
 	public void testMethod() throws JavaScriptModelException {
 		IType type = this.cu.getType("X");
-		IFunction method= type.getMethod("bar", new String[0]);
+		IFunction method= type.getFunction("bar", new String[0]);
 	
 		String actualSource = method.getSource();
 		String expectedSource =
@@ -185,7 +185,7 @@ public class GetSourceTests extends ModifyingResourceTests {
 				"  void static bar() {}\n" +
 				"}";
 			createFile("/P/p/Y.js", cuSource);
-			IFunction method= getCompilationUnit("/P/p/Y.js").getType("Y").getMethod("bar", new String[0]);
+			IFunction method= getCompilationUnit("/P/p/Y.js").getType("Y").getFunction("bar", new String[0]);
 		
 			String actualSource = getNameSource(cuSource, method);
 			String expectedSource = "bar";
@@ -211,7 +211,7 @@ public class GetSourceTests extends ModifyingResourceTests {
 				"  }\n" +
 				"}";
 			createFile("/P/p/Y.js", cuSource);
-			IType anonymous = getCompilationUnit("/P/p/Y.js").getType("Y").getMethod("foo", new String[0]).getType("", 1);
+			IType anonymous = getCompilationUnit("/P/p/Y.js").getType("Y").getFunction("foo", new String[0]).getType("", 1);
 		
 			String actualSource = getNameSource(cuSource, anonymous);
 			String expectedSource = "Y";
@@ -252,7 +252,7 @@ public class GetSourceTests extends ModifyingResourceTests {
 				"  <T extends String, U extends StringBuffer & Runnable> void foo() {} \n" +
 				"}";
 			createFile("/P/p/Y.js", cuSource);
-			ITypeParameter typeParameter = getCompilationUnit("/P/p/Y.js").getType("Y").getMethod("foo", new String[0]).getTypeParameter("U");
+			ITypeParameter typeParameter = getCompilationUnit("/P/p/Y.js").getType("Y").getFunction("foo", new String[0]).getTypeParameter("U");
 			assertSourceEquals(
 				"Unexpected source'", 
 				"U", 
@@ -293,7 +293,7 @@ public class GetSourceTests extends ModifyingResourceTests {
 				"  <T extends String, U extends StringBuffer & Runnable> void foo() {} \n" +
 				"}";
 			createFile("/P/p/Y.js", cuSource);
-			ITypeParameter typeParameter = getCompilationUnit("/P/p/Y.js").getType("Y").getMethod("foo", new String[0]).getTypeParameter("U");
+			ITypeParameter typeParameter = getCompilationUnit("/P/p/Y.js").getType("Y").getFunction("foo", new String[0]).getTypeParameter("U");
 			assertSourceEquals(
 				"Unexpected source'", 
 				"U extends StringBuffer & Runnable", 
@@ -322,7 +322,7 @@ public class GetSourceTests extends ModifyingResourceTests {
 	 */
 	public void testUnicodeMethod() throws JavaScriptModelException {
 		IType type = this.cu.getType("X");
-		IFunction method= type.getMethod("getSize", null);
+		IFunction method= type.getFunction("getSize", null);
 	
 		String actualSource = method.getSource();
 		String expectedSource = 
