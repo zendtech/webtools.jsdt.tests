@@ -433,7 +433,7 @@ public void testGetPrimaryField() {
 //
 //	Vector hierarchy = new Vector(5);
 //	IJavaScriptElement parent= primary.getParent();
-//	while (parent.getElementType() > IJavaScriptElement.COMPILATION_UNIT) {
+//	while (parent.getElementType() > IJavaScriptElement.JAVASCRIPT_UNIT) {
 //		hierarchy.addElement(parent);
 //		parent = parent.getParent();
 //	}

@@ -115,11 +115,11 @@ protected void search(String patternString, int searchFor, int limitTo, int matc
 public void setUpSuite() throws Exception {
 	super.setUpSuite();
 	JAVA_PROJECT = setUpJavaProject("JavaSearchBugs", "1.5");
-//	addLibraryEntry(JAVA_PROJECT, "/JavaSearchBugs/lib/b95152.jar", false);
-//	addLibraryEntry(JAVA_PROJECT, "/JavaSearchBugs/lib/b123679.jar", false);
-//	addLibraryEntry(JAVA_PROJECT, "/JavaSearchBugs/lib/b140156.jar", false);
-//	addLibraryEntry(JAVA_PROJECT, "/JavaSearchBugs/lib/b164791.jar", false);
-//	addLibraryEntry(JAVA_PROJECT, "/JavaSearchBugs/lib/b166348.jar", false);
+//	addLibraryEntry(JAVASCRIPT_PROJECT, "/JavaSearchBugs/lib/b95152.jar", false);
+//	addLibraryEntry(JAVASCRIPT_PROJECT, "/JavaSearchBugs/lib/b123679.jar", false);
+//	addLibraryEntry(JAVASCRIPT_PROJECT, "/JavaSearchBugs/lib/b140156.jar", false);
+//	addLibraryEntry(JAVASCRIPT_PROJECT, "/JavaSearchBugs/lib/b164791.jar", false);
+//	addLibraryEntry(JAVASCRIPT_PROJECT, "/JavaSearchBugs/lib/b166348.jar", false);
 }
 public void tearDownSuite() throws Exception {
 	deleteProject("JavaSearchBugs");

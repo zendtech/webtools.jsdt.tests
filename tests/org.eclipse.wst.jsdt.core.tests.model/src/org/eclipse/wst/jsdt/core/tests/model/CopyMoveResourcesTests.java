@@ -50,7 +50,7 @@ public IJavaScriptElement copyPositive(IJavaScriptElement element, IJavaScriptEl
 		IJavaScriptElement copy = generateHandle(element, rename, container);
 		assertTrue("Copy should exist", copy.exists());
 		//ensure correct position
-		if (element.getElementType() > IJavaScriptElement.COMPILATION_UNIT) {
+		if (element.getElementType() > IJavaScriptElement.JAVASCRIPT_UNIT) {
 			ensureCorrectPositioning((IParent) container, sibling, copy);
 		} else if (container.getElementType() != IJavaScriptElement.PACKAGE_FRAGMENT_ROOT) {
 			// ensure package name is correct
@@ -129,7 +129,7 @@ public void movePositive(IJavaScriptElement[] elements, IJavaScriptElement[] des
 			}
 			// ensure the original element no longer exists, unless moving within the same container, or moving a primary working copy
 			if (!destinations[i].equals(element.getParent())) {
-				if (element.getElementType() != IJavaScriptElement.COMPILATION_UNIT || !((IJavaScriptUnit) element).isWorkingCopy())
+				if (element.getElementType() != IJavaScriptElement.JAVASCRIPT_UNIT || !((IJavaScriptUnit) element).isWorkingCopy())
 					assertTrue("The original element must not exist", !element.exists());
 			}
 			assertTrue("Moved element should exist", moved.exists());
@@ -138,7 +138,7 @@ public void movePositive(IJavaScriptElement[] elements, IJavaScriptElement[] des
 			if (container.getElementType() == IJavaScriptElement.PACKAGE_FRAGMENT) {
 				if (container.getElementName().equals("")) {
 					// default package
-					if (moved.getElementType() == IJavaScriptElement.COMPILATION_UNIT) {
+					if (moved.getElementType() == IJavaScriptElement.JAVASCRIPT_UNIT) {
 						IJavaScriptElement[] children = ((IJavaScriptUnit) moved).getChildren();
 						for (int j = 0; j < children.length; j++) {
 							if (children[j].getElementType() == IJavaScriptElement.PACKAGE_DECLARATION) {

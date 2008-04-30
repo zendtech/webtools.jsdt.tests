@@ -326,7 +326,7 @@ public void testFindElementClassFile() throws JavaScriptModelException {
 public void testFindElementCompilationUnit() throws JavaScriptModelException {
 	IJavaScriptProject project= getJavaProject("JavaProjectTests");
 	IJavaScriptElement element= project.findElement(new Path("x/y/Main.js"));
-	assertTrue("CU not found" , element != null && element.getElementType() == IJavaScriptElement.COMPILATION_UNIT
+	assertTrue("CU not found" , element != null && element.getElementType() == IJavaScriptElement.JAVASCRIPT_UNIT
 		&& element.getElementName().equals("Main.js"));
 }
 /**
@@ -335,7 +335,7 @@ public void testFindElementCompilationUnit() throws JavaScriptModelException {
 public void testFindElementCompilationUnitDefaultPackage() throws JavaScriptModelException {
 	IJavaScriptProject project= getJavaProject("JavaProjectTests");
 	IJavaScriptElement element= project.findElement(new Path("B.js"));
-	assertTrue("CU not found" , element != null && element.getElementType() == IJavaScriptElement.COMPILATION_UNIT
+	assertTrue("CU not found" , element != null && element.getElementType() == IJavaScriptElement.JAVASCRIPT_UNIT
 		&& element.getElementName().equals("B.js"));
 }
 /**

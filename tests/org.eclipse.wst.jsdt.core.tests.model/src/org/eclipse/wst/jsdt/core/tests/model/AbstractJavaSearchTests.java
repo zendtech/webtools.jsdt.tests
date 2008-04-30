@@ -122,7 +122,7 @@ public class AbstractJavaSearchTests extends AbstractJavaModelTests implements I
 						line.append(".");
 					}
 					line.append(localVar.getElementName());
-					unit = (IJavaScriptUnit)localVar.getAncestor(IJavaScriptElement.COMPILATION_UNIT);
+					unit = (IJavaScriptUnit)localVar.getAncestor(IJavaScriptElement.JAVASCRIPT_UNIT);
 				} else if (element instanceof ITypeParameter) {
 					line.append(" ");
 					ITypeParameter typeParam = (ITypeParameter)element;
@@ -137,16 +137,16 @@ public class AbstractJavaSearchTests extends AbstractJavaModelTests implements I
 						unit = method.getJavaScriptUnit();
 					} else {
 						line.append("<Unexpected kind of parent for type parameter>");
-						unit = (IJavaScriptUnit)typeParam.getAncestor(IJavaScriptElement.COMPILATION_UNIT);
+						unit = (IJavaScriptUnit)typeParam.getAncestor(IJavaScriptElement.JAVASCRIPT_UNIT);
 					}
 					line.append(".");
 					line.append(typeParam.getElementName());
 				} else if (element instanceof IImportDeclaration) {
 					IImportDeclaration importDeclaration = (IImportDeclaration)element;
-					unit = (IJavaScriptUnit)importDeclaration.getAncestor(IJavaScriptElement.COMPILATION_UNIT);
+					unit = (IJavaScriptUnit)importDeclaration.getAncestor(IJavaScriptElement.JAVASCRIPT_UNIT);
 				} else if (element instanceof IPackageDeclaration) {
 					IPackageDeclaration packageDeclaration = (IPackageDeclaration)element;
-					unit = (IJavaScriptUnit)packageDeclaration.getAncestor(IJavaScriptElement.COMPILATION_UNIT);
+					unit = (IJavaScriptUnit)packageDeclaration.getAncestor(IJavaScriptElement.JAVASCRIPT_UNIT);
 				}
 				if (resource instanceof IFile) {
 					char[] contents = getSource(resource, element, unit);
@@ -284,7 +284,7 @@ public class AbstractJavaSearchTests extends AbstractJavaModelTests implements I
 			IJavaScriptElement parent = type.getParent();
 			boolean isLocal = false;
 			switch (parent.getElementType()) {
-				case IJavaScriptElement.COMPILATION_UNIT:
+				case IJavaScriptElement.JAVASCRIPT_UNIT:
 					IPackageFragment pkg = type.getPackageFragment();
 					append(pkg);
 					if (!pkg.getElementName().equals(IPackageFragment.DEFAULT_PACKAGE_NAME)) {
@@ -368,7 +368,7 @@ public class AbstractJavaSearchTests extends AbstractJavaModelTests implements I
 		protected char[] getSource(IResource resource, IJavaScriptElement element, IJavaScriptUnit unit) throws CoreException {
 			char[] contents = CharOperation.NO_CHAR;
 			if ("js".equals(resource.getFileExtension())) {
-				IJavaScriptUnit cu = (IJavaScriptUnit)element.getAncestor(IJavaScriptElement.COMPILATION_UNIT);
+				IJavaScriptUnit cu = (IJavaScriptUnit)element.getAncestor(IJavaScriptElement.JAVASCRIPT_UNIT);
 				if (cu != null && cu.isWorkingCopy()) {
 					// working copy
 					contents = unit.getBuffer().getCharacters();

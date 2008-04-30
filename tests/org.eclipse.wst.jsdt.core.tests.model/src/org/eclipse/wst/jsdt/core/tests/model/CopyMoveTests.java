@@ -75,7 +75,7 @@ public IJavaScriptElement copyPositive(IJavaScriptElement element, IJavaScriptEl
 		assertTrue("Copy should exist", copy.exists());
 	
 		//ensure correct position
-		if (element.getElementType() > IJavaScriptElement.COMPILATION_UNIT) {
+		if (element.getElementType() > IJavaScriptElement.JAVASCRIPT_UNIT) {
 			ensureCorrectPositioning((IParent) container, sibling, copy);
 		} else {
 			if (container.getElementType() == IJavaScriptElement.PACKAGE_FRAGMENT_ROOT) {
@@ -136,14 +136,14 @@ public IJavaScriptElement generateHandle(IJavaScriptElement original, String ren
 			break;
 		case IJavaScriptElement.PACKAGE_FRAGMENT :
 			switch (original.getElementType()) {
-				case IJavaScriptElement.COMPILATION_UNIT :
+				case IJavaScriptElement.JAVASCRIPT_UNIT :
 					return ((IPackageFragment) container).getJavaScriptUnit(name);
 				default :
 					assertTrue("illegal child type", false);
 					break;
 			}
 			break;
-		case IJavaScriptElement.COMPILATION_UNIT :
+		case IJavaScriptElement.JAVASCRIPT_UNIT :
 			switch (original.getElementType()) {
 				case IJavaScriptElement.IMPORT_DECLARATION :
 					return ((IJavaScriptUnit) container).getImport(name);
@@ -307,7 +307,7 @@ public void movePositive(IJavaScriptElement[] elements, IJavaScriptElement[] des
 			assertTrue("Moved element should exist", moved.exists());
 	
 			//ensure correct position
-			if (element.getElementType() > IJavaScriptElement.COMPILATION_UNIT) {
+			if (element.getElementType() > IJavaScriptElement.JAVASCRIPT_UNIT) {
 				if (siblings != null && siblings.length > 0) {
 					ensureCorrectPositioning((IParent) moved.getParent(), siblings[i], moved);
 				}
