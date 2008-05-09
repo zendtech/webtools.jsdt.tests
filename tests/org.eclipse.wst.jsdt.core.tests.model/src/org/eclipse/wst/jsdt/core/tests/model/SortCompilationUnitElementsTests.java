@@ -24,10 +24,8 @@ import org.eclipse.text.edits.TextEdit;
 import org.eclipse.wst.jsdt.core.IJavaScriptUnit;
 import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.eclipse.wst.jsdt.core.dom.AST;
-import org.eclipse.wst.jsdt.core.dom.ASTNode;
 import org.eclipse.wst.jsdt.core.dom.ASTParser;
 import org.eclipse.wst.jsdt.core.dom.BodyDeclaration;
-import org.eclipse.wst.jsdt.core.dom.EnumConstantDeclaration;
 import org.eclipse.wst.jsdt.core.util.JavaScriptUnitSorter;
 import org.eclipse.wst.jsdt.internal.compiler.impl.CompilerOptions;
 
@@ -2018,12 +2016,6 @@ public void test033() throws CoreException {
 
 		Comparator comparator = new Comparator() {
 			public int compare(Object o1, Object o2) {
-				switch(((ASTNode) o1).getNodeType()) {
-					case ASTNode.ENUM_CONSTANT_DECLARATION :
-						if (o2 instanceof EnumConstantDeclaration) {
-							return ((EnumConstantDeclaration) o1).getName().getIdentifier().compareTo(((EnumConstantDeclaration) o2).getName().getIdentifier());
-						}
-				}
 				BodyDeclaration bodyDeclaration1 = (BodyDeclaration) o1;
 				BodyDeclaration bodyDeclaration2 = (BodyDeclaration) o2;
 				final int sourceStart1 = ((Integer) bodyDeclaration1.getProperty(JavaScriptUnitSorter.RELATIVE_ORDER)).intValue();
