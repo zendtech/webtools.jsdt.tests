@@ -1014,4 +1014,20 @@ public class BasicResolveTests extends AbstractRegressionTest {
 	}
 
 
+	public void test068()	{	 
+
+		this.runNegativeTest(
+				new String[] {
+						"X.js",
+						"	function foo(param1 , param2){\n" +
+						"	if(\"\" || 0) {} \n" +
+						"	 var value = param1 || param2; \n" +
+						"	 if(param1 || param2) {} \n" +
+						"}\n",
+				},
+				""
+		);
+
+	}
+
 }
