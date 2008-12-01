@@ -532,6 +532,8 @@ public class BasicResolveTests extends AbstractRegressionTest {
 				new String[] {
 						"X.js",
 						"var x = {};\n" +
+						"var b=x;\n;"+
+						"b.a=\"\";\n;"+
 						"x.a = \"\""
 				},
 				""
@@ -1029,5 +1031,39 @@ public class BasicResolveTests extends AbstractRegressionTest {
 		);
 
 	}
+	
+	public void test070()	{	 
+
+		this.runNegativeTest(
+				new String[] {
+						"X.js",
+						"	var s=new String();\n" +
+						"	s.length=1; \n" +
+						"\n",
+				},
+				""
+		);
+	}
+
+	public void testbug255428()	{	 
+
+		this.runNegativeTest(
+				new String[] {
+						"X.js",
+						"	 function MyClass(){}\n" +
+						" MyClass.prototype = {\n" +
+						"    a : 0,\n" +
+						"     myfunc : function(){} \n" +
+						" };\n" +
+						"function test() { \n" +
+						"     var lObj = new MyClass();\n" +
+						"     lObj.a = 2;\n" +
+						"     lObj.myfunc();\n" +
+						"}\n",
+				},
+				""
+		);
+	}
+
 
 }
