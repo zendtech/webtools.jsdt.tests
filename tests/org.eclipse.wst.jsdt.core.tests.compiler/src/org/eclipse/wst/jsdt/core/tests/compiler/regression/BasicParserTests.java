@@ -998,6 +998,20 @@ public class BasicParserTests extends AbstractRegressionTest {
 		);
 	}
   
+	public void testbug248145() {
+		this.runParseTest(
+					 
+				"return \n"+
+			     "a+b;"+
+			   		"",
+				      
+			"X.js",
+			"return ;\n"+
+		     "(a + b);"+
+		   		"\n"  
+		);
+	}
+  
 
    
 }
