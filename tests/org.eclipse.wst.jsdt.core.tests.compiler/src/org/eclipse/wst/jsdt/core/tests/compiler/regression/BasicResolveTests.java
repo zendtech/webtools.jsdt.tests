@@ -1064,6 +1064,35 @@ public class BasicResolveTests extends AbstractRegressionTest {
 				""
 		);
 	}
+	
+	public void testbug259187()	{
+		this.runNegativeTest(
+				new String[] {
+						"X.js",
+						"var params = \"some?string\".split('?');\n" +
+				        "var base = params.shift();"
+				},
+				"----------\n" + 
+		"1. WARNING in X.js (at line 1)\n" + 
+		"	var params = \"some?string\".split(\'?\');\n" + 
+		"	             ^^^^^^^^^^^^^^^^^^^^^^^^\n" + 
+		"Wrong number of arguments for the function split (), expecting 2 argument(s), but there was 1 \n" + 
+		"----------\n"
+		);
+
+		this.runNegativeTest(
+					new String[] {
+							"Y.js",
+							"var substr = \"some?string\".substring('?');\n"
+					},
+					"----------\n" + 
+			"1. WARNING in Y.js (at line 1)\n" + 
+			"	var substr = \"some?string\".substring(\'?\');\n" + 
+			"	             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n" + 
+			"Wrong number of arguments for the function substring (), expecting 2 argument(s), but there was 1 \n" + 
+			"----------\n"
+			);
+	}
 
 
 }
