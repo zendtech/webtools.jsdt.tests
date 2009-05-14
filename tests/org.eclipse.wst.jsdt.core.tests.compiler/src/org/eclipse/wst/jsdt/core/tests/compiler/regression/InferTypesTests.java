@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2008 IBM Corporation and others.
+ * Copyright (c) 2005, 2009 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -87,7 +87,7 @@ public class InferTypesTests extends AbstractRegressionTest {
 				"}",
 			"X.js",
 			"class Shape extends Object{\n  ?? GetArea()\n  Shape()\n}\n"+
-			"class Circle extends Shape{\n  void GetArea()\n}\n",
+			"class Circle extends Shape{\n  ?? constructor;\n  void GetArea()\n}\n",
 			getDefaultOptions()
 			
 		 );
