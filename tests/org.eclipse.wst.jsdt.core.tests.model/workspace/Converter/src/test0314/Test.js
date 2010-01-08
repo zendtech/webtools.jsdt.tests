@@ -1,1 +1,0 @@
-function  main(args) { int x= 3;}
