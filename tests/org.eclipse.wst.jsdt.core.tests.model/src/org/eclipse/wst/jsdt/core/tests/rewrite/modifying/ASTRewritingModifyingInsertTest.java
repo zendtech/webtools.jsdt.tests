@@ -326,7 +326,7 @@ public class ASTRewritingModifyingInsertTest extends ASTRewritingModifyingTest {
 	/**
 	 * insert a new function in an object literal
 	 */
-	public void xtest0009() throws Exception {
+	public void test0009() throws Exception {
 		IPackageFragment pack1= fSourceFolder.createPackageFragment("test0009", false, null);
 		StringBuffer buf= new StringBuffer();
 		buf.append("var o = {\n");
@@ -357,8 +357,8 @@ public class ASTRewritingModifyingInsertTest extends ASTRewritingModifyingTest {
 		buf= new StringBuffer();
 		buf.append("var o = {\n");
 		buf.append("con : function(args){},\n");
-		buf.append("fun1 : function(args){},\n");
-		buf.append("newMethod : function(){}\n");
+		buf.append("fun1 : function(args){}, ");
+		buf.append("newMethod : function (){}\n");
 		buf.append("};\n");
 		assertEqualString(preview, buf.toString());
 	}
