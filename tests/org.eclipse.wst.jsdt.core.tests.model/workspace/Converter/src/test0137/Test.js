@@ -1,3 +1,0 @@
-  // Line comment
-  var i;
-
