@@ -935,86 +935,12 @@ public class InferTypesTests extends AbstractRegressionTest {
 			 );
 		}
 		
-		public void test098() {
-			// BUG286010
+		public void testBUG286010() {
 			CompilationUnitDeclaration declaration = this.runInferTest(
 				"var MyFunc = function () {};\n" +
 				"MyFunc.myMeth = function () {};",
 				"X.js",
 				"class MyFunc extends Function{\n  static void myMeth()\n}\n",
-				getDefaultOptions()
-				
-			 );
-		}		
-
-		public void test099() {
-			// BUG278904
-			CompilationUnitDeclaration declaration = this.runInferTest(
-				"function MyType(){}"+
-				"MyType.prototype = new Object();\n"+
-				"/**\n"+
-				"  * Property length\n"+
-				"  * @type    Number\n"+
-				"  * @memberOf   MyType\n"+
-				"  * @see     MyType\n"+
-				"  * @since   WTP 3.2.2\n"+
-				" */\n"+  
-				"MyType.prototype.length = \"\";\n",
-				"X.js",
-				"class MyType extends Object{\n  Number length;\n  MyType()\n}\n",
-				getDefaultOptions()
-				
-			 );
-		}		
-		public void test100() {
-			// BUG278904
-			CompilationUnitDeclaration declaration = this.runInferTest(
-				"function MyType(){}"+
-				"MyType.prototype = new Object();\n"+
-				"/**\n"+
-				"  * Property length\n"+
-				"  * @memberOf   MyType\n"+
-				"  * @see     MyType\n"+
-				"  * @since   WTP 3.2.2\n"+
-				" */\n"+  
-				"MyType.prototype.length = \"\";\n",
-				"X.js",
-				"class MyType extends Object{\n  String length;\n  MyType()\n}\n",
-				getDefaultOptions()
-				
-			 );
-		}		
-		public void test101() {
-			CompilationUnitDeclaration declaration = this.runInferTest(
-				"MyType = {\n"+
-				"/**\n"+
-				"  * Property length\n"+
-				"  * @type    Number\n"+
-				"  * @memberOf   MyType\n"+
-				"  * @see     MyType\n"+
-				"  * @since   WTP 3.2.2\n"+
-				" */\n"+  
-				"length : \"value\"\n"+
-				"};",
-				"X.js",
-				"class MyType extends Object{\n  Number length;\n}\n",
-				getDefaultOptions()
-				
-			 );
-		}		
-		public void test102() {
-			CompilationUnitDeclaration declaration = this.runInferTest(
-				"MyType = {\n"+
-				"/**\n"+
-				"  * Property length\n"+
-				"  * @memberOf   MyType\n"+
-				"  * @see     MyType\n"+
-				"  * @since   WTP 3.2.2\n"+
-				" */\n"+  
-				"length : \"value\"\n"+
-				"};",
-				"X.js",
-				"class MyType extends Object{\n  String length;\n}\n",
 				getDefaultOptions()
 				
 			 );
