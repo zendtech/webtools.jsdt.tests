@@ -966,6 +966,76 @@ public class InferTypesTests extends AbstractRegressionTest {
 				
 			 );
 		}		
+		public void test099a() {
+			// BUG278904
+			CompilationUnitDeclaration declaration = this.runInferTest(
+				"function MyType(){}"+
+				"MyType.prototype = new Object();\n"+
+				"/**\n"+
+				"  * Property length\n"+
+				"  * @type    Number\n"+
+				"  * @memberOf   MyType\n"+
+				"  * @see     MyType\n"+
+				"  * @since   WTP 3.2.2\n"+
+				" */\n"+  
+				"MyType.prototype.length = \"\";\n"+
+				"MyType.prototype.name = \"\";\n",
+				"X.js",
+				"class MyType extends Object{\n  Number length;\n  String name;\n  MyType()\n}\n",
+				getDefaultOptions()
+				
+			 );
+		}		
+		public void test099b() {
+			// BUG278904
+			CompilationUnitDeclaration declaration = this.runInferTest(
+				"function MyType(){}"+
+				"MyType.prototype = new Object();\n"+
+				"/**\n"+
+				"  * Property length\n"+
+				"  * @type    Number\n"+
+				"  * @memberOf   MyType\n"+
+				"  * @see     MyType\n"+
+				"  * @since   WTP 3.2.2\n"+
+				" */\n"+  
+				"MyType.prototype.length = \"\";\n"+
+				"MyType.prototype.name = \"\";\n"+
+				"MyType.prototype.date = new Date();\n",
+				"X.js",
+				"class MyType extends Object{\n  Number length;\n  String name;\n  Date date;\n  MyType()\n}\n",
+				getDefaultOptions()
+				
+			 );
+		}		
+		public void test099c() {
+			// BUG278904
+			CompilationUnitDeclaration declaration = this.runInferTest(
+				"function MyType(){}"+
+				"MyType.prototype = new Object();\n"+
+				"/**\n"+
+				"  * Property length\n"+
+				"  * @type    String\n"+
+				"  * @memberOf   MyType\n"+
+				"  * @see     MyType\n"+
+				"  * @since   WTP 3.2.2\n"+
+				" */\n"+  
+				"MyType.prototype.time = 1;\n"+
+				"/**\n"+
+				"  * Property length\n"+
+				"  * @type    Number\n"+
+				"  * @memberOf   MyType\n"+
+				"  * @see     MyType\n"+
+				"  * @since   WTP 3.2.2\n"+
+				" */\n"+  
+				"MyType.prototype.length = \"\";\n"+
+				"MyType.prototype.name = \"\";\n"+
+				"MyType.prototype.date = new Date();\n",
+				"X.js",
+				"class MyType extends Object{\n  String time;\n  Number length;\n  String name;\n  Date date;\n  MyType()\n}\n",
+				getDefaultOptions()
+				
+			 );
+		}		
 		public void test100() {
 			// BUG278904
 			CompilationUnitDeclaration declaration = this.runInferTest(
