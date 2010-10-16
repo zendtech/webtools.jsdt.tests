@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2008 IBM Corporation and others.
+ * Copyright (c) 2000, 2010 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -282,10 +282,10 @@ public void test05f() {
 }
 public void test05g() {
 	String s = 
-		"var foo = '  \\\r"+
-		"\r"+
-		"    ';"+
-		"	\r"; 	
+		"var foo = '  \\\n"+
+		"\n"+
+		"    \";"+
+		"	\n"; 	
 
 	String expectedSyntaxErrorDiagnosis =
 		"----------\n"+
@@ -304,10 +304,10 @@ public void test05g() {
 }
 public void test05h() {
 	String s = 
-		"var foo = \"  \\\r"+
-		"\r"+
-		"    \";"+
-		"	\r"; 	
+		"var foo = \"  \\\n"+
+		"\n"+
+		"    ';"+
+		"	\n"; 	
 
 	String expectedSyntaxErrorDiagnosis =
 		"----------\n"+
