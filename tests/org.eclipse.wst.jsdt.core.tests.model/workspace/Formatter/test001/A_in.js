@@ -1,5 +1,0 @@
-	function run() {
-	}
-	
-	function foo() {
-	}
