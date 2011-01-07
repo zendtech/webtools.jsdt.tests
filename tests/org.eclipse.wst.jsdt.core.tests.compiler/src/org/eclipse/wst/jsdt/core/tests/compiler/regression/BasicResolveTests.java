@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2010 IBM Corporation and others.
+ * Copyright (c) 2005, 2011 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -1784,6 +1784,24 @@ public class BasicResolveTests extends AbstractRegressionTest {
 					"	  ^^^^^^^\n" + 
 					"reload2 cannot be resolved or is not a field\n" + 
 					"----------\n"
+			);
+	}
+	
+	public void testbug333781() {
+		this.runNegativeTest(
+					new String[] {
+							"Z.js",
+							"var com = {};\n" +
+							"com.meth1 = function(){};\n" +
+							"com[\"meth2\"] = function(){};\n" +
+							"com.att1 = 1;\n" +
+							"com[\"att2\"] = 2;\n" +
+							"com.meth1();\n" +
+							"com.meth2;" +
+							"com.att1;\n" +
+							"com.att2;"
+					},
+					""
 			);
 	}
 	
