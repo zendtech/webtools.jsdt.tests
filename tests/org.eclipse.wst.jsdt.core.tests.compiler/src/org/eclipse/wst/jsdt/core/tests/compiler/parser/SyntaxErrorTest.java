@@ -158,7 +158,7 @@ public void test03() {
 		"1. ERROR in <test> (at line 2)\n"+
 		"	o = { s: \"Success\"; };								\n"+
 		"	                  ^\n"+
-		"Syntax error on token \";\", delete this token\n"+
+		"Syntax error on token \";\", , expected\n"+
 		"----------\n";
 
 	String testName = "<test>";
@@ -180,7 +180,7 @@ public void test04() {
 		"1. ERROR in <test> (at line 2)\n"+
 		"	var o = { s: \"Success\"; };								\n"+
 		"	                      ^\n"+
-		"Syntax error on token \";\", delete this token\n"+
+		"Syntax error on token \";\", , expected\n"+
 		"----------\n";
 
 	String testName = "<test>";

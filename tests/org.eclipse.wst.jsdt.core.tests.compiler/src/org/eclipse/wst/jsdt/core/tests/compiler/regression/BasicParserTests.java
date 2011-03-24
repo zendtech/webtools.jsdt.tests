@@ -886,7 +886,7 @@ public class BasicParserTests extends AbstractRegressionTest {
 		this.runParseTest(
 				"a=1,b=2",
 			"X.js",
-				"(a = 1), (b = 2);\n"			
+				"((a = 1), (b = 2));\n"			
 		);
 	}
 
@@ -895,7 +895,7 @@ public class BasicParserTests extends AbstractRegressionTest {
 		this.runParseTest(
 				"a=1,funcall(0),5",
 			"X.js",
-				"(a = 1), funcall(0), 5;\n"			
+				"((a = 1), funcall(0), 5);\n"			
 		);
 	}
 
