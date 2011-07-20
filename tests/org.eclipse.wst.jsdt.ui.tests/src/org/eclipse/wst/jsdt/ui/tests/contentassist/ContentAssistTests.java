@@ -103,29 +103,66 @@ public class ContentAssistTests extends TestCase {
 		return new ContentAssistTestsSetup(ts);
 	}
 	
+	public void testFindFunctions_OtherFile_BeforeOpen_ExpressionStarted_0() throws Exception {
+		String[][] expectedProposals = new String[][] {{"funcOne()", "funcTwo()", "funcThree(paramOne)", "funcFour(paramOne, paramTwo)",
+			"funcFive(Number paramOne, String paramTwo)  String", "funcSix(paramOne, String paramTwo)  Number",
+			"funcSeven(String paramOne, paramTwo)  Number", "funcEight(paramOne)  String", "funcNine(paramOne)  Number"}};
+		runProposalTest("test0_1.js", 0, 1, expectedProposals);
+	}
+	
+	public void testFindFunctions_OtherFile_BeforeOpen_ExpressionStarted_1() throws Exception {
+		String[][] expectedProposals = new String[][] {{"funcOne()", "funcTwo()", "funcThree(paramOne)", "funcFour(paramOne, paramTwo)",
+			"funcFive(Number paramOne, String paramTwo)  String", "funcSix(paramOne, String paramTwo)  Number",
+			"funcSeven(String paramOne, paramTwo)  Number", "funcEight(paramOne)  String", "funcNine(paramOne)  Number"}};
+		runProposalTest("test0_1.js", 2, 4, expectedProposals);
+	}
+	
+	public void testFindFunctions_OtherFile_BeforeOpen_ExpressionStarted_2() throws Exception {
+		String[][] expectedProposals = new String[][] {{"funcTwo()", "funcThree(paramOne)"}};
+		runProposalTest("test0_1.js", 4, 5, expectedProposals);
+	}
+	
 	public void testFindFunctions_ThisFile_EmptyLine() throws Exception {
 		String[][] expectedProposals = new String[][] {{"funcOne()", "funcTwo()", "funcThree(paramOne)", "funcFour(paramOne, paramTwo)"}};
-		runProposalTest("test1.js", 16, 0, expectedProposals);
+		runProposalTest("test0_0.js", 55, 0, expectedProposals);
 	}
 	
 	public void testFindFunctions_ThisFile_ExpressionStarted_0() throws Exception {
-		String[][] expectedProposals = new String[][] {{"funcOne()", "funcTwo()", "funcThree(paramOne)", "funcFour(paramOne, paramTwo)"}};
-		runProposalTest("test1.js", 18, 3, expectedProposals);
+		String[][] expectedProposals = new String[][] {{"funcOne()", "funcTwo()", "funcThree(paramOne)", "funcFour(paramOne, paramTwo)",
+			"funcFive(Number paramOne, String paramTwo)  String", "funcSix(paramOne, String paramTwo)  Number",
+			"funcSeven(String paramOne, paramTwo)  Number"}};
+		runProposalTest("test0_0.js", 57, 1, expectedProposals);
 	}
 	
 	public void testFindFunctions_ThisFile_ExpressionStarted_1() throws Exception {
-		String[][] expectedProposals = new String[][] {{"funcTwo()", "funcThree(paramOne)"}};
-		runProposalTest("test1.js", 20, 5, expectedProposals);
+		String[][] expectedProposals = new String[][] {{"funcOne()", "funcTwo()", "funcThree(paramOne)", "funcFour(paramOne, paramTwo)",
+			"funcFive(Number paramOne, String paramTwo)  String", "funcSix(paramOne, String paramTwo)  Number",
+			"funcSeven(String paramOne, paramTwo)  Number"}};
+		runProposalTest("test0_0.js", 59, 4, expectedProposals);
 	}
 	
-	public void testFindFunctions_OtherFile_ExpressionStarted_0() throws Exception {
-		String[][] expectedProposals = new String[][] {{"funcOne()", "funcTwo()", "funcThree(paramOne)", "funcFour(paramOne, paramTwo)"}};
-		runProposalTest("test2.js", 0, 1, expectedProposals);
+	public void testFindFunctions_ThisFile_ExpressionStarted_2() throws Exception {
+		String[][] expectedProposals = new String[][] {{"funcTwo()", "funcThree(paramOne)"}};
+		runProposalTest("test0_0.js", 61, 5, expectedProposals);
 	}
 	
-	public void testFindFunctions_OtherFile_ExpressionStarted_1() throws Exception {
+	public void testFindFunctions_OtherFile_AftereOpen_ExpressionStarted_0() throws Exception {
+		String[][] expectedProposals = new String[][] {{"funcOne()", "funcTwo()", "funcThree(paramOne)", "funcFour(paramOne, paramTwo)",
+			"funcFive(Number paramOne, String paramTwo)  String", "funcSix(paramOne, String paramTwo)  Number",
+			"funcSeven(String paramOne, paramTwo)  Number", "funcEight(paramOne)  String", "funcNine(paramOne)  Number"}};
+		runProposalTest("test0_1.js", 0, 1, expectedProposals);
+	}
+	
+	public void testFindFunctions_OtherFile_AfterOpen_ExpressionStarted_1() throws Exception {
+		String[][] expectedProposals = new String[][] {{"funcOne()", "funcTwo()", "funcThree(paramOne)", "funcFour(paramOne, paramTwo)",
+			"funcFive(Number paramOne, String paramTwo)  String", "funcSix(paramOne, String paramTwo)  Number",
+			"funcSeven(String paramOne, paramTwo)  Number", "funcEight(paramOne)  String", "funcNine(paramOne)  Number"}};
+		runProposalTest("test0_1.js", 2, 4, expectedProposals);
+	}
+	
+	public void testFindFunctions_OtherFile_AfterOpen_ExpressionStarted_2() throws Exception {
 		String[][] expectedProposals = new String[][] {{"funcTwo()", "funcThree(paramOne)"}};
-		runProposalTest("test2.js", 2, 5, expectedProposals);
+		runProposalTest("test0_1.js", 4, 5, expectedProposals);
 	}
 	
 	public void testFindAnonymousTypeField_0() throws Exception {
@@ -148,79 +185,119 @@ public class ContentAssistTests extends TestCase {
 		runProposalTest("test8_1.js", 8, 13, expectedProposals);
 	}
 	
+	public void testFindConstructors_OtherFile_BeforeOpen_ExpressionStarted_0() throws Exception {
+		String[][] expectedProposals = new String[][] {{"Awesome(param1, param2)"}};
+		runProposalTest("test2_1.js", 0, 6, expectedProposals);
+	}
+	
+	public void testFindConstructors_OtherFile_BeforeOpen_ExpressionStarted_1() throws Exception {
+		String[][] expectedProposals = new String[][] {{"bar.Class1(a, b)", "bar.Class2(c, d, e)", "bar.foo.Class3(param1, param2, param3, param4)"}};
+		runProposalTest("test2_1.js", 2, 6, expectedProposals);
+	}
+	
+	public void testFindConstructors_OtherFile_BeforeOpen_ExpressionStarted_2() throws Exception {
+		String[][] expectedProposals = new String[][] {{"bar.Class1(a, b)", "bar.Class2(c, d, e)"}};
+		runProposalTest("test2_1.js", 4, 9, expectedProposals);
+	}
+	
+	public void testFindConstructors_OtherFile_BeforeOpen_ExpressionStarted_3() throws Exception {
+		String[][] expectedProposals = new String[][] {{"bar.foo.Class3(param1, param2, param3, param4)"}};
+		runProposalTest("test2_1.js", 6, 10, expectedProposals);
+	}
+	
+	public void testFindConstructors_OtherFile_BeforeOpen_ExpressionStarted_4() throws Exception {
+		String[][] expectedProposals = new String[][] {{"bar.foo.Class3(param1, param2, param3, param4)"}};
+		runProposalTest("test2_1.js", 8, 13, expectedProposals);
+	}
+	
+	public void testFindConstructors_OtherFile_BeforeOpen_ExpressionStarted_5() throws Exception {
+		String[][] expectedProposals = new String[][] {{"bar.Class1(a, b)", "bar.Class2(c, d, e)", "bar.foo.Class3(param1, param2, param3, param4)"}};
+		runProposalTest("test2_1.js", 10, 5, expectedProposals);
+	}
+	
+	public void testFindConstructors_OtherFile_BeforeOpen_ExpressionStarted_6() throws Exception {
+		String[][] expectedProposals = new String[][] {{"bar.Class1(a, b)", "bar.Class2(c, d, e)", "bar.foo.Class3(param1, param2, param3, param4)"}};
+		runProposalTest("test2_1.js", 12, 9, expectedProposals);
+	}
+	
 	public void testFindConstructors_ThisFile_JustNew() throws Exception {
 		String[][] expectedProposals = new String[][] {{"Awesome(param1, param2)", "bar.Class1(a, b)", "bar.Class2(c, d, e)", "bar.foo.Class3(param1, param2, param3, param4)"}};
-		runProposalTest("test3.js", 17, 4, expectedProposals);
+		runProposalTest("test2_0.js", 17, 4, expectedProposals);
 	}
 	
 	public void testFindConstructors_ThisFile_ExpressionStarted_0() throws Exception {
 		String[][] expectedProposals = new String[][] {{"Awesome(param1, param2)"}};
-		runProposalTest("test3.js", 19, 6, expectedProposals);
+		runProposalTest("test2_0.js", 19, 6, expectedProposals);
 	}
 	
 	public void testFindConstructors_ThisFile_ExpressionStarted_1() throws Exception {
 		String[][] expectedProposals = new String[][] {{"bar.Class1(a, b)", "bar.Class2(c, d, e)", "bar.foo.Class3(param1, param2, param3, param4)"}};
-		runProposalTest("test3.js", 21, 6, expectedProposals);
+		runProposalTest("test2_0.js", 21, 6, expectedProposals);
 	}
 	
 	public void testFindConstructors_ThisFile_ExpressionStarted_2() throws Exception {
 		String[][] expectedProposals = new String[][] {{"bar.Class1(a, b)", "bar.Class2(c, d, e)"}};
-		runProposalTest("test3.js", 23, 9, expectedProposals);
+		runProposalTest("test2_0.js", 23, 9, expectedProposals);
 	}
 	
 	public void testFindConstructors_ThisFile_ExpressionStarted_3() throws Exception {
 		String[][] expectedProposals = new String[][] {{"bar.foo.Class3(param1, param2, param3, param4)"}};
-		runProposalTest("test3.js", 25, 10, expectedProposals);
+		runProposalTest("test2_0.js", 25, 10, expectedProposals);
 	}
 	
 	public void testFindConstructors_ThisFile_ExpressionStarted_4() throws Exception {
 		String[][] expectedProposals = new String[][] {{"bar.foo.Class3(param1, param2, param3, param4)"}};
-		runProposalTest("test3.js", 27, 13, expectedProposals);
+		runProposalTest("test2_0.js", 27, 13, expectedProposals);
 	}
 	
 	public void testFindConstructors_ThisFile_ExpressionStarted_5() throws Exception {
 		String[][] expectedProposals = new String[][] {{"bar.Class1(a, b)", "bar.Class2(c, d, e)", "bar.foo.Class3(param1, param2, param3, param4)"}};
-		runProposalTest("test3.js", 29, 5, expectedProposals);
+		runProposalTest("test2_0.js", 29, 5, expectedProposals);
 	}
 	
 	public void testFindConstructors_ThisFile_ExpressionStarted_6() throws Exception {
 		String[][] expectedProposals = new String[][] {{"bar.Class1(a, b)", "bar.Class2(c, d, e)", "bar.foo.Class3(param1, param2, param3, param4)"}};
-		runProposalTest("test3.js", 31, 9, expectedProposals);
+		runProposalTest("test2_0.js", 31, 9, expectedProposals);
 	}
 	
-	public void testFindConstructors_OtherFile_ExpressionStarted_0() throws Exception {
+	public void testFindConstructors_OtherFile_AfterOpen_ExpressionStarted_0() throws Exception {
 		String[][] expectedProposals = new String[][] {{"Awesome(param1, param2)"}};
-		runProposalTest("test4.js", 0, 6, expectedProposals);
+		runProposalTest("test2_1.js", 0, 6, expectedProposals);
 	}
 	
-	public void testFindConstructors_OtherFile_ExpressionStarted_1() throws Exception {
+	public void testFindConstructors_OtherFile_AfterOpen_ExpressionStarted_1() throws Exception {
 		String[][] expectedProposals = new String[][] {{"bar.Class1(a, b)", "bar.Class2(c, d, e)", "bar.foo.Class3(param1, param2, param3, param4)"}};
-		runProposalTest("test4.js", 2, 6, expectedProposals);
+		runProposalTest("test2_1.js", 2, 6, expectedProposals);
 	}
 	
-	public void testFindConstructors_OtherFile_ExpressionStarted_2() throws Exception {
+	public void testFindConstructors_OtherFile_AfterOpen_ExpressionStarted_2() throws Exception {
 		String[][] expectedProposals = new String[][] {{"bar.Class1(a, b)", "bar.Class2(c, d, e)"}};
-		runProposalTest("test4.js", 4, 9, expectedProposals);
+		runProposalTest("test2_1.js", 4, 9, expectedProposals);
 	}
 	
-	public void testFindConstructors_OtherFile_ExpressionStarted_3() throws Exception {
+	public void testFindConstructors_OtherFile_AfterOpen_ExpressionStarted_3() throws Exception {
 		String[][] expectedProposals = new String[][] {{"bar.foo.Class3(param1, param2, param3, param4)"}};
-		runProposalTest("test4.js", 6, 10, expectedProposals);
+		runProposalTest("test2_1.js", 6, 10, expectedProposals);
 	}
 	
 	public void testFindConstructors_OtherFile_ExpressionStarted_4() throws Exception {
 		String[][] expectedProposals = new String[][] {{"bar.foo.Class3(param1, param2, param3, param4)"}};
-		runProposalTest("test4.js", 8, 13, expectedProposals);
+		runProposalTest("test2_1.js", 8, 13, expectedProposals);
 	}
 	
-	public void testFindConstructors_OtherFile_ExpressionStarted_5() throws Exception {
+	public void testFindConstructors_OtherFile_AfterOpen_ExpressionStarted_5() throws Exception {
 		String[][] expectedProposals = new String[][] {{"bar.Class1(a, b)", "bar.Class2(c, d, e)", "bar.foo.Class3(param1, param2, param3, param4)"}};
-		runProposalTest("test4.js", 10, 5, expectedProposals);
+		runProposalTest("test2_1.js", 10, 5, expectedProposals);
 	}
 	
-	public void testFindConstructors_OtherFile_ExpressionStarted_6() throws Exception {
+	public void testFindConstructors_OtherFile_AfterOpen_ExpressionStarted_6() throws Exception {
 		String[][] expectedProposals = new String[][] {{"bar.Class1(a, b)", "bar.Class2(c, d, e)", "bar.foo.Class3(param1, param2, param3, param4)"}};
-		runProposalTest("test4.js", 12, 9, expectedProposals);
+		runProposalTest("test2_1.js", 12, 9, expectedProposals);
+	}
+	
+	public void testFindConstructors_OtherFile_BeforeOpen_VarDeclaration_ExpressionStarted_0() throws Exception {
+		String[][] expectedProposals = new String[][] {{"MyClass1(a)", "MyClass2()"}};
+		runProposalTest("test6.js", 0, 8, expectedProposals);
 	}
 	
 	public void testFindConstructors_ThisFile_VarDeclaration_ExpressionStarted_0() throws Exception {
@@ -228,7 +305,7 @@ public class ContentAssistTests extends TestCase {
 		runProposalTest("test5.js", 7, 8, expectedProposals);
 	}
 	
-	public void testFindConstructors_OtherFile_VarDeclaration_ExpressionStarted_0() throws Exception {
+	public void testFindConstructors_OtherFile_AfterOpen_VarDeclaration_ExpressionStarted_0() throws Exception {
 		String[][] expectedProposals = new String[][] {{"MyClass1(a)", "MyClass2()"}};
 		runProposalTest("test6.js", 0, 8, expectedProposals);
 	}
@@ -243,14 +320,24 @@ public class ContentAssistTests extends TestCase {
 		runProposalTest("test7.js", 10, 11, expectedProposals);
 	}
 	
+	public void testFindConstructors_OtherFile_BeforeOpen_ArrayReferenceDeclaration_ExpressionStarted_0() throws Exception {
+		String[][] expectedProposals = new String[][] {{"test.Foo(x, y, z)"}};
+		runProposalTest("test9_1.js", 0, 7, expectedProposals);
+	}
+	
 	public void testFindConstructors_ThisFile_ArrayReferenceDeclaration_ExpressionStarted_0() throws Exception {
 		String[][] expectedProposals = new String[][] {{"test.Foo(x, y, z)"}};
 		runProposalTest("test9_0.js", 7, 7, expectedProposals);
 	}
 	
-	public void testFindConstructors_OtherFile_ArrayReferenceDeclaration_ExpressionStarted_0() throws Exception {
+	public void testFindConstructors_OtherFile_AfterOpen_ArrayReferenceDeclaration_ExpressionStarted_0() throws Exception {
 		String[][] expectedProposals = new String[][] {{"test.Foo(x, y, z)"}};
 		runProposalTest("test9_1.js", 0, 7, expectedProposals);
+	}
+	
+	public void testFindFunctionOnType_OtherFile_ExpressionStarted_0() throws Exception {
+		String[][] expectedProposals = new String[][] {{"myFunc1(Number param1)", "foo"}};
+		runProposalTest("test10_1.js", 1, 4, expectedProposals);
 	}
 	
 	/**
