@@ -78,7 +78,24 @@ public class ContentAssistTests extends TestCase {
 							"functionC248(paramOne)",
 							"functionD248(paramOne, paramTwo)" } };
 					runProposalTest("file1.js", 3500, 0, expectedProposals,
-							true);
+							false);
+				} catch (Exception e) {
+					throw new RuntimeException(e);
+				}
+			}
+		};
+		runner.run(this, 10, 1);
+	}
+
+	public void testFindConstructors_ThisFile_ArrayReferenceDeclaration_ExpressionStarted_0() {
+		PerformanceTestRunner runner = new PerformanceTestRunner() {
+			protected void test() {
+				try {
+					String[][] expectedProposals = new String[][] { {
+							"test.Foo491", "test.Foo492", "test.Foo493",
+							"test.Foo494", "test.Foo495" } };
+					runProposalTest("file3.js", 2252, 10, expectedProposals,
+							false);
 				} catch (Exception e) {
 					throw new RuntimeException(e);
 				}
@@ -139,7 +156,7 @@ public class ContentAssistTests extends TestCase {
 				}
 
 				if (editor != null) {
-					standardizeLineEndings(editor);
+					// standardizeLineEndings(editor);
 					fFileToEditorMap.put(file, editor);
 				} else {
 					fail("Could not open editor for " + file);
@@ -277,7 +294,7 @@ public class ContentAssistTests extends TestCase {
 			Collection<JavaEditor> editors = fFileToEditorMap.values();
 			for (JavaEditor editor : editors)
 				PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-						.getActivePage().closeEditor(editor, false);
+						.getActivePage().closeEditor(editor, true);
 
 			// Remove project
 			fProject.delete(true, new NullProgressMonitor());
