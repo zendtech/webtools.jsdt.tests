@@ -53,7 +53,7 @@ import org.zend.jsdt.tests.performance.utils.StringUtils;
 
 public class ContentAssistTests extends TestCase {
 
-	private static final String PROJECT_NAME = "ContentAssist";
+	private static final String PROJECT_NAME = "project1";
 	private static final String CONTENT_DIR = "src";
 	private static final String ZIP_FOLDER = "resources";
 	private static IProject fProject;
@@ -69,21 +69,27 @@ public class ContentAssistTests extends TestCase {
 				"Tests JSDT Content Assist Performnace"));
 	}
 
-	public void testCA() {
+	public void testFindFunctions_ThisFile_EmptyLine() {
 		PerformanceTestRunner runner = new PerformanceTestRunner() {
 			protected void test() {
 				try {
-					Thread.currentThread().sleep(1000);
-				} catch (InterruptedException e) {
+					String[][] expectedProposals = new String[][] { {
+							"functionA248()", "functionB248()",
+							"functionC248(paramOne)",
+							"functionD248(paramOne, paramTwo)" } };
+					runProposalTest("file1.js", 3500, 0, expectedProposals,
+							true);
+				} catch (Exception e) {
+					throw new RuntimeException(e);
 				}
 			}
 		};
-		runner.run(this, 10, 5);
+		runner.run(this, 10, 1);
 	}
 
 	private static void runProposalTest(String fileName, int lineNum,
-			int lineRelativeCharOffset, String[][] expectedProposals)
-			throws Exception {
+			int lineRelativeCharOffset, String[][] expectedProposals,
+			boolean closeEditor) throws Exception {
 
 		IFile file = getFile(fileName);
 		JavaEditor editor = getEditor(file);
@@ -95,6 +101,9 @@ public class ContentAssistTests extends TestCase {
 				expectedProposals.length);
 
 		verifyExpectedProposal(pages, expectedProposals);
+
+		if (closeEditor)
+			closeEditor(file);
 	}
 
 	private static IFile getFile(String name) {
@@ -102,6 +111,14 @@ public class ContentAssistTests extends TestCase {
 		assertTrue("Test file " + file + " can not be found", file.exists());
 
 		return file;
+	}
+
+	private static void closeEditor(IFile file) {
+		JavaEditor editor = (JavaEditor) fFileToEditorMap.remove(file);
+
+		if (editor == null)
+			PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+					.getActivePage().closeEditor(editor, false);
 	}
 
 	private static JavaEditor getEditor(IFile file) {
