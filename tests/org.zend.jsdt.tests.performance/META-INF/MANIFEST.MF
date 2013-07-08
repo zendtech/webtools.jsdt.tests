@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.zend.jsdt.tests.performance
+Bundle-SymbolicName: org.zend.jsdt.tests.performance; singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.zend.jsdt.tests.performance.Activator
+Bundle-Vendor: Zend Technologies
+Require-Bundle: org.eclipse.core.resources;bundle-version="[3.4.0,4.0.0)",
+ org.eclipse.core.runtime;bundle-version="[3.4.0,4.0.0)",
+ org.eclipse.wst.jsdt.core,
+ org.eclipse.wst.jsdt.ui,
+ org.eclipse.ui.editors,
+ org.eclipse.jface,
+ org.eclipse.jface.text,
+ org.eclipse.ui.workbench.texteditor,
+ org.eclipse.ui.ide,
+ org.junit;bundle-version=3.8.2,
+ org.eclipse.test.performance,
+ org.eclipse.core.tests.harness
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
