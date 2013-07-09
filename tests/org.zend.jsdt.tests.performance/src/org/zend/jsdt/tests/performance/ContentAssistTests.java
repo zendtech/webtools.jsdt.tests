@@ -70,38 +70,180 @@ public class ContentAssistTests extends TestCase {
 	}
 
 	public void testFindFunctions_ThisFile_EmptyLine() {
+		IFile file = getFile("file1.js");
+		_testFindFunctions_ThisFile_EmptyLine();
+
 		PerformanceTestRunner runner = new PerformanceTestRunner() {
 			protected void test() {
-				try {
-					String[][] expectedProposals = new String[][] { {
-							"functionA248()", "functionB248()",
-							"functionC248(paramOne)",
-							"functionD248(paramOne, paramTwo)" } };
-					runProposalTest("file1.js", 3500, 0, expectedProposals,
-							false);
-				} catch (Exception e) {
-					throw new RuntimeException(e);
-				}
+				_testFindFunctions_ThisFile_EmptyLine();
 			}
+		};
+		runner.run(this, 10, 1);
+
+		closeEditor(file);
+	}
+
+	public void testFindFunctions_ThisFile_EmptyLine_FirstRun() {
+		PerformanceTestRunner runner = new PerformanceTestRunner() {
+			protected void setUp() {
+				IFile file = getFile("file1.js");
+				getEditor(file);
+			}
+
+			protected void test() {
+				_testFindFunctions_ThisFile_EmptyLine();
+			}
+
+			protected void tearDown() {
+				IFile file = getFile("file1.js");
+				closeEditor(file);
+			}
+
 		};
 		runner.run(this, 10, 1);
 	}
 
-	public void testFindConstructors_ThisFile_ArrayReferenceDeclaration_ExpressionStarted_0() {
+	public void _testFindFunctions_ThisFile_EmptyLine() {
+		try {
+			String[][] expectedProposals = new String[][] { { "functionA248()",
+					"functionB248()", "functionC248(paramOne)",
+					"functionD248(paramOne, paramTwo)" } };
+			runProposalTest("file1.js", 30001, 0, expectedProposals, false);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void testFindFunctions_ThisFile_ExpressionStarted_1() {
+		IFile file = getFile("file2.js");
+		_testFindFunctions_ThisFile_ExpressionStarted_1();
+
 		PerformanceTestRunner runner = new PerformanceTestRunner() {
 			protected void test() {
-				try {
-					String[][] expectedProposals = new String[][] { {
-							"test.Foo491", "test.Foo492", "test.Foo493",
-							"test.Foo494", "test.Foo495" } };
-					runProposalTest("file3.js", 2252, 10, expectedProposals,
-							false);
-				} catch (Exception e) {
-					throw new RuntimeException(e);
-				}
+				_testFindFunctions_ThisFile_ExpressionStarted_1();
 			}
 		};
 		runner.run(this, 10, 1);
+
+		closeEditor(file);
+	}
+
+	public void testFindFunctions_ThisFile_ExpressionStarted_1_FirstRun() {
+		PerformanceTestRunner runner = new PerformanceTestRunner() {
+			protected void setUp() {
+				IFile file = getFile("file2.js");
+				getEditor(file);
+			}
+
+			protected void test() {
+				_testFindFunctions_ThisFile_ExpressionStarted_1();
+			}
+
+			protected void tearDown() {
+				IFile file = getFile("file2.js");
+				closeEditor(file);
+			}
+
+		};
+		runner.run(this, 10, 1);
+	}
+
+	public void _testFindFunctions_ThisFile_ExpressionStarted_1() {
+		try {
+			String[][] expectedProposals = new String[][] { { "inner1",
+					"inner2" } };
+			runProposalTest("file2.js", 2751, 12, expectedProposals, false);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void testFindFunctions_OtherFile_ExpressionStarted_2() {
+		IFile file = getFile("file3.js");
+		_testFindFunctions_OtherFile_ExpressionStarted_2();
+
+		PerformanceTestRunner runner = new PerformanceTestRunner() {
+			protected void test() {
+				_testFindFunctions_OtherFile_ExpressionStarted_2();
+			}
+		};
+		runner.run(this, 10, 1);
+
+		closeEditor(file);
+	}
+
+	public void testFindFunctions_OtherFile_ExpressionStarted_2_FirstRun() {
+		PerformanceTestRunner runner = new PerformanceTestRunner() {
+			protected void setUp() {
+				IFile file = getFile("file3.js");
+				getEditor(file);
+			}
+
+			protected void test() {
+				_testFindFunctions_OtherFile_ExpressionStarted_2();
+			}
+
+			protected void tearDown() {
+				IFile file = getFile("file3.js");
+				closeEditor(file);
+			}
+
+		};
+		runner.run(this, 10, 1);
+	}
+
+	public void _testFindFunctions_OtherFile_ExpressionStarted_2() {
+		try {
+			String[][] expectedProposals = new String[][] { { "functionB241()",
+					"functionB242()", "functionB243()", "functionB244()" } };
+			runProposalTest("file3.js", 0, 10, expectedProposals, false);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void testFindConstructors_ThisFile_ArrayReferenceDeclaration_ExpressionStarted_0() {
+		IFile file = getFile("file3.js");
+		_testFindConstructors_ThisFile_ArrayReferenceDeclaration_ExpressionStarted_0();
+
+		PerformanceTestRunner runner = new PerformanceTestRunner() {
+			protected void test() {
+				_testFindConstructors_ThisFile_ArrayReferenceDeclaration_ExpressionStarted_0();
+			}
+		};
+		runner.run(this, 10, 1);
+
+		closeEditor(file);
+	}
+
+	public void testFindConstructors_ThisFile_ArrayReferenceDeclaration_ExpressionStarted_0_FirstRun() {
+		PerformanceTestRunner runner = new PerformanceTestRunner() {
+			protected void setUp() {
+				IFile file = getFile("file3.js");
+				getEditor(file);
+			}
+
+			protected void test() {
+				_testFindConstructors_ThisFile_ArrayReferenceDeclaration_ExpressionStarted_0();
+			}
+
+			protected void tearDown() {
+				IFile file = getFile("file3.js");
+				closeEditor(file);
+			}
+
+		};
+		runner.run(this, 10, 1);
+	}
+
+	public void _testFindConstructors_ThisFile_ArrayReferenceDeclaration_ExpressionStarted_0() {
+		try {
+			String[][] expectedProposals = new String[][] { { "test.Foo491",
+					"test.Foo492", "test.Foo493", "test.Foo494", "test.Foo495" } };
+			runProposalTest("file3.js", 2254, 10, expectedProposals, false);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private static void runProposalTest(String fileName, int lineNum,
@@ -133,9 +275,17 @@ public class ContentAssistTests extends TestCase {
 	private static void closeEditor(IFile file) {
 		JavaEditor editor = (JavaEditor) fFileToEditorMap.remove(file);
 
-		if (editor == null)
+		if (editor != null)
 			PlatformUI.getWorkbench().getActiveWorkbenchWindow()
 					.getActivePage().closeEditor(editor, false);
+	}
+
+	private static void closeAllEditors() {
+		Collection<JavaEditor> editors = fFileToEditorMap.values();
+		for (JavaEditor editor : editors)
+			PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+					.getActivePage().closeEditor(editor, true);
+		fFileToEditorMap.clear();
 	}
 
 	private static JavaEditor getEditor(IFile file) {

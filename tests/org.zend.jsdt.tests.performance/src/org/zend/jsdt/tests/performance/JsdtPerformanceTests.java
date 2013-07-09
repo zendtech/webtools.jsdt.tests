@@ -26,6 +26,7 @@ public class JsdtPerformanceTests extends TestCase {
 	public static Test suite() {
 		TestSuite suite = new TestSuite("JSDT Performance Tests");
 
+		suite.addTest(EditorTests.suite());
 		suite.addTest(ContentAssistTests.suite());
 		return suite;
 	}
