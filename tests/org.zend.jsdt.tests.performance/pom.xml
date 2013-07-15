@@ -30,6 +30,7 @@
           <useUIHarness>true</useUIHarness>
           <argLine>-Xmx1536m</argLine>
           <testFailureIgnore>true</testFailureIgnore>
+		  <forkedProcessTimeoutInSeconds>300</forkedProcessTimeoutInSeconds>
         </configuration>
       </plugin>
     </plugins>
