@@ -69,7 +69,7 @@ public class ContentAssistTests extends TestCase {
 				"Tests JSDT Content Assist Performnace"));
 	}
 
-	public void testFindFunctions_ThisFile_EmptyLine() {
+	public void _testFindFunctions_ThisFile_EmptyLine() {
 		IFile file = getFile("file1.js");
 		_testFindFunctions_ThisFile_EmptyLine();
 
@@ -83,7 +83,7 @@ public class ContentAssistTests extends TestCase {
 		closeEditor(file);
 	}
 
-	public void testFindFunctions_ThisFile_EmptyLine_FirstRun() {
+	public void _testFindFunctions_ThisFile_EmptyLine_FirstRun() {
 		PerformanceTestRunner runner = new PerformanceTestRunner() {
 			protected void setUp() {
 				IFile file = getFile("file1.js");
@@ -103,18 +103,18 @@ public class ContentAssistTests extends TestCase {
 		runner.run(this, 10, 1);
 	}
 
-	public void _testFindFunctions_ThisFile_EmptyLine() {
-		try {
-			String[][] expectedProposals = new String[][] { { "functionA248()",
-					"functionB248()", "functionC248(paramOne)",
-					"functionD248(paramOne, paramTwo)" } };
-			runProposalTest("file1.js", 30001, 0, expectedProposals, false);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+	//public void _testFindFunctions_ThisFile_EmptyLine() {
+	//	try {
+	//		String[][] expectedProposals = new String[][] { { "functionA248()",
+	//				"functionB248()", "functionC248(paramOne)",
+	//				"functionD248(paramOne, paramTwo)" } };
+	//		runProposalTest("file1.js", 30001, 0, expectedProposals, false);
+	//	} catch (Exception e) {
+	//		throw new RuntimeException(e);
+	//	}
+	//}
 
-	public void testFindFunctions_ThisFile_ExpressionStarted_1() {
+	public void _testFindFunctions_ThisFile_ExpressionStarted_1() {
 		IFile file = getFile("file2.js");
 		_testFindFunctions_ThisFile_ExpressionStarted_1();
 
@@ -128,7 +128,7 @@ public class ContentAssistTests extends TestCase {
 		closeEditor(file);
 	}
 
-	public void testFindFunctions_ThisFile_ExpressionStarted_1_FirstRun() {
+	public void _testFindFunctions_ThisFile_ExpressionStarted_1_FirstRun() {
 		PerformanceTestRunner runner = new PerformanceTestRunner() {
 			protected void setUp() {
 				IFile file = getFile("file2.js");
@@ -148,15 +148,15 @@ public class ContentAssistTests extends TestCase {
 		runner.run(this, 10, 1);
 	}
 
-	public void _testFindFunctions_ThisFile_ExpressionStarted_1() {
-		try {
-			String[][] expectedProposals = new String[][] { { "inner1",
-					"inner2" } };
-			runProposalTest("file2.js", 2751, 12, expectedProposals, false);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+	//public void _testFindFunctions_ThisFile_ExpressionStarted_1() {
+	//	try {
+	//		String[][] expectedProposals = new String[][] { { "inner1",
+	//				"inner2" } };
+	//		runProposalTest("file2.js", 2751, 12, expectedProposals, false);
+	//	} catch (Exception e) {
+	//		throw new RuntimeException(e);
+	//	}
+	//}
 
 	public void testFindFunctions_OtherFile_ExpressionStarted_2() {
 		IFile file = getFile("file3.js");
