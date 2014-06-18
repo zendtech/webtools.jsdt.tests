@@ -9,7 +9,7 @@
   </parent>
   <groupId>org.eclipse.webtools.jsdt.tests</groupId>
   <artifactId>org.eclipse.wst.jsdt.core.tests.compiler</artifactId>
-  <version>1.0.502-SNAPSHOT</version>
+  <version>1.0.600-SNAPSHOT</version>
   <packaging>eclipse-test-plugin</packaging>
   <build>
     <plugins>
